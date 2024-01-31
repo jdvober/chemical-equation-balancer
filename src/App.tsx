@@ -1,18 +1,11 @@
 import "./App.css"
 
-import * as React from "react"
-
-import { Text } from "@chakra-ui/react"
+import { ChemicalElement } from "./components/ChemicalElement/ChemicalElement"
 
 export const App = () => {
 	return (
 		<div>
-			<Text
-				color="white"
-				userSelect={"none"}
-			>
-			Here is the minimal site! Engage!
-			</Text>
+			<ChemicalElement chemicalElement="H" />
 		</div>
 	)
 }
