@@ -9,11 +9,7 @@ type Compound = {
 }
 
 */
-
-type ChemicalElement = {
-	//TODO Add remaining elements
-	symbol:
-	"H"
+type ChemicalSymbol = "H"
 	| "He"
 	| "Li"
 	| "Be"
@@ -117,12 +113,16 @@ type ChemicalElement = {
 	| "Ne"
 	| "Ne"
 	| "Ne"
-	| "Ne",
+	| "Ne"
+type ChemicalElement = {
+	//TODO Add remaining elements
+	symbol: ChemicalSymbol
 	subscript: number
 }
 type ChemicalCompound = {
 	coefficient: number,
-	elements: ChemicalElement[]
+	elements: ChemicalElement[],
+	isReactant: boolean
 }
 
 type ChemicalReactant = ChemicalCompound

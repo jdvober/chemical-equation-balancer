@@ -1,11 +1,13 @@
 import "./App.css"
 
-import { ChemicalElement } from "./components/ChemicalElement/ChemicalElement"
+import { Center } from "@chakra-ui/react"
+
+import { Formula } from "./components/Formula/Formula"
 
 export const App = () => {
 	return (
-		<div>
-			<ChemicalElement chemicalElement="H" subscript={2} />
-		</div>
+		<Center fontSize="5xl">
+			<Formula />
+		</Center>
 	)
 }
