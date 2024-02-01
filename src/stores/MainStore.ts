@@ -2,22 +2,6 @@ import { create } from "zustand"
 
 // import { persist } from "zustand/middleware"
 
-export type Element = {
-	symbol: "H" | "He" | "Li" | "Be" | "B" | "C" | "N" | "O" | "F" | "Ne" | "Na", // TODO Add remaining elements
-	subscript: number
-}
-export type Compound = {
-	coefficient: number,
-	elements: Element[]
-}
-
-export type Reactant = Compound
-export type Product = Compound
-export type Formula = {
-	reactants: Reactant[],
-	products: Product[]
-}
-
 // ₀₁₂₃₄₅₆₇₈₉→
 
 // 2H₂ + 1O₂ → 2H₂O
@@ -77,7 +61,7 @@ export const useMainStore = create<State>()(
 				coefficient: 2,
 				elements: [
 					{
-						symbol: "H",
+
 						subscript: 2
 					}
 				]
