@@ -17,7 +17,7 @@ export const useMainStore = create<State>()(
 	( set ) => ( {
 		formula: {
 			reactants: [ {
-				coefficient: 2,
+				coefficient: 1,
 				elements: [
 					{
 
@@ -40,7 +40,7 @@ export const useMainStore = create<State>()(
 			products: [
 
 				{
-					coefficient: 2,
+					coefficient: 1,
 					elements: [
 						{
 							symbol: "H",
