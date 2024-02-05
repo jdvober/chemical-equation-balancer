@@ -131,3 +131,4 @@ type ChemicalFormula = {
 	reactants: ChemicalReactant[],
 	products: ChemicalProduct[]
 }
+const formulaH = "3em"

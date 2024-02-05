@@ -7,12 +7,14 @@ interface State {
 	formula: {
 		reactants: ChemicalReactant[],
 		products: ChemicalProduct[]
-	}
+	},
+	updateCoefficient: ( isReactant: boolean, index: number, newCoefficient: number ) => void,
+	formulaHeight: string
 }
 
 export const useMainStore = create<State>()(
 	/* persist(*/
-	( /*set*/ ) => ( { /* (set, get)*/
+	( set ) => ( {
 		formula: {
 			reactants: [ {
 				coefficient: 2,
@@ -54,30 +56,26 @@ export const useMainStore = create<State>()(
 			]
 
 
-		}
-		// electrons: [
+		},
+		updateCoefficient: ( isReactant, index, newCoefficient ) => set( ( state ) => {
+			// Exit early to prevent negative coefficients
+			if ( newCoefficient <= 1 ) { return state }
+			// Check to make sure we have an integer
+			if ( !Number.isInteger( newCoefficient ) ) { return state }
 
-		// ],
-		// addElectron: () => set( ( state ) => ( {
-		// 	electrons:
-		// 		[ ...state.electrons, {
-		// 			id: state.electrons.length,
-		// 			energyLevel: determineEnergyLevel( state.electrons ),
-		// 		}, ]
+			if ( isReactant === true ) {
+				state.formula.reactants[ index ].coefficient = newCoefficient
+				return state
+			}
 
-		// } ) ),
-		// removeElectron: () => set( ( state ) => ( {
-		// 	electrons: state.electrons.length != 0 ? state.electrons.slice( 0, -1 ) : state.electrons
-		// } ) ),
-		// totalEnergyLevels: 4,
-		// updateTotalEnergyLevels: ( newTotalEnergyLevels ) => set( () => ( { totalEnergyLevels: newTotalEnergyLevels } ) ),
-	}
-		// ),
-		// {
-		// name: "main-storage",
-		// getStorage: () => sessionStorage,
-		// }
-	) )
+			state.formula.products[ index ].coefficient = newCoefficient
+
+			return state
+		} )
+		,
+
+		formulaHeight: "3em"
+	} ) )
 
 /*
 If you would like to use localstorage or sessionstorage, uncomment the commented "persist" sections and see zustand documentation

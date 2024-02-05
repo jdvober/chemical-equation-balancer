@@ -21,12 +21,18 @@ export const ChemicalCompound: React.FC<ChemicalCompoundProps> = ({
 					/>
 					{compound.isReactant === true ? (
 						index < formula.reactants.length - 1 ? (
-							<Text>+</Text>
+							<Text ml="1vw" mr="2vw">
+								+
+							</Text>
 						) : (
-							<Text>→</Text>
+							<Text ml="1vw" mr="2vw">
+								→
+							</Text>
 						)
 					) : index < formula.products.length - 1 ? (
-						<Text>+</Text>
+						<Text ml="1vw" mr="2vw">
+							+
+						</Text>
 					) : null}
 				</HStack>
 			))}
