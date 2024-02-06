@@ -1,4 +1,5 @@
 import React from "react"
+import { v4 as uuid } from "uuid"
 
 import { Center, HStack } from "@chakra-ui/react"
 
@@ -6,7 +7,10 @@ import { useMainStore } from "../../stores/MainStore.ts"
 import { ChemicalCompound } from "../ChemicalCompound/ChemicalCompound"
 import { Coefficient } from "../Coefficient/Coefficient"
 
-type FormulaProps = {}
+// If no values, use this:
+type FormulaProps = Record<string, never>
+// If values, fill in the object below
+// type FormulaProps = {}
 
 export const Formula: React.FC<FormulaProps> = () => {
 	const formula = useMainStore((state) => state.formula)
@@ -18,29 +22,34 @@ export const Formula: React.FC<FormulaProps> = () => {
 				alignItems="end"
 				alignContent="center"
 				justifyItems="center"
-				justifyContent="center">
+				justifyContent="center"
+				color="dracula.dracComment">
 				<Center>
 					{formula.reactants.map((reactant, reactantIndex) => (
-						<HStack h={formulaHeight}>
+						<HStack h={formulaHeight} key={uuid()}>
 							<Coefficient
 								index={reactantIndex}
 								isReactant={true}
+								key={uuid()}
 							/>
 							<ChemicalCompound
 								compound={reactant}
 								index={reactantIndex}
+								key={uuid()}
 							/>
 						</HStack>
 					))}
 					{formula.products.map((product, productIndex) => (
-						<HStack>
+						<HStack key={uuid()}>
 							<Coefficient
 								index={productIndex}
 								isReactant={false}
+								key={uuid()}
 							/>
 							<ChemicalCompound
 								compound={product}
 								index={productIndex}
+								key={uuid()}
 							/>
 						</HStack>
 					))}

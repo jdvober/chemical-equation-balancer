@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useState } from "react"
 
 import {
 	Flex, NumberDecrementStepper, NumberIncrementStepper, NumberInput, NumberInputStepper, Text
@@ -54,11 +54,21 @@ export const Coefficient: React.FC<CoefficientProps> = ({
 		>
 			<NumberInput precision={0} alignContent="center">
 				<NumberInputStepper h={formulaHeight}>
-					<NumberIncrementStepper onClick={() => increment()} />
-					<Text fontSize={"6xl"} color="red.500">
+					<NumberIncrementStepper
+						bg="dracula.dracGreen"
+						_active={{ bg: "green.300" }}
+						children="+"
+						onClick={() => increment()}
+					/>
+					<Text fontSize={"6xl"} color="dracula.dracFG">
 						<u>{val}</u>
 					</Text>
-					<NumberDecrementStepper onClick={() => decrement()} />
+					<NumberDecrementStepper
+						bg="dracula.dracRed"
+						_active={{ bg: "red.300" }}
+						children="+"
+						onClick={() => decrement()}
+					/>
 				</NumberInputStepper>
 			</NumberInput>
 		</Flex>

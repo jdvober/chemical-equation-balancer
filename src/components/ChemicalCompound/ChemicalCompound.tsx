@@ -1,4 +1,5 @@
 import React from "react"
+import { v4 as uuid } from "uuid"
 
 import { HStack, Text } from "@chakra-ui/react"
 
@@ -14,10 +15,11 @@ export const ChemicalCompound: React.FC<ChemicalCompoundProps> = ({
 	return (
 		<HStack className="compound">
 			{compound.elements.map((element) => (
-				<HStack>
+				<HStack key={uuid()}>
 					<ChemicalElement
 						symbol={element.symbol}
 						subscript={element.subscript}
+						key={uuid()}
 					/>
 					{compound.isReactant === true ? (
 						index < formula.reactants.length - 1 ? (
