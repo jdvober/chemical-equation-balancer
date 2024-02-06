@@ -29,11 +29,12 @@ export const Formula: React.FC<FormulaProps> = () => {
 						<HStack h={formulaHeight} key={uuid()}>
 							<Coefficient
 								index={reactantIndex}
-								isReactant={true}
+								formulaSection="Reactants"
 								key={uuid()}
 							/>
 							<ChemicalCompound
 								compound={reactant}
+								formulaSection="Reactants"
 								index={reactantIndex}
 								key={uuid()}
 							/>
@@ -43,11 +44,12 @@ export const Formula: React.FC<FormulaProps> = () => {
 						<HStack key={uuid()}>
 							<Coefficient
 								index={productIndex}
-								isReactant={false}
+								formulaSection="Products"
 								key={uuid()}
 							/>
 							<ChemicalCompound
 								compound={product}
+								formulaSection="Products"
 								index={productIndex}
 								key={uuid()}
 							/>

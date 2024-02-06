@@ -1,85 +1,96 @@
 import { create } from "zustand"
+import { persist } from "zustand/middleware"
+import { immer } from "zustand/middleware/immer"
 
-// import { persist } from "zustand/middleware"
-
-
-interface State {
+type State = {
 	formula: {
 		reactants: ChemicalReactant[],
 		products: ChemicalProduct[]
 	},
-	updateCoefficient: ( isReactant: boolean, index: number, newCoefficient: number ) => void,
 	formulaHeight: string
 }
 
-export const useMainStore = create<State>()(
-	/* persist(*/
-	( set ) => ( {
-		formula: {
-			reactants: [ {
-				coefficient: 1,
-				elements: [
-					{
+type Action = {
 
-						symbol: "H",
-						subscript: 2
-					}
-				],
-				isReactant: true
-			},
-			{
-				coefficient: 1,
-				elements: [
-					{
-						symbol: "O",
-						subscript: 2
-					}
-				],
-				isReactant: true
-			} ],
-			products: [
+	updateCoefficient: ( formulaSection: "Reactants" | "Products", index: number, newCoefficient: number ) => void,
+}
 
+export const useMainStore = create<State & Action>()(
+	persist(
+		immer( ( set ) => ( {
+			///////////
+			// State //
+			///////////
+			formula: {
+				reactants: [ {
+					coefficient: 1,
+					elements: [
+						{
+
+							symbol: "H",
+							subscript: 2
+						}
+					],
+					formulaSection: "Reactants",
+				},
 				{
 					coefficient: 1,
 					elements: [
 						{
-							symbol: "H",
-							subscript: 2
-						},
-						{
 							symbol: "O",
-							subscript: 1
+							subscript: 2
 						}
 					],
-					isReactant: false
+					formulaSection: "Reactants",
+				} ],
+				products: [
+
+					{
+						coefficient: 1,
+						elements: [
+							{
+								symbol: "H",
+								subscript: 2
+							},
+							{
+								symbol: "O",
+								subscript: 1
+							}
+						],
+						formulaSection: "Products",
+					}
+				]
+
+
+			},
+			formulaHeight: "3em",
+
+			/////////////
+			// Actions //
+			/////////////
+			updateCoefficient: ( formulaSection, index, newCoefficient ) => set( ( state ) => {
+				// Check to make sure we have an integer
+				if ( !Number.isInteger( newCoefficient ) ) { return }
+
+				if ( formulaSection === "Reactants" ) {
+					state.formula.reactants[ index ].coefficient = newCoefficient
+					return
 				}
-			]
 
+				state.formula.products[ index ].coefficient = newCoefficient
+			} )
+			,
 
-		},
-		updateCoefficient: ( isReactant, index, newCoefficient ) => set( ( state ) => {
-			// Exit early to prevent negative coefficients
-			if ( newCoefficient <= 1 ) { return state }
-			// Check to make sure we have an integer
-			if ( !Number.isInteger( newCoefficient ) ) { return state }
+		}
+		) ),
+		{
+			// Use Local Storage
+			name: "main-storage",
+			getStorage: () => sessionStorage,
+		}
 
-			if ( isReactant === true ) {
-				state.formula.reactants[ index ].coefficient = newCoefficient
-				return state
-			}
+	) )
 
-			state.formula.products[ index ].coefficient = newCoefficient
-
-			return state
-		} )
-		,
-
-		formulaHeight: "3em"
-	} ) )
-
-/*
-If you would like to use localstorage or sessionstorage, uncomment the commented "persist" sections and see zustand documentation
-*/
 
 // ₀₁₂₃₄₅₆₇₈₉→
 

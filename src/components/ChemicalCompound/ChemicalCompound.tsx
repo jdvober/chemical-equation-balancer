@@ -6,9 +6,14 @@ import { HStack, Text } from "@chakra-ui/react"
 import { useMainStore } from "../../stores/MainStore.ts"
 import { ChemicalElement } from "../ChemicalElement/ChemicalElement"
 
-type ChemicalCompoundProps = { compound: ChemicalCompound; index: number }
+type ChemicalCompoundProps = {
+	compound: ChemicalCompound
+	formulaSection: "Reactants" | "Products"
+	index: number
+}
 export const ChemicalCompound: React.FC<ChemicalCompoundProps> = ({
 	compound,
+	formulaSection,
 	index,
 }) => {
 	const formula = useMainStore((state) => state.formula)
@@ -21,7 +26,7 @@ export const ChemicalCompound: React.FC<ChemicalCompoundProps> = ({
 						subscript={element.subscript}
 						key={uuid()}
 					/>
-					{compound.isReactant === true ? (
+					{formulaSection === "Reactants" ? (
 						index < formula.reactants.length - 1 ? (
 							<Text ml="1vw" mr="2vw">
 								+

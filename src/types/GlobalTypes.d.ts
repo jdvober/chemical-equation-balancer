@@ -122,7 +122,7 @@ type ChemicalElement = {
 type ChemicalCompound = {
 	coefficient: number,
 	elements: ChemicalElement[],
-	isReactant: boolean
+	formulaSection: "Reactants" | "Products"
 }
 
 type ChemicalReactant = ChemicalCompound
@@ -131,4 +131,3 @@ type ChemicalFormula = {
 	reactants: ChemicalReactant[],
 	products: ChemicalProduct[]
 }
-const formulaH = "3em"

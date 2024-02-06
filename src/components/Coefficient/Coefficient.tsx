@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React from "react"
 
 import {
 	Flex, NumberDecrementStepper, NumberIncrementStepper, NumberInput, NumberInputStepper, Text
@@ -6,41 +6,34 @@ import {
 
 import { useMainStore } from "../../stores/MainStore.ts"
 
-type CoefficientProps = { isReactant: boolean; index: number }
+type CoefficientProps = {
+	formulaSection: "Reactants" | "Products"
+	index: number
+}
 export const Coefficient: React.FC<CoefficientProps> = ({
-	isReactant,
+	formulaSection,
 	index,
 }) => {
 	const formula = useMainStore((state) => state.formula)
+	const getCoefficient = () => {
+		if (formulaSection === "Reactants") {
+			return formula.reactants[index].coefficient
+		}
+		return formula.products[index].coefficient
+	}
+	const coefficient = getCoefficient()
 	const formulaHeight = useMainStore((state) => state.formulaHeight)
 	const updateCoefficient = useMainStore((state) => state.updateCoefficient)
 
-	const [val, setVal] = useState(
-		isReactant === true
-			? formula.reactants[index].coefficient
-			: formula.products[index].coefficient
-	)
-
 	const increment = () => {
-		if (isReactant === true) {
-			updateCoefficient(true, index, val + 1)
-			setVal(val + 1)
-		} else {
-			updateCoefficient(true, index, val + 1)
-			setVal(val + 1)
-		}
-		console.log(formula)
+		updateCoefficient(formulaSection, index, coefficient + 1)
 	}
 
 	const decrement = () => {
-		if (isReactant === true) {
-			updateCoefficient(true, index, val - 1)
-			setVal(val - 1)
-		} else {
-			updateCoefficient(true, index, val - 1)
-			setVal(val - 1)
+		if (coefficient - 1 < 1) {
+			return
 		}
-		console.log(formula)
+		updateCoefficient(formulaSection, index, coefficient - 1)
 	}
 
 	return (
@@ -58,15 +51,20 @@ export const Coefficient: React.FC<CoefficientProps> = ({
 						bg="dracula.dracGreen"
 						_active={{ bg: "green.300" }}
 						children="+"
+						fontSize={"18pt"}
 						onClick={() => increment()}
 					/>
-					<Text fontSize={"6xl"} color="dracula.dracFG">
-						<u>{val}</u>
+					<Text
+						className="coefficient"
+						fontSize={"6xl"}
+						color="dracula.dracFG">
+						<u>{coefficient}</u>
 					</Text>
 					<NumberDecrementStepper
 						bg="dracula.dracRed"
-						_active={{ bg: "red.300" }}
-						children="+"
+						_active={{ bg: "red.500" }}
+						children="-"
+						fontSize={"18pt"}
 						onClick={() => decrement()}
 					/>
 				</NumberInputStepper>
