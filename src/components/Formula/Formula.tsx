@@ -1,7 +1,7 @@
 import React from "react"
 import { v4 as uuid } from "uuid"
 
-import { Center, HStack } from "@chakra-ui/react"
+import { Box, Grid, GridItem, HStack } from "@chakra-ui/react"
 
 import { useMainStore } from "../../stores/MainStore.ts"
 import { ChemicalCompound } from "../ChemicalCompound/ChemicalCompound"
@@ -14,49 +14,70 @@ type FormulaProps = Record<string, never>
 
 export const Formula: React.FC<FormulaProps> = () => {
 	const formula = useMainStore((state) => state.formula)
-	const formulaHeight = useMainStore((state) => state.formulaHeight)
+	// const formulaHeightVH = useMainStore((state) => state.formulaHeightVH)
 
 	return (
-		<div className="formula">
-			<HStack
-				alignItems="end"
-				alignContent="center"
-				justifyItems="center"
-				justifyContent="center"
-				color="dracula.dracComment">
-				<Center>
-					{formula.reactants.map((reactant, reactantIndex) => (
-						<HStack h={formulaHeight} key={uuid()}>
+		<Grid
+			templateColumns={`repeat(${
+				2 * (formula.reactants.length + formula.products.length)
+			}, 1fr)`}
+			gap={6}
+			w="100vw"
+			// h={ `${ formulaHeightVH } vh` }
+		>
+			{formula.reactants.map((reactant, reactantIndex) => (
+				<GridItem w="100%">
+					<HStack>
+						<Box
+							className={`coefficient-reactants-${reactantIndex}-container`}
+							// h={`${formulaHeightVH} vh`}>
+						>
 							<Coefficient
 								index={reactantIndex}
 								formulaSection="Reactants"
 								key={uuid()}
 							/>
+						</Box>
+						<Box
+							className={`chemicalCompound-reactants-${reactantIndex}-container`}
+							// h={`${formulaHeightVH} vh`}>
+						>
 							<ChemicalCompound
 								compound={reactant}
 								formulaSection="Reactants"
 								index={reactantIndex}
 								key={uuid()}
 							/>
-						</HStack>
-					))}
-					{formula.products.map((product, productIndex) => (
-						<HStack key={uuid()}>
+						</Box>
+					</HStack>
+				</GridItem>
+			))}
+			{formula.products.map((product, productIndex) => (
+				<GridItem w="100%">
+					<HStack>
+						<Box
+							// h={`${formulaHeightVH} vh`}
+							className={`coefficient-products-${productIndex}-container`}>
 							<Coefficient
 								index={productIndex}
 								formulaSection="Products"
 								key={uuid()}
 							/>
+						</Box>
+						<Box
+							className={`chemicalCompound-products-${productIndex}-container`}
+							// h={`${formulaHeightVH} vh`}>
+						>
 							<ChemicalCompound
 								compound={product}
 								formulaSection="Products"
 								index={productIndex}
 								key={uuid()}
 							/>
-						</HStack>
-					))}
-				</Center>
-			</HStack>
-		</div>
+						</Box>
+					</HStack>
+				</GridItem>
+			))}
+		</Grid>
 	)
 }

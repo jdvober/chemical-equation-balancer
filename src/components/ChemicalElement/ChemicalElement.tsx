@@ -12,7 +12,7 @@ export const ChemicalElement: React.FC<ChemicalElementProps> = ({
 }) => {
 	return (
 		<Box className="ChemicalElement">
-			<HStack>
+			<HStack color="dracula.dracFG">
 				<Text>{symbol}</Text>
 				{subscript && !(subscript <= 1) ? (
 					<Text>

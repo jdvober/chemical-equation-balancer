@@ -7,7 +7,7 @@ type State = {
 		reactants: ChemicalReactant[],
 		products: ChemicalProduct[]
 	},
-	formulaHeight: string
+	formulaHeightVH: number
 }
 
 type Action = {
@@ -63,7 +63,7 @@ export const useMainStore = create<State & Action>()(
 
 
 			},
-			formulaHeight: "3em",
+			formulaHeightVH: 20,
 
 			/////////////
 			// Actions //

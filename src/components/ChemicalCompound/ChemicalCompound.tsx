@@ -18,28 +18,30 @@ export const ChemicalCompound: React.FC<ChemicalCompoundProps> = ({
 }) => {
 	const formula = useMainStore((state) => state.formula)
 	return (
-		<HStack className="compound">
+		<HStack className="compound" m="0px" p="0px">
 			{compound.elements.map((element) => (
-				<HStack key={uuid()}>
-					<ChemicalElement
-						symbol={element.symbol}
-						subscript={element.subscript}
-						key={uuid()}
-					/>
+				<HStack
+				// border="1px solid cyan" key={uuid()}
+				>
+					<HStack>
+						<ChemicalElement
+							symbol={element.symbol}
+							subscript={element.subscript}
+							key={uuid()}
+						/>
+					</HStack>
 					{formulaSection === "Reactants" ? (
 						index < formula.reactants.length - 1 ? (
-							<Text ml="1vw" mr="2vw">
+							<Text color="dracula.dracComment" ml="1vw">
 								+
 							</Text>
 						) : (
-							<Text ml="1vw" mr="2vw">
+							<Text color="dracula.dracComment" ml="1vw">
 								→
 							</Text>
 						)
 					) : index < formula.products.length - 1 ? (
-						<Text ml="1vw" mr="2vw">
-							+
-						</Text>
+						<Text>+</Text>
 					) : null}
 				</HStack>
 			))}
