@@ -63,7 +63,7 @@ export const useMainStore = create<State & Action>()(
 
 
 			},
-			formulaHeightVH: 20,
+			formulaHeightVH: 60,
 
 			/////////////
 			// Actions //

@@ -1,11 +1,16 @@
 import React from "react"
 
 import {
-	Box, Grid, GridItem, NumberDecrementStepper, NumberIncrementStepper, NumberInput,
-	NumberInputStepper, Text
+	Box,
+	NumberDecrementStepper,
+	NumberIncrementStepper,
+	NumberInput,
+	NumberInputStepper,
+	Text,
+	VStack,
 } from "@chakra-ui/react"
 
-import { useMainStore } from "../../stores/MainStore.ts"
+import { useMainStore } from "../../../stores/MainStore.ts"
 
 type CoefficientProps = {
 	formulaSection: "Reactants" | "Products"
@@ -42,60 +47,68 @@ export const Coefficient: React.FC<CoefficientProps> = ({
 		updateCoefficient(formulaSection, index, coefficient - 1)
 	}
 
+	const cWidth = "5vw"
+
 	return (
-		<Grid
-			className={`coefficient-${formulaSection}-${index}`}
-			h={`${formulaHeightVH + formulaHeightVH * 0.3}vh`}
-			w="3vw"
-			// border="1px solid orange"
-			templateRows={`1fr 3fr 1fr`}>
+		<VStack
+			justify="start"
+			align="center"
+			h={`${formulaHeightVH}vh`}
+			w={cWidth}>
+			{/* <Grid
+				className={`coefficient-${formulaSection}-${index}`}
+				h={`${formulaHeightVH}vh`}
+				w={"8vw"}
+				// justifyItems="start"
+				templateRows={`1fr 3fr 1fr`}> */}
 			<NumberInput precision={0}>
 				<NumberInputStepper>
-					<GridItem>
+					{/* <GridItem> */}
+					<Box w={cWidth} mt={"1vh"}>
 						<NumberIncrementStepper
-							h={`${formulaHeightVH * 0.15}vh`}
+							h={`${formulaHeightVH / 6}vh`}
+							w="100%"
 							bg="dracula.dracGreen"
 							_active={{ bg: "green.300" }}
 							children="+"
-							// fontSize={"3 vh"}
+							fontSize={"75%"}
+							// fontSize={"4vh"}
 							gridRowStart={1}
 							gridRowEnd={1}
 							onClick={() => increment()}
 						/>
-					</GridItem>
-					<GridItem>
-						<Box
-							// border="1px solid green"
-							minH={`${formulaHeightVH * 0.6}vh`}>
-							<Text
-								className="coefficient"
-								// minH={`${formulaHeightVH}vh`}
-								color="dracula.dracFG"
-								// border="1px solid yellow"
-								gridRowStart={2}
-								gridRowEnd={2}
-								// fontSize={`${formulaHeightVH * 0.6}vh`}>
-							>
-								<u>{coefficient}</u>
-								{/* {coefficient} */}
-							</Text>
-						</Box>
-					</GridItem>
-					<GridItem>
+					</Box>
+					{/* </GridItem> */}
+					{/* <GridItem> */}
+					<Box h={`${(4 * formulaHeightVH) / 6}vh`} w={cWidth}>
+						<Text
+							className="coefficient"
+							color="dracula.dracFG"
+							gridRowStart={2}
+							gridRowEnd={2}
+							fontSize="100%">
+							<u>{coefficient}</u>
+						</Text>
+					</Box>
+					{/* </GridItem> */}
+					{/* <GridItem> */}
+					<Box w={cWidth} mb={0}>
 						<NumberDecrementStepper
 							bg="dracula.dracRed"
-							h={`${formulaHeightVH * 0.15} vh`}
+							h={`${formulaHeightVH / 6}vh`}
 							_active={{ bg: "red.500" }}
 							children="-"
-							justifySelf={"flex-end"}
 							gridRowStart={3}
 							gridRowEnd={3}
-							// fontSize={"3 vh"}
+							w={cWidth}
+							fontSize={"75%"}
 							onClick={() => decrement()}
 						/>
-					</GridItem>
+					</Box>
+					{/* </GridItem> */}
 				</NumberInputStepper>
 			</NumberInput>
-		</Grid>
+			{/* </Grid> */}
+		</VStack>
 	)
 }

@@ -3,8 +3,8 @@ import { v4 as uuid } from "uuid"
 
 import { HStack, Text } from "@chakra-ui/react"
 
-import { useMainStore } from "../../stores/MainStore.ts"
-import { ChemicalElement } from "../ChemicalElement/ChemicalElement"
+import { useMainStore } from "../../../stores/MainStore.ts"
+import { ChemicalElement } from "../ChemicalElement/ChemicalElement.tsx"
 
 type ChemicalCompoundProps = {
 	compound: ChemicalCompound
@@ -18,11 +18,9 @@ export const ChemicalCompound: React.FC<ChemicalCompoundProps> = ({
 }) => {
 	const formula = useMainStore((state) => state.formula)
 	return (
-		<HStack className="compound" m="0px" p="0px">
+		<HStack className="compound" m="0px" p="0px" mt="33%" mb="33%">
 			{compound.elements.map((element) => (
-				<HStack
-				// border="1px solid cyan" key={uuid()}
-				>
+				<HStack>
 					<HStack>
 						<ChemicalElement
 							symbol={element.symbol}

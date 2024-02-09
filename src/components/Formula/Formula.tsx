@@ -4,8 +4,8 @@ import { v4 as uuid } from "uuid"
 import { Box, Grid, GridItem, HStack } from "@chakra-ui/react"
 
 import { useMainStore } from "../../stores/MainStore.ts"
-import { ChemicalCompound } from "../ChemicalCompound/ChemicalCompound"
-import { Coefficient } from "../Coefficient/Coefficient"
+import { ChemicalCompound } from "./ChemicalCompound/ChemicalCompound.tsx"
+import { Coefficient } from "./Coefficient/Coefficient"
 
 // If no values, use this:
 type FormulaProps = Record<string, never>
@@ -14,20 +14,21 @@ type FormulaProps = Record<string, never>
 
 export const Formula: React.FC<FormulaProps> = () => {
 	const formula = useMainStore((state) => state.formula)
-	// const formulaHeightVH = useMainStore((state) => state.formulaHeightVH)
+	const formulaHeightVH = useMainStore((state) => state.formulaHeightVH)
 
 	return (
 		<Grid
 			templateColumns={`repeat(${
 				2 * (formula.reactants.length + formula.products.length)
 			}, 1fr)`}
-			gap={6}
+			gap={0}
 			w="100vw"
-			// h={ `${ formulaHeightVH } vh` }
-		>
+			alignItems="center"
+			border="1px solid white"
+			h={`${formulaHeightVH}vh`}>
 			{formula.reactants.map((reactant, reactantIndex) => (
-				<GridItem w="100%">
-					<HStack>
+				<GridItem w="100%" h={`${formulaHeightVH}vh`}>
+					<HStack alignItems={"center"}>
 						<Box
 							className={`coefficient-reactants-${reactantIndex}-container`}
 							// h={`${formulaHeightVH} vh`}>
@@ -39,8 +40,8 @@ export const Formula: React.FC<FormulaProps> = () => {
 							/>
 						</Box>
 						<Box
-							className={`chemicalCompound-reactants-${reactantIndex}-container`}
-							// h={`${formulaHeightVH} vh`}>
+
+						// h={`${formulaHeightVH} vh`}>
 						>
 							<ChemicalCompound
 								compound={reactant}
@@ -53,7 +54,7 @@ export const Formula: React.FC<FormulaProps> = () => {
 				</GridItem>
 			))}
 			{formula.products.map((product, productIndex) => (
-				<GridItem w="100%">
+				<GridItem w="100%" h={`${formulaHeightVH}vh`}>
 					<HStack>
 						<Box
 							// h={`${formulaHeightVH} vh`}
@@ -66,6 +67,7 @@ export const Formula: React.FC<FormulaProps> = () => {
 						</Box>
 						<Box
 							className={`chemicalCompound-products-${productIndex}-container`}
+							justifyItems="center"
 							// h={`${formulaHeightVH} vh`}>
 						>
 							<ChemicalCompound
