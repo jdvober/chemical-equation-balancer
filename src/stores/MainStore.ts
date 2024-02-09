@@ -63,7 +63,7 @@ export const useMainStore = create<State & Action>()(
 
 
 			},
-			formulaHeightVH: 60,
+			formulaHeightVH: 20,
 
 			/////////////
 			// Actions //
@@ -87,9 +87,9 @@ export const useMainStore = create<State & Action>()(
 			// Use Local Storage
 			name: "main-storage",
 			getStorage: () => sessionStorage,
-		}
+		} )
 
-	) )
+)
 
 
 // ₀₁₂₃₄₅₆₇₈₉→

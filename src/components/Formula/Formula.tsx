@@ -22,7 +22,9 @@ export const Formula: React.FC<FormulaProps> = () => {
 				2 * (formula.reactants.length + formula.products.length)
 			}, 1fr)`}
 			gap={0}
-			w="100vw"
+			minW="30vw"
+			w="40vw"
+			maxW="100vw"
 			alignItems="center"
 			border="1px solid white"
 			h={`${formulaHeightVH}vh`}>
