@@ -23,10 +23,9 @@ export const Formula: React.FC<FormulaProps> = () => {
 			}, 1fr)`}
 			gap={0}
 			minW="30vw"
-			w="40vw"
+			w="50vw"
 			maxW="100vw"
 			alignItems="center"
-			border="1px solid white"
 			h={`${formulaHeightVH}vh`}>
 			{formula.reactants.map((reactant, reactantIndex) => (
 				<GridItem w="100%" h={`${formulaHeightVH}vh`}>
