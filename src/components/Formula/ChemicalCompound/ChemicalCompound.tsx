@@ -18,9 +18,15 @@ export const ChemicalCompound: React.FC<ChemicalCompoundProps> = ({
 }) => {
 	const formula = useMainStore((state) => state.formula)
 	return (
-		<HStack className="compound" m="0px" p="0px" mt="33%" mb="33%">
+		<HStack
+			className="compound"
+			m="0px"
+			p="0px"
+			mt="33%"
+			mb="33%"
+			key={uuid()}>
 			{compound.elements.map((element) => (
-				<HStack>
+				<HStack key={uuid()}>
 					<HStack>
 						<ChemicalElement
 							symbol={element.symbol}

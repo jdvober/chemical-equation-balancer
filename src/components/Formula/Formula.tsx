@@ -26,9 +26,10 @@ export const Formula: React.FC<FormulaProps> = () => {
 			w="50vw"
 			maxW="100vw"
 			alignItems="center"
-			h={`${formulaHeightVH}vh`}>
+			h={`${formulaHeightVH}vh`}
+			key={uuid()}>
 			{formula.reactants.map((reactant, reactantIndex) => (
-				<GridItem w="100%" h={`${formulaHeightVH}vh`}>
+				<GridItem w="100%" h={`${formulaHeightVH}vh`} key={uuid()}>
 					<HStack alignItems={"center"}>
 						<Box
 							className={`coefficient-reactants-${reactantIndex}-container`}
@@ -37,7 +38,6 @@ export const Formula: React.FC<FormulaProps> = () => {
 							<Coefficient
 								index={reactantIndex}
 								formulaSection="Reactants"
-								key={uuid()}
 							/>
 						</Box>
 						<Box
@@ -48,17 +48,15 @@ export const Formula: React.FC<FormulaProps> = () => {
 								compound={reactant}
 								formulaSection="Reactants"
 								index={reactantIndex}
-								key={uuid()}
 							/>
 						</Box>
 					</HStack>
 				</GridItem>
 			))}
 			{formula.products.map((product, productIndex) => (
-				<GridItem w="100%" h={`${formulaHeightVH}vh`}>
+				<GridItem w="100%" h={`${formulaHeightVH}vh`} key={uuid()}>
 					<HStack>
 						<Box
-							// h={`${formulaHeightVH} vh`}
 							className={`coefficient-products-${productIndex}-container`}>
 							<Coefficient
 								index={productIndex}
@@ -68,14 +66,11 @@ export const Formula: React.FC<FormulaProps> = () => {
 						</Box>
 						<Box
 							className={`chemicalCompound-products-${productIndex}-container`}
-							justifyItems="center"
-							// h={`${formulaHeightVH} vh`}>
-						>
+							justifyItems="center">
 							<ChemicalCompound
 								compound={product}
 								formulaSection="Products"
 								index={productIndex}
-								key={uuid()}
 							/>
 						</Box>
 					</HStack>

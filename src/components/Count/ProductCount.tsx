@@ -1,4 +1,5 @@
 import React from "react"
+import { v4 as uuid } from "uuid"
 
 import { Box, Text } from "@chakra-ui/react"
 
@@ -29,32 +30,35 @@ export const ProductCount: React.FC<ProductCountProps> = () => {
 	})
 
 	const elements: {
+		elementListIndex: number
 		symbol: string
 		count: number
 	}[] = []
-	for (const symbol of symbols) {
+	for (let i = 0; i < elements.length; i++) {
 		elements.push({
-			symbol: symbol,
-			count: allSymbols.filter((e) => e == symbol).length,
+			elementListIndex: i,
+			symbol: symbols[i],
+			count: allSymbols.filter((e) => e == elements[i].symbol).length,
 		})
 	}
-
 	return (
 		<Box
 			className="ProductCount"
 			border={`1px solid #44475a`}
 			w="33vw"
 			h="auto">
-			{elements.map((element, i) => {
+			{symbols.map((_, i) => {
 				return (
-					<Box>
+					<Box key={uuid()}>
 						<Text
 							color={
 								reactantCountList[i].count ==
 								productCountList[i].count
-									? "green"
-									: "red"
-							}>{`${element.symbol}:${element.count}`}</Text>
+									? "dracula.dracGreen"
+									: "dracula.dracRed"
+							}>
+							{`${reactantCountList[i].symbol}:${reactantCountList[i].count}`}
+						</Text>
 					</Box>
 				)
 			})}

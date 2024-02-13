@@ -114,15 +114,19 @@ type ChemicalSymbol = "H"
 	| "Ne"
 	| "Ne"
 	| "Ne"
+//TODO Add remaining elements
+
+type FormulaSection = "Reactants" | "Products"
+
 type ChemicalElement = {
-	//TODO Add remaining elements
 	symbol: ChemicalSymbol
 	subscript: number
 }
+
 type ChemicalCompound = {
 	coefficient: number,
 	elements: ChemicalElement[],
-	formulaSection: "Reactants" | "Products"
+	formulaSection: FormulaSection
 }
 
 type ChemicalReactant = ChemicalCompound

@@ -13,7 +13,7 @@ import {
 import { useMainStore } from "../../../stores/MainStore.ts"
 
 type CoefficientProps = {
-	formulaSection: "Reactants" | "Products"
+	formulaSection: FormulaSection
 	index: number
 }
 export const Coefficient: React.FC<CoefficientProps> = ({
@@ -30,6 +30,12 @@ export const Coefficient: React.FC<CoefficientProps> = ({
 	const coefficient = getCoefficient()
 	const formulaHeightVH = useMainStore((state) => state.formulaHeightVH)
 	const updateCoefficient = useMainStore((state) => state.updateCoefficient)
+	const updateReactantCountList = useMainStore(
+		(state) => state.updateReactantCountList
+	)
+	const updateProductCountList = useMainStore(
+		(state) => state.updateProductCountList
+	)
 
 	const increment = () => {
 		// Limit coefficients to double digit numbers
@@ -37,6 +43,10 @@ export const Coefficient: React.FC<CoefficientProps> = ({
 			return
 		}
 		updateCoefficient(formulaSection, index, coefficient + 1)
+		// Update the store
+		formulaSection == "Reactants"
+			? updateReactantCountList(coefficient + 1, index)
+			: updateProductCountList(coefficient + 1, index)
 	}
 
 	const decrement = () => {
@@ -45,6 +55,10 @@ export const Coefficient: React.FC<CoefficientProps> = ({
 			return
 		}
 		updateCoefficient(formulaSection, index, coefficient - 1)
+		// Update the store
+		formulaSection == "Reactants"
+			? updateReactantCountList(coefficient + 1, index)
+			: updateProductCountList(coefficient + 1, index)
 	}
 
 	const cWidth = "5vw"

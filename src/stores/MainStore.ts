@@ -21,14 +21,8 @@ type State = {
 type Action = {
 
 	updateCoefficient: ( formulaSection: "Reactants" | "Products", index: number, newCoefficient: number ) => void,
-	updateReactantCountList: ( newReactantCountList: {
-		symbol: string
-		count: number
-	}[] ) => void,
-	updateProductCountList: ( newProductCountList: {
-		symbol: string
-		count: number
-	}[] ) => void
+	updateReactantCountList: ( newCount: number, elementListIndex: number ) => void,
+	updateProductCountList: ( newCount: number, elementListIndex: number ) => void
 }
 
 export const useMainStore = create<State & Action>()(
@@ -110,11 +104,11 @@ export const useMainStore = create<State & Action>()(
 			state.formula.products[ index ].coefficient = newCoefficient
 		} )
 		,
-		updateReactantCountList: ( newReactantCountList ) => set( ( state ) => {
-			state.reactantCountList = newReactantCountList
+		updateReactantCountList: ( newCount, elementListIndex ) => set( ( state ) => {
+			state.reactantCountList[ elementListIndex ].count = newCount
 		} ),
-		updateProductCountList: ( newReactantCountList ) => set( ( state ) => {
-			state.reactantCountList = newReactantCountList
+		updateProductCountList: ( newCount, elementListIndex ) => set( ( state ) => {
+			state.reactantCountList[ elementListIndex ].count = newCount
 		} )
 
 	}
