@@ -11,6 +11,8 @@ type ProductCountProps = Record<string, never>
 
 export const ProductCount: React.FC<ProductCountProps> = () => {
 	const formula = useMainStore((state) => state.formula)
+	const reactantCountList = useMainStore((state) => state.reactantCountList)
+	const productCountList = useMainStore((state) => state.productCountList)
 	const allSymbols: string[] = []
 	const symbols: string[] = []
 	formula.products.forEach((product) => {
@@ -43,11 +45,19 @@ export const ProductCount: React.FC<ProductCountProps> = () => {
 			border={`1px solid #44475a`}
 			w="33vw"
 			h="auto">
-			{elements.map((element) => (
-				<Box>
-					<Text color="dracula.dracFG">{`${element.symbol}:${element.count} `}</Text>
-				</Box>
-			))}
+			{elements.map((element, i) => {
+				return (
+					<Box>
+						<Text
+							color={
+								reactantCountList[i].count ==
+								productCountList[i].count
+									? "green"
+									: "red"
+							}>{`${element.symbol}:${element.count}`}</Text>
+					</Box>
+				)
+			})}
 		</Box>
 	)
 }

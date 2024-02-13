@@ -45,9 +45,15 @@ export const ReactantCount: React.FC<ReactantCountProps> = () => {
 			border={`1px solid #44475a`}
 			w="33vw"
 			h="auto">
-			{elements.map((element) => (
+			{elements.map((element, i) => (
 				<Box>
-					<Text color="dracula.dracFG">{`${element.symbol}:${element.count} `}</Text>
+					<Text
+						color={
+							reactantCountList[i].count ==
+							productCountList[i].count
+								? "green"
+								: "red"
+						}>{`${element.symbol}:${element.count}`}</Text>
 				</Box>
 			))}
 		</Box>

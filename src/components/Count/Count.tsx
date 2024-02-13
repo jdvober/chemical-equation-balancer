@@ -1,8 +1,7 @@
 import React from "react"
 
-import { HStack, Text } from "@chakra-ui/react"
+import { HStack } from "@chakra-ui/react"
 
-import { useMainStore } from "../../stores/MainStore.ts"
 import { ProductCount } from "./ProductCount"
 import { ReactantCount } from "./ReactantCount"
 
