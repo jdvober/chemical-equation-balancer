@@ -3,15 +3,13 @@
 Put Global Functions you want to be available everywhere in this file.
 
 */
-import { useMainStore } from "../stores/MainStore.ts"
 
-const formula = useMainStore( ( state ) => state.formula )
+export const CalculateCountList = ( formula: ChemicalFormula, formulaSection: FormulaSection ) => {
 
-export const calculateCountList = ( formulaSection: FormulaSection ) => {
-
+	console.log( formula )
 	const allSymbols: string[] = []
 	const symbols: string[] = []
-	if ( formulaSection == "Reactants" ) {
+	if ( formulaSection == "REACTANTS" ) {
 
 		formula.reactants.forEach( ( reactant ) => {
 			reactant.elements.forEach( ( element ) => {
@@ -25,8 +23,9 @@ export const calculateCountList = ( formulaSection: FormulaSection ) => {
 				}
 			} )
 		} )
+		console.log( symbols, allSymbols )
 
-	} else if ( formulaSection == "Products" ) {
+	} else if ( formulaSection == "PRODUCTS" ) {
 		formula.products.forEach( ( product ) => {
 			product.elements.forEach( ( element ) => {
 				if ( !symbols.includes( element.symbol ) ) {
@@ -41,17 +40,22 @@ export const calculateCountList = ( formulaSection: FormulaSection ) => {
 		} )
 	}
 
-	const elements: {
-		elementListIndex: number
-		symbol: string
-		count: number
-	}[] = []
-	for ( let i = 0; i < elements.length; i++ ) {
-		elements.push( {
+	// const elementCountList: ElementCountList = []
+
+	const elementCountList: ElementCountList = symbols.map( ( symbol, i ) => {
+		return {
 			elementListIndex: i,
-			symbol: elements[ i ].symbol,
-			count: allSymbols.filter( ( e ) => e == elements[ i ].symbol ).length,
-		} )
-	}
-	return elements
+			symbol: symbol,
+			count: allSymbols.filter( ( x ) => x === symbol ).length
+		}
+	} )
+	// for ( let i = 0; i < elementCountList.length; i++ ) {
+	// 	elementCountList.push( {
+	// 		elementListIndex: i,
+	// 		symbol: elementCountList[ i ].symbol,
+	// 		count: allSymbols.filter( ( e ) => e == elementCountList[ i ].symbol ).length,
+	// 	} )
+	// }
+	console.log( elementCountList )
+	return elementCountList
 }

@@ -1,15 +1,8 @@
 import React from "react"
 
-import {
-	Box,
-	NumberDecrementStepper,
-	NumberIncrementStepper,
-	NumberInput,
-	NumberInputStepper,
-	Text,
-	VStack,
-} from "@chakra-ui/react"
+import { Button, Text, VStack } from "@chakra-ui/react"
 
+import { CalculateCountList } from "../../../functions/GlobalFunctions.ts"
 import { useMainStore } from "../../../stores/MainStore.ts"
 
 type CoefficientProps = {
@@ -21,108 +14,72 @@ export const Coefficient: React.FC<CoefficientProps> = ({
 	index,
 }) => {
 	const formula = useMainStore((state) => state.formula)
-	const getCoefficient = () => {
-		if (formulaSection === "Reactants") {
-			return formula.reactants[index].coefficient
-		}
-		return formula.products[index].coefficient
-	}
-	const coefficient = getCoefficient()
-	const formulaHeightVH = useMainStore((state) => state.formulaHeightVH)
 	const updateCoefficient = useMainStore((state) => state.updateCoefficient)
-	const updateReactantCountList = useMainStore(
-		(state) => state.updateReactantCountList
-	)
-	const updateProductCountList = useMainStore(
-		(state) => state.updateProductCountList
-	)
-
-	const increment = () => {
-		// Limit coefficients to double digit numbers
-		if (coefficient + 1 > 99) {
-			return
-		}
-		updateCoefficient(formulaSection, index, coefficient + 1)
-		// Update the store
-		formulaSection == "Reactants"
-			? updateReactantCountList(coefficient + 1, index)
-			: updateProductCountList(coefficient + 1, index)
-	}
-
-	const decrement = () => {
-		// Coefficients can't be negative
-		if (coefficient - 1 < 1) {
-			return
-		}
-		updateCoefficient(formulaSection, index, coefficient - 1)
-		// Update the store
-		formulaSection == "Reactants"
-			? updateReactantCountList(coefficient + 1, index)
-			: updateProductCountList(coefficient + 1, index)
-	}
+	const formulaHeightVH = useMainStore((state) => state.formulaHeightVH)
+	const updateCountList = useMainStore((state) => state.updateCountList)
 
 	const cWidth = "5vw"
 
+	const increment = () => {
+		updateCoefficient(
+			formulaSection,
+			index,
+			formulaSection == "REACTANTS"
+				? formula.reactants[index].coefficient + 1
+				: formula.products[index].coefficient + 1
+		)
+
+		// Calculate new totals
+		const newCountList = CalculateCountList(
+			useMainStore.getState().formula,
+			formulaSection
+		)
+
+		// Update reactant count list
+		updateCountList(newCountList, formulaSection)
+	}
+	const decrement = () => {
+		updateCoefficient(
+			formulaSection,
+			index,
+			formulaSection == "REACTANTS"
+				? formula.reactants[index].coefficient - 1
+				: formula.products[index].coefficient - 1
+		)
+
+		// Calculate new totals
+		const newCountList = CalculateCountList(
+			useMainStore.getState().formula,
+			formulaSection
+		)
+
+		// Update reactant count list
+		updateCountList(newCountList, formulaSection)
+	}
 	return (
 		<VStack
 			justify="start"
 			align="center"
 			h={`${formulaHeightVH}vh`}
 			w={cWidth}>
-			{/* <Grid
-				className={`coefficient-${formulaSection}-${index}`}
-				h={`${formulaHeightVH}vh`}
-				w={"8vw"}
-				// justifyItems="start"
-				templateRows={`1fr 3fr 1fr`}> */}
-			<NumberInput precision={0}>
-				<NumberInputStepper>
-					{/* <GridItem> */}
-					<Box w={cWidth} mt={"1vh"}>
-						<NumberIncrementStepper
-							h={`${formulaHeightVH / 6}vh`}
-							w="100%"
-							bg="dracula.dracGreen"
-							_active={{ bg: "green.300" }}
-							children="+"
-							fontSize={"75%"}
-							// fontSize={"4vh"}
-							gridRowStart={1}
-							gridRowEnd={1}
-							onClick={() => increment()}
-						/>
-					</Box>
-					{/* </GridItem> */}
-					{/* <GridItem> */}
-					<Box h={`${(4 * formulaHeightVH) / 6}vh`} w={cWidth}>
-						<Text
-							className="coefficient"
-							color="dracula.dracFG"
-							gridRowStart={2}
-							gridRowEnd={2}
-							fontSize="100%">
-							<u>{coefficient}</u>
-						</Text>
-					</Box>
-					{/* </GridItem> */}
-					{/* <GridItem> */}
-					<Box w={cWidth} mb={0}>
-						<NumberDecrementStepper
-							bg="dracula.dracRed"
-							h={`${formulaHeightVH / 6}vh`}
-							_active={{ bg: "red.500" }}
-							children="-"
-							gridRowStart={3}
-							gridRowEnd={3}
-							w={cWidth}
-							fontSize={"75%"}
-							onClick={() => decrement()}
-						/>
-					</Box>
-					{/* </GridItem> */}
-				</NumberInputStepper>
-			</NumberInput>
-			{/* </Grid> */}
+			<Button
+				onClick={() => {
+					increment()
+				}}>
+				+
+			</Button>
+			<Text color="dracula.dracPurple">
+				{formulaSection == "REACTANTS"
+					? formula.reactants[index].coefficient
+					: formula.products[index].coefficient}
+			</Text>
+
+			<Button
+				onClick={() => {
+					decrement()
+				}}>
+				-
+			</Button>
 		</VStack>
 	)
 }

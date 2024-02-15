@@ -37,7 +37,7 @@ export const Formula: React.FC<FormulaProps> = () => {
 						>
 							<Coefficient
 								index={reactantIndex}
-								formulaSection="Reactants"
+								formulaSection="REACTANTS"
 							/>
 						</Box>
 						<Box
@@ -46,7 +46,7 @@ export const Formula: React.FC<FormulaProps> = () => {
 						>
 							<ChemicalCompound
 								compound={reactant}
-								formulaSection="Reactants"
+								formulaSection="REACTANTS"
 								index={reactantIndex}
 							/>
 						</Box>
@@ -60,7 +60,7 @@ export const Formula: React.FC<FormulaProps> = () => {
 							className={`coefficient-products-${productIndex}-container`}>
 							<Coefficient
 								index={productIndex}
-								formulaSection="Products"
+								formulaSection="PRODUCTS"
 								key={uuid()}
 							/>
 						</Box>
@@ -69,7 +69,7 @@ export const Formula: React.FC<FormulaProps> = () => {
 							justifyItems="center">
 							<ChemicalCompound
 								compound={product}
-								formulaSection="Products"
+								formulaSection="PRODUCTS"
 								index={productIndex}
 							/>
 						</Box>

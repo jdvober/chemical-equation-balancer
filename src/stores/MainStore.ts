@@ -20,9 +20,8 @@ type State = {
 
 type Action = {
 
-	updateCoefficient: ( formulaSection: "Reactants" | "Products", index: number, newCoefficient: number ) => void,
-	updateReactantCountList: ( newCount: number, elementListIndex: number ) => void,
-	updateProductCountList: ( newCount: number, elementListIndex: number ) => void
+	updateCoefficient: ( formulaSection: FormulaSection, index: number, newCoefficient: number ) => void,
+	updateCountList: ( newCountList: ElementCountList, formulaSection: FormulaSection ) => void,
 }
 
 export const useMainStore = create<State & Action>()(
@@ -41,7 +40,7 @@ export const useMainStore = create<State & Action>()(
 						subscript: 2
 					}
 				],
-				formulaSection: "Reactants",
+				formulaSection: "REACTANTS",
 			},
 			{
 				coefficient: 1,
@@ -51,7 +50,7 @@ export const useMainStore = create<State & Action>()(
 						subscript: 2
 					}
 				],
-				formulaSection: "Reactants",
+				formulaSection: "REACTANTS",
 			} ],
 			products: [
 
@@ -67,11 +66,9 @@ export const useMainStore = create<State & Action>()(
 							subscript: 1
 						}
 					],
-					formulaSection: "Products",
+					formulaSection: "PRODUCTS",
 				}
 			]
-
-
 		},
 		formulaHeightVH: 20,
 		reactantCountList: [ {
@@ -92,23 +89,25 @@ export const useMainStore = create<State & Action>()(
 		/////////////
 		// Actions //
 		/////////////
+		updateCountList: ( newCountList, formulaSection ) => set( ( state ) => {
+			console.log( `Updating Reactant Count to ${ newCountList }` )
+			formulaSection === "REACTANTS" ? state.reactantCountList = newCountList : state.productCountList = newCountList
+		} ),
+
 		updateCoefficient: ( formulaSection, index, newCoefficient ) => set( ( state ) => {
 			// Check to make sure we have an integer
 			if ( !Number.isInteger( newCoefficient ) ) { return }
 
-			if ( formulaSection === "Reactants" ) {
+			// Update the coefficient
+			if ( formulaSection === "REACTANTS" ) {
 				state.formula.reactants[ index ].coefficient = newCoefficient
-				return
-			}
+				console.log( `Updating Coefficient ${ index } of Reactants to ${ newCoefficient }` )
 
-			state.formula.products[ index ].coefficient = newCoefficient
-		} )
-		,
-		updateReactantCountList: ( newCount, elementListIndex ) => set( ( state ) => {
-			state.reactantCountList[ elementListIndex ].count = newCount
-		} ),
-		updateProductCountList: ( newCount, elementListIndex ) => set( ( state ) => {
-			state.reactantCountList[ elementListIndex ].count = newCount
+			} else if ( formulaSection === "PRODUCTS" ) {
+
+				console.log( `Updating Coefficient ${ index } of Products to ${ newCoefficient }` )
+				state.formula.products[ index ].coefficient = newCoefficient
+			}
 		} )
 
 	}

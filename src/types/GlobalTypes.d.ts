@@ -116,7 +116,15 @@ type ChemicalSymbol = "H"
 	| "Ne"
 //TODO Add remaining elements
 
-type FormulaSection = "Reactants" | "Products"
+type FormulaSection = "REACTANTS" | "PRODUCTS"
+
+type ElementListElement = {
+	elementListIndex: number
+	symbol: string
+	count: number
+}
+
+type ElementCountList = ElementListElement[]
 
 type ChemicalElement = {
 	symbol: ChemicalSymbol

@@ -8,7 +8,7 @@ import { ChemicalElement } from "../ChemicalElement/ChemicalElement.tsx"
 
 type ChemicalCompoundProps = {
 	compound: ChemicalCompound
-	formulaSection: "Reactants" | "Products"
+	formulaSection: FormulaSection
 	index: number
 }
 export const ChemicalCompound: React.FC<ChemicalCompoundProps> = ({
@@ -17,6 +17,7 @@ export const ChemicalCompound: React.FC<ChemicalCompoundProps> = ({
 	index,
 }) => {
 	const formula = useMainStore((state) => state.formula)
+
 	return (
 		<HStack
 			className="compound"
@@ -34,7 +35,7 @@ export const ChemicalCompound: React.FC<ChemicalCompoundProps> = ({
 							key={uuid()}
 						/>
 					</HStack>
-					{formulaSection === "Reactants" ? (
+					{formulaSection === "REACTANTS" ? (
 						index < formula.reactants.length - 1 ? (
 							<Text color="dracula.dracComment" ml="1vw">
 								+
