@@ -1,7 +1,7 @@
 import React from "react"
 import { v4 as uuid } from "uuid"
 
-import { Box, Grid, GridItem, HStack } from "@chakra-ui/react"
+import { Box, GridItem, HStack, SimpleGrid, Spacer } from "@chakra-ui/react"
 
 import { useMainStore } from "../../stores/MainStore.ts"
 import { ChemicalCompound } from "./ChemicalCompound/ChemicalCompound.tsx"
@@ -17,17 +17,21 @@ export const Formula: React.FC<FormulaProps> = () => {
 	const formulaHeightVH = useMainStore((state) => state.formulaHeightVH)
 
 	return (
-		<Grid
-			templateColumns={`repeat(${
-				2 * (formula.reactants.length + formula.products.length)
-			}, 1fr)`}
-			gap={0}
-			minW="30vw"
-			w="50vw"
-			maxW="100vw"
-			alignItems="center"
-			h={`${formulaHeightVH}vh`}
-			key={uuid()}>
+		// <Grid
+		// 	templateColumns={`repeat(${
+		// 		2 * (formula.reactants.length + formula.products.length)
+		// 	}, 1fr)`}
+		// 	gap={0}
+		// 	minW="30vw"
+		// 	w="90vw"
+		// 	maxW="100vw"
+		// 	h={`${formulaHeightVH}vh`}
+		// 	key={uuid()}>
+		<SimpleGrid
+			columns={2 * (formula.reactants.length + formula.products.length)}
+			border="1px solid green">
+			<Spacer />
+			<Spacer />
 			{formula.reactants.map((reactant, reactantIndex) => (
 				<GridItem w="100%" h={`${formulaHeightVH}vh`} key={uuid()}>
 					<HStack alignItems={"center"}>
@@ -76,6 +80,9 @@ export const Formula: React.FC<FormulaProps> = () => {
 					</HStack>
 				</GridItem>
 			))}
-		</Grid>
+			<Spacer />
+			<Spacer />
+			{/* </Grid> */}
+		</SimpleGrid>
 	)
 }

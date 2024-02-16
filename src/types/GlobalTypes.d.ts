@@ -127,6 +127,7 @@ type ElementListElement = {
 type ElementCountList = ElementListElement[]
 
 type ChemicalElement = {
+	index: number
 	symbol: ChemicalSymbol
 	subscript: number
 }

@@ -1,7 +1,8 @@
 import "./App.css"
 
-import { Box, Center, VStack } from "@chakra-ui/react"
+import { Center, VStack } from "@chakra-ui/react"
 
+import { ChemicalDisplay } from "./components/ChemicalDisplay/ChemicalDisplay"
 import { Count } from "./components/Count/Count"
 import { Formula } from "./components/Formula/Formula"
 
@@ -12,10 +13,9 @@ export const App = () => {
 	return (
 		<Center fontSize="5xl">
 			<VStack>
-				<Box m="2vw">
-					<Formula />
-				</Box>
+				<Formula />
 				<Count />
+				<ChemicalDisplay />
 			</VStack>
 
 			{/* <VStack>

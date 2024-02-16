@@ -36,6 +36,7 @@ export const useMainStore = create<State & Action>()(
 				elements: [
 					{
 
+						index: 0,
 						symbol: "H",
 						subscript: 2
 					}
@@ -46,6 +47,7 @@ export const useMainStore = create<State & Action>()(
 				coefficient: 1,
 				elements: [
 					{
+						index: 0,
 						symbol: "O",
 						subscript: 2
 					}
@@ -58,10 +60,12 @@ export const useMainStore = create<State & Action>()(
 					coefficient: 1,
 					elements: [
 						{
+							index: 0,
 							symbol: "H",
 							subscript: 2
 						},
 						{
+							index: 1,
 							symbol: "O",
 							subscript: 1
 						}
