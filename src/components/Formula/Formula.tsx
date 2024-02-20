@@ -17,16 +17,6 @@ export const Formula: React.FC<FormulaProps> = () => {
 	const formulaHeightVH = useMainStore((state) => state.formulaHeightVH)
 
 	return (
-		// <Grid
-		// 	templateColumns={`repeat(${
-		// 		2 * (formula.reactants.length + formula.products.length)
-		// 	}, 1fr)`}
-		// 	gap={0}
-		// 	minW="30vw"
-		// 	w="90vw"
-		// 	maxW="100vw"
-		// 	h={`${formulaHeightVH}vh`}
-		// 	key={uuid()}>
 		<SimpleGrid
 			columns={2 * (formula.reactants.length + formula.products.length)}
 			border="1px solid green">
