@@ -1,7 +1,7 @@
 import React from "react"
 import { v4 as uuid } from "uuid"
 
-import { Box, Text } from "@chakra-ui/react"
+import { Box, Center, Text } from "@chakra-ui/react"
 
 import { useMainStore } from "../../stores/MainStore.ts"
 
@@ -25,7 +25,7 @@ export const ReactantCount: React.FC<ReactantCountProps> = () => {
 		>
 			{reactantCountList.map((_, i) => {
 				return (
-					<Box key={uuid()}>
+					<Center key={uuid()}>
 						<Text
 							color={
 								reactantCountList[i].count ==
@@ -37,7 +37,7 @@ export const ReactantCount: React.FC<ReactantCountProps> = () => {
 							{reactantCountList[i].symbol}:
 							{reactantCountList[i].count}
 						</Text>
-					</Box>
+					</Center>
 				)
 			})}
 		</Box>

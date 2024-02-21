@@ -20,6 +20,7 @@ export const Formula: React.FC<FormulaProps> = () => {
 	return (
 		<SimpleGrid
 			columns={2 * (formula.reactants.length + formula.products.length)}
+			m="1vw"
 			border={`1px solid #44475a`}
 			borderRadius={"1vw"}
 			p="1vw"

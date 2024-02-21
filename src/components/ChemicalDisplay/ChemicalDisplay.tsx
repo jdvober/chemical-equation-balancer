@@ -14,7 +14,7 @@ type ChemicalDisplayProps = Record<string, never>
 
 export const ChemicalDisplay: React.FC<ChemicalDisplayProps> = () => {
 	const formula = useMainStore((state) => state.formula)
-	const showBorders = true as boolean
+	const showBorders = false as boolean
 
 	const makeChemicalArr = (element: ChemicalElement) => {
 		const chemArr: ChemicalSymbol[] = []
@@ -49,7 +49,7 @@ export const ChemicalDisplay: React.FC<ChemicalDisplayProps> = () => {
 				>
 					// Amount Text
 					<HStack color="dracula.dracFG" key={uuid()} maxW="30vw">
-						<Text color="dracula.dracRed">
+						<Text color="dracula.dracCyan">
 							{`${compound.coefficient}`}
 						</Text>
 						<Text color="dracula.dracComment">of</Text>
@@ -63,7 +63,11 @@ export const ChemicalDisplay: React.FC<ChemicalDisplayProps> = () => {
 					// Atoms
 					{makeChemicalArrays(compound).map((chemicalArray) => {
 						return (
-							<HStack>
+							<HStack
+								border={"1px solid orange"}
+								borderRadius={"1vw"}
+								p="1vw"
+							>
 								{/* <Text color="dracula.dracOrange">
 									{chemicalArray}
 								</Text> */}
