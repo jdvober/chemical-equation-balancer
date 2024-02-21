@@ -1,7 +1,7 @@
 import React from "react"
 import { v4 as uuid } from "uuid"
 
-import { Flex, HStack, Spacer, Text, VStack } from "@chakra-ui/react"
+import { Box, Flex, HStack, Spacer, Text, VStack } from "@chakra-ui/react"
 
 // If values, fill in the object below
 //type ChemicalDisplayProps = {}
@@ -32,7 +32,6 @@ export const ChemicalDisplay: React.FC<ChemicalDisplayProps> = () => {
 			})
 			chemsArr.push(chemicals.flat())
 		}
-		console.log(chemsArr)
 		return chemsArr
 	}
 
@@ -61,7 +60,15 @@ export const ChemicalDisplay: React.FC<ChemicalDisplayProps> = () => {
 						/>
 					</HStack>
 					// Atoms
-					{makeChemicalArrays(compound)}
+					{makeChemicalArrays(compound).map((chemicalArray) => {
+						return (
+							<Box>
+								<Text color="dracula.dracOrange">
+									{chemicalArray}
+								</Text>
+							</Box>
+						)
+					})}
 				</VStack>
 			)
 		})
