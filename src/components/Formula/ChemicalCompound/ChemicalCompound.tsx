@@ -10,11 +10,13 @@ type ChemicalCompoundProps = {
 	compound: ChemicalCompound
 	formulaSection: FormulaSection
 	index: number
+	includeSymbols: boolean
 }
 export const ChemicalCompound: React.FC<ChemicalCompoundProps> = ({
 	compound,
 	formulaSection,
 	index,
+	includeSymbols,
 }) => {
 	const formula = useMainStore((state) => state.formula)
 
@@ -38,11 +40,11 @@ export const ChemicalCompound: React.FC<ChemicalCompoundProps> = ({
 					{formulaSection === "REACTANTS" ? (
 						index < formula.reactants.length - 1 ? (
 							<Text color="dracula.dracComment" ml="1vw">
-								+
+								{includeSymbols ? "+" : ""}
 							</Text>
 						) : (
 							<Text color="dracula.dracComment" ml="1vw">
-								→
+								{includeSymbols ? "→" : ""}
 							</Text>
 						)
 					) : index < formula.products.length - 1 ? (

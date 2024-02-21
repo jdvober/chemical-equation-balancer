@@ -7,21 +7,21 @@ import { Box, Flex, HStack, Spacer, Text, VStack } from "@chakra-ui/react"
 //type ChemicalDisplayProps = {}
 import { useMainStore } from "../../stores/MainStore.ts"
 import { ChemicalCompound } from "../Formula/ChemicalCompound/ChemicalCompound.tsx"
-import { AtomSVGSource } from "./AtomSVGSource"
+import { AtomSVG } from "./AtomSVG.tsx"
 
 // If no values, use this:
 type ChemicalDisplayProps = Record<string, never>
 export const ChemicalDisplay: React.FC<ChemicalDisplayProps> = () => {
 	const formula = useMainStore((state) => state.formula)
-	const cs = (coefficient: number, subscript: number) => {
-		let c = []
-		let d = []
+	const atomCircles = (coefficient: number, subscript: number) => {
+		let groups = []
+		let atomCircles = []
 		for (let i = 0; i < coefficient; i++) {
-			d = []
+			atomCircles = []
 			for (let j = 0; j < subscript; j++) {
-				d.push(
+				atomCircles.push(
 					<Box>
-						<AtomSVGSource
+						<AtomSVG
 							symbol={"H"}
 							cirRadiusInVH={10}
 							cirFill="white"
@@ -31,13 +31,13 @@ export const ChemicalDisplay: React.FC<ChemicalDisplayProps> = () => {
 					</Box>
 				)
 			}
-			console.log(d)
-			c.push(d)
+			console.log(atomCircles)
+			groups.push(atomCircles)
 		}
-		console.log(c)
+		console.log(groups)
 		return (
 			<HStack>
-				{c.map((p) => (
+				{groups.map((p) => (
 					<HStack border="1px solid yellow" borderRadius={"1vw"}>
 						{p}{" "}
 					</HStack>
@@ -47,39 +47,42 @@ export const ChemicalDisplay: React.FC<ChemicalDisplayProps> = () => {
 	}
 
 	return (
-		<Flex w="90vw">
+		<Flex w="90vw" border="1px solid green">
 			<VStack>
-				{formula.reactants.map((reactant) => {
+				{formula.reactants.map((reactant, reactantIndex) => {
 					return (
 						<HStack key={uuid()}>
 							// Amount Text
-							<Box color="red" key={uuid()}>
+							<Box
+								color="dracula.dracFG"
+								key={uuid()}
+								maxW="25vw">
 								<Text>
-									{`${reactant.coefficient}`}
-									{` of `}
+									<Text>{`${reactant.coefficient} of: `}</Text>
 								</Text>
 							</Box>
 							// Compounds
-							<Box color="red" key={uuid()} maxW="30vw">
+							<HStack
+								color="dracula.dracFG"
+								key={uuid()}
+								maxW="30vw">
+								<ChemicalCompound
+									compound={reactant}
+									formulaSection={reactant.formulaSection}
+									index={reactantIndex}
+									includeSymbols={false}
+								/>
 								{reactant.elements.map((element) => {
 									return (
 										<HStack>
-											<Box>
-												{element.symbol}
-												<sub>
-													{element.subscript <= 1
-														? ""
-														: element.subscript}
-												</sub>
-											</Box>
-											{cs(
+											{atomCircles(
 												reactant.coefficient,
 												element.subscript
 											)}
 										</HStack>
 									)
 								})}
-							</Box>
+							</HStack>
 							// Atoms
 						</HStack>
 					)
@@ -91,23 +94,27 @@ export const ChemicalDisplay: React.FC<ChemicalDisplayProps> = () => {
 					return (
 						<HStack key={uuid()}>
 							// Amount Text
-							<Box color="red" key={uuid()} w="45vw">
-								<Text>
-									{`${product.coefficient}`}
-									{` of `}
-								</Text>
+							<Box
+								color="dracula.dracFG"
+								key={uuid()}
+								maxW="25vw">
+								<Text>{`${product.coefficient} of: `}</Text>
 							</Box>
 							// Compounds
-							<HStack color="red" key={uuid()} maxW="30vw">
+							<HStack
+								color="dracula.dracFG"
+								key={uuid()}
+								maxW="30vw">
 								<ChemicalCompound
 									compound={product}
 									formulaSection={product.formulaSection}
 									index={productIndex}
+									includeSymbols={false}
 								/>
 								{product.elements.map((element) => {
 									return (
 										<HStack>
-											{cs(
+											{atomCircles(
 												product.coefficient,
 												element.subscript
 											)}
