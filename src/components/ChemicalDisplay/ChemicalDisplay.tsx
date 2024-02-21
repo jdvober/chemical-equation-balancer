@@ -1,12 +1,13 @@
 import React from "react"
 import { v4 as uuid } from "uuid"
 
-import { Box, Flex, HStack, Spacer, Text, VStack } from "@chakra-ui/react"
+import { Flex, HStack, Spacer, Text, VStack } from "@chakra-ui/react"
 
 // If values, fill in the object below
 //type ChemicalDisplayProps = {}
 import { useMainStore } from "../../stores/MainStore.ts"
 import { ChemicalCompound } from "../Formula/ChemicalCompound/ChemicalCompound.tsx"
+import { AtomSVG } from "./AtomSVG.tsx"
 
 // If no values, use this:
 type ChemicalDisplayProps = Record<string, never>
@@ -62,11 +63,23 @@ export const ChemicalDisplay: React.FC<ChemicalDisplayProps> = () => {
 					// Atoms
 					{makeChemicalArrays(compound).map((chemicalArray) => {
 						return (
-							<Box>
-								<Text color="dracula.dracOrange">
+							<HStack>
+								{/* <Text color="dracula.dracOrange">
 									{chemicalArray}
-								</Text>
-							</Box>
+								</Text> */}
+								{chemicalArray.map((arr) => {
+									return (
+										<AtomSVG
+											cirFill="white"
+											cirRadiusInVW={2}
+											cirStroke="black"
+											symbol={arr}
+											textFill="red"
+											key={uuid()}
+										/>
+									)
+								})}
+							</HStack>
 						)
 					})}
 				</VStack>
