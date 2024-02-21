@@ -18,8 +18,11 @@ export const ReactantCount: React.FC<ReactantCountProps> = () => {
 		<Box
 			className="ReactantCount"
 			border={`1px solid #44475a`}
+			borderRadius={"1vw"}
 			w="33vw"
-			h="auto">
+			h="auto"
+			mt="2vh"
+		>
 			{reactantCountList.map((_, i) => {
 				return (
 					<Box key={uuid()}>
@@ -29,7 +32,8 @@ export const ReactantCount: React.FC<ReactantCountProps> = () => {
 								productCountList[i].count
 									? "dracula.dracGreen"
 									: "dracula.dracRed"
-							}>
+							}
+						>
 							{reactantCountList[i].symbol}:
 							{reactantCountList[i].count}
 						</Text>

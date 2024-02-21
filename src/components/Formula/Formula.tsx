@@ -13,13 +13,18 @@ type FormulaProps = Record<string, never>
 // type FormulaProps = {}
 
 export const Formula: React.FC<FormulaProps> = () => {
+	const showBorders = false as boolean
 	const formula = useMainStore((state) => state.formula)
 	const formulaHeightVH = useMainStore((state) => state.formulaHeightVH)
 
 	return (
 		<SimpleGrid
 			columns={2 * (formula.reactants.length + formula.products.length)}
-			border="1px solid green">
+			border={`1px solid #44475a`}
+			borderRadius={"1vw"}
+			p="1vw"
+			// border={showBorders === true ? "1px solid green" : ""}
+		>
 			<Spacer />
 			<Spacer />
 			{formula.reactants.map((reactant, reactantIndex) => (
@@ -52,7 +57,8 @@ export const Formula: React.FC<FormulaProps> = () => {
 				<GridItem w="100%" h={`${formulaHeightVH}vh`} key={uuid()}>
 					<HStack>
 						<Box
-							className={`coefficient-products-${productIndex}-container`}>
+							className={`coefficient-products-${productIndex}-container`}
+						>
 							<Coefficient
 								index={productIndex}
 								formulaSection="PRODUCTS"
@@ -61,7 +67,8 @@ export const Formula: React.FC<FormulaProps> = () => {
 						</Box>
 						<Box
 							className={`chemicalCompound-products-${productIndex}-container`}
-							justifyItems="center">
+							justifyItems="center"
+						>
 							<ChemicalCompound
 								compound={product}
 								formulaSection="PRODUCTS"

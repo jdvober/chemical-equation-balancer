@@ -11,12 +11,14 @@ type CountProps = Record<string, never>
 //type CountProps = {}
 
 export const Count: React.FC<CountProps> = () => {
+	const showBorders = false as boolean
 	return (
 		<HStack
 			className="Count-container"
-			border={`1px solid #44475a`}
+			border={showBorders === true ? "1px solid #44475a" : ""}
 			w="33vw"
-			h="auto">
+			h="auto"
+		>
 			<ReactantCount />
 			<ProductCount />
 		</HStack>

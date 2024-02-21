@@ -54,8 +54,11 @@ export const ProductCount: React.FC<ProductCountProps> = () => {
 		<Box
 			className="ProductCount"
 			border={`1px solid #44475a`}
+			borderRadius={"1vw"}
 			w="33vw"
-			h="auto">
+			h="auto"
+			mt="2vh"
+		>
 			{productCountList.map((_, i) => {
 				return (
 					<Box key={uuid()}>
@@ -65,7 +68,8 @@ export const ProductCount: React.FC<ProductCountProps> = () => {
 								productCountList[i].count
 									? "dracula.dracGreen"
 									: "dracula.dracRed"
-							}>
+							}
+						>
 							{productCountList[i].symbol}:
 							{productCountList[i].count}
 						</Text>

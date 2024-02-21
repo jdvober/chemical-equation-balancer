@@ -9,7 +9,37 @@ type Compound = {
 }
 
 */
-type ChemicalSymbol = "H"
+type FormulaSection = "REACTANTS" | "PRODUCTS"
+
+type ElementListElement = {
+	elementListIndex: number
+	symbol: string
+	count: number
+}
+
+type ElementCountList = ElementListElement[]
+
+type ChemicalElement = {
+	index: number
+	symbol: ChemicalSymbol
+	subscript: number
+}
+
+type ChemicalCompound = {
+	coefficient: number,
+	elements: ChemicalElement[],
+	formulaSection: FormulaSection
+}
+
+type ChemicalReactant = ChemicalCompound
+type ChemicalProduct = ChemicalCompound
+type ChemicalFormula = {
+	reactants: ChemicalReactant[],
+	products: ChemicalProduct[]
+}
+
+type ChemicalSymbol =
+	"H"
 	| "He"
 	| "Li"
 	| "Be"
@@ -127,32 +157,3 @@ type ChemicalSymbol = "H"
 	| "Lv"
 	| "Ts"
 	| "Og"
-
-type FormulaSection = "REACTANTS" | "PRODUCTS"
-
-type ElementListElement = {
-	elementListIndex: number
-	symbol: string
-	count: number
-}
-
-type ElementCountList = ElementListElement[]
-
-type ChemicalElement = {
-	index: number
-	symbol: ChemicalSymbol
-	subscript: number
-}
-
-type ChemicalCompound = {
-	coefficient: number,
-	elements: ChemicalElement[],
-	formulaSection: FormulaSection
-}
-
-type ChemicalReactant = ChemicalCompound
-type ChemicalProduct = ChemicalCompound
-type ChemicalFormula = {
-	reactants: ChemicalReactant[],
-	products: ChemicalProduct[]
-}
