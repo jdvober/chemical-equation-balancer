@@ -49,7 +49,17 @@ export const FormulaEditorToggleButton: React.FC<
 							<Spacer />
 							<Stack direction={"row"}>
 								<Text>Reactants</Text>
-								<Switch variant="neutral" size="lg" />
+								<Switch
+									variant="neutral"
+									size="lg"
+									onChange={() =>
+										setSection(
+											section === "REACTANTS"
+												? "PRODUCTS"
+												: "REACTANTS"
+										)
+									}
+								/>
 								<Text>Products</Text>S
 							</Stack>
 						</Stack>
