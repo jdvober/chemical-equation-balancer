@@ -1,8 +1,9 @@
 import { extendTheme } from "@chakra-ui/react"
-import { Styles } from "./styles"
 import { Colors } from "./colors/colors"
-import { button } from "./components/Button"
 import { box } from "./components/Box"
+import { button } from "./components/Button"
+import { switchTheme } from "./components/Switch"
+import { Styles } from "./styles"
 
 export const ThemeOverrides = extendTheme({
 	// Put overrides here
@@ -11,6 +12,7 @@ export const ThemeOverrides = extendTheme({
 	components: {
 		Button: button,
 		Box: box,
+		Switch: switchTheme,
 	},
 	fonts: {
 		heading: `'Fira Mono', sans-serif`,

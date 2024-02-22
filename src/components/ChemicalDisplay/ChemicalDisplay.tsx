@@ -67,6 +67,7 @@ export const ChemicalDisplay: React.FC<ChemicalDisplayProps> = () => {
 								border={"1px solid orange"}
 								borderRadius={"1vw"}
 								p="1vw"
+								key={uuid()}
 							>
 								{/* <Text color="dracula.dracOrange">
 									{chemicalArray}

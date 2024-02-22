@@ -35,17 +35,17 @@ export const AtomSVG: React.FC<AtomSVGProps> = ({
 					cy={"50%"}
 					r={`${cirRadiusInVW}vw`}
 					stroke={cirStroke}
-					stroke-width="3"
+					strokeWidth="3"
 					fill={cirFill}
 				/>
 				<text
 					x="50%"
 					y={`${textYPos}vw`}
 					fontSize={`${fontHeight}vw`}
-					text-anchor="middle"
+					textAnchor="middle"
 					stroke="black"
-					stroke-width="1px"
-					alignment-baseline="middle"
+					strokeWidth="1px"
+					alignmentBaseline="middle"
 					fill={textFill}
 				>
 					{symbol}

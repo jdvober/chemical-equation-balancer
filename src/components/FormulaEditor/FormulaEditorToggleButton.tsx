@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 
 import {
 	Box,
@@ -8,6 +8,10 @@ import {
 	DrawerContent,
 	DrawerHeader,
 	DrawerOverlay,
+	Spacer,
+	Stack,
+	Switch,
+	Text,
 	useDisclosure,
 } from "@chakra-ui/react"
 
@@ -22,6 +26,8 @@ export const FormulaEditorToggleButton: React.FC<
 	FormulaEditorToggleButtonProps
 > = () => {
 	const { isOpen, onOpen, onClose } = useDisclosure()
+	const [section, setSection] = useState("REACTANTS")
+
 	return (
 		<Box className="FormulaEditorToggleButton" w="5vw" h="2vh">
 			<Button onClick={onOpen}>Edit</Button>
@@ -38,7 +44,15 @@ export const FormulaEditorToggleButton: React.FC<
 						borderBottomWidth="1px"
 						color="dracula.dracFG"
 					>
-						Edit Formula
+						<Stack direction="row">
+							<Text>Edit Formula</Text>
+							<Spacer />
+							<Stack direction={"row"}>
+								<Text>Reactants</Text>
+								<Switch variant="neutral" size="lg" />
+								<Text>Products</Text>S
+							</Stack>
+						</Stack>
 					</DrawerHeader>
 					<DrawerBody>
 						<FormulaEditor />
