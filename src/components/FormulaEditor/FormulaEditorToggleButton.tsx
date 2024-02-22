@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React from "react"
 
 import {
 	Box,
@@ -15,6 +15,7 @@ import {
 	useDisclosure,
 } from "@chakra-ui/react"
 
+import { useMainStore } from "../../stores/MainStore"
 import { FormulaEditor } from "./FormulaEditor"
 
 // If no values, use this:
@@ -26,7 +27,10 @@ export const FormulaEditorToggleButton: React.FC<
 	FormulaEditorToggleButtonProps
 > = () => {
 	const { isOpen, onOpen, onClose } = useDisclosure()
-	const [section, setSection] = useState("REACTANTS")
+	const setEditFormulaSection = useMainStore(
+		(state) => state.setEditFormulaSection
+	)
+	const editFormulaSection = useMainStore((state) => state.editFormulaSection)
 
 	return (
 		<Box className="FormulaEditorToggleButton" w="5vw" h="2vh">
@@ -38,7 +42,7 @@ export const FormulaEditorToggleButton: React.FC<
 					bgColor={"dracula.dracBG"}
 					border="2px solid #FFB86C"
 					borderRadius={"1vw"}
-					opacity={"98%"}
+					opacity={"95%"}
 				>
 					<DrawerHeader
 						borderBottomWidth="1px"
@@ -53,8 +57,8 @@ export const FormulaEditorToggleButton: React.FC<
 									variant="neutral"
 									size="lg"
 									onChange={() =>
-										setSection(
-											section === "REACTANTS"
+										setEditFormulaSection(
+											editFormulaSection === "REACTANTS"
 												? "PRODUCTS"
 												: "REACTANTS"
 										)
@@ -65,6 +69,7 @@ export const FormulaEditorToggleButton: React.FC<
 						</Stack>
 					</DrawerHeader>
 					<DrawerBody>
+						// Main Body
 						<FormulaEditor />
 					</DrawerBody>
 				</DrawerContent>

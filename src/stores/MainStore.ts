@@ -16,12 +16,14 @@ type State = {
 		symbol: string
 		count: number
 	}[],
+	editFormulaSection: FormulaSection
 }
 
 type Action = {
 
-	updateCoefficient: ( formulaSection: FormulaSection, index: number, newCoefficient: number ) => void,
-	updateCountList: ( newCountList: ElementCountList, formulaSection: FormulaSection ) => void,
+	setCoefficient: ( formulaSection: FormulaSection, index: number, newCoefficient: number ) => void,
+	setCountList: ( newCountList: ElementCountList, formulaSection: FormulaSection ) => void,
+	setEditFormulaSection: ( newFormulaSection: FormulaSection ) => void
 }
 
 export const useMainStore = create<State & Action>()(
@@ -89,16 +91,17 @@ export const useMainStore = create<State & Action>()(
 			symbol: "O",
 			count: 1
 		} ],
+		editFormulaSection: "REACTANTS",
 
 		/////////////
 		// Actions //
 		/////////////
-		updateCountList: ( newCountList, formulaSection ) => set( ( state ) => {
+		setCountList: ( newCountList, formulaSection ) => set( ( state ) => {
 			console.log( `Updating Reactant Count to ${ newCountList }` )
 			formulaSection === "REACTANTS" ? state.reactantCountList = newCountList : state.productCountList = newCountList
 		} ),
 
-		updateCoefficient: ( formulaSection, index, newCoefficient ) => set( ( state ) => {
+		setCoefficient: ( formulaSection, index, newCoefficient ) => set( ( state ) => {
 			// Check to make sure we have an integer
 			if ( !Number.isInteger( newCoefficient ) ) { return }
 
@@ -112,6 +115,9 @@ export const useMainStore = create<State & Action>()(
 				console.log( `Updating Coefficient ${ index } of Products to ${ newCoefficient }` )
 				state.formula.products[ index ].coefficient = newCoefficient
 			}
+		} ),
+		setEditFormulaSection: ( newFormulaSection ) => set( ( state ) => {
+			state.editFormulaSection = newFormulaSection
 		} )
 
 	}

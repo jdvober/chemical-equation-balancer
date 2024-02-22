@@ -14,9 +14,9 @@ export const Coefficient: React.FC<CoefficientProps> = ({
 	index,
 }) => {
 	const formula = useMainStore((state) => state.formula)
-	const updateCoefficient = useMainStore((state) => state.updateCoefficient)
+	const updateCoefficient = useMainStore((state) => state.setCoefficient)
 	const formulaHeightVH = useMainStore((state) => state.formulaHeightVH)
-	const updateCountList = useMainStore((state) => state.updateCountList)
+	const updateCountList = useMainStore((state) => state.setCountList)
 
 	const cWidth = "5vw"
 
@@ -65,11 +65,13 @@ export const Coefficient: React.FC<CoefficientProps> = ({
 			justify="start"
 			align="center"
 			h={`${formulaHeightVH}vh`}
-			w={cWidth}>
+			w={cWidth}
+		>
 			<Button
 				onClick={() => {
 					increment()
-				}}>
+				}}
+			>
 				+
 			</Button>
 			<Text color="dracula.dracPurple">
@@ -81,7 +83,8 @@ export const Coefficient: React.FC<CoefficientProps> = ({
 			<Button
 				onClick={() => {
 					decrement()
-				}}>
+				}}
+			>
 				-
 			</Button>
 		</VStack>
