@@ -9,6 +9,11 @@ type Compound = {
 }
 
 */
+
+type Cards = {
+	title: string
+}
+
 type FormulaSection = "REACTANTS" | "PRODUCTS"
 
 type ElementListElement = {
