@@ -1,31 +1,26 @@
 import "./App.css"
 
-import { Center, HStack, VStack } from "@chakra-ui/react"
+import { Center, VStack } from "@chakra-ui/react"
 
-import { ChemicalDisplay } from "./components/ChemicalDisplay/ChemicalDisplay"
-import { Count } from "./components/Count/Count"
-import { Formula } from "./components/Formula/Formula"
-import { FormulaEditorToggleButton } from "./components/FormulaEditor/FormulaEditorToggleButton"
+// import { ChemicalDisplay } from "./components/ChemicalDisplay/ChemicalDisplay.js"
+// import { Count } from "./components/Count/Count.js"
+// import { Formula } from "./components/Formula/Formula.js"
+import { DragAndDrop } from "./components/FormulaEditor/DragAndDrop/DragAndDrop.js"
 
-// import { TestButton } from "./components/TestButton"
-// import { TestDisplay } from "./components/TestDisplay"
+// import { FormulaEditorToggleButton } from "./components/FormulaEditor/FormulaEditorToggleButton.js"
 
 export const App = () => {
 	return (
 		<Center fontSize="5xl">
 			<VStack>
-				<HStack>
+				<DragAndDrop />
+				{/* <HStack>
 					<Formula />
 					<FormulaEditorToggleButton />
 				</HStack>
 				<Count />
-				<ChemicalDisplay />
+				<ChemicalDisplay /> */}
 			</VStack>
-
-			{/* <VStack>
-				<TestButton />
-				<TestDisplay />
-			</VStack> */}
 		</Center>
 	)
 }

@@ -5,7 +5,7 @@ import { ChakraProvider, ColorModeScript } from "@chakra-ui/react"
 import { DndContext } from "@dnd-kit/core"
 import { GoogleOAuthProvider } from "@react-oauth/google"
 
-import { App } from "./App"
+import { App } from "./App.tsx"
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 //@ts-ignore
 import { ThemeOverrides } from "./theme/theme"
