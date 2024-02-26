@@ -3,11 +3,8 @@ import { useState } from "react"
 import { Flex } from "@chakra-ui/react"
 import { DndContext, rectIntersection } from "@dnd-kit/core"
 
-import AddCard from "./AddCard"
+import { AddCard } from "./AddCard"
 import { Droppable } from "./Droppable"
-
-/* The implementation details of <Item> and <ScrollableList> are not
- * relevant for this example and are therefore omitted. */
 
 export const DragAndDrop = () => {
 	const [todoItems, setTodoItems] = useState<Array<any>>([])
@@ -27,30 +24,40 @@ export const DragAndDrop = () => {
 				const index = e.active.data.current?.index ?? 0
 				const parent = e.active.data.current?.parent ?? "ToDo"
 				if (container === "ToDo") {
+					console.log(`Adding ${title} to ${container}`)
 					setTodoItems([...todoItems, { title }])
 				} else if (container === "Done") {
+					console.log(`Adding ${title} to ${container}`)
 					setDoneItems([...doneItems, { title }])
 				} else if (container === "Unassigned") {
+					console.log(`Adding ${title} to ${container}`)
 					setuItems([...uItems, { title }])
 				} else {
+					console.log(`Adding ${title} to ${container}`)
 					setInProgressItems([...inProgressItems, { title }])
 				}
 				if (parent === "ToDo") {
+					console.log(`Removing ${title} from ToDo`)
 					setTodoItems([
 						...todoItems.slice(0, index),
 						...todoItems.slice(index + 1),
 					])
 				} else if (parent === "Done") {
+					console.log(`Removing ${title} from Done`)
+
 					setDoneItems([
 						...doneItems.slice(0, index),
 						...doneItems.slice(index + 1),
 					])
 				} else if (parent === "Unassigned") {
+					console.log(`Removing ${title} from Unassigned`)
+
 					setuItems([
 						...uItems.slice(0, index),
 						...uItems.slice(index + 1),
 					])
 				} else {
+					console.log(`Removing ${title} from InProgressItems`)
 					setInProgressItems([
 						...inProgressItems.slice(0, index),
 						...inProgressItems.slice(index + 1),
@@ -69,12 +76,4 @@ export const DragAndDrop = () => {
 			</Flex>
 		</DndContext>
 	)
-
-	// function handleDragStart(event: any) {
-	// 	setActiveId(event.active.id)
-	// }
-
-	// function handleDragEnd() {
-	// 	setActiveId(null)
-	// }
 }
