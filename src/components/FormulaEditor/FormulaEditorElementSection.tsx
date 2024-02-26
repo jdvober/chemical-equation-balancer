@@ -1,24 +1,46 @@
-import React, { ReactNode } from "react"
+import React from "react"
+import { v4 as uuid } from "uuid"
 
-import { useDraggable } from "@dnd-kit/core"
+import { Box, Flex, HStack, Text, VStack } from "@chakra-ui/react"
 
-type FormulaEditorElementSectionProps = { children?: ReactNode; id: string }
+import { useMainStore } from "../../stores/MainStore"
+import { DraggableElement } from "./DraggableElement"
+
+type FormulaEditorElementSectionProps = {}
 
 export const FormulaEditorElementSection: React.FC<
 	FormulaEditorElementSectionProps
-> = ({ children, id }) => {
-	const { attributes, listeners, setNodeRef, transform } = useDraggable({
-		id: id,
-	})
-	const style = transform
-		? {
-				transform: `translate3d(${transform.x}px, ${transform.y}px, 0)`,
-		  }
-		: undefined
-
+> = () => {
+	const elements = useMainStore((state) => state.elements)
 	return (
-		<button ref={setNodeRef} style={style} {...listeners} {...attributes}>
-			{children}
-		</button>
+		<Box>
+			<VStack color="dracula.dracFG">
+				<Text>Elements</Text>
+				<Flex
+					w="86vw"
+					border="1px solid cyan"
+					wrap="wrap"
+					justify={"center"}
+				>
+					{elements.map((period) => {
+						return (
+							<HStack>
+								{period.map((symbol, i) => {
+									return (
+										<DraggableElement
+											symbol={symbol}
+											id={uuid()}
+											index={i}
+											parent={"ELEMENT_SECTION"}
+											key={uuid()}
+										/>
+									)
+								})}
+							</HStack>
+						)
+					})}
+				</Flex>
+			</VStack>
+		</Box>
 	)
 }

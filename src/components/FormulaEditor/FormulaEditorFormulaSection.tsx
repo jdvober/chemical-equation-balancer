@@ -1,24 +1,17 @@
-import React, { ReactNode } from "react"
+import React from "react"
 
-import { useDroppable } from "@dnd-kit/core"
+import { Box } from "@chakra-ui/react"
 
 // If no values, use this:
 // type FormulaEditorFormulaSectionProps = Record<string, never>
 // If values, fill in the object below
-type FormulaEditorFormulaSectionProps = { children?: ReactNode; id: string }
+type FormulaEditorFormulaSectionProps = {}
 export const FormulaEditorFormulaSection: React.FC<
 	FormulaEditorFormulaSectionProps
-> = ({ children, id }) => {
-	const { isOver, setNodeRef } = useDroppable({
-		id: id,
-	})
-	const style = {
-		color: isOver ? "green" : undefined,
-	}
-
+> = () => {
 	return (
-		<div ref={setNodeRef} style={style}>
-			{children}
-		</div>
+		<Box>
+			<Box color="dracula.dracFG">Formula Goes Here</Box>
+		</Box>
 	)
 }
