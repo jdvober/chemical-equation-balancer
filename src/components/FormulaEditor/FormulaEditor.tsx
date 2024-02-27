@@ -3,8 +3,8 @@ import { v4 as uuid } from "uuid"
 
 import { Box } from "@chakra-ui/react"
 
+import { FormulaEditorChemicalSection } from "./FormulaEditorChemicalSection.tsx"
 import { FormulaEditorElementSection } from "./FormulaEditorElementSection.tsx"
-import { FormulaEditorFormulaSection } from "./FormulaEditorFormulaSection.tsx"
 
 // If no values, use this:
 type FormulaEditorProps = Record<string, never>
@@ -19,7 +19,7 @@ export const FormulaEditor: React.FC<FormulaEditorProps> = () => {
 			border={"1px solid white"}
 			h="90%"
 		>
-			<FormulaEditorFormulaSection id={uuid()} />
+			<FormulaEditorChemicalSection id={uuid()} />
 			<FormulaEditorElementSection id={uuid()} />
 		</Box>
 	)

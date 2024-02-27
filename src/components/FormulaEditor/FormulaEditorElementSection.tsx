@@ -24,14 +24,16 @@ export const FormulaEditorElementSection: React.FC<
 				>
 					{elements.map((period) => {
 						return (
-							<HStack>
+							<HStack key={uuid()}>
 								{period.map((symbol, i) => {
 									return (
 										<DraggableElement
 											symbol={symbol}
 											id={uuid()}
 											index={i}
-											parent={"ELEMENT_SECTION"}
+											parent={
+												"FormulaEditorElementSection"
+											}
 											key={uuid()}
 										/>
 									)
