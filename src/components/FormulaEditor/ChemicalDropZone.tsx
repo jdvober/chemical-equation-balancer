@@ -1,9 +1,9 @@
+import "./ChemicalDropZone.css"
+
 import React from "react"
 
 import { Box, Flex } from "@chakra-ui/react"
 import { useDroppable } from "@dnd-kit/core"
-
-import { dracCyan } from "../../vars/GlobalVars"
 
 // If no values, use this:
 // type ChemicalDropZoneProps = Record<string, never>
@@ -16,8 +16,9 @@ export const ChemicalDropZone: React.FC<ChemicalDropZone> = ({ title }) => {
 
 	return (
 		<Flex
+			className="ChemicalDropZoneBox"
 			ref={setNodeRef}
-			backgroundColor={isOver ? "dracula.dracGreen" : ""}
+			backgroundColor={isOver ? "dracula.dracYellow" : ""}
 			borderRadius="8"
 			flex="1"
 			padding="1vh"
@@ -30,10 +31,11 @@ export const ChemicalDropZone: React.FC<ChemicalDropZone> = ({ title }) => {
 			mr="2vw"
 		>
 			<Box
-				border={"1px solid " + dracCyan}
+				// border={"1px solid " + dracCyan}
+				boxShadow={"0 0 0 10px rgba(241, 250, 140, 80)"}
 				borderRadius="8"
-				w="6vw"
-				h="6vw"
+				w="4vw"
+				h="4vw"
 			/>
 		</Flex>
 	)

@@ -1,5 +1,6 @@
 import React from "react"
 import { RxReset } from "react-icons/rx"
+import { TiChevronRightOutline } from "react-icons/ti"
 import { v4 as uuid } from "uuid"
 
 import { Box, Button, Flex, VStack } from "@chakra-ui/react"
@@ -78,15 +79,27 @@ export const FormulaEditorChemicalSection: React.FC<
 							items={[]}
 						/>
 					) : null}
-					<Button
-						ml="2vw"
-						fontSize={"2rem"}
-						onClick={() => {
-							setFormulaEditorChemicalSectionItems([])
-						}}
-					>
-						<RxReset />
-					</Button>
+					<VStack>
+						<Button
+							ml="2vw"
+							fontSize={"2rem"}
+							onClick={() => {
+								setFormulaEditorChemicalSectionItems([])
+							}}
+						>
+							<RxReset />
+						</Button>
+						<Button
+							ml="2vw"
+							fontSize={"2rem"}
+							onClick={() => {
+								// TODO: Add to formula instead of removing from chemical
+								setFormulaEditorChemicalSectionItems([])
+							}}
+						>
+							<TiChevronRightOutline />
+						</Button>
+					</VStack>
 				</Flex>
 			</Flex>
 		</Box>
