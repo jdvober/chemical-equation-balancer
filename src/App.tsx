@@ -6,7 +6,9 @@ import { DndContext, rectIntersection } from "@dnd-kit/core"
 // import { ChemicalDisplay } from "./components/ChemicalDisplay/ChemicalDisplay.js"
 // import { Count } from "./components/Count/Count.js"
 // import { Formula } from "./components/Formula/Formula.js"
-import { FormulaEditorChemicalSection } from "./components/FormulaEditor/FormulaEditorChemicalSection"
+import {
+	FormulaEditorChemicalSection
+} from "./components/FormulaEditor/FormulaEditorChemicalSection"
 import { FormulaEditorElementSection } from "./components/FormulaEditor/FormulaEditorElementSection"
 import { useMainStore } from "./stores/MainStore"
 
@@ -37,7 +39,8 @@ export const App = () => {
 							{
 								index: index,
 								symbol: symbol,
-								subscript: 3,
+								subscript: 1,
+								subscriptColor: "dracula.dracPurple",
 							},
 						])
 					}

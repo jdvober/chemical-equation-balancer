@@ -28,6 +28,7 @@ export const FormulaEditorElementSection: React.FC<
 											parent={
 												"FormulaEditorElementSection"
 											}
+											subscript={0}
 											key={uuid()}
 										/>
 									)

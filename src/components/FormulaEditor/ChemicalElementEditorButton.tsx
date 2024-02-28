@@ -18,7 +18,9 @@ export const ChemicalElementEditorButton: React.FC<
 	ChemicalElementEditorButtonProps
 > = ({ isUpArrow, index }) => {
 	const [opacity, setOpacity] = useState(25)
-	const setSubscriptColor = useMainStore((state) => state.setSubscriptColor)
+	const setChemicalSelectionItemSubscriptColor = useMainStore(
+		(state) => state.setChemicalSelectionItemSubscriptColor
+	)
 	const formulaEditorChemicalSectionItems = useMainStore(
 		(state) => state.formulaEditorChemicalSectionItems
 	)
@@ -34,11 +36,17 @@ export const ChemicalElementEditorButton: React.FC<
 				opacity={`${opacity}%`}
 				onMouseEnter={() => {
 					setOpacity(100)
-					setSubscriptColor("dracula.dracGreen")
+					setChemicalSelectionItemSubscriptColor(
+						"dracula.dracGreen",
+						index
+					)
 				}}
 				onMouseLeave={() => {
 					setOpacity(25)
-					setSubscriptColor("dracula.dracPurple")
+					setChemicalSelectionItemSubscriptColor(
+						"dracula.dracPurple",
+						index
+					)
 				}}
 				onClick={() => {
 					setFormulaEditorChemicalSectionItemSubscript(
@@ -58,11 +66,17 @@ export const ChemicalElementEditorButton: React.FC<
 				opacity={`${opacity}%`}
 				onMouseEnter={() => {
 					setOpacity(100)
-					setSubscriptColor("dracula.dracRed")
+					setChemicalSelectionItemSubscriptColor(
+						"dracula.dracGreen",
+						index
+					)
 				}}
 				onMouseLeave={() => {
 					setOpacity(25)
-					setSubscriptColor("dracula.dracPurple")
+					setChemicalSelectionItemSubscriptColor(
+						"dracula.dracPurple",
+						index
+					)
 				}}
 				onClick={() => {
 					if (

@@ -30,6 +30,11 @@ type ChemicalElement = {
 	subscript: number
 }
 
+// Extend
+interface ChemicalSectionItem extends ChemicalElement {
+	subscriptColor: "dracula.dracPurple" | "dracula.dracGreen" | "dracula.dracRed"
+}
+
 type ChemicalCompound = {
 	coefficient: number,
 	elements: ChemicalElement[],

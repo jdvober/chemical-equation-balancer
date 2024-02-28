@@ -32,11 +32,14 @@ export const DraggableElement = ({
 	}
 	const [col, setCol] = useState("dracula.dracFG")
 
-	const subscriptColor = useMainStore((state) => state.subscriptColor)
 	const formulaEditorChemicalSectionItems = useMainStore(
 		(state) => state.formulaEditorChemicalSectionItems
 	)
 
+	const subscriptColor =
+		formulaEditorChemicalSectionItems[index]?.subscriptColor === undefined
+			? "dracula.dracPurple"
+			: formulaEditorChemicalSectionItems[index]?.subscriptColor
 	return (
 		<Flex
 			padding="3"
@@ -54,7 +57,13 @@ export const DraggableElement = ({
 			h={`3vw`}
 			mb=".25vw"
 			ml=".125vw"
-			mr={parent === "FormulaEditorChemicalSection" ? "2vw" : ".125vw"}
+			mr={
+				parent === "FormulaEditorChemicalSection"
+					? formulaEditorChemicalSectionItems[index].subscript <= 1
+						? "-1vw"
+						: ".125vw"
+					: ".125vw"
+			}
 			align="center"
 			justify={"center"}
 			borderRadius="8"

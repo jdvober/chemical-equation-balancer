@@ -19,7 +19,7 @@ type State = {
 	editFormulaSection: FormulaSection,
 	elements: ( ChemicalSymbol | "" )[][]
 	subscriptColor: "dracula.dracRed" | "dracula.dracGreen" | "dracula.dracPurple"
-	formulaEditorChemicalSectionItems: ChemicalElement[]
+	formulaEditorChemicalSectionItems: ChemicalSectionItem[]
 
 }
 
@@ -28,9 +28,9 @@ type Action = {
 	setCoefficient: ( formulaSection: FormulaSection, index: number, newCoefficient: number ) => void,
 	setCountList: ( newCountList: ElementCountList, formulaSection: FormulaSection ) => void,
 	setEditFormulaSection: ( newFormulaSection: FormulaSection ) => void
-	setSubscriptColor: ( newSubscriptColor: "dracula.dracRed" | "dracula.dracGreen" | "dracula.dracPurple"
+	setChemicalSelectionItemSubscriptColor: ( newSubscriptColor: "dracula.dracRed" | "dracula.dracGreen" | "dracula.dracPurple", index: number
 	) => void
-	setFormulaEditorChemicalSectionItems: ( newFormulaEditorChemicalSectionItems: ChemicalElement[] ) => void
+	setFormulaEditorChemicalSectionItems: ( newFormulaEditorChemicalSectionItems: ChemicalSectionItem[] ) => void
 	setFormulaEditorChemicalSectionItemSubscript: ( newSubscript: number, index: number ) => void
 }
 
@@ -294,19 +294,15 @@ export const useMainStore = create<State & Action>()(
 		setEditFormulaSection: ( newFormulaSection ) => set( ( state ) => {
 			state.editFormulaSection = newFormulaSection
 		} ),
-		setSubscriptColor: ( newSubscriptColor ) => set( ( state ) => {
-			state.subscriptColor = newSubscriptColor
+		setChemicalSelectionItemSubscriptColor: ( newSubscriptColor, index ) => set( ( state ) => {
+			state.formulaEditorChemicalSectionItems[ index ].subscriptColor = newSubscriptColor
 		} ),
 		setFormulaEditorChemicalSectionItems: ( newFormulaEditorChemicalSectionItems ) => set( ( state ) => {
 			state.formulaEditorChemicalSectionItems = newFormulaEditorChemicalSectionItems
 		} ),
 		setFormulaEditorChemicalSectionItemSubscript: ( newSubscript, index ) => set( ( state ) => {
 			state.formulaEditorChemicalSectionItems[ index ].subscript = newSubscript
-			console.log( state.formulaEditorChemicalSectionItems[ index ].subscript )
-			return
 		} ),
-
-
 	}
 	) ),
 	// {
