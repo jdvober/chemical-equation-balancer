@@ -32,3 +32,42 @@
 		opacity: 40%;
 	}
 }
+
+.ChemicalDropZoneBox:hover {
+	animation: twist 2s infinite normal;
+	transition-timing-function: ease;
+}
+
+@keyframes twist {
+	0% {
+		transform: rotate(0deg);
+	}
+
+	10% {
+		transform: rotate(15deg);
+	}
+
+	15% {
+		transform: rotate(-15deg);
+	}
+
+	20% {
+		transform: rotate(0deg);
+	}
+
+	25% {
+		transform: rotate(5deg);
+	}
+
+	30% {
+		transform: rotate(5deg);
+	}
+
+	40% {
+		transform: rotate(0deg);
+	}
+
+	100% {
+		transform: rotate(0deg);
+	}
+}
