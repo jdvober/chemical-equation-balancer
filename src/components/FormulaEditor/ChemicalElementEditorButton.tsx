@@ -67,7 +67,7 @@ export const ChemicalElementEditorButton: React.FC<
 				onMouseEnter={() => {
 					setOpacity(100)
 					setChemicalSelectionItemSubscriptColor(
-						"dracula.dracGreen",
+						"dracula.dracRed",
 						index
 					)
 				}}
