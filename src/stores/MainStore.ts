@@ -18,6 +18,8 @@ type State = {
 	}[],
 	editFormulaSection: FormulaSection,
 	elements: ( ChemicalSymbol | "" )[][]
+	subscriptColor: "dracula.dracRed" | "dracula.dracGreen" | "dracula.dracPurple"
+	formulaEditorChemicalSectionItems: ChemicalElement[]
 
 }
 
@@ -26,6 +28,10 @@ type Action = {
 	setCoefficient: ( formulaSection: FormulaSection, index: number, newCoefficient: number ) => void,
 	setCountList: ( newCountList: ElementCountList, formulaSection: FormulaSection ) => void,
 	setEditFormulaSection: ( newFormulaSection: FormulaSection ) => void
+	setSubscriptColor: ( newSubscriptColor: "dracula.dracRed" | "dracula.dracGreen" | "dracula.dracPurple"
+	) => void
+	setFormulaEditorChemicalSectionItems: ( newFormulaEditorChemicalSectionItems: ChemicalElement[] ) => void
+	setFormulaEditorChemicalSectionItemSubscript: ( newSubscript: number, index: number ) => void
 }
 
 export const useMainStore = create<State & Action>()(
@@ -252,10 +258,19 @@ export const useMainStore = create<State & Action>()(
 				"No",
 				"Lr" ],
 		],
+		subscriptColor: "dracula.dracPurple",
+		formulaEditorChemicalSectionItems: [],
 
-		/////////////
-		// Actions //
-		/////////////
+		////////////////////////////////////////////////////
+		////////////////////////////////////////////////////
+		////////////////////////////////////////////////////
+		////////////////////////////////////////////////////
+		///////////////////// Actions //////////////////////
+		////////////////////////////////////////////////////
+		////////////////////////////////////////////////////
+		////////////////////////////////////////////////////
+		////////////////////////////////////////////////////
+
 		setCountList: ( newCountList, formulaSection ) => set( ( state ) => {
 			console.log( `Updating Reactant Count to ${ newCountList }` )
 			formulaSection === "REACTANTS" ? state.reactantCountList = newCountList : state.productCountList = newCountList
@@ -278,7 +293,19 @@ export const useMainStore = create<State & Action>()(
 		} ),
 		setEditFormulaSection: ( newFormulaSection ) => set( ( state ) => {
 			state.editFormulaSection = newFormulaSection
-		} )
+		} ),
+		setSubscriptColor: ( newSubscriptColor ) => set( ( state ) => {
+			state.subscriptColor = newSubscriptColor
+		} ),
+		setFormulaEditorChemicalSectionItems: ( newFormulaEditorChemicalSectionItems ) => set( ( state ) => {
+			state.formulaEditorChemicalSectionItems = newFormulaEditorChemicalSectionItems
+		} ),
+		setFormulaEditorChemicalSectionItemSubscript: ( newSubscript, index ) => set( ( state ) => {
+			state.formulaEditorChemicalSectionItems[ index ].subscript = newSubscript
+			console.log( state.formulaEditorChemicalSectionItems[ index ].subscript )
+			return
+		} ),
+
 
 	}
 	) ),

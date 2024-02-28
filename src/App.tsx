@@ -1,7 +1,5 @@
 import "./App.css"
 
-import { useState } from "react"
-
 import { Center, VStack } from "@chakra-ui/react"
 import { DndContext, rectIntersection } from "@dnd-kit/core"
 
@@ -10,14 +8,17 @@ import { DndContext, rectIntersection } from "@dnd-kit/core"
 // import { Formula } from "./components/Formula/Formula.js"
 import { FormulaEditorChemicalSection } from "./components/FormulaEditor/FormulaEditorChemicalSection"
 import { FormulaEditorElementSection } from "./components/FormulaEditor/FormulaEditorElementSection"
+import { useMainStore } from "./stores/MainStore"
 
 // import { FormulaEditorToggleButton } from "./components/FormulaEditor/FormulaEditorToggleButton.js"
 
 export const App = () => {
-	const [
-		FormulaEditorChemicalSectionItems,
-		setFormulaEditorChemicalSectionItems,
-	] = useState<Array<any>>([])
+	const formulaEditorChemicalSectionItems = useMainStore(
+		(state) => state.formulaEditorChemicalSectionItems
+	)
+	const setFormulaEditorChemicalSectionItems = useMainStore(
+		(state) => state.setFormulaEditorChemicalSectionItems
+	)
 
 	return (
 		<Center fontSize="5xl">
@@ -25,36 +26,42 @@ export const App = () => {
 				collisionDetection={rectIntersection}
 				onDragEnd={(e) => {
 					const container = e.over?.id
-					const title = e.active.data.current?.title ?? ""
-					const index = e.active.data.current?.index ?? 0
+					const symbol = e.active.data.current?.symbol ?? ""
+					// const index = e.active.data.current?.index ?? 0
+					const index = formulaEditorChemicalSectionItems.length ?? 0
 					const parent = e.active.data.current?.parent ?? "ToDo"
 					if (container === "FormulaEditorChemicalSection") {
-						console.log(`Adding ${title} to ${container}`)
+						console.log(`Adding ${symbol} to ${container}`)
 						setFormulaEditorChemicalSectionItems([
-							...FormulaEditorChemicalSectionItems,
-							{ title },
+							...formulaEditorChemicalSectionItems,
+							{
+								index: index,
+								symbol: symbol,
+								subscript: 3,
+							},
 						])
 					}
 					if (parent === "FormulaEditorChemicalSection") {
 						console.log(
-							`Removing ${title} from FormulaEditorChemicalSection`
+							`Removing ${symbol} from FormulaEditorChemicalSection`
 						)
 						setFormulaEditorChemicalSectionItems([
-							...FormulaEditorChemicalSectionItems.slice(
+							...formulaEditorChemicalSectionItems.slice(
 								0,
 								index
 							),
-							...FormulaEditorChemicalSectionItems.slice(
+							...formulaEditorChemicalSectionItems.slice(
 								index + 1
 							),
 						])
 					}
+					console.log(index)
+					console.log(formulaEditorChemicalSectionItems)
 				}}
 			>
 				<VStack>
 					<FormulaEditorChemicalSection
-						title={"FormulaEditorChemicalSection"}
-						items={FormulaEditorChemicalSectionItems}
+						items={formulaEditorChemicalSectionItems}
 					/>
 					<FormulaEditorElementSection />
 					{/* <DragAndDrop /> */}

@@ -1,27 +1,28 @@
 import { useState } from "react"
-import { TiArrowDownOutline, TiArrowUpOutline } from "react-icons/ti"
 
-import { Button, Flex, Text, VStack } from "@chakra-ui/react"
+import { Flex, HStack, Text, VStack } from "@chakra-ui/react"
 import { useDraggable } from "@dnd-kit/core"
 import { CSS } from "@dnd-kit/utilities"
+
+import { useMainStore } from "../../stores/MainStore"
 
 export const DraggableElement = ({
 	id,
 	symbol,
 	index,
 	parent,
-	subscript = 1,
+	subscript,
 }: {
 	id: string
 	symbol: string
 	index: number
 	parent: string
-	subscript?: number
+	subscript: number
 }) => {
 	const { attributes, listeners, setNodeRef, transform } = useDraggable({
 		id: id,
 		data: {
-			title: symbol,
+			symbol: symbol,
 			index: index,
 			parent: parent,
 		},
@@ -30,6 +31,12 @@ export const DraggableElement = ({
 		transform: CSS.Translate.toString(transform),
 	}
 	const [col, setCol] = useState("dracula.dracFG")
+
+	const subscriptColor = useMainStore((state) => state.subscriptColor)
+	const formulaEditorChemicalSectionItems = useMainStore(
+		(state) => state.formulaEditorChemicalSectionItems
+	)
+
 	return (
 		<Flex
 			padding="3"
@@ -43,11 +50,12 @@ export const DraggableElement = ({
 					? "dracula.dracCurrentLine"
 					: "dracula.dracPurple"
 			}
-			w={`4vw`}
-			h={`4vw`}
+			w={`3vw`}
+			h={`3vw`}
 			mb=".25vw"
 			ml=".125vw"
-			mr=".125vw"
+			mr={parent === "FormulaEditorChemicalSection" ? "2vw" : ".125vw"}
+			align="center"
 			justify={"center"}
 			borderRadius="8"
 			border={
@@ -66,28 +74,54 @@ export const DraggableElement = ({
 			ref={setNodeRef}
 		>
 			<VStack>
-				{parent === "FormulaEditorChemicalSection" ? (
-					<Button border="1px solid green">
-						<TiArrowUpOutline />
-					</Button>
-				) : null}
-				<Text
-					onMouseEnter={() => {
-						setCol("dracula.dracRed")
-					}}
-					onMouseLeave={() => {
-						setCol("dracula.dracFG")
-					}}
-					fontSize="2vw"
-				>
-					{symbol}
-					{subscript >= 2 ? <sub>subscript</sub> : ""}
-				</Text>
-				{parent === "FormulaEditorChemicalSection" ? (
-					<Button border="1px solid red">
-						<TiArrowDownOutline />
-					</Button>
-				) : null}
+				<HStack>
+					<Text
+						onMouseEnter={() => {
+							setCol("dracula.dracRed")
+						}}
+						onMouseLeave={() => {
+							setCol("dracula.dracFG")
+						}}
+						fontSize={
+							parent === "FormulaEditorChemicalSection"
+								? "2vw"
+								: "1.5vw"
+						}
+						color={
+							parent === "FormulaEditorChemicalSection"
+								? "dracula.dracPurple"
+								: "dracula.dracBG"
+						}
+					>
+						{symbol}
+					</Text>
+					<Text
+						onMouseEnter={() => {
+							setCol("dracula.dracRed")
+						}}
+						onMouseLeave={() => {
+							setCol("dracula.dracFG")
+						}}
+						fontSize={
+							parent === "FormulaEditorChemicalSection"
+								? "2vw"
+								: "1.5vw"
+						}
+						color={subscriptColor}
+						opacity={subscript === 1 ? "0%" : "100%"}
+					>
+						{parent === "FormulaEditorChemicalSection" ? (
+							<sub>
+								{
+									formulaEditorChemicalSectionItems[index]
+										.subscript
+								}
+							</sub>
+						) : (
+							""
+						)}
+					</Text>
+				</HStack>
 			</VStack>
 		</Flex>
 	)

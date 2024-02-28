@@ -1,22 +1,20 @@
 import React from "react"
 import { RxReset } from "react-icons/rx"
+import { v4 as uuid } from "uuid"
 
-import { Box, Button, Flex, Text } from "@chakra-ui/react"
-import { useDroppable } from "@dnd-kit/core"
+import { Box, Button, Flex, VStack } from "@chakra-ui/react"
 
+import { ChemicalDropZone } from "./ChemicalDropZone"
+import { ChemicalElementEditorButton } from "./ChemicalElementEditorButton"
 import { DraggableElement } from "./DraggableElement"
 
 // If no values, use this:
 // type FormulaEditorChemicalSectionProps = Record<string, never>
 // If values, fill in the object below
-type FormulaEditorChemicalSection = { title: string; items: any[] }
+type FormulaEditorChemicalSection = { items: ChemicalElement[] }
 export const FormulaEditorChemicalSection: React.FC<
 	FormulaEditorChemicalSection
-> = ({ title, items }) => {
-	const { isOver, setNodeRef } = useDroppable({
-		id: title,
-	})
-
+> = ({ items }) => {
 	return (
 		<Box>
 			<Flex
@@ -25,39 +23,57 @@ export const FormulaEditorChemicalSection: React.FC<
 				flexDirection="row"
 				minH="10rem"
 				align={"center"}
+				justify="space-evenly"
 			>
 				<Flex
-					ref={setNodeRef}
-					backgroundColor={
-						isOver ? "dracula.dracGreen" : "dracula.dracCurrentLine"
-					}
 					borderRadius="8"
+					border="1px solid orange"
 					flex="1"
 					padding="1vh"
 					flexDirection="row"
 					minW="20vw"
-					w="20vw"
+					w="auto"
 					minH="15vh"
-					maxH="15vh"
+					h="16vh"
 					maxW="75vw"
 					align={"center"}
-					justify="space-between"
+					pl="2vw"
+					pr="2vw"
 				>
 					{items.length === 0 ? (
-						<Text fontSize={"1.5rem"}>
-							Drag Elements Here To Build A Compound
-						</Text>
+						<ChemicalDropZone
+							title={"FormulaEditorChemicalSection"}
+							items={[]}
+							key={uuid()}
+						/>
 					) : (
-						items.map(({ title: title }, key) => (
-							<DraggableElement
-								symbol={title}
-								id={title}
-								key={key}
-								index={key}
-								parent={"FormulaEditorChemicalSection"}
-							/>
+						items.map((item, index) => (
+							<VStack key={uuid()}>
+								<ChemicalElementEditorButton
+									isUpArrow={true}
+									index={index}
+								/>
+								<DraggableElement
+									symbol={item.symbol}
+									id={uuid()}
+									key={uuid()}
+									index={index}
+									parent={"FormulaEditorChemicalSection"}
+									subscript={items[index].subscript}
+								/>
+								<ChemicalElementEditorButton
+									isUpArrow={false}
+									index={index}
+								/>
+							</VStack>
 						))
 					)}
+					{items.length >= 1 ? (
+						<ChemicalDropZone
+							title={"FormulaEditorChemicalSection"}
+							items={[]}
+						/>
+					) : null}
 					<Button ml="2vw" fontSize={"2rem"}>
 						<RxReset />
 					</Button>
