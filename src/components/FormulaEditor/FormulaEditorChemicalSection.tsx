@@ -4,6 +4,7 @@ import { v4 as uuid } from "uuid"
 
 import { Box, Button, Flex, VStack } from "@chakra-ui/react"
 
+import { useMainStore } from "../../stores/MainStore"
 import { ChemicalDropZone } from "./ChemicalDropZone"
 import { ChemicalElementEditorButton } from "./ChemicalElementEditorButton"
 import { DraggableElement } from "./DraggableElement"
@@ -15,6 +16,9 @@ type FormulaEditorChemicalSection = { items: ChemicalElement[] }
 export const FormulaEditorChemicalSection: React.FC<
 	FormulaEditorChemicalSection
 > = ({ items }) => {
+	const setFormulaEditorChemicalSectionItems = useMainStore(
+		(state) => state.setFormulaEditorChemicalSectionItems
+	)
 	return (
 		<Box>
 			<Flex
@@ -74,7 +78,13 @@ export const FormulaEditorChemicalSection: React.FC<
 							items={[]}
 						/>
 					) : null}
-					<Button ml="2vw" fontSize={"2rem"}>
+					<Button
+						ml="2vw"
+						fontSize={"2rem"}
+						onClick={() => {
+							setFormulaEditorChemicalSectionItems([])
+						}}
+					>
 						<RxReset />
 					</Button>
 				</Flex>
