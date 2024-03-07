@@ -3,12 +3,14 @@ import { RxReset } from "react-icons/rx"
 import { TiChevronRightOutline } from "react-icons/ti"
 import { v4 as uuid } from "uuid"
 
-import { Box, Button, Flex, HStack, VStack } from "@chakra-ui/react"
+import { Box, Button, Flex, Spacer, VStack } from "@chakra-ui/react"
 
 import { useMainStore } from "../../stores/MainStore"
+import { dracOrange } from "../../vars/GlobalVars.ts"
 import { ChemicalDropZone } from "./ChemicalDropZone"
 import { ChemicalElementEditorButton } from "./ChemicalElementEditorButton"
 import { DraggableElement } from "./DraggableElement"
+import { FormulaEditorFormula } from "./FormulaEditorFormula.tsx"
 
 // If no values, use this:
 type FormulaEditorChemicalSectionProps = Record<string, never>
@@ -43,7 +45,7 @@ export const FormulaEditorChemicalSection: React.FC<
 			>
 				<Flex
 					borderRadius="8"
-					border="1px solid orange"
+					border={`1px solid ${dracOrange}`}
 					flex="1"
 					padding="1vh"
 					flexDirection="row"
@@ -55,102 +57,109 @@ export const FormulaEditorChemicalSection: React.FC<
 					align={"center"}
 					pl="2vw"
 					pr="2vw"
+					justifyContent={"flex-start"}
 				>
-					<VStack>
-						<HStack>
-							{formulaEditorChemicalSectionItems.length === 0 ? (
-								<ChemicalDropZone
-									title={"FormulaEditorChemicalSection"}
-									items={[]}
-									key={uuid()}
-								/>
-							) : (
-								formulaEditorChemicalSectionItems.map(
-									(item, index) => (
-										<VStack key={uuid()}>
-											<ChemicalElementEditorButton
-												isUpArrow={true}
-												index={index}
-											/>
-											<DraggableElement
-												symbol={item.symbol}
-												id={uuid()}
-												key={uuid()}
-												index={index}
-												parent={
-													"FormulaEditorChemicalSection"
-												}
-												subscript={
-													formulaEditorChemicalSectionItems[
-														index
-													].subscript
-												}
-											/>
-											<ChemicalElementEditorButton
-												isUpArrow={false}
-												index={index}
-											/>
-										</VStack>
-									)
+					<Flex dir="row">
+						{formulaEditorChemicalSectionItems.length === 0 ? (
+							<ChemicalDropZone
+								title={"FormulaEditorChemicalSection"}
+								items={[]}
+								key={uuid()}
+							/>
+						) : (
+							formulaEditorChemicalSectionItems.map(
+								(item, index) => (
+									<VStack key={uuid()}>
+										<ChemicalElementEditorButton
+											isUpArrow={true}
+											index={index}
+										/>
+										<DraggableElement
+											symbol={item.symbol}
+											id={uuid()}
+											key={uuid()}
+											index={index}
+											parent={
+												"FormulaEditorChemicalSection"
+											}
+											subscript={
+												formulaEditorChemicalSectionItems[
+													index
+												].subscript
+											}
+										/>
+										<ChemicalElementEditorButton
+											isUpArrow={false}
+											index={index}
+										/>
+									</VStack>
 								)
-							)}
-							{formulaEditorChemicalSectionItems.length >= 1 ? (
-								<ChemicalDropZone
-									title={"FormulaEditorChemicalSection"}
-									items={[]}
-								/>
-							) : null}
-							<VStack>
-								<Button
-									ml="2vw"
-									fontSize={"2rem"}
-									onClick={() => {
-										setFormulaEditorChemicalSectionItems([])
-									}}
-								>
-									<RxReset />
-								</Button>
-								<Button
-									ml="2vw"
-									fontSize={"2rem"}
-									onClick={() => {
-										// TODO: Add to formula instead of generic formula
-										editFormulaSection === "REACTANTS"
-											? setReactants([
-													{
-														coefficient: 1,
-														formulaSection:
-															editFormulaSection,
-														elements: [
-															{
-																index: 0,
-																subscript: 6,
-																symbol: "Ga",
-															},
-														],
-													},
-											  ])
-											: setProducts([
-													{
-														coefficient: 1,
-														formulaSection:
-															editFormulaSection,
-														elements: [
-															{
-																index: 0,
-																subscript: 6,
-																symbol: "Ga",
-															},
-														],
-													},
-											  ])
-									}}
-								>
-									<TiChevronRightOutline />
-								</Button>
-							</VStack>
-						</HStack>
-					</VStack>
+							)
+						)}
+						{formulaEditorChemicalSectionItems.length >= 1 ? (
+							<ChemicalDropZone
+								title={"FormulaEditorChemicalSection"}
+								items={[]}
+							/>
+						) : null}
+						<VStack>
+							<Button
+								mt="1vh"
+								mb="1vh"
+								ml="2vw"
+								fontSize={"2rem"}
+								onClick={() => {
+									setFormulaEditorChemicalSectionItems([])
+								}}
+							>
+								<RxReset />
+							</Button>
+							<Button
+								mt="1vh"
+								mb="1vh"
+								ml="2vw"
+								fontSize={"2rem"}
+								onClick={() => {
+									// TODO: Add to formula instead of generic formula
+									editFormulaSection === "REACTANTS"
+										? setReactants([
+												{
+													coefficient: 1,
+													formulaSection:
+														editFormulaSection,
+													elements: [
+														{
+															index: 0,
+															subscript: 6,
+															symbol: "Ga",
+														},
+													],
+												},
+										  ])
+										: setProducts([
+												{
+													coefficient: 1,
+													formulaSection:
+														editFormulaSection,
+													elements: [
+														{
+															index: 0,
+															subscript: 6,
+															symbol: "Ga",
+														},
+													],
+												},
+										  ])
+								}}
+							>
+								<TiChevronRightOutline />
+							</Button>
+						</VStack>
+						<Spacer />
+						<Box pt="1vh" pb="1vh" alignSelf={"center"} ml="2vw">
+							<FormulaEditorFormula />
+						</Box>
+					</Flex>
 				</Flex>
 			</Flex>
 		</Box>

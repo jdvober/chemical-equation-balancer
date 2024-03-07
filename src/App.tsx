@@ -5,7 +5,7 @@ import { DndContext, rectIntersection } from "@dnd-kit/core"
 
 import { ChemicalDisplay } from "./components/ChemicalDisplay/ChemicalDisplay.js"
 import { Count } from "./components/Count/Count.js"
-import { FormulaEditorFormula } from "./components/FormulaEditor/FormulaEditorFormula.js"
+import { Formula } from "./components/Formula/Formula"
 import { FormulaEditorToggleButton } from "./components/FormulaEditor/FormulaEditorToggleButton.js"
 import { useMainStore } from "./stores/MainStore"
 
@@ -59,7 +59,7 @@ export const App = () => {
 			>
 				<VStack>
 					<HStack>
-						<FormulaEditorFormula />
+						<Formula />
 						<FormulaEditorToggleButton />
 					</HStack>
 					<Count />

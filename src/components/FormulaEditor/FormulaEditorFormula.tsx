@@ -20,7 +20,6 @@ export const FormulaEditorFormula: React.FC<FormulaEditorFormulaProps> = () => {
 				<GridItem key={uuid()}>
 					<HStack alignItems={"center"}>
 						<Box
-
 						// h={`${formulaHeightVH} vh`}>
 						>
 							<ChemicalCompound
@@ -28,6 +27,7 @@ export const FormulaEditorFormula: React.FC<FormulaEditorFormulaProps> = () => {
 								formulaSection="REACTANTS"
 								index={reactantIndex}
 								includeSymbols={true}
+								fontSizeInVH={4}
 							/>
 						</Box>
 					</HStack>
@@ -45,6 +45,7 @@ export const FormulaEditorFormula: React.FC<FormulaEditorFormulaProps> = () => {
 								formulaSection="PRODUCTS"
 								index={productIndex}
 								includeSymbols={true}
+								fontSizeInVH={4}
 							/>
 						</Box>
 					</HStack>

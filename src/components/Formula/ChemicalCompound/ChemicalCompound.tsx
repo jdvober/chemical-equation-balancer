@@ -11,12 +11,14 @@ type ChemicalCompoundProps = {
 	formulaSection: FormulaSection
 	index: number
 	includeSymbols: boolean
+	fontSizeInVH: number
 }
 export const ChemicalCompound: React.FC<ChemicalCompoundProps> = ({
 	compound,
 	formulaSection,
 	index,
 	includeSymbols,
+	fontSizeInVH,
 }) => {
 	const formula = useMainStore((state) => state.formula)
 
@@ -27,13 +29,15 @@ export const ChemicalCompound: React.FC<ChemicalCompoundProps> = ({
 			p="0px"
 			mt="33%"
 			mb="33%"
-			key={uuid()}>
+			key={uuid()}
+		>
 			{compound.elements.map((element) => (
 				<HStack key={uuid()}>
 					<HStack>
 						<ChemicalElement
 							symbol={element.symbol}
 							subscript={element.subscript}
+							fontSizeInVH={fontSizeInVH}
 							key={uuid()}
 						/>
 					</HStack>

@@ -13,7 +13,6 @@ type FormulaProps = Record<string, never>
 // type FormulaProps = {}
 
 export const Formula: React.FC<FormulaProps> = () => {
-	const showBorders = false as boolean
 	const formula = useMainStore((state) => state.formula)
 	const formulaHeightVH = useMainStore((state) => state.formulaHeightVH)
 
@@ -23,7 +22,8 @@ export const Formula: React.FC<FormulaProps> = () => {
 			m="1vw"
 			border={`1px solid #44475a`}
 			borderRadius={"1vw"}
-			p="1vw"
+			h={"25vh"}
+			alignSelf={"center"}
 			// border={showBorders === true ? "1px solid green" : ""}
 		>
 			<Spacer />
@@ -49,6 +49,7 @@ export const Formula: React.FC<FormulaProps> = () => {
 								formulaSection="REACTANTS"
 								index={reactantIndex}
 								includeSymbols={true}
+								fontSizeInVH={8}
 							/>
 						</Box>
 					</HStack>
@@ -75,6 +76,7 @@ export const Formula: React.FC<FormulaProps> = () => {
 								formulaSection="PRODUCTS"
 								index={productIndex}
 								includeSymbols={true}
+								fontSizeInVH={8}
 							/>
 						</Box>
 					</HStack>
