@@ -1,18 +1,13 @@
 import "./App.css"
 
-import { Center, VStack } from "@chakra-ui/react"
+import { Center, HStack, VStack } from "@chakra-ui/react"
 import { DndContext, rectIntersection } from "@dnd-kit/core"
 
-// import { ChemicalDisplay } from "./components/ChemicalDisplay/ChemicalDisplay.js"
-// import { Count } from "./components/Count/Count.js"
-// import { Formula } from "./components/Formula/Formula.js"
-import {
-	FormulaEditorChemicalSection
-} from "./components/FormulaEditor/FormulaEditorChemicalSection"
-import { FormulaEditorElementSection } from "./components/FormulaEditor/FormulaEditorElementSection"
+import { ChemicalDisplay } from "./components/ChemicalDisplay/ChemicalDisplay.js"
+import { Count } from "./components/Count/Count.js"
+import { FormulaEditorFormula } from "./components/FormulaEditor/FormulaEditorFormula.js"
+import { FormulaEditorToggleButton } from "./components/FormulaEditor/FormulaEditorToggleButton.js"
 import { useMainStore } from "./stores/MainStore"
-
-// import { FormulaEditorToggleButton } from "./components/FormulaEditor/FormulaEditorToggleButton.js"
 
 export const App = () => {
 	const formulaEditorChemicalSectionItems = useMainStore(
@@ -63,17 +58,12 @@ export const App = () => {
 				}}
 			>
 				<VStack>
-					<FormulaEditorChemicalSection
-						items={formulaEditorChemicalSectionItems}
-					/>
-					<FormulaEditorElementSection />
-					{/* <DragAndDrop /> */}
-					{/* <HStack>
-					<Formula />
-					<FormulaEditorToggleButton />
-				</HStack>
-				<Count />
-				<ChemicalDisplay /> */}
+					<HStack>
+						<FormulaEditorFormula />
+						<FormulaEditorToggleButton />
+					</HStack>
+					<Count />
+					<ChemicalDisplay />
 				</VStack>
 			</DndContext>
 		</Center>

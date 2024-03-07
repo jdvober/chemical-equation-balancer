@@ -25,6 +25,8 @@ type State = {
 
 type Action = {
 
+	setReactants: ( newReactants: ChemicalReactant[] | ChemicalCompound[] ) => void,
+	setProducts: ( newFormula: ChemicalProduct[] | ChemicalCompound[] ) => void,
 	setCoefficient: ( formulaSection: FormulaSection, index: number, newCoefficient: number ) => void,
 	setCountList: ( newCountList: ElementCountList, formulaSection: FormulaSection ) => void,
 	setEditFormulaSection: ( newFormulaSection: FormulaSection ) => void
@@ -271,6 +273,13 @@ export const useMainStore = create<State & Action>()(
 		////////////////////////////////////////////////////
 		////////////////////////////////////////////////////
 
+
+		setReactants: ( newReactants ) => set( ( state ) => {
+			state.formula.reactants = newReactants
+		} ),
+		setProducts: ( newProducts ) => set( ( state ) => {
+			state.formula.products = newProducts
+		} ),
 		setCountList: ( newCountList, formulaSection ) => set( ( state ) => {
 			console.log( `Updating Reactant Count to ${ newCountList }` )
 			formulaSection === "REACTANTS" ? state.reactantCountList = newCountList : state.productCountList = newCountList

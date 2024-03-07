@@ -1,5 +1,4 @@
 import React from "react"
-import { v4 as uuid } from "uuid"
 
 import { Box } from "@chakra-ui/react"
 
@@ -13,14 +12,9 @@ type FormulaEditorProps = Record<string, never>
 
 export const FormulaEditor: React.FC<FormulaEditorProps> = () => {
 	return (
-		<Box
-			className="FormulaEditor"
-			color="dracula.dracFG"
-			border={"1px solid white"}
-			h="90%"
-		>
-			<FormulaEditorChemicalSection id={uuid()} />
-			<FormulaEditorElementSection id={uuid()} />
+		<Box className="FormulaEditor" color="dracula.dracFG" h="90%">
+			<FormulaEditorChemicalSection />
+			<FormulaEditorElementSection />
 		</Box>
 	)
 }
