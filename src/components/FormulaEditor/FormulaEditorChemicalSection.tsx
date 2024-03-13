@@ -37,25 +37,7 @@ export const FormulaEditorChemicalSection: React.FC<
 
 	// TODO: Not adding to reactants / products for some reason???
 	const addNewReactants = () => {
-		console.log("REACTANTS")
-
 		let newReactants = formula.reactants
-		// formulaEditorChemicalSectionItems.forEach((item) => {
-		// 	reactants.push({
-		// 		coefficient: 1,
-		// 		formulaSection: "REACTANTS",
-		// 		elements: [
-		// 			{
-		// 				index: item.index,
-		// 				subscript: item.subscript,
-		// 				symbol: item.symbol,
-		// 			},
-		// 		],
-		// 	})
-		// })
-
-		console.log(newReactants)
-		console.log(formulaEditorChemicalSectionItems)
 		formulaEditorChemicalSectionItems.forEach((item) => {
 			newReactants = [
 				...newReactants,
@@ -72,30 +54,30 @@ export const FormulaEditorChemicalSection: React.FC<
 				},
 			]
 		})
-		console.log(newReactants)
 		setReactants(newReactants)
 		setFormulaEditorChemicalSectionItems([])
 	}
 
 	const addNewProducts = () => {
-		console.log("PRODUCTS")
-
-		let products = formula.products
+		let newProducts = formula.products
 		formulaEditorChemicalSectionItems.forEach((item) => {
-			products.push({
-				coefficient: 1,
-				formulaSection: "PRODUCTS",
-				elements: [
-					{
-						index: item.index,
-						subscript: item.subscript,
-						symbol: item.symbol,
-					},
-				],
-			})
+			newProducts = [
+				...newProducts,
+				{
+					coefficient: 1,
+					formulaSection: "REACTANTS",
+					elements: [
+						{
+							index: item.index,
+							subscript: item.subscript,
+							symbol: item.symbol,
+						},
+					],
+				},
+			]
 		})
 
-		setProducts(products)
+		setProducts(newProducts)
 		setFormulaEditorChemicalSectionItems([])
 	}
 
