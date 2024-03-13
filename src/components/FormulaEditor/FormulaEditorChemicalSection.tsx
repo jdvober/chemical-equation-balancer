@@ -37,25 +37,49 @@ export const FormulaEditorChemicalSection: React.FC<
 
 	// TODO: Not adding to reactants / products for some reason???
 	const addNewReactants = () => {
-		let reactants = formula.reactants
-		formulaEditorChemicalSectionItems.forEach((item) => {
-			reactants.push({
-				coefficient: 1,
-				formulaSection: "REACTANTS",
-				elements: [
-					{
-						index: item.index,
-						subscript: item.subscript,
-						symbol: item.symbol,
-					},
-				],
-			})
-		})
+		console.log("REACTANTS")
 
-		setReactants(reactants)
+		let newReactants = formula.reactants
+		// formulaEditorChemicalSectionItems.forEach((item) => {
+		// 	reactants.push({
+		// 		coefficient: 1,
+		// 		formulaSection: "REACTANTS",
+		// 		elements: [
+		// 			{
+		// 				index: item.index,
+		// 				subscript: item.subscript,
+		// 				symbol: item.symbol,
+		// 			},
+		// 		],
+		// 	})
+		// })
+
+		console.log(newReactants)
+		console.log(formulaEditorChemicalSectionItems)
+		formulaEditorChemicalSectionItems.forEach((item) => {
+			newReactants = [
+				...newReactants,
+				{
+					coefficient: 1,
+					formulaSection: "REACTANTS",
+					elements: [
+						{
+							index: item.index,
+							subscript: item.subscript,
+							symbol: item.symbol,
+						},
+					],
+				},
+			]
+		})
+		console.log(newReactants)
+		setReactants(newReactants)
+		setFormulaEditorChemicalSectionItems([])
 	}
 
 	const addNewProducts = () => {
+		console.log("PRODUCTS")
+
 		let products = formula.products
 		formulaEditorChemicalSectionItems.forEach((item) => {
 			products.push({
@@ -72,6 +96,7 @@ export const FormulaEditorChemicalSection: React.FC<
 		})
 
 		setProducts(products)
+		setFormulaEditorChemicalSectionItems([])
 	}
 
 	return (
@@ -162,6 +187,7 @@ export const FormulaEditorChemicalSection: React.FC<
 								fontSize={"2rem"}
 								onClick={() => {
 									// TODO: Add to formula instead of generic formula
+									console.log("PRESSed")
 									editFormulaSection === "REACTANTS"
 										? addNewReactants()
 										: addNewProducts()
