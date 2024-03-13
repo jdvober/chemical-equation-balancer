@@ -33,6 +33,47 @@ export const FormulaEditorChemicalSection: React.FC<
 
 	const editFormulaSection = useMainStore((state) => state.editFormulaSection)
 
+	const formula = useMainStore((state) => state.formula)
+
+	// TODO: Not adding to reactants / products for some reason???
+	const addNewReactants = () => {
+		let reactants = formula.reactants
+		formulaEditorChemicalSectionItems.forEach((item) => {
+			reactants.push({
+				coefficient: 1,
+				formulaSection: "REACTANTS",
+				elements: [
+					{
+						index: item.index,
+						subscript: item.subscript,
+						symbol: item.symbol,
+					},
+				],
+			})
+		})
+
+		setReactants(reactants)
+	}
+
+	const addNewProducts = () => {
+		let products = formula.products
+		formulaEditorChemicalSectionItems.forEach((item) => {
+			products.push({
+				coefficient: 1,
+				formulaSection: "PRODUCTS",
+				elements: [
+					{
+						index: item.index,
+						subscript: item.subscript,
+						symbol: item.symbol,
+					},
+				],
+			})
+		})
+
+		setProducts(products)
+	}
+
 	return (
 		<Box>
 			<Flex
@@ -122,34 +163,8 @@ export const FormulaEditorChemicalSection: React.FC<
 								onClick={() => {
 									// TODO: Add to formula instead of generic formula
 									editFormulaSection === "REACTANTS"
-										? setReactants([
-												{
-													coefficient: 1,
-													formulaSection:
-														editFormulaSection,
-													elements: [
-														{
-															index: 0,
-															subscript: 6,
-															symbol: "Ga",
-														},
-													],
-												},
-										  ])
-										: setProducts([
-												{
-													coefficient: 1,
-													formulaSection:
-														editFormulaSection,
-													elements: [
-														{
-															index: 0,
-															subscript: 6,
-															symbol: "Ga",
-														},
-													],
-												},
-										  ])
+										? addNewReactants()
+										: addNewProducts()
 								}}
 							>
 								<TiChevronRightOutline />
