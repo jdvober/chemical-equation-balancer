@@ -12,6 +12,7 @@ type ChemicalCompoundProps = {
 	index: number
 	includeSymbols: boolean
 	fontSizeInVH: number
+	isHovered: boolean
 }
 export const ChemicalCompound: React.FC<ChemicalCompoundProps> = ({
 	compound,
@@ -19,6 +20,7 @@ export const ChemicalCompound: React.FC<ChemicalCompoundProps> = ({
 	index,
 	includeSymbols,
 	fontSizeInVH,
+	isHovered,
 }) => {
 	const formula = useMainStore((state) => state.formula)
 
@@ -31,6 +33,7 @@ export const ChemicalCompound: React.FC<ChemicalCompoundProps> = ({
 				mb={"auto"}
 				key={uuid()}
 				alignSelf="center"
+				userSelect={"none"}
 			>
 				{compound.elements.map((element) => (
 					<HStack key={uuid()}>
@@ -39,6 +42,7 @@ export const ChemicalCompound: React.FC<ChemicalCompoundProps> = ({
 								symbol={element.symbol}
 								subscript={element.subscript}
 								fontSizeInVH={fontSizeInVH}
+								isHovered={isHovered}
 								key={uuid()}
 							/>
 						</HStack>

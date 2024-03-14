@@ -57,6 +57,8 @@ export const ChemicalDisplay: React.FC<ChemicalDisplayProps> = () => {
 							compound={compound}
 							formulaSection={compound.formulaSection}
 							index={compoundIndex}
+							isHovered={false}
+							fontSizeInVH={4}
 							includeSymbols={false}
 						/>
 					</HStack>

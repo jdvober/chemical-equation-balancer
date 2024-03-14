@@ -48,7 +48,6 @@ export const FormulaEditorChemicalSection: React.FC<
 			...newReactants,
 			{
 				coefficient: 1,
-				// Needs to be switched for some reason?
 
 				formulaSection: "REACTANTS",
 				elements: elements,
@@ -72,7 +71,6 @@ export const FormulaEditorChemicalSection: React.FC<
 			...newProducts,
 			{
 				coefficient: 1,
-				// Needs to be switched for some reason?
 				formulaSection: "PRODUCTS",
 				elements: elements,
 			},
@@ -93,7 +91,7 @@ export const FormulaEditorChemicalSection: React.FC<
 				justify="space-evenly"
 			>
 				<Flex
-					borderRadius="8"
+					borderRadius="8px"
 					border={`1px solid ${dracOrange}`}
 					flex="1"
 					padding="1vh"
@@ -107,7 +105,8 @@ export const FormulaEditorChemicalSection: React.FC<
 					pl="2vw"
 					pr="2vw"
 					justifyContent={"flex-start"}
-					overflow={"scroll"}
+					overflowX={"auto"}
+					overflowY={"clip"}
 				>
 					<Flex dir="row">
 						{formulaEditorChemicalSectionItems.length === 0 ? (
@@ -119,7 +118,11 @@ export const FormulaEditorChemicalSection: React.FC<
 						) : (
 							formulaEditorChemicalSectionItems.map(
 								(item, index) => (
-									<VStack key={uuid()}>
+									<VStack
+										key={uuid()}
+										h="100%"
+										alignSelf="center"
+									>
 										<ChemicalElementEditorButton
 											isUpArrow={true}
 											index={index}
