@@ -24,6 +24,8 @@ export const Formula: React.FC<FormulaProps> = () => {
 			borderRadius={"1vw"}
 			h={"25vh"}
 			alignSelf={"center"}
+			alignItems="center"
+			overflowX="scroll"
 			// border={showBorders === true ? "1px solid green" : ""}
 		>
 			<Spacer />

@@ -35,47 +35,45 @@ export const FormulaEditorChemicalSection: React.FC<
 
 	const formula = useMainStore((state) => state.formula)
 
-	// TODO: Not adding to reactants / products for some reason???
 	const addNewReactants = () => {
 		let newReactants = formula.reactants
-		formulaEditorChemicalSectionItems.forEach((item) => {
-			newReactants = [
-				...newReactants,
-				{
-					coefficient: 1,
-					formulaSection: "REACTANTS",
-					elements: [
-						{
-							index: item.index,
-							subscript: item.subscript,
-							symbol: item.symbol,
-						},
-					],
-				},
-			]
+		const elements = formulaEditorChemicalSectionItems.map((item) => {
+			return {
+				index: item.index,
+				subscript: item.subscript,
+				symbol: item.symbol,
+			}
 		})
+		newReactants = [
+			...newReactants,
+			{
+				coefficient: 1,
+				formulaSection: "REACTANTS",
+				elements: elements,
+			},
+		]
+
 		setReactants(newReactants)
 		setFormulaEditorChemicalSectionItems([])
 	}
 
 	const addNewProducts = () => {
 		let newProducts = formula.products
-		formulaEditorChemicalSectionItems.forEach((item) => {
-			newProducts = [
-				...newProducts,
-				{
-					coefficient: 1,
-					formulaSection: "REACTANTS",
-					elements: [
-						{
-							index: item.index,
-							subscript: item.subscript,
-							symbol: item.symbol,
-						},
-					],
-				},
-			]
+		const elements = formulaEditorChemicalSectionItems.map((item) => {
+			return {
+				index: item.index,
+				subscript: item.subscript,
+				symbol: item.symbol,
+			}
 		})
+		newProducts = [
+			...newProducts,
+			{
+				coefficient: 1,
+				formulaSection: "PRODUCTS",
+				elements: elements,
+			},
+		]
 
 		setProducts(newProducts)
 		setFormulaEditorChemicalSectionItems([])
@@ -106,6 +104,7 @@ export const FormulaEditorChemicalSection: React.FC<
 					pl="2vw"
 					pr="2vw"
 					justifyContent={"flex-start"}
+					overflow={"scroll"}
 				>
 					<Flex dir="row">
 						{formulaEditorChemicalSectionItems.length === 0 ? (
@@ -168,8 +167,6 @@ export const FormulaEditorChemicalSection: React.FC<
 								ml="2vw"
 								fontSize={"2rem"}
 								onClick={() => {
-									// TODO: Add to formula instead of generic formula
-									console.log("PRESSed")
 									editFormulaSection === "REACTANTS"
 										? addNewReactants()
 										: addNewProducts()

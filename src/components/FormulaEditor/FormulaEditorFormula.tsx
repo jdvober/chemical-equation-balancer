@@ -1,7 +1,7 @@
 import React from "react"
 import { v4 as uuid } from "uuid"
 
-import { Box, GridItem, HStack } from "@chakra-ui/react"
+import { Box, GridItem, HStack, Text } from "@chakra-ui/react"
 
 import { useMainStore } from "../../stores/MainStore"
 import { ChemicalCompound } from "../Formula/ChemicalCompound/ChemicalCompound"
@@ -33,6 +33,10 @@ export const FormulaEditorFormula: React.FC<FormulaEditorFormulaProps> = () => {
 					</HStack>
 				</GridItem>
 			))}
+			<Text color="dracula.dracComment" ml="1vw">
+				→
+			</Text>
+
 			{formula.products.map((product, productIndex) => (
 				<GridItem key={uuid()}>
 					<HStack alignItems={"center"}>
