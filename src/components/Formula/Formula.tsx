@@ -1,7 +1,7 @@
 import React from "react"
 import { v4 as uuid } from "uuid"
 
-import { Box, GridItem, HStack, SimpleGrid, Spacer } from "@chakra-ui/react"
+import { Box, Flex, HStack, Spacer, Text } from "@chakra-ui/react"
 
 import { useMainStore } from "../../stores/MainStore.ts"
 import { ChemicalCompound } from "./ChemicalCompound/ChemicalCompound.tsx"
@@ -17,21 +17,24 @@ export const Formula: React.FC<FormulaProps> = () => {
 	const formulaHeightVH = useMainStore((state) => state.formulaHeightVH)
 
 	return (
-		<SimpleGrid
-			columns={2 * (formula.reactants.length + formula.products.length)}
-			m="1vw"
+		<Flex
+			w="90vw"
 			border={`1px solid #44475a`}
 			borderRadius={"1vw"}
 			h={"25vh"}
-			alignSelf={"center"}
+			overflowX={"scroll"}
+			m="1vh"
 			alignItems="center"
-			overflowX="scroll"
-			// border={showBorders === true ? "1px solid green" : ""}
 		>
 			<Spacer />
 			<Spacer />
 			{formula.reactants.map((reactant, reactantIndex) => (
-				<GridItem w="100%" h={`${formulaHeightVH}vh`} key={uuid()}>
+				<Box
+					w="auto"
+					h={`${formulaHeightVH}vh`}
+					key={uuid()}
+					alignSelf="center"
+				>
 					<HStack alignItems={"center"}>
 						<Box
 							className={`coefficient-reactants-${reactantIndex}-container`}
@@ -43,8 +46,9 @@ export const Formula: React.FC<FormulaProps> = () => {
 							/>
 						</Box>
 						<Box
-
-						// h={`${formulaHeightVH} vh`}>
+							alignItems="center"
+							alignSelf="center"
+							// h={`${formulaHeightVH} vh`}>
 						>
 							<ChemicalCompound
 								compound={reactant}
@@ -55,10 +59,19 @@ export const Formula: React.FC<FormulaProps> = () => {
 							/>
 						</Box>
 					</HStack>
-				</GridItem>
+				</Box>
 			))}
+			<Text
+				color="dracula.dracYellow"
+				ml="1vw"
+				mr="1vw"
+				alignSelf="center"
+			>
+				→
+			</Text>
+
 			{formula.products.map((product, productIndex) => (
-				<GridItem w="100%" h={`${formulaHeightVH}vh`} key={uuid()}>
+				<Box w="auto" h={`${formulaHeightVH}vh`} key={uuid()}>
 					<HStack>
 						<Box
 							className={`coefficient-products-${productIndex}-container`}
@@ -82,11 +95,10 @@ export const Formula: React.FC<FormulaProps> = () => {
 							/>
 						</Box>
 					</HStack>
-				</GridItem>
+				</Box>
 			))}
 			<Spacer />
 			<Spacer />
-			{/* </Grid> */}
-		</SimpleGrid>
+		</Flex>
 	)
 }

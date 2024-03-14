@@ -15,10 +15,7 @@ export const Coefficient: React.FC<CoefficientProps> = ({
 }) => {
 	const formula = useMainStore((state) => state.formula)
 	const updateCoefficient = useMainStore((state) => state.setCoefficient)
-	const formulaHeightVH = useMainStore((state) => state.formulaHeightVH)
 	const updateCountList = useMainStore((state) => state.setCountList)
-
-	const cWidth = "5vw"
 
 	const increment = () => {
 		updateCoefficient(
@@ -61,26 +58,29 @@ export const Coefficient: React.FC<CoefficientProps> = ({
 		updateCountList(newCountList, formulaSection)
 	}
 	return (
-		<VStack
-			justify="start"
-			align="center"
-			h={`${formulaHeightVH}vh`}
-			w={cWidth}
-		>
+		<VStack justify="start" w={"100%"}>
 			<Button
+				w="1vw"
+				h="3vh"
 				onClick={() => {
 					increment()
 				}}
 			>
 				+
 			</Button>
-			<Text color="dracula.dracPurple">
+			<Text
+				color="dracula.dracPurple"
+				fontSize={"8vh"}
+				alignSelf="center"
+			>
 				{formulaSection == "REACTANTS"
 					? formula.reactants[index].coefficient
 					: formula.products[index].coefficient}
 			</Text>
 
 			<Button
+				w="1vw"
+				h="3vh"
 				onClick={() => {
 					decrement()
 				}}

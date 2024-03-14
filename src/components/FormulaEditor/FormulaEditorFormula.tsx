@@ -33,7 +33,7 @@ export const FormulaEditorFormula: React.FC<FormulaEditorFormulaProps> = () => {
 					</HStack>
 				</GridItem>
 			))}
-			<Text color="dracula.dracComment" ml="1vw">
+			<Text color="dracula.dracComment" mr="1vw">
 				→
 			</Text>
 

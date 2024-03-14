@@ -48,6 +48,8 @@ export const FormulaEditorChemicalSection: React.FC<
 			...newReactants,
 			{
 				coefficient: 1,
+				// Needs to be switched for some reason?
+
 				formulaSection: "REACTANTS",
 				elements: elements,
 			},
@@ -70,6 +72,7 @@ export const FormulaEditorChemicalSection: React.FC<
 			...newProducts,
 			{
 				coefficient: 1,
+				// Needs to be switched for some reason?
 				formulaSection: "PRODUCTS",
 				elements: elements,
 			},
@@ -149,12 +152,13 @@ export const FormulaEditorChemicalSection: React.FC<
 								items={[]}
 							/>
 						) : null}
-						<VStack>
+						<VStack h="100%" alignSelf="center">
 							<Button
 								mt="1vh"
 								mb="1vh"
 								ml="2vw"
 								fontSize={"2rem"}
+								alignSelf={"center"}
 								onClick={() => {
 									setFormulaEditorChemicalSectionItems([])
 								}}
