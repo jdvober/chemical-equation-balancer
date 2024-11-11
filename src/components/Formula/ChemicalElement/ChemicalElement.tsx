@@ -6,7 +6,7 @@ type ChemicalElementProps = {
 	symbol: ChemicalSymbol
 	subscript?: number
 	fontSizeInVH: number
-	isHovered: boolean
+	isHovered?: boolean
 }
 export const ChemicalElement: React.FC<ChemicalElementProps> = ({
 	symbol,

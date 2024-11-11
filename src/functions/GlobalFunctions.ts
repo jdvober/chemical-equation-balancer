@@ -44,7 +44,6 @@ export const CalculateCountList = ( formula: ChemicalFormula, formulaSection: Fo
 
 	const elementCountList: ElementCountList = symbols.map( ( symbol, i ) => {
 		return {
-			elementListIndex: i,
 			symbol: symbol,
 			count: allSymbols.filter( ( x ) => x === symbol ).length
 		}

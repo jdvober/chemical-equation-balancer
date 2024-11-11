@@ -12,7 +12,7 @@ type ChemicalCompoundProps = {
 	index: number
 	includeSymbols: boolean
 	fontSizeInVH: number
-	isHovered: boolean
+	isHovered?: boolean
 }
 export const ChemicalCompound: React.FC<ChemicalCompoundProps> = ({
 	compound,

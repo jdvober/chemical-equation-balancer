@@ -1,7 +1,8 @@
 import React from "react"
 
-import { HStack } from "@chakra-ui/react"
+import { Box, HStack } from "@chakra-ui/react"
 
+import { useMainStore } from "../../stores/MainStore"
 import { ProductCount } from "./ProductCount"
 import { ReactantCount } from "./ReactantCount"
 
@@ -11,16 +12,33 @@ type CountProps = Record<string, never>
 //type CountProps = {}
 
 export const Count: React.FC<CountProps> = () => {
-	const showBorders = false as boolean
-	return (
-		<HStack
-			className="Count-container"
-			border={showBorders === true ? "1px solid #44475a" : ""}
-			w="33vw"
-			h="auto"
-		>
-			<ReactantCount />
-			<ProductCount />
-		</HStack>
+	const editFormulaDrawerActive = useMainStore(
+		(state) => state.editFormulaDrawerActive
 	)
+
+	const showBorders = false as boolean
+	if (editFormulaDrawerActive === true) {
+		return (
+			<Box
+				className="Count-container"
+				border={`1px solid #44475a`}
+				borderRadius={"1vw"}
+				w="33vw"
+				h="auto"
+				mt="2vh"
+			></Box>
+		)
+	} else {
+		return (
+			<HStack
+				className="Count-container"
+				border={showBorders === true ? "1px solid #44475a" : ""}
+				w="33vw"
+				h="auto"
+			>
+				<ReactantCount />
+				<ProductCount />
+			</HStack>
+		)
+	}
 }

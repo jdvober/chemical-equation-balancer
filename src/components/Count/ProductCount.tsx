@@ -50,6 +50,18 @@ export const ProductCount: React.FC<ProductCountProps> = () => {
 	// 	})
 	// }
 
+	const numSamePairs = () => {
+		return reactantCountList.filter((reactant, index) => {
+			return reactant.count === productCountList[index].count
+		}).length
+	}
+
+	const determineElementSame = (index: number) => {
+		return reactantCountList[index].count === productCountList[index].count
+			? true
+			: false
+	}
+
 	return (
 		<Box
 			className="ProductCount"
@@ -59,23 +71,34 @@ export const ProductCount: React.FC<ProductCountProps> = () => {
 			h="auto"
 			mt="2vh"
 		>
-			{productCountList.map((_, i) => {
-				return (
-					<Center key={uuid()}>
-						<Text
-							color={
-								reactantCountList[i].count ==
-								productCountList[i].count
-									? "dracula.dracGreen"
-									: "dracula.dracRed"
-							}
-						>
-							{productCountList[i].symbol}:
-							{productCountList[i].count}
-						</Text>
-					</Center>
-				)
-			})}
+			{productCountList
+				.filter((product) => {
+					return product.count >= 1
+				})
+				.map((product, i) => {
+					return (
+						<Center key={uuid()}>
+							<Text
+								color={
+									numSamePairs() === reactantCountList.length
+										? "dracula.dracGreen"
+										: determineElementSame(i) === true
+										? "dracula.dracYellow"
+										: "dracula.dracRed"
+								}
+								opacity={
+									numSamePairs() === reactantCountList.length
+										? "100%"
+										: determineElementSame(i) === true
+										? "50%"
+										: "100%"
+								}
+							>
+								{product.symbol}:{product.count}
+							</Text>
+						</Center>
+					)
+				})}
 		</Box>
 	)
 }

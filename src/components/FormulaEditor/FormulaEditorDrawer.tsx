@@ -27,6 +27,11 @@ export const FormulaEditorDrawer: React.FC<FormulaEditorDrawerProps> = () => {
 		(state) => state.setEditFormulaSection
 	)
 	const editFormulaSection = useMainStore((state) => state.editFormulaSection)
+	const setEditFormulaDrawerActive = useMainStore(
+		(state) => state.setEditFormulaDrawerActive
+	)
+	const reactantCountList = useMainStore((state) => state.reactantCountList)
+	const productCountList = useMainStore((state) => state.productCountList)
 
 	return (
 		<Box>
@@ -60,7 +65,17 @@ export const FormulaEditorDrawer: React.FC<FormulaEditorDrawerProps> = () => {
 							<Text>Products</Text>
 						</Stack>
 						<Spacer />
-						<DrawerCloseButton />
+						{/* Check to make sure there isn't a situation where an element exists on one side of the equation, but not the
+						other. It will crash if it tries to compare two arrays
+						of different lengths. */}
+						{reactantCountList.length ===
+						productCountList.length ? (
+							<DrawerCloseButton
+								onClick={() => {
+									setEditFormulaDrawerActive(false)
+								}}
+							/>
+						) : null}
 					</Stack>
 				</DrawerHeader>
 				<DrawerBody>

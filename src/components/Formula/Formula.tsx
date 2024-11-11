@@ -51,6 +51,7 @@ export const Formula: React.FC<FormulaProps> = () => {
 							// h={`${formulaHeightVH} vh`}>
 						>
 							<ChemicalCompound
+								isHovered={true}
 								compound={reactant}
 								formulaSection="REACTANTS"
 								index={reactantIndex}
@@ -87,6 +88,7 @@ export const Formula: React.FC<FormulaProps> = () => {
 							justifyItems="center"
 						>
 							<ChemicalCompound
+								isHovered={true}
 								compound={product}
 								formulaSection="PRODUCTS"
 								index={productIndex}

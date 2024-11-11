@@ -17,7 +17,6 @@ type Cards = {
 type FormulaSection = "REACTANTS" | "PRODUCTS"
 
 type ElementListElement = {
-	elementListIndex: number
 	symbol: string
 	count: number
 }
@@ -38,7 +37,8 @@ interface ChemicalSectionItem extends ChemicalElement {
 type ChemicalCompound = {
 	coefficient: number,
 	elements: ChemicalElement[],
-	formulaSection: FormulaSection
+	formulaSection: FormulaSection,
+	isHovered: boolean
 }
 
 type ChemicalReactant = ChemicalCompound

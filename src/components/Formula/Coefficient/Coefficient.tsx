@@ -15,9 +15,11 @@ export const Coefficient: React.FC<CoefficientProps> = ({
 }) => {
 	const formula = useMainStore((state) => state.formula)
 	const updateCoefficient = useMainStore((state) => state.setCoefficient)
-	const updateCountList = useMainStore((state) => state.setCountList)
+	const setCountList = useMainStore((state) => state.setCountList)
+	const productCountList = useMainStore((state) => state.productCountList)
 
 	const increment = () => {
+		console.log(productCountList)
 		updateCoefficient(
 			formulaSection,
 			index,
@@ -31,9 +33,9 @@ export const Coefficient: React.FC<CoefficientProps> = ({
 			useMainStore.getState().formula,
 			formulaSection
 		)
-
 		// Update reactant count list
-		updateCountList(newCountList, formulaSection)
+		setCountList(newCountList, formulaSection)
+		console.log("set new count list")
 	}
 	const decrement = () => {
 		updateCoefficient(
@@ -55,7 +57,7 @@ export const Coefficient: React.FC<CoefficientProps> = ({
 		)
 
 		// Update reactant count list
-		updateCountList(newCountList, formulaSection)
+		setCountList(newCountList, formulaSection)
 	}
 	return (
 		<VStack justify="start" w={"100%"}>

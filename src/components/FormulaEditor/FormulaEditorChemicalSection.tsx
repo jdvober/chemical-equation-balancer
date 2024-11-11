@@ -34,6 +34,9 @@ export const FormulaEditorChemicalSection: React.FC<
 	const editFormulaSection = useMainStore((state) => state.editFormulaSection)
 
 	const formula = useMainStore((state) => state.formula)
+	const reactantCountList = useMainStore((state) => state.reactantCountList)
+	const productCountList = useMainStore((state) => state.productCountList)
+	const setCountList = useMainStore((state) => state.setCountList)
 
 	const addNewReactants = () => {
 		let newReactants = formula.reactants
@@ -50,11 +53,21 @@ export const FormulaEditorChemicalSection: React.FC<
 				coefficient: 1,
 
 				formulaSection: "REACTANTS",
+				isHovered: false,
 				elements: elements,
 			},
 		]
 
 		setReactants(newReactants)
+		let newElements = elements.map((element) => {
+			return {
+				symbol: element.symbol,
+				count: element.subscript,
+			}
+		})
+		let newCountList = [...reactantCountList, ...newElements]
+
+		setCountList(newCountList, "REACTANTS")
 		setFormulaEditorChemicalSectionItems([])
 	}
 
@@ -72,11 +85,22 @@ export const FormulaEditorChemicalSection: React.FC<
 			{
 				coefficient: 1,
 				formulaSection: "PRODUCTS",
+				isHovered: false,
 				elements: elements,
 			},
 		]
 
 		setProducts(newProducts)
+
+		let newElements = elements.map((element) => {
+			return {
+				symbol: element.symbol,
+				count: element.subscript,
+			}
+		})
+		let newCountList = [...productCountList, ...newElements]
+
+		setCountList(newCountList, "PRODUCTS")
 		setFormulaEditorChemicalSectionItems([])
 	}
 

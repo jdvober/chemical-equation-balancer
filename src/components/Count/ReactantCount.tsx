@@ -14,6 +14,18 @@ export const ReactantCount: React.FC<ReactantCountProps> = () => {
 	const reactantCountList = useMainStore((state) => state.reactantCountList)
 	const productCountList = useMainStore((state) => state.productCountList)
 
+	const numSamePairs = () => {
+		return reactantCountList.filter((reactant, index) => {
+			return reactant.count === productCountList[index].count
+		}).length
+	}
+
+	const determineElementSame = (index: number) => {
+		return reactantCountList[index].count === productCountList[index].count
+			? true
+			: false
+	}
+
 	return (
 		<Box
 			className="ReactantCount"
@@ -23,23 +35,34 @@ export const ReactantCount: React.FC<ReactantCountProps> = () => {
 			h="auto"
 			mt="2vh"
 		>
-			{reactantCountList.map((_, i) => {
-				return (
-					<Center key={uuid()}>
-						<Text
-							color={
-								reactantCountList[i].count ==
-								productCountList[i].count
-									? "dracula.dracGreen"
-									: "dracula.dracRed"
-							}
-						>
-							{reactantCountList[i].symbol}:
-							{reactantCountList[i].count}
-						</Text>
-					</Center>
-				)
-			})}
+			{reactantCountList
+				.filter((reactant) => {
+					return reactant.count >= 1
+				})
+				.map((reactant, i) => {
+					return (
+						<Center key={uuid()}>
+							<Text
+								color={
+									numSamePairs() === reactantCountList.length
+										? "dracula.dracGreen"
+										: determineElementSame(i) === true
+										? "dracula.dracYellow"
+										: "dracula.dracRed"
+								}
+								opacity={
+									numSamePairs() === reactantCountList.length
+										? "100%"
+										: determineElementSame(i) === true
+										? "50%"
+										: "100%"
+								}
+							>
+								{reactant.symbol}:{reactant.count}
+							</Text>
+						</Center>
+					)
+				})}
 		</Box>
 	)
 }
