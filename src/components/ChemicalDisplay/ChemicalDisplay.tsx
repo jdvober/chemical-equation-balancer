@@ -45,7 +45,7 @@ export const ChemicalDisplay: React.FC<ChemicalDisplayProps> = () => {
 					h="15vh"
 					maxH="15vh"
 					minH="15vh"
-					w="20vw"
+					w="auto"
 				>
 					// Amount Text
 					<HStack color="dracula.dracFG" key={uuid()} maxW="30vw">

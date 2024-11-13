@@ -17,39 +17,6 @@ export const ProductCount: React.FC<ProductCountProps> = () => {
 
 	const productCountList = useMainStore((state) => state.productCountList)
 
-	// const allSymbols: string[] = []
-
-	// const symbols: string[] = []
-
-	// const [reactantCounts, setReactantCounts] = useState(reactantCountList)
-	// const [productCounts, setProductCounts] = useState(reactantCountList)
-
-	// formula.products.forEach((product) => {
-	// 	product.elements.forEach((element) => {
-	// 		if (!symbols.includes(element.symbol)) {
-	// 			symbols.push(element.symbol)
-	// 		}
-	// 		for (let c = 0; c < product.coefficient; c++) {
-	// 			for (let s = 0; s < element.subscript; s++) {
-	// 				allSymbols.push(element.symbol)
-	// 			}
-	// 		}
-	// 	})
-	// })
-
-	// const elements: {
-	// 	elementListIndex: number
-	// 	symbol: string
-	// 	count: number
-	// }[] = []
-	// for (let i = 0; i < elements.length; i++) {
-	// 	elements.push({
-	// 		elementListIndex: i,
-	// 		symbol: symbols[i],
-	// 		count: allSymbols.filter((e) => e == elements[i].symbol).length,
-	// 	})
-	// }
-
 	const numSamePairs = () => {
 		return reactantCountList.filter((reactant, index) => {
 			return reactant.count === productCountList[index].count
@@ -57,9 +24,16 @@ export const ProductCount: React.FC<ProductCountProps> = () => {
 	}
 
 	const determineElementSame = (index: number) => {
-		return reactantCountList[index].count === productCountList[index].count
-			? true
-			: false
+		let match = false
+		reactantCountList.forEach((reactantCount) => {
+			if (
+				productCountList[index].symbol === reactantCount.symbol &&
+				productCountList[index].count === reactantCount.count
+			) {
+				match = true
+			}
+		})
+		return match
 	}
 
 	return (

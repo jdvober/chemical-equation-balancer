@@ -21,9 +21,16 @@ export const ReactantCount: React.FC<ReactantCountProps> = () => {
 	}
 
 	const determineElementSame = (index: number) => {
-		return reactantCountList[index].count === productCountList[index].count
-			? true
-			: false
+		let match = false
+		productCountList.forEach((productCount) => {
+			if (
+				reactantCountList[index].symbol === productCount.symbol &&
+				reactantCountList[index].count === productCount.count
+			) {
+				match = true
+			}
+		})
+		return match
 	}
 
 	return (

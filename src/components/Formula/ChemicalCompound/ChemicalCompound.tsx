@@ -56,7 +56,7 @@ export const ChemicalCompound: React.FC<ChemicalCompoundProps> = ({
 					) : null
 				) : index < formula.products.length - 1 ? (
 					<Text color="dracula.dracComment" mr="1vw">
-						+
+						{includeSymbols ? "+" : ""}
 					</Text>
 				) : null}
 			</HStack>

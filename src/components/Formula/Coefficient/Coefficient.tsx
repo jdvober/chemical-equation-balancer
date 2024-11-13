@@ -14,13 +14,13 @@ export const Coefficient: React.FC<CoefficientProps> = ({
 	index,
 }) => {
 	const formula = useMainStore((state) => state.formula)
-	const updateCoefficient = useMainStore((state) => state.setCoefficient)
+	const setCoefficient = useMainStore((state) => state.setCoefficient)
 	const setCountList = useMainStore((state) => state.setCountList)
+	const reactantCountList = useMainStore((state) => state.reactantCountList)
 	const productCountList = useMainStore((state) => state.productCountList)
 
 	const increment = () => {
-		console.log(productCountList)
-		updateCoefficient(
+		setCoefficient(
 			formulaSection,
 			index,
 			formulaSection == "REACTANTS"
@@ -28,17 +28,25 @@ export const Coefficient: React.FC<CoefficientProps> = ({
 				: formula.products[index].coefficient + 1
 		)
 
-		// Calculate new totals
+		// structuredClone creates a deep copy of formula that has the "read-only" attribute of properties removed (this was enacted by strict mode)
+		let updatedFormula = structuredClone(formula)
+
+		formulaSection === "REACTANTS"
+			? updatedFormula.reactants[index].coefficient++
+			: updatedFormula.products[index].coefficient++
+
 		const newCountList = CalculateCountList(
-			useMainStore.getState().formula,
+			updatedFormula,
+			formulaSection === "REACTANTS"
+				? reactantCountList
+				: productCountList,
 			formulaSection
 		)
 		// Update reactant count list
 		setCountList(newCountList, formulaSection)
-		console.log("set new count list")
 	}
 	const decrement = () => {
-		updateCoefficient(
+		setCoefficient(
 			formulaSection,
 			index,
 			formulaSection == "REACTANTS"
@@ -50,12 +58,21 @@ export const Coefficient: React.FC<CoefficientProps> = ({
 				: formula.products[index].coefficient - 1
 		)
 
+		// structuredClone creates a deep copy of formula that has the "read-only" attribute of properties removed (this was enacted by strict mode)
+		let updatedFormula = structuredClone(formula)
+
+		formulaSection === "REACTANTS"
+			? updatedFormula.reactants[index].coefficient++
+			: updatedFormula.products[index].coefficient++
+
 		// Calculate new totals
 		const newCountList = CalculateCountList(
-			useMainStore.getState().formula,
+			updatedFormula,
+			formulaSection === "REACTANTS"
+				? reactantCountList
+				: productCountList,
 			formulaSection
 		)
-
 		// Update reactant count list
 		setCountList(newCountList, formulaSection)
 	}

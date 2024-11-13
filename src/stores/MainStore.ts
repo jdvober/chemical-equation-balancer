@@ -9,11 +9,11 @@ type State = {
 	},
 	formulaHeightVH: number,
 	reactantCountList: {
-		symbol: string
+		symbol: ChemicalSymbol
 		count: number
 	}[],
 	productCountList: {
-		symbol: string
+		symbol: ChemicalSymbol
 		count: number
 	}[],
 	editFormulaSection: FormulaSection,
@@ -514,8 +514,8 @@ export const useMainStore = create<State & Action>()(
 		setProducts: ( newProducts ) => set( ( state ) => {
 			state.formula.products = newProducts
 		} ),
-		setCountList: ( newCountList, formulaSection ) => set( ( state ) => {
-			console.log( `Updating ${ formulaSection } Count to ${ newCountList }` )
+		setCountList: ( newCountList: any, formulaSection ) => set( ( state ) => {
+			// console.log( `Updating ${ formulaSection } Count to ${ newCountList }` )
 			formulaSection === "REACTANTS" ? state.reactantCountList = newCountList : state.productCountList = newCountList
 		} ),
 

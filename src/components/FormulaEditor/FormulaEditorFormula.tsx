@@ -17,6 +17,7 @@ export const FormulaEditorFormula: React.FC<FormulaEditorFormulaProps> = () => {
 	const setProducts = useMainStore((state) => state.setProducts)
 	const setHoverStatus = useMainStore((state) => state.setHoverStatus)
 	const setCountList = useMainStore((state) => state.setCountList)
+	const productCountList = useMainStore((state) => state.reactantCountList)
 
 	const getTooltipLabel = (compound: ChemicalCompound) => {
 		return (
@@ -40,11 +41,33 @@ export const FormulaEditorFormula: React.FC<FormulaEditorFormulaProps> = () => {
 		formula: ChemicalFormula,
 		reactantIndex: number
 	) => {
-		console.log(formula.reactants)
 		let newReactants = formula.reactants.filter((_, index) => {
 			return index !== reactantIndex
 		})
-		console.log(newReactants)
+
+		// Update the counts
+		let newElements = formula.reactants[reactantIndex].elements
+		let newCountList = productCountList.map((reactantCount) => {
+			let tempCount
+			newElements.forEach((newElement) => {
+				if (newElement.symbol === reactantCount.symbol) {
+					tempCount = {
+						symbol: newElement.symbol as ChemicalSymbol,
+						count: (reactantCount.count -
+							newElement.subscript *
+								formula.reactants[reactantIndex]
+									.coefficient) as number,
+					}
+				}
+			})
+			if (tempCount != undefined) {
+				return tempCount
+			} else {
+				return reactantCount
+			}
+		})
+
+		setCountList(newCountList, "REACTANTS")
 		setReactants(newReactants)
 	}
 
@@ -53,6 +76,31 @@ export const FormulaEditorFormula: React.FC<FormulaEditorFormulaProps> = () => {
 			return index !== productIndex
 		})
 		setProducts(newProducts)
+		//
+		// Update the counts
+		let newElements = formula.products[productIndex].elements
+		let newCountList = productCountList.map((productCount) => {
+			let tempCount
+			newElements.forEach((newElement) => {
+				if (newElement.symbol === productCount.symbol) {
+					tempCount = {
+						symbol: newElement.symbol as ChemicalSymbol,
+						count: (productCount.count -
+							newElement.subscript *
+								formula.reactants[productIndex]
+									.coefficient) as number,
+					}
+				}
+			})
+			if (tempCount != undefined) {
+				return tempCount
+			} else {
+				return productCount
+			}
+		})
+
+		setCountList(newCountList, "PRODUCTS")
+		setReactants(newProducts)
 	}
 
 	return (

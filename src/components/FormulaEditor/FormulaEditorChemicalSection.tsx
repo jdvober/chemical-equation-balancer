@@ -65,7 +65,25 @@ export const FormulaEditorChemicalSection: React.FC<
 				count: element.subscript,
 			}
 		})
-		let newCountList = [...reactantCountList, ...newElements]
+
+		// Update the counts
+		let newCountList = reactantCountList.map((reactantCount) => {
+			let tempCount
+			newElements.forEach((newElement) => {
+				if (newElement.symbol === reactantCount.symbol) {
+					tempCount = {
+						symbol: newElement.symbol as ChemicalSymbol,
+						count: (reactantCount.count +
+							newElement.count) as number,
+					}
+				}
+			})
+			if (tempCount != undefined) {
+				return tempCount
+			} else {
+				return reactantCount
+			}
+		})
 
 		setCountList(newCountList, "REACTANTS")
 		setFormulaEditorChemicalSectionItems([])
@@ -98,7 +116,25 @@ export const FormulaEditorChemicalSection: React.FC<
 				count: element.subscript,
 			}
 		})
-		let newCountList = [...productCountList, ...newElements]
+
+		// Update the counts
+		let newCountList = productCountList.map((productCount) => {
+			let tempCount
+			newElements.forEach((newElement) => {
+				if (newElement.symbol === productCount.symbol) {
+					tempCount = {
+						symbol: newElement.symbol as ChemicalSymbol,
+						count: (productCount.count +
+							newElement.count) as number,
+					}
+				}
+			})
+			if (tempCount != undefined) {
+				return tempCount
+			} else {
+				return productCount
+			}
+		})
 
 		setCountList(newCountList, "PRODUCTS")
 		setFormulaEditorChemicalSectionItems([])
