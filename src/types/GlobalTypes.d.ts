@@ -21,7 +21,7 @@ type ElementListElement = {
 	count: number
 }
 
-type ElementCountList = ElementListElement[]
+type ElementCountList = { symbol: ChemicalSymbol, reactantCount: number, productCount: numher }[]
 
 type ChemicalElement = {
 	index: number

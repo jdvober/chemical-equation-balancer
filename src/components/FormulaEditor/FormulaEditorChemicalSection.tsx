@@ -6,7 +6,7 @@ import { v4 as uuid } from "uuid"
 import { Box, Button, Flex, Spacer, VStack } from "@chakra-ui/react"
 
 import { useMainStore } from "../../stores/MainStore"
-import { dracOrange } from "../../vars/GlobalVars.ts"
+import { dracOrange, dracRed } from "../../vars/GlobalVars.ts"
 import { ChemicalDropZone } from "./ChemicalDropZone"
 import { ChemicalElementEditorButton } from "./ChemicalElementEditorButton"
 import { DraggableElement } from "./DraggableElement"
@@ -34,9 +34,11 @@ export const FormulaEditorChemicalSection: React.FC<
 	const editFormulaSection = useMainStore((state) => state.editFormulaSection)
 
 	const formula = useMainStore((state) => state.formula)
-	const reactantCountList = useMainStore((state) => state.reactantCountList)
-	const productCountList = useMainStore((state) => state.productCountList)
+	const countList = useMainStore((state) => state.countList)
 	const setCountList = useMainStore((state) => state.setCountList)
+	const reactantAndProductElementListsMatch = useMainStore(
+		(state) => state.reactantAndProductElementListsMatch
+	)
 
 	const addNewReactants = () => {
 		let newReactants = formula.reactants
@@ -67,25 +69,27 @@ export const FormulaEditorChemicalSection: React.FC<
 		})
 
 		// Update the counts
-		let newCountList = reactantCountList.map((reactantCount) => {
-			let tempCount
+		let newCountList = countList.map((element) => {
+			let tempCountReactants
+
 			newElements.forEach((newElement) => {
-				if (newElement.symbol === reactantCount.symbol) {
-					tempCount = {
+				if (newElement.symbol === element.symbol) {
+					tempCountReactants = {
 						symbol: newElement.symbol as ChemicalSymbol,
-						count: (reactantCount.count +
+						reactantCount: (element.reactantCount +
 							newElement.count) as number,
+						productCount: element.productCount,
 					}
 				}
 			})
-			if (tempCount != undefined) {
-				return tempCount
+			if (tempCountReactants != undefined) {
+				return tempCountReactants
 			} else {
-				return reactantCount
+				return element
 			}
 		})
 
-		setCountList(newCountList, "REACTANTS")
+		setCountList(newCountList)
 		setFormulaEditorChemicalSectionItems([])
 	}
 
@@ -118,25 +122,27 @@ export const FormulaEditorChemicalSection: React.FC<
 		})
 
 		// Update the counts
-		let newCountList = productCountList.map((productCount) => {
-			let tempCount
+		let newCountList = countList.map((element) => {
+			let tempCountProducts
+
 			newElements.forEach((newElement) => {
-				if (newElement.symbol === productCount.symbol) {
-					tempCount = {
+				if (newElement.symbol === element.symbol) {
+					tempCountProducts = {
 						symbol: newElement.symbol as ChemicalSymbol,
-						count: (productCount.count +
+						reactantCount: element.productCount,
+						productCount: (element.productCount +
 							newElement.count) as number,
 					}
 				}
 			})
-			if (tempCount != undefined) {
-				return tempCount
+			if (tempCountProducts != undefined) {
+				return tempCountProducts
 			} else {
-				return productCount
+				return element
 			}
 		})
 
-		setCountList(newCountList, "PRODUCTS")
+		setCountList(newCountList)
 		setFormulaEditorChemicalSectionItems([])
 	}
 
@@ -152,7 +158,11 @@ export const FormulaEditorChemicalSection: React.FC<
 			>
 				<Flex
 					borderRadius="8px"
-					border={`1px solid ${dracOrange}`}
+					border={`1px solid ${
+						reactantAndProductElementListsMatch === true
+							? dracOrange
+							: dracRed
+					}`}
 					flex="1"
 					padding="1vh"
 					flexDirection="row"

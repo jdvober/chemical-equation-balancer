@@ -3,6 +3,7 @@ import { v4 as uuid } from "uuid"
 
 import { Box, Center, Text } from "@chakra-ui/react"
 
+import { CalculateCountList } from "../../functions/GlobalFunctions.ts"
 import { useMainStore } from "../../stores/MainStore.ts"
 
 // If no values, use this:
@@ -11,22 +12,19 @@ type ReactantCountProps = Record<string, never>
 //type ReactantCountProps = {}
 
 export const ReactantCount: React.FC<ReactantCountProps> = () => {
-	const reactantCountList = useMainStore((state) => state.reactantCountList)
-	const productCountList = useMainStore((state) => state.productCountList)
+	const formula = useMainStore((state) => state.formula)
+	const countList = CalculateCountList(formula)
 
 	const numSamePairs = () => {
-		return reactantCountList.filter((reactant, index) => {
-			return reactant.count === productCountList[index].count
+		return countList.filter((element) => {
+			return element.reactantCount === element.productCount
 		}).length
 	}
 
-	const determineElementSame = (index: number) => {
+	const determineElementSame = () => {
 		let match = false
-		productCountList.forEach((productCount) => {
-			if (
-				reactantCountList[index].symbol === productCount.symbol &&
-				reactantCountList[index].count === productCount.count
-			) {
+		countList.forEach((count) => {
+			if (count.reactantCount === count.productCount) {
 				match = true
 			}
 		})
@@ -42,30 +40,30 @@ export const ReactantCount: React.FC<ReactantCountProps> = () => {
 			h="auto"
 			mt="2vh"
 		>
-			{reactantCountList
-				.filter((reactant) => {
-					return reactant.count >= 1
+			{countList
+				.filter((element) => {
+					return element.reactantCount >= 1
 				})
-				.map((reactant, i) => {
+				.map((element) => {
 					return (
 						<Center key={uuid()}>
 							<Text
 								color={
-									numSamePairs() === reactantCountList.length
+									numSamePairs() === countList.length
 										? "dracula.dracGreen"
-										: determineElementSame(i) === true
+										: determineElementSame() === true
 										? "dracula.dracYellow"
 										: "dracula.dracRed"
 								}
 								opacity={
-									numSamePairs() === reactantCountList.length
+									numSamePairs() === countList.length
 										? "100%"
-										: determineElementSame(i) === true
+										: determineElementSame() === true
 										? "50%"
 										: "100%"
 								}
 							>
-								{reactant.symbol}:{reactant.count}
+								{element.symbol}:{element.reactantCount}
 							</Text>
 						</Center>
 					)

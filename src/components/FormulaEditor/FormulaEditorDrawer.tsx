@@ -11,6 +11,7 @@ import {
 	Stack,
 	Switch,
 	Text,
+	Tooltip,
 } from "@chakra-ui/react"
 
 import { useMainStore } from "../../stores/MainStore"
@@ -22,7 +23,6 @@ type FormulaEditorDrawerProps = Record<string, never>
 //type FormulaEditorDrawerProps = {}
 
 export const FormulaEditorDrawer: React.FC<FormulaEditorDrawerProps> = () => {
-	// const { isOpen, onOpen, onClose } = useDisclosure()
 	const setEditFormulaSection = useMainStore(
 		(state) => state.setEditFormulaSection
 	)
@@ -30,8 +30,44 @@ export const FormulaEditorDrawer: React.FC<FormulaEditorDrawerProps> = () => {
 	const setEditFormulaDrawerActive = useMainStore(
 		(state) => state.setEditFormulaDrawerActive
 	)
-	const reactantCountList = useMainStore((state) => state.reactantCountList)
-	const productCountList = useMainStore((state) => state.productCountList)
+	const countList = useMainStore((state) => state.countList)
+	const setReactantAndProductElementListsMatch = useMainStore(
+		(state) => state.setReactantAndProductElementListsMatch
+	)
+
+	const reactantsProductsContainSameElements = () => {
+		let reactantElementList = countList
+			.map((element) => {
+				return { symbol: element.symbol, count: element.reactantCount }
+			})
+			.filter((reactant) => {
+				return reactant.count >= 1
+			})
+			.map((reactant) => {
+				return reactant.symbol
+			})
+			.sort()
+		let productElementList = countList
+			.map((element) => {
+				return { symbol: element.symbol, count: element.productCount }
+			})
+			.filter((product) => {
+				return product.count >= 1
+			})
+			.map((product) => {
+				return product.symbol
+			})
+			.sort()
+
+		for (var i = 0; i < reactantElementList.length; ++i) {
+			if (reactantElementList[i] !== productElementList[i]) {
+				setReactantAndProductElementListsMatch(false)
+				return false
+			}
+		}
+		setReactantAndProductElementListsMatch(true)
+		return true
+	}
 
 	return (
 		<Box>
@@ -40,17 +76,17 @@ export const FormulaEditorDrawer: React.FC<FormulaEditorDrawerProps> = () => {
 				h="99vh"
 				w="96vw"
 				bgColor={"dracula.dracBG"}
-				border="2px solid #FFB86C"
+				border={`2px solid #FFB86C`}
 				borderRadius={"1vw"}
 				opacity={"95%"}
 				ml="2vw"
 			>
 				<DrawerHeader borderBottomWidth="1px" color="dracula.dracFG">
 					<Stack direction="row">
-						<Text>Edit Formula</Text>
+						<Text userSelect={"none"}>Edit Formula</Text>
 						<Spacer />
 						<Stack direction={"row"} alignSelf={"center"}>
-							<Text>Reactants</Text>
+							<Text userSelect={"none"}>Reactants</Text>
 							<Switch
 								variant="neutral"
 								size="lg"
@@ -62,20 +98,35 @@ export const FormulaEditorDrawer: React.FC<FormulaEditorDrawerProps> = () => {
 									)
 								}
 							/>
-							<Text>Products</Text>
+							<Text userSelect={"none"}>Products</Text>
 						</Stack>
 						<Spacer />
 						{/* Check to make sure there isn't a situation where an element exists on one side of the equation, but not the
 						other. It will crash if it tries to compare two arrays
 						of different lengths. */}
-						{reactantCountList.length ===
-						productCountList.length ? (
-							<DrawerCloseButton
-								onClick={() => {
-									setEditFormulaDrawerActive(false)
-								}}
-							/>
-						) : null}
+						<Box w="25vw">
+							{reactantsProductsContainSameElements() === true ? (
+								<DrawerCloseButton
+									onClick={() => {
+										setEditFormulaDrawerActive(false)
+									}}
+								/>
+							) : (
+								<Tooltip
+									content="Elements on both sides of the → must match!"
+									userSelect={"none"}
+								>
+									<Text
+										color={"dracRed"}
+										fontSize={"medium"}
+										userSelect={"none"}
+									>
+										Elements on both sides of the → must
+										match! 🚫
+									</Text>
+								</Tooltip>
+							)}
+						</Box>
 					</Stack>
 				</DrawerHeader>
 				<DrawerBody>

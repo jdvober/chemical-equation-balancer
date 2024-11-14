@@ -3,6 +3,7 @@ import { v4 as uuid } from "uuid"
 
 import { Box, GridItem, HStack, Text, Tooltip } from "@chakra-ui/react"
 
+import { CalculateCountList } from "../../functions/GlobalFunctions"
 import { useMainStore } from "../../stores/MainStore"
 import { ChemicalCompound } from "../Formula/ChemicalCompound/ChemicalCompound"
 
@@ -17,7 +18,6 @@ export const FormulaEditorFormula: React.FC<FormulaEditorFormulaProps> = () => {
 	const setProducts = useMainStore((state) => state.setProducts)
 	const setHoverStatus = useMainStore((state) => state.setHoverStatus)
 	const setCountList = useMainStore((state) => state.setCountList)
-	const productCountList = useMainStore((state) => state.reactantCountList)
 
 	const getTooltipLabel = (compound: ChemicalCompound) => {
 		return (
@@ -45,29 +45,12 @@ export const FormulaEditorFormula: React.FC<FormulaEditorFormulaProps> = () => {
 			return index !== reactantIndex
 		})
 
-		// Update the counts
-		let newElements = formula.reactants[reactantIndex].elements
-		let newCountList = productCountList.map((reactantCount) => {
-			let tempCount
-			newElements.forEach((newElement) => {
-				if (newElement.symbol === reactantCount.symbol) {
-					tempCount = {
-						symbol: newElement.symbol as ChemicalSymbol,
-						count: (reactantCount.count -
-							newElement.subscript *
-								formula.reactants[reactantIndex]
-									.coefficient) as number,
-					}
-				}
+		setCountList(
+			CalculateCountList({
+				reactants: newReactants,
+				products: formula.products,
 			})
-			if (tempCount != undefined) {
-				return tempCount
-			} else {
-				return reactantCount
-			}
-		})
-
-		setCountList(newCountList, "REACTANTS")
+		)
 		setReactants(newReactants)
 	}
 
@@ -75,32 +58,10 @@ export const FormulaEditorFormula: React.FC<FormulaEditorFormulaProps> = () => {
 		let newProducts = formula.products.filter((_, index) => {
 			return index !== productIndex
 		})
-		setProducts(newProducts)
-		//
-		// Update the counts
-		let newElements = formula.products[productIndex].elements
-		let newCountList = productCountList.map((productCount) => {
-			let tempCount
-			newElements.forEach((newElement) => {
-				if (newElement.symbol === productCount.symbol) {
-					tempCount = {
-						symbol: newElement.symbol as ChemicalSymbol,
-						count: (productCount.count -
-							newElement.subscript *
-								formula.reactants[productIndex]
-									.coefficient) as number,
-					}
-				}
-			})
-			if (tempCount != undefined) {
-				return tempCount
-			} else {
-				return productCount
-			}
-		})
 
-		setCountList(newCountList, "PRODUCTS")
-		setReactants(newProducts)
+		setCountList(CalculateCountList(formula))
+
+		setProducts(newProducts)
 	}
 
 	return (

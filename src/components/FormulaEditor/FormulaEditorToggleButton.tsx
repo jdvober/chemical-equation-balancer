@@ -17,20 +17,33 @@ export const FormulaEditorToggleButton: React.FC<
 	const setEditFormulaDrawerActive = useMainStore(
 		(state) => state.setEditFormulaDrawerActive
 	)
-
-	return (
-		<Box className="FormulaEditorToggleButton" w="5vw" h="2vh">
-			<Button
-				onClick={() => {
-					setEditFormulaDrawerActive(true)
-					onOpen()
-				}}
-			>
-				Edit
-			</Button>
-			<Drawer placement={"bottom"} onClose={onClose} isOpen={isOpen}>
-				<FormulaEditorDrawer />
-			</Drawer>
-		</Box>
+	const editFormulaDrawerActive = useMainStore(
+		(state) => state.editFormulaDrawerActive
 	)
+
+	if (!editFormulaDrawerActive) {
+		return (
+			<Box className="FormulaEditorToggleButton" w="5vw" h="2vh">
+				<Button
+					onClick={() => {
+						setEditFormulaDrawerActive(true)
+						onOpen()
+					}}
+				>
+					Edit
+				</Button>
+				<Drawer placement={"bottom"} onClose={onClose} isOpen={isOpen}>
+					<FormulaEditorDrawer />
+				</Drawer>
+			</Box>
+		)
+	} else {
+		return (
+			<Box className="FormulaEditorToggleButton" w="5vw" h="2vh">
+				<Drawer placement={"bottom"} onClose={onClose} isOpen={isOpen}>
+					<FormulaEditorDrawer />
+				</Drawer>
+			</Box>
+		)
+	}
 }

@@ -15,6 +15,9 @@ type ChemicalDisplayProps = Record<string, never>
 export const ChemicalDisplay: React.FC<ChemicalDisplayProps> = () => {
 	const formula = useMainStore((state) => state.formula)
 	const showBorders = false as boolean
+	const editFormulaDrawerActive = useMainStore(
+		(state) => state.editFormulaDrawerActive
+	)
 
 	const makeChemicalArr = (element: ChemicalElement) => {
 		const chemArr: ChemicalSymbol[] = []
@@ -94,15 +97,19 @@ export const ChemicalDisplay: React.FC<ChemicalDisplayProps> = () => {
 		})
 	}
 
-	return (
-		<Flex
-			w="90vw"
-			border={showBorders === true ? "1px solid green" : ""}
-			maxH="50vh"
-		>
-			<HStack>{displayList(formula.reactants)}</HStack>
-			<Spacer />
-			<HStack>{displayList(formula.products)}</HStack>
-		</Flex>
-	)
+	if (!editFormulaDrawerActive) {
+		return (
+			<Flex
+				w="90vw"
+				border={showBorders === true ? "1px solid green" : ""}
+				maxH="50vh"
+			>
+				<HStack>{displayList(formula.reactants)}</HStack>
+				<Spacer />
+				<HStack>{displayList(formula.products)}</HStack>
+			</Flex>
+		)
+	} else {
+		return null
+	}
 }
