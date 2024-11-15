@@ -9,7 +9,6 @@ type Compound = {
 }
 
 */
-type View = "BALANCER" | "FORMULA_EDITOR"
 
 type Cards = {
 	title: string

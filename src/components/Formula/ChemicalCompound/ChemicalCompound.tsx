@@ -33,6 +33,7 @@ export const ChemicalCompound: React.FC<ChemicalCompoundProps> = ({
 				mb={"auto"}
 				key={uuid()}
 				alignSelf="center"
+				userSelect={"none"}
 			>
 				{compound.elements.map((element) => (
 					<HStack key={uuid()}>

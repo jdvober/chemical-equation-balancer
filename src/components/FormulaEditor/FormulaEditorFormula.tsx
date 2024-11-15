@@ -5,7 +5,7 @@ import { Box, GridItem, HStack, Text, Tooltip } from "@chakra-ui/react"
 
 import { CalculateCountList } from "../../functions/GlobalFunctions"
 import { useMainStore } from "../../stores/MainStore"
-import { ChemicalCompound } from "../Balancer/ChemicalCompound/ChemicalCompound"
+import { ChemicalCompound } from "../Formula/ChemicalCompound/ChemicalCompound"
 
 // If no values, use this:
 type FormulaEditorFormulaProps = Record<string, never>

@@ -2,16 +2,15 @@ import React from "react"
 import { v4 as uuid } from "uuid"
 
 import { Box, Center, Text } from "@chakra-ui/react"
-
-import { CalculateCountList } from "../../../functions/GlobalFunctions.ts"
-import { useMainStore } from "../../../stores/MainStore.ts"
+import { CalculateCountList } from "../../functions/GlobalFunctions.ts"
+import { useMainStore } from "../../stores/MainStore.ts"
 
 // If no values, use this:
-type ReactantCountProps = Record<string, never>
+type ProductCountProps = Record<string, never>
 // If values, fill in the object below
-//type ReactantCountProps = {}
+//type ProductCountProps = {}
 
-export const ReactantCount: React.FC<ReactantCountProps> = () => {
+export const ProductCount: React.FC<ProductCountProps> = () => {
 	const formula = useMainStore((state) => state.formula)
 	const countList = CalculateCountList(formula)
 
@@ -42,7 +41,7 @@ export const ReactantCount: React.FC<ReactantCountProps> = () => {
 		>
 			{countList
 				.filter((element) => {
-					return element.reactantCount >= 1
+					return element.productCount >= 1
 				})
 				.map((element) => {
 					return (
@@ -63,7 +62,7 @@ export const ReactantCount: React.FC<ReactantCountProps> = () => {
 										: "100%"
 								}
 							>
-								{element.symbol}:{element.reactantCount}
+								{element.symbol}:{element.productCount}
 							</Text>
 						</Center>
 					)

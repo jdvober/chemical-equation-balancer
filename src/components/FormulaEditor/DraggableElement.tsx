@@ -215,6 +215,7 @@ export const DraggableElement = ({
 			{...listeners}
 			{...attributes}
 			ref={setNodeRef}
+			userSelect={"none"}
 			onMouseEnter={handleMouseEnter}
 			onMouseLeave={handleMouseLeave}
 			onMouseDown={(e) => {
@@ -244,6 +245,7 @@ export const DraggableElement = ({
 								? "dracula.dracPurple"
 								: "dracula.dracBG"
 						}
+						userSelect={"none"}
 						justifySelf="center"
 					>
 						{sym}
@@ -256,6 +258,7 @@ export const DraggableElement = ({
 						}
 						color={subscriptColor}
 						opacity={subscript === 1 ? "0%" : "100%"}
+						userSelect={"none"}
 					>
 						{parent === "FormulaEditorChemicalSection" &&
 						sym === symbol ? (
