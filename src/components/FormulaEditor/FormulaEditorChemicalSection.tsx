@@ -56,7 +56,7 @@ export const FormulaEditorChemicalSection: React.FC<
 
 				formulaSection: "REACTANTS",
 				isHovered: false,
-				elements: elements,
+				elements: elements as ChemicalElement[],
 			},
 		]
 
@@ -108,7 +108,7 @@ export const FormulaEditorChemicalSection: React.FC<
 				coefficient: 1,
 				formulaSection: "PRODUCTS",
 				isHovered: false,
-				elements: elements,
+				elements: elements as ChemicalElement[],
 			},
 		]
 
@@ -200,6 +200,7 @@ export const FormulaEditorChemicalSection: React.FC<
 										<DraggableElement
 											symbol={item.symbol}
 											id={uuid()}
+											eID={item.eID}
 											key={uuid()}
 											index={index}
 											parent={
@@ -210,6 +211,7 @@ export const FormulaEditorChemicalSection: React.FC<
 													index
 												].subscript
 											}
+											subscriptColor="dracula.dracPurple"
 										/>
 										<ChemicalElementEditorButton
 											isUpArrow={false}
@@ -233,7 +235,12 @@ export const FormulaEditorChemicalSection: React.FC<
 								fontSize={"2rem"}
 								alignSelf={"center"}
 								onClick={() => {
-									setFormulaEditorChemicalSectionItems([])
+									setFormulaEditorChemicalSectionItems(
+										formulaEditorChemicalSectionItems.slice(
+											0,
+											-1
+										)
+									)
 								}}
 							>
 								<RxReset />

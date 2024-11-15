@@ -50,7 +50,10 @@ export const ChemicalElementEditorButton: React.FC<
 				}}
 				onClick={() => {
 					setFormulaEditorChemicalSectionItemSubscript(
-						formulaEditorChemicalSectionItems[index].subscript + 1,
+						formulaEditorChemicalSectionItems[index].subscript <= 98
+							? formulaEditorChemicalSectionItems[index]
+									.subscript + 1
+							: 99,
 						index
 					)
 				}}
@@ -79,15 +82,13 @@ export const ChemicalElementEditorButton: React.FC<
 					)
 				}}
 				onClick={() => {
-					if (
+					setFormulaEditorChemicalSectionItemSubscript(
 						formulaEditorChemicalSectionItems[index].subscript >= 2
-					) {
-						setFormulaEditorChemicalSectionItemSubscript(
-							formulaEditorChemicalSectionItems[index].subscript -
-								1,
-							index
-						)
-					}
+							? formulaEditorChemicalSectionItems[index]
+									.subscript - 1
+							: 1,
+						index
+					)
 				}}
 			>
 				<TiArrowDownOutline />

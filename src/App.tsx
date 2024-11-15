@@ -1,9 +1,10 @@
+import { v4 as uuid } from "uuid"
 import "./App.css"
 
 import { Center, HStack, VStack } from "@chakra-ui/react"
 import {
 	DndContext,
-	PointerSensor,
+	MouseSensor,
 	rectIntersection,
 	useSensor,
 	useSensors,
@@ -23,7 +24,7 @@ export const App = () => {
 		(state) => state.setFormulaEditorChemicalSectionItems
 	)
 	const sensors = useSensors(
-		useSensor(PointerSensor, {
+		useSensor(MouseSensor, {
 			activationConstraint: {
 				distance: 8,
 			},
@@ -45,6 +46,7 @@ export const App = () => {
 							...formulaEditorChemicalSectionItems,
 							{
 								index: index,
+								eID: uuid(),
 								symbol: symbol,
 								subscript: 1,
 								subscriptColor: "dracula.dracPurple",

@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { v4 as uuid } from "uuid"
 
 import { Flex, Text, VStack } from "@chakra-ui/react"
 import { useDraggable } from "@dnd-kit/core"
@@ -18,7 +19,7 @@ export const DraggableElement = ({
 	id: string
 	eID: string
 	index: number
-	symbol: ChemicalSymbol | "" | "🚫"
+	symbol: ChemicalSymbol | ""
 	parent: string
 	subscript: number
 	subscriptColor:
@@ -38,7 +39,7 @@ export const DraggableElement = ({
 		transform: CSS.Translate.toString(transform),
 	}
 	const [col, setCol] = useState("dracula.dracFG")
-	const [sym, setSym] = useState(symbol)
+	const [col2, setCol2] = useState("dracula.dracPurple")
 
 	const formulaEditorChemicalSectionItems = useMainStore(
 		(state) => state.formulaEditorChemicalSectionItems
@@ -47,69 +48,25 @@ export const DraggableElement = ({
 	const setFormulaEditorChemicalSectionItems = useMainStore(
 		(state) => state.setFormulaEditorChemicalSectionItems
 	)
-	// const [position, setPosition] = useState({ x: 0, y: 0 })
-	const [position, setPosition] = useState({
-		startX: 0,
-		startY: 0,
-		endX: 0,
-		endY: 0,
-	})
 
-	const handleMouseDown = (
-		e: React.MouseEvent<HTMLDivElement, MouseEvent>
-	) => {
-		// const startX = e.clientX - position.x
-		// const startY = e.clientY - position.y
-
-		setPosition({
-			startX: e.clientX,
-			startY: e.clientY,
-			endX: position.endX,
-			endY: position.endY,
-		})
-		// const handleMouseMove = (e: any) => {
-		// 	setPosition({
-		// 		x: e.clientX - startX,
-		// 		y: e.clientY - startY,
-		// 	})
-		// }
-
-		// const handleMouseUp = () => {
-		// 	window.removeEventListener("mousemove", handleMouseMove)
-		// 	window.removeEventListener("mouseup", handleMouseUp)
-		// }
-
-		// window.addEventListener("mousemove", handleMouseMove)
-		// window.addEventListener("mouseup", handleMouseUp)
-	}
-
-	const handleMouseUp = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-		setPosition({
-			startX: position.startX,
-			startY: position.startY,
-			endX: e.clientX,
-			endY: e.clientY,
-		})
+	const handleClick = () => {
 		if (parent === "FormulaEditorElementSection") {
-			// If you haven't dragged too far
-			if (
-				Math.abs(position.startX - position.endX) < 30 &&
-				Math.abs(position.startY - position.endY) < 30
-			) {
-				console.log(eID)
-				setFormulaEditorChemicalSectionItems([
-					...formulaEditorChemicalSectionItems,
-					{
-						eID: eID,
-						index: formulaEditorChemicalSectionItems.length,
-						symbol: symbol,
-						subscript: 1,
-						subscriptColor: "dracula.dracPurple",
-					},
-				] as ChemicalSectionItem[])
-			}
-			return
+			console.log(eID)
+			setFormulaEditorChemicalSectionItems([
+				...formulaEditorChemicalSectionItems,
+				{
+					eID: uuid(),
+					index: formulaEditorChemicalSectionItems.length,
+					symbol: symbol,
+					subscript: 1,
+					subscriptColor: "dracula.dracPurple",
+				},
+			] as ChemicalSectionItem[])
+			console.log(formulaEditorChemicalSectionItems)
 		} else {
+			console.log(eID)
+
+			console.log(formulaEditorChemicalSectionItems)
 			console.log("Remove element?")
 			setFormulaEditorChemicalSectionItems(
 				[...formulaEditorChemicalSectionItems].filter((item) => {
@@ -117,45 +74,62 @@ export const DraggableElement = ({
 				})
 			)
 		}
-		setPosition({
-			startX: 0,
-			startY: 0,
-			endX: 0,
-			endY: 0,
-		})
 	}
 
 	const handleMouseEnter = () => {
-		if (parent === "FormulaEditorChemicalSection") {
-			// console.log(`Enter ${symbol}`)
-			setSym("🚫")
-			console.log(eID)
-		} else {
+		if (parent === "FormulaEditorElementSection") {
 			setCol("dracula.dracRed")
+		} else if (parent === "FormulaEditorChemicalSection") {
+			setCol2("dracula.dracRed")
 		}
 	}
 	const handleMouseLeave = () => {
-		if (parent === "FormulaEditorChemicalSection") {
-			// console.log(`Leave ${symbol}`)
-			setSym(symbol)
-			setCol("purple")
-		} else {
+		if (parent === "FormulaEditorElementSection") {
 			setCol("dracula.dracFG")
+		} else if (parent === "FormulaEditorChemicalSection") {
+			setCol2("dracula.dracPurple")
 		}
 	}
 
 	const handleWheel = (e: React.WheelEvent<HTMLDivElement>) => {
 		if (e.deltaY < 0) {
 			// Increment
-			console.log(e.deltaY)
-			// let newItems = formulaEditorChemicalSectionItems
-
-			// setFormulaEditorChemicalSectionItems()
-
+			let newItems = [...formulaEditorChemicalSectionItems]
+			let updatedItem = formulaEditorChemicalSectionItems.find((item) => {
+				console.log(`${item.eID} === ${eID}`)
+				return item.eID === eID
+			})
+			if (updatedItem != undefined) {
+				newItems[
+					formulaEditorChemicalSectionItems.indexOf(updatedItem)
+				] = {
+					eID: eID,
+					index: index,
+					symbol: symbol as ChemicalSymbol,
+					subscript: subscript <= 98 ? subscript + 1 : 99,
+					subscriptColor: "dracula.dracPurple",
+				}
+			}
+			setFormulaEditorChemicalSectionItems(newItems)
 			return
 		}
 		// Decrement
-		console.log(e.deltaY)
+		let newItems = [...formulaEditorChemicalSectionItems]
+		let updatedItem = formulaEditorChemicalSectionItems.find((item) => {
+			console.log(`${item.eID} === ${eID}`)
+			return item.eID === eID
+		})
+		if (updatedItem != undefined) {
+			newItems[formulaEditorChemicalSectionItems.indexOf(updatedItem)] = {
+				eID: eID,
+				index: index,
+				symbol: symbol as ChemicalSymbol,
+				subscript: subscript >= 2 ? subscript - 1 : 1,
+				subscriptColor: "dracula.dracPurple",
+			}
+		}
+		setFormulaEditorChemicalSectionItems(newItems)
+		return
 	}
 
 	return (
@@ -169,7 +143,7 @@ export const DraggableElement = ({
 			color={
 				parent !== "FormulaEditorChemicalSection"
 					? "dracula.dracCurrentLine"
-					: "dracula.dracPurple"
+					: col2
 			}
 			w={`3vw`}
 			h={`3vw`}
@@ -218,11 +192,8 @@ export const DraggableElement = ({
 			userSelect={"none"}
 			onMouseEnter={handleMouseEnter}
 			onMouseLeave={handleMouseLeave}
-			onMouseDown={(e) => {
-				handleMouseDown(e)
-			}}
-			onMouseUp={(e) => {
-				handleMouseUp(e)
+			onClick={() => {
+				handleClick()
 			}}
 			onWheel={(e) => {
 				handleWheel(e)
@@ -242,13 +213,13 @@ export const DraggableElement = ({
 						}
 						color={
 							parent === "FormulaEditorChemicalSection"
-								? "dracula.dracPurple"
+								? col2
 								: "dracula.dracBG"
 						}
 						userSelect={"none"}
 						justifySelf="center"
 					>
-						{sym}
+						{symbol}
 					</Text>
 					<Text
 						fontSize={
@@ -256,21 +227,18 @@ export const DraggableElement = ({
 								? "2vw"
 								: "1.5vw"
 						}
-						color={subscriptColor}
+						color={col2}
 						opacity={subscript === 1 ? "0%" : "100%"}
 						userSelect={"none"}
 					>
-						{parent === "FormulaEditorChemicalSection" &&
-						sym === symbol ? (
-							<sub>
+						{parent === "FormulaEditorChemicalSection" ? (
+							<sub color={col2}>
 								{
 									formulaEditorChemicalSectionItems[index]
 										.subscript
 								}
 							</sub>
-						) : (
-							""
-						)}
+						) : null}
 					</Text>
 				</Flex>
 			</VStack>
