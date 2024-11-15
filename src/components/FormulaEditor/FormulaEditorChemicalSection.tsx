@@ -58,7 +58,7 @@ export const FormulaEditorChemicalSection: React.FC<
 				isHovered: false,
 				elements: elements,
 			},
-		]
+		] as ChemicalCompound[]
 
 		setReactants(newReactants)
 		let newElements = elements.map((element) => {
@@ -110,7 +110,7 @@ export const FormulaEditorChemicalSection: React.FC<
 				isHovered: false,
 				elements: elements,
 			},
-		]
+		] as ChemicalCompound[]
 
 		setProducts(newProducts)
 
@@ -200,6 +200,7 @@ export const FormulaEditorChemicalSection: React.FC<
 										<DraggableElement
 											symbol={item.symbol}
 											id={uuid()}
+											eID={uuid()}
 											key={uuid()}
 											index={index}
 											parent={
@@ -210,6 +211,7 @@ export const FormulaEditorChemicalSection: React.FC<
 													index
 												].subscript
 											}
+											subscriptColor="dracula.dracPurple"
 										/>
 										<ChemicalElementEditorButton
 											isUpArrow={false}

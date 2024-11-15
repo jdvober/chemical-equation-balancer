@@ -2,25 +2,20 @@ import React from "react"
 import { v4 as uuid } from "uuid"
 
 import { Box, Flex, HStack, Spacer, Text } from "@chakra-ui/react"
-
-import { useMainStore } from "../../stores/MainStore.ts"
-import { ChemicalCompound } from "./ChemicalCompound/ChemicalCompound.tsx"
+import { useMainStore } from "../../stores/MainStore"
+import { ChemicalCompound } from "./ChemicalCompound/ChemicalCompound"
 import { Coefficient } from "./Coefficient/Coefficient"
 
 // If no values, use this:
-type FormulaProps = Record<string, never>
+type BalancerFormulaProps = Record<string, never>
 // If values, fill in the object below
-// type FormulaProps = {}
+//type BalancerFormulaProps = {}
 
-export const Formula: React.FC<FormulaProps> = () => {
+export const BalancerFormula: React.FC<BalancerFormulaProps> = () => {
 	const formula = useMainStore((state) => state.formula)
 	const formulaHeightVH = useMainStore((state) => state.formulaHeightVH)
-	const editFormulaDrawerActive = useMainStore(
-		(state) => state.editFormulaDrawerActive
-	)
-
-	if (!editFormulaDrawerActive) {
-		return (
+	return (
+		<Box className="BalancerFormula">
 			<Flex
 				w="90vw"
 				border={`1px solid #44475a`}
@@ -106,8 +101,6 @@ export const Formula: React.FC<FormulaProps> = () => {
 				<Spacer />
 				<Spacer />
 			</Flex>
-		)
-	} else {
-		return null
-	}
+		</Box>
+	)
 }
