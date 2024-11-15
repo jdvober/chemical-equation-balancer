@@ -139,7 +139,6 @@ export const CalculateCountList = ( formula: ChemicalFormula ) => {
 		formula.reactants.forEach( ( reactant ) => {
 			reactant.elements.forEach( ( reactantElement ) => {
 				if ( reactantElement.symbol === countListElement.symbol ) {
-					console.log( `coefficient: ${ reactant.coefficient }` )
 					numOfElementPresentReactants += reactantElement.subscript * reactant.coefficient
 				}
 			} )

@@ -1,6 +1,7 @@
 * {
 	scrollbar-width: thin;
 	scrollbar-color: transparent var(--primary);
+	user-select: none;
 }
 
 *::-webkit-scrollbar {

@@ -1,5 +1,6 @@
 import { create } from "zustand"
 // import { persist } from "zustand/middleware"
+import { v4 as uuid } from "uuid"
 import { immer } from "zustand/middleware/immer"
 
 type State = {
@@ -50,7 +51,7 @@ export const useMainStore = create<State & Action>()(
 				coefficient: 1,
 				elements: [
 					{
-
+						eID: uuid(),
 						index: 0,
 						symbol: "H",
 						subscript: 2
@@ -64,6 +65,7 @@ export const useMainStore = create<State & Action>()(
 				elements: [
 					{
 						index: 0,
+						eID: uuid(),
 						symbol: "O",
 						subscript: 2
 					}
@@ -78,11 +80,13 @@ export const useMainStore = create<State & Action>()(
 					elements: [
 						{
 							index: 0,
+							eID: uuid(),
 							symbol: "H",
 							subscript: 2
 						},
 						{
 							index: 1,
+							eID: uuid(),
 							symbol: "O",
 							subscript: 1
 						}
@@ -396,7 +400,6 @@ export const useMainStore = create<State & Action>()(
 			state.formula.products = newProducts
 		} ),
 		setCountList: ( newCountList: any ) => set( ( state ) => {
-			// console.log( `Updating ${ formulaSection } Count to ${ newCountList }` )
 			state.countList = newCountList
 		} ),
 
@@ -407,11 +410,9 @@ export const useMainStore = create<State & Action>()(
 			// Update the coefficient
 			if ( formulaSection === "REACTANTS" ) {
 				state.formula.reactants[ index ].coefficient = newCoefficient
-				console.log( `Updating Coefficient ${ index } of Reactants to ${ newCoefficient }` )
 
 			} else if ( formulaSection === "PRODUCTS" ) {
 
-				console.log( `Updating Coefficient ${ index } of Products to ${ newCoefficient }` )
 				state.formula.products[ index ].coefficient = newCoefficient
 			}
 		} ),

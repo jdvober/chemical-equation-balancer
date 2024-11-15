@@ -1,7 +1,13 @@
 import "./App.css"
 
 import { Center, HStack, VStack } from "@chakra-ui/react"
-import { DndContext, rectIntersection } from "@dnd-kit/core"
+import {
+	DndContext,
+	PointerSensor,
+	rectIntersection,
+	useSensor,
+	useSensors,
+} from "@dnd-kit/core"
 
 import { ChemicalDisplay } from "./components/ChemicalDisplay/ChemicalDisplay.js"
 import { Count } from "./components/Count/Count.js"
@@ -16,10 +22,17 @@ export const App = () => {
 	const setFormulaEditorChemicalSectionItems = useMainStore(
 		(state) => state.setFormulaEditorChemicalSectionItems
 	)
-
+	const sensors = useSensors(
+		useSensor(PointerSensor, {
+			activationConstraint: {
+				distance: 8,
+			},
+		})
+	)
 	return (
 		<Center fontSize="5xl">
 			<DndContext
+				sensors={sensors}
 				collisionDetection={rectIntersection}
 				onDragEnd={(e) => {
 					const container = e.over?.id
@@ -28,7 +41,6 @@ export const App = () => {
 					const index = formulaEditorChemicalSectionItems.length ?? 0
 					const parent = e.active.data.current?.parent ?? "ToDo"
 					if (container === "FormulaEditorChemicalSection") {
-						console.log(`Adding ${symbol} to ${container}`)
 						setFormulaEditorChemicalSectionItems([
 							...formulaEditorChemicalSectionItems,
 							{
@@ -40,9 +52,6 @@ export const App = () => {
 						])
 					}
 					if (parent === "FormulaEditorChemicalSection") {
-						console.log(
-							`Removing ${symbol} from FormulaEditorChemicalSection`
-						)
 						setFormulaEditorChemicalSectionItems([
 							...formulaEditorChemicalSectionItems.slice(
 								0,
@@ -53,8 +62,6 @@ export const App = () => {
 							),
 						])
 					}
-					console.log(index)
-					console.log(formulaEditorChemicalSectionItems)
 				}}
 			>
 				<VStack>

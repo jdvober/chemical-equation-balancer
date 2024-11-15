@@ -20,17 +20,35 @@ export const FormulaEditorElementSection: React.FC<
 						return (
 							<HStack key={uuid()}>
 								{period.map((symbol, i) => {
+									if (symbol != "") {
+										return (
+											<DraggableElement
+												symbol={symbol}
+												index={i}
+												id={uuid()}
+												eID={uuid()}
+												parent={
+													"FormulaEditorElementSection"
+												}
+												subscript={0}
+												subscriptColor="dracula.dracPurple"
+												key={uuid()}
+											/>
+										)
+									}
+
 									return (
-										<DraggableElement
-											symbol={symbol}
-											id={uuid()}
-											index={i}
-											parent={
-												"FormulaEditorElementSection"
-											}
-											subscript={0}
+										<Box
 											key={uuid()}
-										/>
+											padding="3"
+											w={`3vw`}
+											h={`3vw`}
+											mb=".25vw"
+											ml=".125vw"
+											mr={".125vw"}
+											borderRadius="8"
+											border={"2px solid gray.500"}
+										></Box>
 									)
 								})}
 							</HStack>

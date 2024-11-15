@@ -24,6 +24,7 @@ type ElementListElement = {
 type ElementCountList = { symbol: ChemicalSymbol, reactantCount: number, productCount: numher }[]
 
 type ChemicalElement = {
+	eID: string
 	index: number
 	symbol: ChemicalSymbol
 	subscript: number
