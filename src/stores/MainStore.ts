@@ -15,7 +15,7 @@ type State = {
 		productCount: number
 	}[],
 	editFormulaSection: FormulaSection,
-	editFormulaDrawerActive: boolean,
+	formulaEditorActive: boolean,
 	elements: ( ChemicalSymbol | "" )[][]
 	subscriptColor: "dracula.dracRed" | "dracula.dracGreen" | "dracula.dracPurple"
 	formulaEditorChemicalSectionItems: ChemicalSectionItem[]
@@ -31,7 +31,7 @@ type Action = {
 	setCoefficient: ( formulaSection: FormulaSection, index: number, newCoefficient: number ) => void,
 	setCountList: ( newCountList: ElementCountList ) => void,
 	setEditFormulaSection: ( newFormulaSection: FormulaSection ) => void
-	setEditFormulaDrawerActive: ( isActive: boolean ) => void,
+	setFormulaEditorActive: ( isActive: boolean ) => void,
 	setChemicalSelectionItemSubscriptColor: ( newSubscriptColor: "dracula.dracRed" | "dracula.dracGreen" | "dracula.dracPurple", index: number
 	) => void
 	setFormulaEditorChemicalSectionItems: ( newFormulaEditorChemicalSectionItems: ChemicalSectionItem[] ) => void
@@ -219,7 +219,7 @@ export const useMainStore = create<State & Action>()(
 		],
 
 		editFormulaSection: "REACTANTS",
-		editFormulaDrawerActive: false,
+		formulaEditorActive: false,
 		elements: [
 			[ "H",
 				"",
@@ -419,9 +419,9 @@ export const useMainStore = create<State & Action>()(
 		setEditFormulaSection: ( newFormulaSection ) => set( ( state ) => {
 			state.editFormulaSection = newFormulaSection
 		} ),
-		setEditFormulaDrawerActive: ( isActive ) =>
+		setFormulaEditorActive: ( isActive ) =>
 			set( ( state ) => {
-				state.editFormulaDrawerActive = isActive
+				state.formulaEditorActive = isActive
 			} ),
 		setChemicalSelectionItemSubscriptColor: ( newSubscriptColor, index ) => set( ( state ) => {
 			state.formulaEditorChemicalSectionItems[ index ].subscriptColor = newSubscriptColor

@@ -1,7 +1,7 @@
 import { v4 as uuid } from "uuid"
 import "./App.css"
 
-import { Center, HStack, VStack } from "@chakra-ui/react"
+import { Center } from "@chakra-ui/react"
 import {
 	DndContext,
 	MouseSensor,
@@ -9,11 +9,8 @@ import {
 	useSensor,
 	useSensors,
 } from "@dnd-kit/core"
+import { Balancer } from "./components/Balancer"
 
-import { ChemicalDisplay } from "./components/ChemicalDisplay/ChemicalDisplay.js"
-import { Count } from "./components/Count/Count.js"
-import { Formula } from "./components/Formula/Formula"
-import { FormulaEditorToggleButton } from "./components/FormulaEditor/FormulaEditorToggleButton.js"
 import { useMainStore } from "./stores/MainStore"
 
 export const App = () => {
@@ -31,14 +28,13 @@ export const App = () => {
 		})
 	)
 	return (
-		<Center fontSize="5xl">
+		<Center fontSize="5xl" bg="dracula.dracBG">
 			<DndContext
 				sensors={sensors}
 				collisionDetection={rectIntersection}
 				onDragEnd={(e) => {
 					const container = e.over?.id
 					const symbol = e.active.data.current?.symbol ?? ""
-					// const index = e.active.data.current?.index ?? 0
 					const index = formulaEditorChemicalSectionItems.length ?? 0
 					const parent = e.active.data.current?.parent ?? "ToDo"
 					if (container === "FormulaEditorChemicalSection") {
@@ -66,14 +62,7 @@ export const App = () => {
 					}
 				}}
 			>
-				<VStack>
-					<HStack>
-						<Formula />
-						<FormulaEditorToggleButton />
-					</HStack>
-					<Count />
-					<ChemicalDisplay />
-				</VStack>
+				<Balancer />
 			</DndContext>
 		</Center>
 	)

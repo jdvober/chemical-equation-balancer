@@ -1,19 +1,19 @@
-import React from "react"
+import React, { useState } from "react"
 
 import {
 	Box,
+	Button,
 	DrawerBody,
-	DrawerCloseButton,
 	DrawerContent,
 	DrawerHeader,
-	DrawerOverlay,
 	Spacer,
 	Stack,
-	Switch,
 	Text,
-	Tooltip,
 } from "@chakra-ui/react"
 
+import { DrawerRoot } from "@/components/ui/drawer"
+import { Switch } from "@/components/ui/switch"
+import { Tooltip } from "@/components/ui/tooltip"
 import { useMainStore } from "../../stores/MainStore"
 import { FormulaEditor } from "./FormulaEditor"
 
@@ -28,7 +28,7 @@ export const FormulaEditorDrawer: React.FC<FormulaEditorDrawerProps> = () => {
 	)
 	const editFormulaSection = useMainStore((state) => state.editFormulaSection)
 	const setEditFormulaDrawerActive = useMainStore(
-		(state) => state.setEditFormulaDrawerActive
+		(state) => state.setFormulaEditorActive
 	)
 	const countList = useMainStore((state) => state.countList)
 	const setReactantAndProductElementListsMatch = useMainStore(
@@ -69,70 +69,79 @@ export const FormulaEditorDrawer: React.FC<FormulaEditorDrawerProps> = () => {
 		return true
 	}
 
+	const [open, setOpen] = useState(false)
+
 	return (
 		<Box>
-			<DrawerOverlay />
-			<DrawerContent
-				h="99vh"
-				w="96vw"
-				bgColor={"dracula.dracBG"}
-				border={`2px solid #FFB86C`}
-				borderRadius={"1vw"}
-				opacity={"95%"}
-				ml="2vw"
+			<DrawerRoot
+				open={open}
+				onOpenChange={(e) => {
+					setOpen(e.open)
+				}}
 			>
-				<DrawerHeader borderBottomWidth="1px" color="dracula.dracFG">
-					<Stack direction="row">
-						<Text userSelect={"none"}>Edit Formula</Text>
-						<Spacer />
-						<Stack direction={"row"} alignSelf={"center"}>
-							<Text userSelect={"none"}>Reactants</Text>
-							<Switch
-								variant="neutral"
-								size="lg"
-								onChange={() =>
-									setEditFormulaSection(
-										editFormulaSection === "REACTANTS"
-											? "PRODUCTS"
-											: "REACTANTS"
-									)
-								}
-							/>
-							<Text userSelect={"none"}>Products</Text>
-						</Stack>
-						<Spacer />
-						{/* Check to make sure there isn't a situation where an element exists on one side of the equation, but not the
+				<DrawerContent
+					h="99vh"
+					w="96vw"
+					bgColor={"dracula.dracBG"}
+					border={`2px solid #FFB86C`}
+					borderRadius={"1vw"}
+					opacity={"95%"}
+					ml="2vw"
+				>
+					<DrawerHeader
+						borderBottomWidth="1px"
+						color="dracula.dracFG"
+					>
+						<Stack direction="row">
+							<Text userSelect={"none"}>Edit Formula</Text>
+							<Spacer />
+							<Stack direction={"row"} alignSelf={"center"}>
+								<Text userSelect={"none"}>Reactants</Text>
+								<Switch
+									size="lg"
+									onChange={() =>
+										setEditFormulaSection(
+											editFormulaSection === "REACTANTS"
+												? "PRODUCTS"
+												: "REACTANTS"
+										)
+									}
+								/>
+								<Text userSelect={"none"}>Products</Text>
+							</Stack>
+							<Spacer />
+							{/* Check to make sure there isn't a situation where an element exists on one side of the equation, but not the
 						other. It will crash if it tries to compare two arrays
 						of different lengths. */}
-						<Box w="25vw">
-							{reactantsProductsContainSameElements() === true ? (
-								<DrawerCloseButton
-									onClick={() => {
-										setEditFormulaDrawerActive(false)
-									}}
-								/>
-							) : (
-								<Tooltip
-									content="Elements on both sides of the → must match!"
-									userSelect={"none"}
-								>
-									<Text
-										color={"dracRed"}
-										fontSize={"medium"}
-										userSelect={"none"}
-									>
-										Elements on both sides of the → must
-										match! 🚫
-									</Text>
-								</Tooltip>
-							)}
-						</Box>
-					</Stack>
-				</DrawerHeader>
-				<DrawerBody>
-					<FormulaEditor />
-				</DrawerBody>
-			</DrawerContent>
+							<Box w="25vw">
+								{reactantsProductsContainSameElements() ===
+								true ? (
+									<Button
+										onClick={() => {
+											setEditFormulaDrawerActive(false)
+											setOpen(true)
+										}}
+									/>
+								) : (
+									<Tooltip content="Elements on both sides of the → must match!">
+										<Text
+											color={"dracRed"}
+											fontSize={"medium"}
+											userSelect={"none"}
+										>
+											Elements on both sides of the → must
+											match! 🚫
+										</Text>
+									</Tooltip>
+								)}
+							</Box>
+						</Stack>
+					</DrawerHeader>
+					<DrawerBody>
+						<FormulaEditor />
+					</DrawerBody>
+				</DrawerContent>
+			</DrawerRoot>
 		</Box>
 	)
 }

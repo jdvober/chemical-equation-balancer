@@ -62,6 +62,7 @@ export const Coefficient: React.FC<CoefficientProps> = ({
 		// Update reactant count list
 		setCountList(newCountList)
 	}
+
 	return (
 		<VStack justify="start" w={"100%"}>
 			<Button

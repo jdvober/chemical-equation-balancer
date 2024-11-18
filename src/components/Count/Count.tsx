@@ -13,7 +13,7 @@ type CountProps = Record<string, never>
 
 export const Count: React.FC<CountProps> = () => {
 	const editFormulaDrawerActive = useMainStore(
-		(state) => state.editFormulaDrawerActive
+		(state) => state.formulaEditorActive
 	)
 
 	const showBorders = false as boolean

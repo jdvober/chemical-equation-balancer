@@ -4,6 +4,7 @@ Put Global Functions you want to be available everywhere in this file.
 
 */
 
+
 // export const CalculateCountList = ( formula: ChemicalFormula, formulaSection: FormulaSection ) => {
 export const CalculateCountList = ( formula: ChemicalFormula ) => {
 	let countList = [

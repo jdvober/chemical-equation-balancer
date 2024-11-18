@@ -1,10 +1,18 @@
-import React from "react"
+import React, { useState } from "react"
 import { RxReset } from "react-icons/rx"
 import { TiChevronRightOutline } from "react-icons/ti"
 import { v4 as uuid } from "uuid"
 
-import { Box, Button, Flex, Spacer, VStack } from "@chakra-ui/react"
-
+import { Switch } from "@/components/ui/switch"
+import {
+	Box,
+	Button,
+	Flex,
+	HStack,
+	Spacer,
+	Text,
+	VStack,
+} from "@chakra-ui/react"
 import { useMainStore } from "../../stores/MainStore"
 import { dracOrange, dracRed } from "../../vars/GlobalVars.ts"
 import { ChemicalDropZone } from "./ChemicalDropZone"
@@ -39,6 +47,7 @@ export const FormulaEditorChemicalSection: React.FC<
 	const reactantAndProductElementListsMatch = useMainStore(
 		(state) => state.reactantAndProductElementListsMatch
 	)
+	const [useParens, setUseParens] = useState(false)
 
 	const addNewReactants = () => {
 		let newReactants = formula.reactants
@@ -147,7 +156,7 @@ export const FormulaEditorChemicalSection: React.FC<
 	}
 
 	return (
-		<Box>
+		<Box w="95vw">
 			<Flex
 				flex="3"
 				padding="5"
@@ -166,11 +175,11 @@ export const FormulaEditorChemicalSection: React.FC<
 					flex="1"
 					padding="1vh"
 					flexDirection="row"
-					minW="20vw"
-					w="auto"
-					minH="15vh"
+					// minW="20vw"
+					w="95vw"
+					// minH="15vh"
 					h="20vh"
-					maxW="75vw"
+					// maxW="75vw"
 					align={"center"}
 					pl="2vw"
 					pr="2vw"
@@ -228,10 +237,29 @@ export const FormulaEditorChemicalSection: React.FC<
 							/>
 						) : null}
 						<VStack h="100%" alignSelf="center">
+							<HStack>
+								<Switch
+									checked={useParens}
+									variant="solid"
+									colorPalette={"dracula.dracOrange"}
+									onCheckedChange={(e) => {
+										setUseParens(e.checked)
+									}}
+									ml="2vw"
+									w="3vw"
+									h="5vh"
+								></Switch>
+
+								<Text>
+									( )<sub>x</sub>
+								</Text>
+							</HStack>
 							<Button
-								mt="1vh"
-								mb="1vh"
+								// mt="1vh"
+								// mb="1vh"
 								ml="2vw"
+								w="5vw"
+								h="5vh"
 								fontSize={"2rem"}
 								alignSelf={"center"}
 								onClick={() => {
@@ -246,10 +274,12 @@ export const FormulaEditorChemicalSection: React.FC<
 								<RxReset />
 							</Button>
 							<Button
-								mt="1vh"
-								mb="1vh"
+								// mt="1vh"
+								// mb="1vh"
 								ml="2vw"
 								fontSize={"2rem"}
+								w="5vw"
+								h="5vh"
 								onClick={() => {
 									editFormulaSection === "REACTANTS"
 										? addNewReactants()

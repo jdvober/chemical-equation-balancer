@@ -15,9 +15,6 @@ type ChemicalDisplayProps = Record<string, never>
 export const ChemicalDisplay: React.FC<ChemicalDisplayProps> = () => {
 	const formula = useMainStore((state) => state.formula)
 	const showBorders = false as boolean
-	const editFormulaDrawerActive = useMainStore(
-		(state) => state.editFormulaDrawerActive
-	)
 
 	const makeChemicalArr = (element: ChemicalElement) => {
 		const chemArr: ChemicalSymbol[] = []
@@ -50,7 +47,7 @@ export const ChemicalDisplay: React.FC<ChemicalDisplayProps> = () => {
 					minH="15vh"
 					w="auto"
 				>
-					// Amount Text
+					{/* Amount Text*/}
 					<HStack color="dracula.dracFG" key={uuid()} maxW="30vw">
 						<Text color="dracula.dracCyan">
 							{`${compound.coefficient}`}
@@ -65,7 +62,7 @@ export const ChemicalDisplay: React.FC<ChemicalDisplayProps> = () => {
 							includeSymbols={false}
 						/>
 					</HStack>
-					// Atoms
+					{/* Atoms*/}
 					{makeChemicalArrays(compound).map((chemicalArray) => {
 						return (
 							<HStack
@@ -97,19 +94,15 @@ export const ChemicalDisplay: React.FC<ChemicalDisplayProps> = () => {
 		})
 	}
 
-	if (!editFormulaDrawerActive) {
-		return (
-			<Flex
-				w="90vw"
-				border={showBorders === true ? "1px solid green" : ""}
-				maxH="50vh"
-			>
-				<HStack>{displayList(formula.reactants)}</HStack>
-				<Spacer />
-				<HStack>{displayList(formula.products)}</HStack>
-			</Flex>
-		)
-	} else {
-		return null
-	}
+	return (
+		<Flex
+			w="90vw"
+			border={showBorders === true ? "1px solid green" : ""}
+			maxH="50vh"
+		>
+			<HStack>{displayList(formula.reactants)}</HStack>
+			<Spacer />
+			<HStack>{displayList(formula.products)}</HStack>
+		</Flex>
+	)
 }

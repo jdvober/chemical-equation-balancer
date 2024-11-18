@@ -30,7 +30,7 @@ export const Colors = {
 		dracRed: "#ff5555",
 		dracYellow: "#f1fa8c",
 	},
-	mass: {
+	massillon: {
 		orange: "#fe6a00",
 	},
 }

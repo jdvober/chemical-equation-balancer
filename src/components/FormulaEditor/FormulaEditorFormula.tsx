@@ -1,7 +1,7 @@
 import React from "react"
 import { v4 as uuid } from "uuid"
 
-import { Box, GridItem, HStack, Text, Tooltip } from "@chakra-ui/react"
+import { Box, GridItem, HStack, Text } from "@chakra-ui/react"
 
 import { CalculateCountList } from "../../functions/GlobalFunctions"
 import { useMainStore } from "../../stores/MainStore"
@@ -18,24 +18,6 @@ export const FormulaEditorFormula: React.FC<FormulaEditorFormulaProps> = () => {
 	const setProducts = useMainStore((state) => state.setProducts)
 	const setHoverStatus = useMainStore((state) => state.setHoverStatus)
 	const setCountList = useMainStore((state) => state.setCountList)
-
-	const getTooltipLabel = (compound: ChemicalCompound) => {
-		return (
-			<HStack>
-				<Text>Click To Delete</Text>
-				{compound.elements.map((elem) => {
-					return (
-						<Text key={uuid()}>
-							{elem.symbol}
-							<sub>
-								{elem.subscript >= 2 ? elem.subscript : ""}
-							</sub>
-						</Text>
-					)
-				})}
-			</HStack>
-		)
-	}
 
 	const removeReactant = (
 		formula: ChemicalFormula,
@@ -65,50 +47,45 @@ export const FormulaEditorFormula: React.FC<FormulaEditorFormulaProps> = () => {
 	}
 
 	return (
-		<HStack className="FormulaEditorFormula">
+		<HStack>
 			{formula.reactants.map((reactant, reactantIndex) => {
 				return (
 					<GridItem key={uuid()}>
 						<HStack alignItems={"center"} key={uuid()}>
-							<Tooltip
-								label={getTooltipLabel(reactant)}
+							<Box
 								key={uuid()}
+								className="compound-container"
+								onClick={() => {
+									removeReactant(formula, reactantIndex)
+								}}
+								onMouseEnter={() =>
+									setHoverStatus(
+										"REACTANTS",
+										reactantIndex,
+										true
+									)
+								}
+								onMouseLeave={() =>
+									setHoverStatus(
+										"REACTANTS",
+										reactantIndex,
+										false
+									)
+								}
 							>
-								<Box
+								<ChemicalCompound
 									key={uuid()}
-									className="compound-container"
-									onClick={() => {
-										removeReactant(formula, reactantIndex)
-									}}
-									onMouseEnter={() =>
-										setHoverStatus(
-											"REACTANTS",
-											reactantIndex,
-											true
-										)
+									compound={reactant}
+									formulaSection="REACTANTS"
+									index={reactantIndex}
+									includeSymbols={true}
+									isHovered={
+										formula.reactants[reactantIndex]
+											.isHovered
 									}
-									onMouseLeave={() =>
-										setHoverStatus(
-											"REACTANTS",
-											reactantIndex,
-											false
-										)
-									}
-								>
-									<ChemicalCompound
-										key={uuid()}
-										compound={reactant}
-										formulaSection="REACTANTS"
-										index={reactantIndex}
-										includeSymbols={true}
-										isHovered={
-											formula.reactants[reactantIndex]
-												.isHovered
-										}
-										fontSizeInVH={4}
-									/>
-								</Box>
-							</Tooltip>
+									fontSizeInVH={4}
+								/>
+							</Box>
 						</HStack>
 					</GridItem>
 				)
@@ -118,49 +95,42 @@ export const FormulaEditorFormula: React.FC<FormulaEditorFormulaProps> = () => {
 			</Text>
 
 			{formula.products.map((product, productIndex) => {
-				// const [hov, setHov] = useState(false)
 				return (
 					<GridItem key={uuid()}>
 						<HStack alignItems={"center"} key={uuid()}>
-							<Tooltip
-								label={getTooltipLabel(product)}
+							<Box
+								className="compound-container"
+								onClick={() => {
+									removeProduct(productIndex)
+								}}
+								onMouseEnter={() =>
+									setHoverStatus(
+										"PRODUCTS",
+										productIndex,
+										true
+									)
+								}
+								onMouseLeave={() =>
+									setHoverStatus(
+										"PRODUCTS",
+										productIndex,
+										false
+									)
+								}
 								key={uuid()}
 							>
-								<Box
-									className="compound-container"
-									onClick={() => {
-										removeProduct(productIndex)
-									}}
-									onMouseEnter={() =>
-										setHoverStatus(
-											"PRODUCTS",
-											productIndex,
-											true
-										)
+								<ChemicalCompound
+									compound={product}
+									formulaSection="PRODUCTS"
+									index={productIndex}
+									includeSymbols={true}
+									isHovered={
+										formula.products[productIndex].isHovered
 									}
-									onMouseLeave={() =>
-										setHoverStatus(
-											"PRODUCTS",
-											productIndex,
-											false
-										)
-									}
+									fontSizeInVH={4}
 									key={uuid()}
-								>
-									<ChemicalCompound
-										compound={product}
-										formulaSection="PRODUCTS"
-										index={productIndex}
-										includeSymbols={true}
-										isHovered={
-											formula.products[productIndex]
-												.isHovered
-										}
-										fontSizeInVH={4}
-										key={uuid()}
-									/>
-								</Box>
-							</Tooltip>
+								/>
+							</Box>
 						</HStack>
 					</GridItem>
 				)
