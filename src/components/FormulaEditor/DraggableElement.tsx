@@ -14,7 +14,6 @@ export const DraggableElement = ({
 	symbol,
 	parent,
 	subscript,
-	subscriptColor,
 }: {
 	id: string
 	eID: string
@@ -42,11 +41,11 @@ export const DraggableElement = ({
 	const [col2, setCol2] = useState("dracula.dracPurple")
 
 	const formulaEditorChemicalSectionItems = useMainStore(
-		(state) => state.formulaEditorChemicalSectionItems
+		(state) => state.editorChemicalSectionItems
 	)
 
 	const setFormulaEditorChemicalSectionItems = useMainStore(
-		(state) => state.setFormulaEditorChemicalSectionItems
+		(state) => state.setEditorChemicalSectionItems
 	)
 
 	const handleClick = () => {
@@ -174,7 +173,7 @@ export const DraggableElement = ({
 			}
 			align="center"
 			justify={"center"}
-			borderRadius="8"
+			borderRadius="lg"
 			border={
 				symbol === "" || parent === "FormulaEditorChemicalSection"
 					? ""

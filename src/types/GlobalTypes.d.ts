@@ -38,9 +38,16 @@ interface ChemicalSectionItem extends ChemicalElement {
 type ChemicalCompound = {
 	coefficient: number,
 	elements: ChemicalElement[],
+	parens: Parenthesis[],
 	formulaSection: FormulaSection,
 	isHovered: boolean
 }
+type Parenthesis =
+	{
+		elementUUIDs: string[],
+		subscript: number
+	}
+
 
 type ChemicalReactant = ChemicalCompound
 type ChemicalProduct = ChemicalCompound

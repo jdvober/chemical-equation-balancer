@@ -1,4 +1,5 @@
 import React from "react"
+import "../App.css"
 
 import { ChemicalDisplay } from "@/components/ChemicalDisplay/ChemicalDisplay"
 import { Count } from "@/components/Count/Count"

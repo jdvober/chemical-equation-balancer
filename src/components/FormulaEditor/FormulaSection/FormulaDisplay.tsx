@@ -3,16 +3,16 @@ import { v4 as uuid } from "uuid"
 
 import { Box, GridItem, HStack, Text } from "@chakra-ui/react"
 
-import { CalculateCountList } from "../../functions/GlobalFunctions"
-import { useMainStore } from "../../stores/MainStore"
-import { ChemicalCompound } from "../Formula/ChemicalCompound/ChemicalCompound"
+import { CalculateCountList } from "../../../functions/GlobalFunctions"
+import { useMainStore } from "../../../stores/MainStore"
+import { ChemicalCompound } from "../../Formula/ChemicalCompound/ChemicalCompound"
 
 // If no values, use this:
-type FormulaEditorFormulaProps = Record<string, never>
+type EditorFormulaProps = Record<string, never>
 // If values, fill in the object below
 //type FormulaProps = {}
 
-export const FormulaEditorFormula: React.FC<FormulaEditorFormulaProps> = () => {
+export const EditorFormula: React.FC<EditorFormulaProps> = () => {
 	const formula = useMainStore((state) => state.formula)
 	const setReactants = useMainStore((state) => state.setReactants)
 	const setProducts = useMainStore((state) => state.setProducts)
@@ -47,7 +47,7 @@ export const FormulaEditorFormula: React.FC<FormulaEditorFormulaProps> = () => {
 	}
 
 	return (
-		<HStack>
+		<HStack pt="1vh" pb="1vh" alignSelf={"center"} ml="2vw">
 			{formula.reactants.map((reactant, reactantIndex) => {
 				return (
 					<GridItem key={uuid()}>

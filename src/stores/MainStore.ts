@@ -18,7 +18,7 @@ type State = {
 	formulaEditorActive: boolean,
 	elements: ( ChemicalSymbol | "" )[][]
 	subscriptColor: "dracula.dracRed" | "dracula.dracGreen" | "dracula.dracPurple"
-	formulaEditorChemicalSectionItems: ChemicalSectionItem[]
+	editorChemicalSectionItems: ChemicalSectionItem[]
 	reactantAndProductElementListsMatch: boolean,
 
 
@@ -34,8 +34,8 @@ type Action = {
 	setFormulaEditorActive: ( isActive: boolean ) => void,
 	setChemicalSelectionItemSubscriptColor: ( newSubscriptColor: "dracula.dracRed" | "dracula.dracGreen" | "dracula.dracPurple", index: number
 	) => void
-	setFormulaEditorChemicalSectionItems: ( newFormulaEditorChemicalSectionItems: ChemicalSectionItem[] ) => void
-	setFormulaEditorChemicalSectionItemSubscript: ( newSubscript: number, index: number ) => void
+	setEditorChemicalSectionItems: ( newFormulaEditorChemicalSectionItems: ChemicalSectionItem[] ) => void
+	setEditorChemicalSectionItemSubscript: ( newSubscript: number, index: number ) => void
 	setHoverStatus: ( formulaSection: FormulaSection, index: number, newHoverStatus: boolean ) => void
 	setReactantAndProductElementListsMatch: ( newBoolean: boolean ) => void
 }
@@ -57,6 +57,7 @@ export const useMainStore = create<State & Action>()(
 						subscript: 2
 					}
 				],
+				parens: [],
 				formulaSection: "REACTANTS",
 				isHovered: false
 			},
@@ -70,6 +71,7 @@ export const useMainStore = create<State & Action>()(
 						subscript: 2
 					}
 				],
+				parens: [],
 				formulaSection: "REACTANTS",
 				isHovered: false
 			} ],
@@ -91,6 +93,7 @@ export const useMainStore = create<State & Action>()(
 							subscript: 1
 						}
 					],
+					parens: [],
 					formulaSection: "PRODUCTS",
 					isHovered: false
 				}
@@ -379,7 +382,7 @@ export const useMainStore = create<State & Action>()(
 				"Lr" ],
 		],
 		subscriptColor: "dracula.dracPurple",
-		formulaEditorChemicalSectionItems: [],
+		editorChemicalSectionItems: [],
 		reactantAndProductElementListsMatch: false,
 
 		////////////////////////////////////////////////////
@@ -424,13 +427,13 @@ export const useMainStore = create<State & Action>()(
 				state.formulaEditorActive = isActive
 			} ),
 		setChemicalSelectionItemSubscriptColor: ( newSubscriptColor, index ) => set( ( state ) => {
-			state.formulaEditorChemicalSectionItems[ index ].subscriptColor = newSubscriptColor
+			state.editorChemicalSectionItems[ index ].subscriptColor = newSubscriptColor
 		} ),
-		setFormulaEditorChemicalSectionItems: ( newFormulaEditorChemicalSectionItems ) => set( ( state ) => {
-			state.formulaEditorChemicalSectionItems = newFormulaEditorChemicalSectionItems
+		setEditorChemicalSectionItems: ( newFormulaEditorChemicalSectionItems ) => set( ( state ) => {
+			state.editorChemicalSectionItems = newFormulaEditorChemicalSectionItems
 		} ),
-		setFormulaEditorChemicalSectionItemSubscript: ( newSubscript, index ) => set( ( state ) => {
-			state.formulaEditorChemicalSectionItems[ index ].subscript = newSubscript
+		setEditorChemicalSectionItemSubscript: ( newSubscript, index ) => set( ( state ) => {
+			state.editorChemicalSectionItems[ index ].subscript = newSubscript
 		} ),
 		setHoverStatus: ( formulaSection, index, newFormulaStatus ) =>
 			set( ( state ) => {

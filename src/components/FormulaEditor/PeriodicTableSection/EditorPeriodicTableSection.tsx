@@ -3,13 +3,13 @@ import { v4 as uuid } from "uuid"
 
 import { Box, Flex, HStack, VStack } from "@chakra-ui/react"
 
-import { useMainStore } from "../../stores/MainStore"
-import { DraggableElement } from "./DraggableElement"
+import { useMainStore } from "../../../stores/MainStore"
+import { DraggableElement } from "../DraggableElement"
 
-type FormulaEditorElementSectionProps = {}
+type EditorPeriodicTableSectionProps = {}
 
-export const FormulaEditorElementSection: React.FC<
-	FormulaEditorElementSectionProps
+export const EditorPeriodicTableSection: React.FC<
+	EditorPeriodicTableSectionProps
 > = () => {
 	const elements = useMainStore((state) => state.elements)
 	return (
