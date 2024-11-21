@@ -1,7 +1,7 @@
 import React from "react"
 import { v4 as uuid } from "uuid"
 
-import { Flex } from "@chakra-ui/react"
+import { Box, Flex, HStack, Text } from "@chakra-ui/react"
 
 // If values, fill in the object below
 //type ChemicalDisplayProps = {}
@@ -14,77 +14,129 @@ type ChemicalDisplayProps = Record<string, never>
 export const ChemicalDisplay: React.FC<ChemicalDisplayProps> = () => {
 	const formula = useMainStore((state) => state.formula)
 
-	const makeElementList = (formulaSection: FormulaSection) => {
-		let elementList = [] as ChemicalSymbol[]
-		if (formulaSection === "REACTANTS") {
-			formula.reactants.forEach((reactant) => {
-				reactant.chunks.forEach((chunk) => {
-					chunk.elements.forEach((element) => {
-						for (
-							let s = 0;
-							s <
-							reactant.coefficient *
-								(chunk.parenthesesSubscript === 0
-									? 1
-									: chunk.parenthesesSubscript) *
-								element.subscript;
-							s++
-						) {
-							elementList.push(element.symbol)
-						}
-					})
-				})
-			})
-			return elementList
-		}
-		formula.products.forEach((product) => {
-			product.chunks.forEach((chunk) => {
-				chunk.elements.forEach((element) => {
-					for (
-						let s = 0;
-						s <
-						product.coefficient *
-							(chunk.parenthesesSubscript === 0
-								? 1
-								: chunk.parenthesesSubscript) *
-							element.subscript;
-						s++
-					) {
-						elementList.push(element.symbol)
-					}
+	const getCompoundString = (compound: ChemicalCompound) => {
+		let symbolList = [] as { symbol: ChemicalSymbol; count: number }[]
+		compound.chunks.forEach((chunk) => {
+			chunk.elements.forEach((element) => {
+				symbolList.push({
+					symbol: element.symbol,
+					count: element.subscript,
 				})
 			})
 		})
-		return elementList
+		return symbolList
 	}
 
 	return (
-		<Flex className="ChemicalDisplay" dir="row">
-			{}
-			{makeElementList("REACTANTS").map((symbol) => {
-				return (
-					<AtomSVG
-						cirFill="white"
-						cirRadiusInVW={2.5}
-						cirStroke="black"
-						symbol={symbol}
-						textFill="red"
-						key={uuid()}
-					/>
-				)
-			})}
-			{makeElementList("PRODUCTS").map((symbol) => {
-				return (
-					<AtomSVG
-						cirFill="black"
-						cirRadiusInVW={2.5}
-						cirStroke="black"
-						symbol={symbol}
-						textFill="red"
-						key={uuid()}
-					/>
-				)
-			})}
+		<Flex w="95vw" justifyContent="space-evenly">
+			<Box>
+				{formula.reactants.map((reactant) => {
+					return (
+						<Flex dir="column">
+							<Text>{reactant.coefficient}</Text>
+							<Text ml=".25em" mr=".25em">
+								of
+							</Text>
+							{getCompoundString(reactant).map((compound) => {
+								return (
+									<>
+										<Text>{compound.symbol}</Text>
+										<Text>
+											{compound.count > 1 ? (
+												<sub>{compound.count}</sub>
+											) : null}
+										</Text>
+									</>
+								)
+							})}
+							{getCompoundString(reactant).map((compound) => {
+								return (
+									<>
+										{/* Atoms */}
+										<HStack ml="1vw">
+											{Array(compound.count)
+												.fill(0)
+												.map(() => {
+													return (
+														<AtomSVG
+															cirFill="black"
+															cirRadiusInVW={2.5}
+															cirStroke="black"
+															symbol={
+																compound.symbol
+															}
+															textFill="red"
+															key={uuid()}
+														/>
+													)
+												})}
+										</HStack>
+									</>
+								)
+							})}
+						</Flex>
+					)
+				})}
+			</Box>
+			{/* Products */}
+			<Box>
+				{formula.products.map((product) => {
+					return (
+						<Flex dir="column">
+							<Text>{product.coefficient}</Text>
+							<Text ml=".25em" mr=".25em">
+								of
+							</Text>
+							{getCompoundString(product).map((compound) => {
+								return (
+									<>
+										<Text>{compound.symbol}</Text>
+										<Text>
+											{compound.count > 1 ? (
+												<sub>{compound.count}</sub>
+											) : null}
+										</Text>
+									</>
+								)
+							})}
+							{getCompoundString(product).map((compound) => {
+								return (
+									<>
+										{/* Atoms */}
+										<HStack ml="1vw">
+											{Array(compound.count)
+												.fill(0)
+												.map(() => {
+													return (
+														<AtomSVG
+															cirFill="black"
+															cirRadiusInVW={2.5}
+															cirStroke="black"
+															symbol={
+																compound.symbol
+															}
+															textFill="red"
+															key={uuid()}
+														/>
+													)
+												})}
+										</HStack>
+									</>
+								)
+							})}
+						</Flex>
+					)
+				})}
+			</Box>
 		</Flex>
 	)
 }
+
+// <AtomSVG
+// 	cirFill="black"
+// 	cirRadiusInVW={ 2.5 }
+// 	cirStroke="black"
+// 	symbol={ compound.symbol }
+// 	textFill="red"
+// 	key={ uuid() }
+// />
