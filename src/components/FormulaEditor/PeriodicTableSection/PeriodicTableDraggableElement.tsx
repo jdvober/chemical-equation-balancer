@@ -49,7 +49,7 @@ export const PeriodicTableDraggableElement = ({
 				subscript: 1,
 				subscriptColor: "dracula.dracPurple",
 			},
-		] as ChemicalSectionItem[])
+		] as CompoundConstructer[])
 		console.log(formulaEditorChemicalSectionItems)
 	}
 

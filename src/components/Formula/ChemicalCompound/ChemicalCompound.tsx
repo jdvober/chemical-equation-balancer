@@ -3,27 +3,22 @@ import { v4 as uuid } from "uuid"
 
 import { HStack, Text, VStack } from "@chakra-ui/react"
 
-import { useMainStore } from "../../../stores/MainStore.ts"
-import { ChemicalElement } from "../ChemicalElement/ChemicalElement.tsx"
+import { CompoundChunk } from "@/components/Formula/CompoundChunk/CompoundChunk.tsx"
+import { useMainStore } from "@/stores/MainStore.ts"
 
 type ChemicalCompoundProps = {
 	compound: ChemicalCompound
 	formulaSection: FormulaSection
 	index: number
 	includeSymbols: boolean
-	fontSizeInVH: number
-	isHovered?: boolean
 }
 export const ChemicalCompound: React.FC<ChemicalCompoundProps> = ({
 	compound,
 	formulaSection,
 	index,
 	includeSymbols,
-	fontSizeInVH,
-	isHovered,
 }) => {
 	const formula = useMainStore((state) => state.formula)
-
 	return (
 		<VStack h="20vh">
 			<HStack
@@ -35,17 +30,12 @@ export const ChemicalCompound: React.FC<ChemicalCompoundProps> = ({
 				alignSelf="center"
 				userSelect={"none"}
 			>
-				{compound.elements.map((element) => (
+				{compound.chunks.map((chunk) => (
 					<HStack key={uuid()}>
-						<HStack>
-							<ChemicalElement
-								symbol={element.symbol}
-								subscript={element.subscript}
-								fontSizeInVH={fontSizeInVH}
-								isHovered={isHovered}
-								key={uuid()}
-							/>
-						</HStack>
+						<CompoundChunk
+							chunk={chunk}
+							isHovered={compound.isHovered}
+						/>
 					</HStack>
 				))}
 				{formulaSection === "REACTANTS" ? (

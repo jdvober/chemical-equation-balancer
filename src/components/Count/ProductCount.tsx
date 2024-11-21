@@ -43,6 +43,15 @@ export const ProductCount: React.FC<ProductCountProps> = () => {
 				.filter((element) => {
 					return element.productCount >= 1
 				})
+				.sort((a: ElementCountListEntry, b: ElementCountListEntry) => {
+					if (a.symbol < b.symbol) {
+						return -1
+					}
+					if (a.symbol > b.symbol) {
+						return 1
+					}
+					return 0
+				})
 				.map((element) => {
 					return (
 						<Center key={uuid()}>

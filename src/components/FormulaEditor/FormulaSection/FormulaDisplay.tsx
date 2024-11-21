@@ -79,11 +79,6 @@ export const FormulaDisplay: React.FC<FormulaDisplayProps> = () => {
 									formulaSection="REACTANTS"
 									index={reactantIndex}
 									includeSymbols={true}
-									isHovered={
-										formula.reactants[reactantIndex]
-											.isHovered
-									}
-									fontSizeInVH={4}
 								/>
 							</Box>
 						</HStack>
@@ -124,10 +119,6 @@ export const FormulaDisplay: React.FC<FormulaDisplayProps> = () => {
 									formulaSection="PRODUCTS"
 									index={productIndex}
 									includeSymbols={true}
-									isHovered={
-										formula.products[productIndex].isHovered
-									}
-									fontSizeInVH={4}
 									key={uuid()}
 								/>
 							</Box>

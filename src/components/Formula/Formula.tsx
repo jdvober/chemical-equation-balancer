@@ -46,12 +46,10 @@ export const Formula: React.FC<FormulaProps> = () => {
 						</Box>
 						<Box alignItems="center" alignSelf="center">
 							<ChemicalCompound
-								isHovered={true}
 								compound={reactant}
 								formulaSection="REACTANTS"
 								index={reactantIndex}
 								includeSymbols={true}
-								fontSizeInVH={8}
 							/>
 						</Box>
 					</HStack>
@@ -83,12 +81,10 @@ export const Formula: React.FC<FormulaProps> = () => {
 							justifyItems="center"
 						>
 							<ChemicalCompound
-								isHovered={true}
 								compound={product}
 								formulaSection="PRODUCTS"
 								index={productIndex}
 								includeSymbols={true}
-								fontSizeInVH={8}
 							/>
 						</Box>
 					</HStack>

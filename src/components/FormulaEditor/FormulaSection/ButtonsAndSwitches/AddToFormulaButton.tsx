@@ -39,9 +39,13 @@ export const AddToFormulaButton: React.FC<AddToFormulaButtonProps> = () => {
 				coefficient: 1,
 
 				formulaSection: "REACTANTS",
-				parens: [],
 				isHovered: false,
-				elements: elements as ChemicalElement[],
+				chunks: [
+					{
+						parenthesesSubscript: 3,
+						elements: elements as ChemicalElement[],
+					},
+				],
 			},
 		]
 
@@ -82,19 +86,24 @@ export const AddToFormulaButton: React.FC<AddToFormulaButtonProps> = () => {
 		let newProducts = formula.products
 		const elements = editorChemicalSectionItems.map((item) => {
 			return {
+				eID: item.eID,
 				index: item.index,
-				subscript: item.subscript,
 				symbol: item.symbol,
-			}
+				subscript: item.subscript,
+			} as ChemicalElement
 		})
 		newProducts = [
 			...newProducts,
 			{
 				coefficient: 1,
 				formulaSection: "PRODUCTS",
-				parens: [],
 				isHovered: false,
-				elements: elements as ChemicalElement[],
+				chunks: [
+					{
+						parenthesesSubscript: 2,
+						elements: elements as ChemicalElement[],
+					},
+				],
 			},
 		]
 

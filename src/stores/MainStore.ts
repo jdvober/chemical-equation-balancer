@@ -19,7 +19,7 @@ type State = {
 	formulaEditorActive: boolean,
 	elements: ( ChemicalSymbol | "" )[][]
 	subscriptColor: string
-	editorChemicalSectionItems: ChemicalSectionItem[]
+	editorChemicalSectionItems: CompoundConstructer[]
 	reactantAndProductElementListsMatch: boolean,
 
 
@@ -35,7 +35,7 @@ type Action = {
 	setFormulaEditorActive: ( isActive: boolean ) => void,
 	setChemicalSelectionItemSubscriptColor: ( newSubscriptColor: string, index: number
 	) => void
-	setEditorChemicalSectionItems: ( newFormulaEditorChemicalSectionItems: ChemicalSectionItem[] ) => void
+	setEditorChemicalSectionItems: ( newFormulaEditorChemicalSectionItems: CompoundConstructer[] ) => void
 	setEditorChemicalSectionItemSubscript: ( newSubscript: number, index: number ) => void
 	setHoverStatus: ( formulaSection: FormulaSection, index: number, newHoverStatus: boolean ) => void
 	setReactantAndProductElementListsMatch: ( newBoolean: boolean ) => void
@@ -50,53 +50,64 @@ export const useMainStore = create<State & Action>()(
 		formula: {
 			reactants: [ {
 				coefficient: 1,
-				elements: [
-					{
-						eID: uuid(),
-						index: 0,
-						symbol: "H",
-						subscript: 2
-					}
-				],
-				parens: [],
 				formulaSection: "REACTANTS",
-				isHovered: false
+				isHovered: false,
+				chunks: [
+					{
+						parenthesesSubscript: 0,
+						elements: [
+							{
+								eID: uuid(),
+								index: 0,
+								symbol: "H",
+								subscript: 2
+							}
+						],
+					}
+				]
 			},
 			{
 				coefficient: 1,
-				elements: [
-					{
-						index: 0,
-						eID: uuid(),
-						symbol: "O",
-						subscript: 2
-					}
-				],
-				parens: [],
 				formulaSection: "REACTANTS",
-				isHovered: false
+				isHovered: false,
+				chunks: [
+					{
+						parenthesesSubscript: 0,
+						elements: [
+							{
+								index: 0,
+								eID: uuid(),
+								symbol: "O",
+								subscript: 2
+							}
+						],
+					}
+				]
 			} ],
 			products: [
-
 				{
 					coefficient: 1,
-					elements: [
-						{
-							index: 0,
-							eID: uuid(),
-							symbol: "H",
-							subscript: 2
-						},
-						{
-							index: 1,
-							eID: uuid(),
-							symbol: "O",
-							subscript: 1
-						}
-					],
-					parens: [],
 					formulaSection: "PRODUCTS",
-					isHovered: false
+					isHovered: false,
+					chunks: [
+						{
+							parenthesesSubscript: 0,
+							elements: [
+								{
+									index: 0,
+									eID: uuid(),
+									symbol: "H",
+									subscript: 2
+								},
+								{
+									index: 1,
+									eID: uuid(),
+									symbol: "O",
+									subscript: 1
+								}
+							],
+						}
+					]
 				}
 			]
 		},

@@ -10,19 +10,27 @@ type Compound = {
 
 */
 
-type Cards = {
-	title: string
+type ChemicalFormula = {
+	reactants: ChemicalReactant[],
+	products: ChemicalProduct[]
+}
+
+type ChemicalReactant = ChemicalCompound
+type ChemicalProduct = ChemicalCompound
+
+type ChemicalCompound = {
+	coefficient: number,
+	formulaSection: FormulaSection,
+	isHovered: boolean
+	chunks: CompoundChunk[]
 }
 
 type FormulaSection = "REACTANTS" | "PRODUCTS"
 
-type ElementListElement = {
-	symbol: string
-	count: number
+type CompoundChunk = {
+	parenthesesSubscript: number, // 0 = No parentheses, 1=Show parens with no subscript, 2+ = show parens with subscript
+	elements: ChemicalElement[]
 }
-
-type ElementCountListEntry = { symbol: ChemicalSymbol, reactantCount: number, productCount: number }
-type ElementCountList = ElementCountListEntry[]
 
 type ChemicalElement = {
 	eID: string
@@ -31,30 +39,26 @@ type ChemicalElement = {
 	subscript: number
 }
 
+type Cards = {
+	title: string
+}
+
+type ElementListElement = {
+	symbol: string
+	count: number
+}
+
+type ElementCountListEntry = {
+	symbol: ChemicalSymbol,
+	reactantCount: number,
+	productCount: number
+}
+
+type ElementCountList = ElementCountListEntry[]
+
 // Extend
-interface ChemicalSectionItem extends ChemicalElement {
+interface CompoundConstructer extends ChemicalElement {
 	subscriptColor: string
-}
-
-type ChemicalCompound = {
-	coefficient: number,
-	elements: ChemicalElement[],
-	parens: Parenthesis[],
-	formulaSection: FormulaSection,
-	isHovered: boolean
-}
-type Parenthesis =
-	{
-		elementUUIDs: string[],
-		subscript: number
-	}
-
-
-type ChemicalReactant = ChemicalCompound
-type ChemicalProduct = ChemicalCompound
-type ChemicalFormula = {
-	reactants: ChemicalReactant[],
-	products: ChemicalProduct[]
 }
 
 type ChemicalSymbol =

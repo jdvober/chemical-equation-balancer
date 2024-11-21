@@ -19,19 +19,16 @@ export const EditorPeriodicTableSection: React.FC<
 					{elements.map((period) => {
 						return (
 							<HStack key={uuid()}>
-								{period.map((symbol, i) => {
+								{period.map((symbol) => {
 									if (symbol != "") {
 										return (
 											<PeriodicTableDraggableElement
 												symbol={symbol}
-												index={i}
 												id={uuid()}
 												eID={uuid()}
 												parent={
 													"FormulaEditorElementSection"
 												}
-												subscript={0}
-												subscriptColor="dracula.dracPurple"
 												key={uuid()}
 											/>
 										)

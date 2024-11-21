@@ -1,4 +1,4 @@
-import "./ChemicalDropZone.css"
+import "../../../customCSS/ChemicalDropZone.css"
 
 import React from "react"
 
