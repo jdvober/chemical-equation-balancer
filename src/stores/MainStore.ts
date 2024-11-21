@@ -1,5 +1,6 @@
 import { create } from "zustand"
 // import { persist } from "zustand/middleware"
+import { dracPurple } from "@/theme/colors/colors"
 import { v4 as uuid } from "uuid"
 import { immer } from "zustand/middleware/immer"
 
@@ -17,7 +18,7 @@ type State = {
 	editFormulaSection: FormulaSection,
 	formulaEditorActive: boolean,
 	elements: ( ChemicalSymbol | "" )[][]
-	subscriptColor: "dracula.dracRed" | "dracula.dracGreen" | "dracula.dracPurple"
+	subscriptColor: string
 	editorChemicalSectionItems: ChemicalSectionItem[]
 	reactantAndProductElementListsMatch: boolean,
 
@@ -32,7 +33,7 @@ type Action = {
 	setCountList: ( newCountList: ElementCountList ) => void,
 	setEditFormulaSection: ( newFormulaSection: FormulaSection ) => void
 	setFormulaEditorActive: ( isActive: boolean ) => void,
-	setChemicalSelectionItemSubscriptColor: ( newSubscriptColor: "dracula.dracRed" | "dracula.dracGreen" | "dracula.dracPurple", index: number
+	setChemicalSelectionItemSubscriptColor: ( newSubscriptColor: string, index: number
 	) => void
 	setEditorChemicalSectionItems: ( newFormulaEditorChemicalSectionItems: ChemicalSectionItem[] ) => void
 	setEditorChemicalSectionItemSubscript: ( newSubscript: number, index: number ) => void
@@ -381,7 +382,7 @@ export const useMainStore = create<State & Action>()(
 				"No",
 				"Lr" ],
 		],
-		subscriptColor: "dracula.dracPurple",
+		subscriptColor: dracPurple,
 		editorChemicalSectionItems: [],
 		reactantAndProductElementListsMatch: false,
 

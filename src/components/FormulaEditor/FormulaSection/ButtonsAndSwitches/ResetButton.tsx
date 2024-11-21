@@ -21,9 +21,6 @@ export const ResetButton: React.FC<ResetButtonProps> = () => {
 	return (
 		<Box className="ResetButton">
 			<Button
-				// mt="1vh"
-				// mb="1vh"
-				ml="2vw"
 				w="5vw"
 				h="5vh"
 				fontSize={"2rem"}

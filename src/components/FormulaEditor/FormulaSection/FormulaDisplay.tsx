@@ -8,11 +8,11 @@ import { useMainStore } from "../../../stores/MainStore"
 import { ChemicalCompound } from "../../Formula/ChemicalCompound/ChemicalCompound"
 
 // If no values, use this:
-type EditorFormulaProps = Record<string, never>
+type FormulaDisplayProps = Record<string, never>
 // If values, fill in the object below
 //type FormulaProps = {}
 
-export const EditorFormula: React.FC<EditorFormulaProps> = () => {
+export const FormulaDisplay: React.FC<FormulaDisplayProps> = () => {
 	const formula = useMainStore((state) => state.formula)
 	const setReactants = useMainStore((state) => state.setReactants)
 	const setProducts = useMainStore((state) => state.setProducts)

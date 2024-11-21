@@ -21,7 +21,8 @@ type ElementListElement = {
 	count: number
 }
 
-type ElementCountList = { symbol: ChemicalSymbol, reactantCount: number, productCount: numher }[]
+type ElementCountListEntry = { symbol: ChemicalSymbol, reactantCount: number, productCount: number }
+type ElementCountList = ElementCountListEntry[]
 
 type ChemicalElement = {
 	eID: string
@@ -32,7 +33,7 @@ type ChemicalElement = {
 
 // Extend
 interface ChemicalSectionItem extends ChemicalElement {
-	subscriptColor: "dracula.dracPurple" | "dracula.dracGreen" | "dracula.dracRed"
+	subscriptColor: string
 }
 
 type ChemicalCompound = {

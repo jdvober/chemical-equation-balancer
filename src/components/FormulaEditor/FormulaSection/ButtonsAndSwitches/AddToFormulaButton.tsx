@@ -134,9 +134,6 @@ export const AddToFormulaButton: React.FC<AddToFormulaButtonProps> = () => {
 	return (
 		<Box className="AddToFormulaButton">
 			<Button
-				// mt="1vh"
-				// mb="1vh"
-				ml="2vw"
 				fontSize={"2rem"}
 				w="5vw"
 				h="5vh"

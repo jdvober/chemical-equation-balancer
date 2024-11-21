@@ -3,8 +3,8 @@ import { TiArrowDownOutline, TiArrowUpOutline } from "react-icons/ti"
 
 import { Button } from "@chakra-ui/react"
 
+import { dracGreen, dracRed } from "@/theme/colors/colors"
 import { useMainStore } from "../../../../stores/MainStore"
-import { dracGreen, dracRed } from "../../../../vars/GlobalVars"
 
 // If no values, use this:
 // type ChemicalElementEditorButtonProps = Record<string, never>
@@ -18,9 +18,6 @@ export const ChemicalElementSubscriptModificationButton: React.FC<
 	ChemicalElementSubscriptModificationButtonProps
 > = ({ isUpArrow, index }) => {
 	const [opacity, setOpacity] = useState(25)
-	const setChemicalSelectionItemSubscriptColor = useMainStore(
-		(state) => state.setChemicalSelectionItemSubscriptColor
-	)
 	const formulaEditorChemicalSectionItems = useMainStore(
 		(state) => state.editorChemicalSectionItems
 	)
@@ -36,17 +33,9 @@ export const ChemicalElementSubscriptModificationButton: React.FC<
 				opacity={`${opacity}%`}
 				onMouseEnter={() => {
 					setOpacity(100)
-					setChemicalSelectionItemSubscriptColor(
-						"dracula.dracGreen",
-						index
-					)
 				}}
 				onMouseLeave={() => {
 					setOpacity(25)
-					setChemicalSelectionItemSubscriptColor(
-						"dracula.dracPurple",
-						index
-					)
 				}}
 				onClick={() => {
 					setFormulaEditorChemicalSectionItemSubscript(
@@ -69,17 +58,9 @@ export const ChemicalElementSubscriptModificationButton: React.FC<
 				opacity={`${opacity}%`}
 				onMouseEnter={() => {
 					setOpacity(100)
-					setChemicalSelectionItemSubscriptColor(
-						"dracula.dracRed",
-						index
-					)
 				}}
 				onMouseLeave={() => {
 					setOpacity(25)
-					setChemicalSelectionItemSubscriptColor(
-						"dracula.dracPurple",
-						index
-					)
 				}}
 				onClick={() => {
 					setFormulaEditorChemicalSectionItemSubscript(

@@ -3,7 +3,7 @@ import React from "react"
 import { Box } from "@chakra-ui/react"
 import { Link } from "react-router-dom"
 //@ts-ignore
-import { Colors } from "../../theme/colors/colors"
+import { dracCyan } from "../../theme/colors/colors"
 
 // If no values, use this:
 type EditorCloseButtonProps = Record<string, never>
@@ -16,7 +16,7 @@ export const EditorCloseButton: React.FC<EditorCloseButtonProps> = () => {
 			<Link to={`/`}>
 				<Box
 					border={`2px solid`}
-					borderColor={Colors.dracula.dracCyan}
+					borderColor={dracCyan}
 					fontSize={"2xl"}
 					pl="1vw"
 					pr="1vw"

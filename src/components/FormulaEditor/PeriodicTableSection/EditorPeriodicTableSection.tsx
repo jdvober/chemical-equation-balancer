@@ -4,7 +4,7 @@ import { v4 as uuid } from "uuid"
 import { Box, Flex, HStack, VStack } from "@chakra-ui/react"
 
 import { useMainStore } from "../../../stores/MainStore"
-import { DraggableElement } from "../DraggableElement"
+import { PeriodicTableDraggableElement } from "./PeriodicTableDraggableElement"
 
 type EditorPeriodicTableSectionProps = {}
 
@@ -22,7 +22,7 @@ export const EditorPeriodicTableSection: React.FC<
 								{period.map((symbol, i) => {
 									if (symbol != "") {
 										return (
-											<DraggableElement
+											<PeriodicTableDraggableElement
 												symbol={symbol}
 												index={i}
 												id={uuid()}
