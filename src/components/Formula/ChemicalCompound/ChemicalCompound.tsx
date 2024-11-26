@@ -30,11 +30,12 @@ export const ChemicalCompound: React.FC<ChemicalCompoundProps> = ({
 				alignSelf="center"
 				userSelect={"none"}
 			>
-				{compound.chunks.map((chunk) => (
+				{compound.chunks.map((chunk, chunkIndex) => (
 					<HStack key={uuid()}>
 						<CompoundChunk
 							chunk={chunk}
-							isHovered={compound.isHovered}
+							chunkIndex={chunkIndex}
+							arrows={false}
 						/>
 					</HStack>
 				))}

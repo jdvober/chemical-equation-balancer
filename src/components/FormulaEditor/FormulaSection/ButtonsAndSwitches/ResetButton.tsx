@@ -11,11 +11,11 @@ type ResetButtonProps = Record<string, never>
 
 export const ResetButton: React.FC<ResetButtonProps> = () => {
 	const setEditorChemicalSectionItems = useMainStore(
-		(state) => state.setEditorChemicalSectionItems
+		(state) => state.setEditorChemicalSectionChunks
 	)
 
 	const editorChemicalSectionItems = useMainStore(
-		(state) => state.editorChemicalSectionItems
+		(state) => state.editorChemicalSectionChunks
 	)
 
 	return (

@@ -15,7 +15,7 @@ export const ChemicalElement: React.FC<ChemicalElementProps> = ({
 	isHovered,
 }) => {
 	return (
-		<Box className="ChemicalElement">
+		<Box className="ChemicalElement" border="1px solid purple">
 			<HStack
 				color={
 					isHovered === true ? "dracula.dracRed" : "dracula.dracFG"

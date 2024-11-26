@@ -13,10 +13,10 @@ export const AddToFormulaButton: React.FC<AddToFormulaButtonProps> = () => {
 	const editFormulaSection = useMainStore((state) => state.editFormulaSection)
 	const setReactants = useMainStore((state) => state.setReactants)
 	const setEditorChemicalSectionItems = useMainStore(
-		(state) => state.setEditorChemicalSectionItems
+		(state) => state.setEditorChemicalSectionChunks
 	)
 	const editorChemicalSectionItems = useMainStore(
-		(state) => state.editorChemicalSectionItems
+		(state) => state.editorChemicalSectionChunks
 	)
 
 	const setProducts = useMainStore((state) => state.setProducts)

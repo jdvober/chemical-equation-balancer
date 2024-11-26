@@ -6,6 +6,7 @@ import { Box, HStack, VStack } from "@chakra-ui/react"
 
 import { FormulaSection } from "@/components/FormulaEditor/FormulaSection/FormulaSection.tsx"
 import { useMainStore } from "@/stores/MainStore.ts"
+import { dracPurple } from "@/theme/colors/colors.ts"
 import {
 	DndContext,
 	MouseSensor,
@@ -22,11 +23,14 @@ type FormulaEditorProps = Record<string, never>
 //type FormulaEditorProps = {}
 
 export const FormulaEditor: React.FC<FormulaEditorProps> = () => {
-	const formulaEditorChemicalSectionItems = useMainStore(
-		(state) => state.editorChemicalSectionItems
+	const formulaEditorChemicalSectionChunks = useMainStore(
+		(state) => state.editorChemicalSectionChunks
 	)
-	const setFormulaEditorChemicalSectionItems = useMainStore(
-		(state) => state.setEditorChemicalSectionItems
+	const setFormulaEditorChemicalSectionChunks = useMainStore(
+		(state) => state.setEditorChemicalSectionChunks
+	)
+	const selectedConstructionCompoundIDs = useMainStore(
+		(state) => state.selectedConstructionCompoundIDs
 	)
 	const sensors = useSensors(
 		useSensor(MouseSensor, {
@@ -44,27 +48,35 @@ export const FormulaEditor: React.FC<FormulaEditorProps> = () => {
 				onDragEnd={(e) => {
 					const container = e.over?.id
 					const symbol = e.active.data.current?.symbol ?? ""
-					const index = formulaEditorChemicalSectionItems.length ?? 0
+					const index = formulaEditorChemicalSectionChunks.length ?? 0
 					const parent = e.active.data.current?.parent ?? "ToDo"
 					if (container === "FormulaEditorChemicalSection") {
-						setFormulaEditorChemicalSectionItems([
-							...formulaEditorChemicalSectionItems,
+						setFormulaEditorChemicalSectionChunks([
+							...formulaEditorChemicalSectionChunks,
 							{
-								index: index,
-								eID: uuid(),
-								symbol: symbol,
-								subscript: 1,
-								subscriptColor: "dracula.dracPurple",
+								elements: [
+									{
+										index: index,
+										eID: uuid(),
+										symbol: symbol,
+										subscript: {
+											value: 1,
+											color: dracPurple,
+										},
+									},
+								],
+								chunkID: uuid(),
+								parenthesesSubscript: 0,
 							},
 						])
 					}
 					if (parent === "FormulaEditorChemicalSection") {
-						setFormulaEditorChemicalSectionItems([
-							...formulaEditorChemicalSectionItems.slice(
+						setFormulaEditorChemicalSectionChunks([
+							...formulaEditorChemicalSectionChunks.slice(
 								0,
 								index
 							),
-							...formulaEditorChemicalSectionItems.slice(
+							...formulaEditorChemicalSectionChunks.slice(
 								index + 1
 							),
 						])
@@ -77,6 +89,9 @@ export const FormulaEditor: React.FC<FormulaEditorProps> = () => {
 						<EditorCloseButton />
 					</HStack>
 					<EditorPeriodicTableSection />
+					{selectedConstructionCompoundIDs.map((compound) => {
+						return <div key={uuid()}>{compound}</div>
+					})}
 				</VStack>
 			</DndContext>
 		</Box>

@@ -20,7 +20,7 @@ export const EditorPeriodicTableSection: React.FC<
 						return (
 							<HStack key={uuid()}>
 								{period.map((symbol) => {
-									if (symbol != "") {
+									if (symbol != "BLANK") {
 										return (
 											<PeriodicTableDraggableElement
 												symbol={symbol}

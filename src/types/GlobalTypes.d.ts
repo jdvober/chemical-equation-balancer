@@ -30,13 +30,18 @@ type FormulaSection = "REACTANTS" | "PRODUCTS"
 type CompoundChunk = {
 	parenthesesSubscript: number, // 0 = No parentheses, 1=Show parens with no subscript, 2+ = show parens with subscript
 	elements: ChemicalElement[]
+	chunkID: string
 }
 
 type ChemicalElement = {
 	eID: string
 	index: number
 	symbol: ChemicalSymbol
-	subscript: number
+	subscript: { value: number, color: string }
+}
+
+interface ConstructionElement extends ChemicalElement {
+	id: string
 }
 
 type Cards = {
@@ -55,11 +60,6 @@ type ElementCountListEntry = {
 }
 
 type ElementCountList = ElementCountListEntry[]
-
-// Extend
-interface CompoundConstructer extends ChemicalElement {
-	subscriptColor: string
-}
 
 type ChemicalSymbol =
 	"H"
@@ -180,3 +180,4 @@ type ChemicalSymbol =
 	| "Lv"
 	| "Ts"
 	| "Og"
+	| "BLANK"

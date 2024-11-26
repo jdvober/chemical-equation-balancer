@@ -15,7 +15,7 @@ export const PeriodicTableDraggableElement = ({
 }: {
 	id: string
 	eID: string
-	symbol: ChemicalSymbol | ""
+	symbol: ChemicalSymbol
 	parent: string
 }) => {
 	const { attributes, listeners, setNodeRef, transform } = useDraggable({
@@ -30,27 +30,32 @@ export const PeriodicTableDraggableElement = ({
 		transform: CSS.Translate.toString(transform),
 	}
 
-	const formulaEditorChemicalSectionItems = useMainStore(
-		(state) => state.editorChemicalSectionItems
+	const editorChemicalSectionChunks = useMainStore(
+		(state) => state.editorChemicalSectionChunks
 	)
 
-	const setFormulaEditorChemicalSectionItems = useMainStore(
-		(state) => state.setEditorChemicalSectionItems
+	const setEditorChemicalSectionChunks = useMainStore(
+		(state) => state.setEditorChemicalSectionChunks
 	)
 
 	const addElement = () => {
 		console.log(eID)
-		setFormulaEditorChemicalSectionItems([
-			...formulaEditorChemicalSectionItems,
+		setEditorChemicalSectionChunks([
+			...editorChemicalSectionChunks,
 			{
-				eID: uuid(),
-				index: formulaEditorChemicalSectionItems.length,
-				symbol: symbol,
-				subscript: 1,
-				subscriptColor: "dracula.dracPurple",
+				parenthesesSubscript: 0,
+				elements: [
+					{
+						eID: uuid(),
+						index: editorChemicalSectionChunks.length,
+						symbol: symbol,
+						subscript: { value: 1, color: "dracula.dracPurple" },
+					},
+				],
+				chunkID: uuid(),
 			},
-		] as CompoundConstructer[])
-		console.log(formulaEditorChemicalSectionItems)
+		] as CompoundChunk[])
+		console.log(editorChemicalSectionChunks)
 	}
 
 	const handleClick = () => {
@@ -61,7 +66,7 @@ export const PeriodicTableDraggableElement = ({
 		<Flex
 			padding="3"
 			backgroundColor={
-				symbol === "" || parent !== "FormulaEditorElementSection"
+				symbol === "BLANK" || parent !== "FormulaEditorElementSection"
 					? ""
 					: dracFG
 			}
@@ -74,8 +79,8 @@ export const PeriodicTableDraggableElement = ({
 			align="center"
 			justify={"center"}
 			borderRadius="lg"
-			border={symbol === "" ? "" : "2px solid gray.500"}
-			boxShadow={symbol === "" ? "" : "0px 0px 5px 2px #2121213b"}
+			border={symbol === "BLANK" ? "" : "2px solid gray.500"}
+			boxShadow={symbol === "BLANK" ? "" : "0px 0px 5px 2px #2121213b"}
 			transform={style.transform}
 			{...listeners}
 			{...attributes}

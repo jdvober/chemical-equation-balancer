@@ -8,20 +8,37 @@ import { Flex, Text } from "@chakra-ui/react"
 // If values, fill in the object below
 type CompoundChunkProps = {
 	chunk: CompoundChunk
-	isHovered: boolean
+	chunkIndex: number
+	arrows: boolean
 }
 
 export const CompoundChunk: React.FC<CompoundChunkProps> = ({
 	chunk,
-	isHovered,
+	chunkIndex,
+	arrows,
 }) => {
 	return (
-		<Flex className="CompoundChunk" direction="row">
-			{chunk.parenthesesSubscript >= 1 ? <Text>(</Text> : null}
-			<Subcompound chunk={chunk} isHovered={isHovered} />
-			{chunk.parenthesesSubscript >= 1 ? <Text>)</Text> : null}
+		<Flex
+			className="CompoundChunk"
+			direction="row"
+			justifyContent={"center"} /*justify ==> along main axis*/
+			alignItems={"center"} /*align ==> along cross axis*/
+		>
+			{chunk.parenthesesSubscript >= 1 ? (
+				<Text fontSize="2vw">(</Text>
+			) : null}
+			<Subcompound
+				chunk={chunk}
+				chunkIndex={chunkIndex}
+				arrows={arrows}
+			/>
+			{chunk.parenthesesSubscript >= 1 ? (
+				<Text fontSize="2vw">)</Text>
+			) : null}
 			{chunk.parenthesesSubscript > 1 ? (
-				<sub>{chunk.parenthesesSubscript}</sub>
+				<Text fontSize="2vw">
+					<sub>{chunk.parenthesesSubscript}</sub>
+				</Text>
 			) : null}
 		</Flex>
 	)

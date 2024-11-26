@@ -3,6 +3,8 @@ import { create } from "zustand"
 import { dracPurple } from "@/theme/colors/colors"
 import { v4 as uuid } from "uuid"
 import { immer } from "zustand/middleware/immer"
+import { CountList } from "./countList"
+import { Elements } from "./elements"
 
 type State = {
 	formula: {
@@ -17,12 +19,11 @@ type State = {
 	}[],
 	editFormulaSection: FormulaSection,
 	formulaEditorActive: boolean,
-	elements: ( ChemicalSymbol | "" )[][]
+	elements: ( ChemicalSymbol )[][]
 	subscriptColor: string
-	editorChemicalSectionItems: CompoundConstructer[]
+	editorChemicalSectionChunks: CompoundChunk[]
 	reactantAndProductElementListsMatch: boolean,
-
-
+	selectedConstructionCompoundIDs: string[]
 }
 
 type Action = {
@@ -33,12 +34,13 @@ type Action = {
 	setCountList: ( newCountList: ElementCountList ) => void,
 	setEditFormulaSection: ( newFormulaSection: FormulaSection ) => void
 	setFormulaEditorActive: ( isActive: boolean ) => void,
-	setChemicalSelectionItemSubscriptColor: ( newSubscriptColor: string, index: number
+	setChemicalSelectionItemSubscriptColor: ( newSubscriptColor: string, chunkIndex: number, elementIndex: number
 	) => void
-	setEditorChemicalSectionItems: ( newFormulaEditorChemicalSectionItems: CompoundConstructer[] ) => void
-	setEditorChemicalSectionItemSubscript: ( newSubscript: number, index: number ) => void
+	setEditorChemicalSectionChunks: ( newFormulaEditorChemicalSectionItems: CompoundChunk[] ) => void
+	setEditorChemicalSectionItemSubscriptValue: ( newSubscriptValue: number, chunkIndex: number, elementIndex: number ) => void
 	setHoverStatus: ( formulaSection: FormulaSection, index: number, newHoverStatus: boolean ) => void
 	setReactantAndProductElementListsMatch: ( newBoolean: boolean ) => void
+	setSelectedConstructionCompoundIDs: ( selectedCompounds: string[] ) => void
 }
 
 export const useMainStore = create<State & Action>()(
@@ -54,13 +56,14 @@ export const useMainStore = create<State & Action>()(
 				isHovered: false,
 				chunks: [
 					{
+						chunkID: uuid(),
 						parenthesesSubscript: 0,
 						elements: [
 							{
 								eID: uuid(),
 								index: 0,
 								symbol: "H",
-								subscript: 2
+								subscript: { value: 2, color: dracPurple }
 							}
 						],
 					}
@@ -72,13 +75,14 @@ export const useMainStore = create<State & Action>()(
 				isHovered: false,
 				chunks: [
 					{
-						parenthesesSubscript: 0,
+						chunkID: uuid(),
+						parenthesesSubscript: 2,
 						elements: [
 							{
 								index: 0,
 								eID: uuid(),
 								symbol: "O",
-								subscript: 2
+								subscript: { value: 2, color: dracPurple }
 							}
 						],
 					}
@@ -91,19 +95,20 @@ export const useMainStore = create<State & Action>()(
 					isHovered: false,
 					chunks: [
 						{
+							chunkID: uuid(),
 							parenthesesSubscript: 0,
 							elements: [
 								{
 									index: 0,
 									eID: uuid(),
 									symbol: "H",
-									subscript: 2
+									subscript: { value: 2, color: dracPurple }
 								},
 								{
 									index: 1,
 									eID: uuid(),
 									symbol: "O",
-									subscript: 1
+									subscript: { value: 1, color: dracPurple }
 								}
 							],
 						}
@@ -112,290 +117,15 @@ export const useMainStore = create<State & Action>()(
 			]
 		},
 		formulaHeightVH: 20,
-		countList: [
-			{ symbol: "H", reactantCount: 0, productCount: 0 },
-			{ symbol: "He", reactantCount: 0, productCount: 0 },
-			{ symbol: "Li", reactantCount: 0, productCount: 0 },
-			{ symbol: "Be", reactantCount: 0, productCount: 0 },
-			{ symbol: "B", reactantCount: 0, productCount: 0 },
-			{ symbol: "C", reactantCount: 0, productCount: 0 },
-			{ symbol: "N", reactantCount: 0, productCount: 0 },
-			{ symbol: "O", reactantCount: 0, productCount: 0 },
-			{ symbol: "F", reactantCount: 0, productCount: 0 },
-			{ symbol: "Ne", reactantCount: 0, productCount: 0 },
-			{ symbol: "Na", reactantCount: 0, productCount: 0 },
-			{ symbol: "Mg", reactantCount: 0, productCount: 0 },
-			{ symbol: "Al", reactantCount: 0, productCount: 0 },
-			{ symbol: "Si", reactantCount: 0, productCount: 0 },
-			{ symbol: "P", reactantCount: 0, productCount: 0 },
-			{ symbol: "S", reactantCount: 0, productCount: 0 },
-			{ symbol: "Cl", reactantCount: 0, productCount: 0 },
-			{ symbol: "Ar", reactantCount: 0, productCount: 0 },
-			{ symbol: "K", reactantCount: 0, productCount: 0 },
-			{ symbol: "Ca", reactantCount: 0, productCount: 0 },
-			{ symbol: "Sc", reactantCount: 0, productCount: 0 },
-			{ symbol: "Ti", reactantCount: 0, productCount: 0 },
-			{ symbol: "V", reactantCount: 0, productCount: 0 },
-			{ symbol: "Cr", reactantCount: 0, productCount: 0 },
-			{ symbol: "Mn", reactantCount: 0, productCount: 0 },
-			{ symbol: "Fe", reactantCount: 0, productCount: 0 },
-			{ symbol: "Co", reactantCount: 0, productCount: 0 },
-			{ symbol: "Ni", reactantCount: 0, productCount: 0 },
-			{ symbol: "Cu", reactantCount: 0, productCount: 0 },
-			{ symbol: "Zn", reactantCount: 0, productCount: 0 },
-			{ symbol: "Ga", reactantCount: 0, productCount: 0 },
-			{ symbol: "Ge", reactantCount: 0, productCount: 0 },
-			{ symbol: "As", reactantCount: 0, productCount: 0 },
-			{ symbol: "Se", reactantCount: 0, productCount: 0 },
-			{ symbol: "Br", reactantCount: 0, productCount: 0 },
-			{ symbol: "Kr", reactantCount: 0, productCount: 0 },
-			{ symbol: "Rb", reactantCount: 0, productCount: 0 },
-			{ symbol: "Sr", reactantCount: 0, productCount: 0 },
-			{ symbol: "Y", reactantCount: 0, productCount: 0 },
-			{ symbol: "Zr", reactantCount: 0, productCount: 0 },
-			{ symbol: "Nb", reactantCount: 0, productCount: 0 },
-			{ symbol: "Mo", reactantCount: 0, productCount: 0 },
-			{ symbol: "Tc", reactantCount: 0, productCount: 0 },
-			{ symbol: "Ru", reactantCount: 0, productCount: 0 },
-			{ symbol: "Rh", reactantCount: 0, productCount: 0 },
-			{ symbol: "Pd", reactantCount: 0, productCount: 0 },
-			{ symbol: "Ag", reactantCount: 0, productCount: 0 },
-			{ symbol: "Cd", reactantCount: 0, productCount: 0 },
-			{ symbol: "In", reactantCount: 0, productCount: 0 },
-			{ symbol: "Sn", reactantCount: 0, productCount: 0 },
-			{ symbol: "Sb", reactantCount: 0, productCount: 0 },
-			{ symbol: "Te", reactantCount: 0, productCount: 0 },
-			{ symbol: "I", reactantCount: 0, productCount: 0 },
-			{ symbol: "Xe", reactantCount: 0, productCount: 0 },
-			{ symbol: "Cs", reactantCount: 0, productCount: 0 },
-			{ symbol: "Ba", reactantCount: 0, productCount: 0 },
-			{ symbol: "Hf", reactantCount: 0, productCount: 0 },
-			{ symbol: "Ta", reactantCount: 0, productCount: 0 },
-			{ symbol: "W", reactantCount: 0, productCount: 0 },
-			{ symbol: "Re", reactantCount: 0, productCount: 0 },
-			{ symbol: "Os", reactantCount: 0, productCount: 0 },
-			{ symbol: "Ir", reactantCount: 0, productCount: 0 },
-			{ symbol: "Pt", reactantCount: 0, productCount: 0 },
-			{ symbol: "Au", reactantCount: 0, productCount: 0 },
-			{ symbol: "Hg", reactantCount: 0, productCount: 0 },
-			{ symbol: "Tl", reactantCount: 0, productCount: 0 },
-			{ symbol: "Pb", reactantCount: 0, productCount: 0 },
-			{ symbol: "Bi", reactantCount: 0, productCount: 0 },
-			{ symbol: "Pi", reactantCount: 0, productCount: 0 },
-			{ symbol: "At", reactantCount: 0, productCount: 0 },
-			{ symbol: "Rn", reactantCount: 0, productCount: 0 },
-			{ symbol: "Fr", reactantCount: 0, productCount: 0 },
-			{ symbol: "Ra", reactantCount: 0, productCount: 0 },
-			{ symbol: "Rf", reactantCount: 0, productCount: 0 },
-			{ symbol: "Db", reactantCount: 0, productCount: 0 },
-			{ symbol: "Sg", reactantCount: 0, productCount: 0 },
-			{ symbol: "Bh", reactantCount: 0, productCount: 0 },
-			{ symbol: "Hs", reactantCount: 0, productCount: 0 },
-			{ symbol: "Mt", reactantCount: 0, productCount: 0 },
-			{ symbol: "Ds", reactantCount: 0, productCount: 0 },
-			{ symbol: "Rg", reactantCount: 0, productCount: 0 },
-			{ symbol: "Cn", reactantCount: 0, productCount: 0 },
-			{ symbol: "Nh", reactantCount: 0, productCount: 0 },
-			{ symbol: "Fl", reactantCount: 0, productCount: 0 },
-			{ symbol: "Mc", reactantCount: 0, productCount: 0 },
-			{ symbol: "Lv", reactantCount: 0, productCount: 0 },
-			{ symbol: "Ts", reactantCount: 0, productCount: 0 },
-			{ symbol: "Og", reactantCount: 0, productCount: 0 },
-			{ symbol: "La", reactantCount: 0, productCount: 0 },
-			{ symbol: "Ce", reactantCount: 0, productCount: 0 },
-			{ symbol: "Pr", reactantCount: 0, productCount: 0 },
-			{ symbol: "Nd", reactantCount: 0, productCount: 0 },
-			{ symbol: "Pm", reactantCount: 0, productCount: 0 },
-			{ symbol: "Sm", reactantCount: 0, productCount: 0 },
-			{ symbol: "Eu", reactantCount: 0, productCount: 0 },
-			{ symbol: "Gd", reactantCount: 0, productCount: 0 },
-			{ symbol: "Tb", reactantCount: 0, productCount: 0 },
-			{ symbol: "Dy", reactantCount: 0, productCount: 0 },
-			{ symbol: "Ho", reactantCount: 0, productCount: 0 },
-			{ symbol: "Er", reactantCount: 0, productCount: 0 },
-			{ symbol: "Tm", reactantCount: 0, productCount: 0 },
-			{ symbol: "Yb", reactantCount: 0, productCount: 0 },
-			{ symbol: "Lu", reactantCount: 0, productCount: 0 },
-			{ symbol: "Ac", reactantCount: 0, productCount: 0 },
-			{ symbol: "Th", reactantCount: 0, productCount: 0 },
-			{ symbol: "Pa", reactantCount: 0, productCount: 0 },
-			{ symbol: "U", reactantCount: 0, productCount: 0 },
-			{ symbol: "Np", reactantCount: 0, productCount: 0 },
-			{ symbol: "Pu", reactantCount: 0, productCount: 0 },
-			{ symbol: "Am", reactantCount: 0, productCount: 0 },
-			{ symbol: "Cm", reactantCount: 0, productCount: 0 },
-			{ symbol: "Bk", reactantCount: 0, productCount: 0 },
-			{ symbol: "Cf", reactantCount: 0, productCount: 0 },
-			{ symbol: "Es", reactantCount: 0, productCount: 0 },
-			{ symbol: "Fm", reactantCount: 0, productCount: 0 },
-			{ symbol: "Md", reactantCount: 0, productCount: 0 },
-			{ symbol: "No", reactantCount: 0, productCount: 0 },
-			{ symbol: "Lr", reactantCount: 0, productCount: 0 }
-		],
+		countList: CountList,
 
 		editFormulaSection: "REACTANTS",
 		formulaEditorActive: false,
-		elements: [
-			[ "H",
-				"",
-				"",
-				"",
-				"",
-				"",
-				"",
-				"",
-				"",
-				"",
-				"",
-				"",
-				"",
-				"",
-				"",
-				"",
-				"",
-				"He" ],
-			[ "Li",
-				"Be",
-				"",
-				"",
-				"",
-				"",
-				"",
-				"",
-				"",
-				"",
-				"",
-				"",
-				"B",
-				"C",
-				"N",
-				"O",
-				"F",
-				"Ne" ],
-			[ "Na",
-				"Mg",
-				"",
-				"",
-				"",
-				"",
-				"",
-				"",
-				"",
-				"",
-				"",
-				"",
-				"Al",
-				"Si",
-				"P",
-				"S",
-				"Cl",
-				"Ar" ],
-			[ "K",
-				"Ca",
-				"Sc",
-				"Ti",
-				"V",
-				"Cr",
-				"Mn",
-				"Fe",
-				"Co",
-				"Ni",
-				"Cu",
-				"Zn",
-				"Ga",
-				"Ge",
-				"As",
-				"Se",
-				"Br",
-				"Kr" ],
-			[ "Rb",
-				"Sr",
-				"Y",
-				"Zr",
-				"Nb",
-				"Mo",
-				"Tc",
-				"Ru",
-				"Rh",
-				"Pd",
-				"Ag",
-				"Cd",
-				"In",
-				"Sn",
-				"Sb",
-				"Te",
-				"I",
-				"Xe" ],
-			[ "Cs",
-				"Ba",
-				"",
-				"Hf",
-				"Ta",
-				"W",
-				"Re",
-				"Os",
-				"Ir",
-				"Pt",
-				"Au",
-				"Hg",
-				"Tl",
-				"Pb",
-				"Bi",
-				"Pi",
-				"At",
-				"Rn" ],
-			[ "Fr",
-				"Ra",
-				"",
-				"Rf",
-				"Db",
-				"Sg",
-				"Bh",
-				"Hs",
-				"Mt",
-				"Ds",
-				"Rg",
-				"Cn",
-				"Nh",
-				"Fl",
-				"Mc",
-				"Lv",
-				"Ts",
-				"Og" ],
-			[ "La",
-				"Ce",
-				"Pr",
-				"Nd",
-				"Pm",
-				"Sm",
-				"Eu",
-				"Gd",
-				"Tb",
-				"Dy",
-				"Ho",
-				"Er",
-				"Tm",
-				"Yb",
-				"Lu" ],
-			[ "Ac",
-				"Th",
-				"Pa",
-				"U",
-				"Np",
-				"Pu",
-				"Am",
-				"Cm",
-				"Bk",
-				"Cf",
-				"Es",
-				"Fm",
-				"Md",
-				"No",
-				"Lr" ],
-		],
+		elements: Elements,
 		subscriptColor: dracPurple,
-		editorChemicalSectionItems: [],
+		editorChemicalSectionChunks: [],
 		reactantAndProductElementListsMatch: false,
+		selectedConstructionCompoundIDs: [],
 
 		////////////////////////////////////////////////////
 		////////////////////////////////////////////////////
@@ -438,14 +168,16 @@ export const useMainStore = create<State & Action>()(
 			set( ( state ) => {
 				state.formulaEditorActive = isActive
 			} ),
-		setChemicalSelectionItemSubscriptColor: ( newSubscriptColor, index ) => set( ( state ) => {
-			state.editorChemicalSectionItems[ index ].subscriptColor = newSubscriptColor
+		setChemicalSelectionItemSubscriptColor: ( newSubscriptColor, chunkIndex, elementIndex ) => set( ( state ) => {
+			let oldValue = state.editorChemicalSectionChunks[ chunkIndex ].elements[ elementIndex ].subscript.value
+			state.editorChemicalSectionChunks[ chunkIndex ].elements[ elementIndex ].subscript = { color: newSubscriptColor, value: oldValue }
 		} ),
-		setEditorChemicalSectionItems: ( newFormulaEditorChemicalSectionItems ) => set( ( state ) => {
-			state.editorChemicalSectionItems = newFormulaEditorChemicalSectionItems
+		setEditorChemicalSectionChunks: ( newFormulaEditorChemicalSectionItems ) => set( ( state ) => {
+			state.editorChemicalSectionChunks = newFormulaEditorChemicalSectionItems
 		} ),
-		setEditorChemicalSectionItemSubscript: ( newSubscript, index ) => set( ( state ) => {
-			state.editorChemicalSectionItems[ index ].subscript = newSubscript
+		setEditorChemicalSectionItemSubscriptValue: ( newSubscriptValue, chunkIndex, elementIndex ) => set( ( state ) => {
+			let oldColor = state.editorChemicalSectionChunks[ chunkIndex ].elements[ elementIndex ].subscript.color
+			state.editorChemicalSectionChunks[ chunkIndex ].elements[ elementIndex ].subscript = { color: oldColor, value: newSubscriptValue }
 		} ),
 		setHoverStatus: ( formulaSection, index, newFormulaStatus ) =>
 			set( ( state ) => {
@@ -457,6 +189,11 @@ export const useMainStore = create<State & Action>()(
 			set( ( state ) => {
 				state.reactantAndProductElementListsMatch = newBoolean
 			} ),
+		setSelectedConstructionCompoundIDs ( selectedCompoundIDs ) {
+			set( ( state ) => {
+				state.selectedConstructionCompoundIDs = selectedCompoundIDs
+			} )
+		},
 	}
 	) ),
 	// {
@@ -471,47 +208,3 @@ export const useMainStore = create<State & Action>()(
 // ₀₁₂₃₄₅₆₇₈₉→
 
 // 2H₂ + 1O₂ → 2H₂O
-
-/*
-Schema
-
-{
-	reactants:[
-			{
-				coefficient: 2,
-				elements:[
-					{
-						symbol: H,
-						subscript: 2
-					}
-				]
-			},
-						{
-				coefficient: 1,
-				elements:[
-					{
-						symbol: O,
-						subscript: 2
-					}
-				]
-			}
-		]
-	products:
-			{
-				coefficient: 2,
-				elements:[
-					{
-						symbol: "H",
-						subscript: 2
-					},
-					{
-						symbol: "O",
-						subscript: 1
-					}
-				]
-			}
-
-}
-
-
-*/

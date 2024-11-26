@@ -11,18 +11,19 @@ import { useMainStore } from "../../../../stores/MainStore"
 // If values, fill in the object below
 type ChemicalElementSubscriptModificationButtonProps = {
 	isUpArrow: boolean
-	index: number
+	chunkIndex: number
+	elementIndex: number
 }
 
 export const ChemicalElementSubscriptModificationButton: React.FC<
 	ChemicalElementSubscriptModificationButtonProps
-> = ({ isUpArrow, index }) => {
+> = ({ isUpArrow, chunkIndex, elementIndex }) => {
 	const [opacity, setOpacity] = useState(25)
-	const formulaEditorChemicalSectionItems = useMainStore(
-		(state) => state.editorChemicalSectionItems
+	const formulaEditorChemicalSectionChunks = useMainStore(
+		(state) => state.editorChemicalSectionChunks
 	)
-	const setFormulaEditorChemicalSectionItemSubscript = useMainStore(
-		(state) => state.setEditorChemicalSectionItemSubscript
+	const setFormulaEditorChemicalSectionItemSubscriptValue = useMainStore(
+		(state) => state.setEditorChemicalSectionItemSubscriptValue
 	)
 
 	if (isUpArrow === true) {
@@ -38,12 +39,15 @@ export const ChemicalElementSubscriptModificationButton: React.FC<
 					setOpacity(25)
 				}}
 				onClick={() => {
-					setFormulaEditorChemicalSectionItemSubscript(
-						formulaEditorChemicalSectionItems[index].subscript <= 98
-							? formulaEditorChemicalSectionItems[index]
-									.subscript + 1
+					setFormulaEditorChemicalSectionItemSubscriptValue(
+						formulaEditorChemicalSectionChunks[chunkIndex].elements[
+							elementIndex
+						].subscript.value <= 98
+							? formulaEditorChemicalSectionChunks[chunkIndex]
+									.elements[elementIndex].subscript.value + 1
 							: 99,
-						index
+						chunkIndex,
+						elementIndex
 					)
 				}}
 			>
@@ -63,12 +67,15 @@ export const ChemicalElementSubscriptModificationButton: React.FC<
 					setOpacity(25)
 				}}
 				onClick={() => {
-					setFormulaEditorChemicalSectionItemSubscript(
-						formulaEditorChemicalSectionItems[index].subscript >= 2
-							? formulaEditorChemicalSectionItems[index]
-									.subscript - 1
-							: 1,
-						index
+					setFormulaEditorChemicalSectionItemSubscriptValue(
+						formulaEditorChemicalSectionChunks[chunkIndex].elements[
+							elementIndex
+						].subscript.value >= 2
+							? formulaEditorChemicalSectionChunks[chunkIndex]
+									.elements[elementIndex].subscript.value - 1
+							: 99,
+						chunkIndex,
+						elementIndex
 					)
 				}}
 			>
