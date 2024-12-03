@@ -31,7 +31,7 @@ export const ChemicalDropZone: React.FC<ChemicalDropZone> = ({ title }) => {
 		>
 			<Box
 				// border={"1px solid " + dracCyan}
-				backgroundColor={isOver ? "yellow" : ""}
+				backgroundColor={isOver ? "drac.yellow" : ""}
 				boxShadow={"0 0 0 10px rgba(241, 250, 140, 80)"}
 				borderRadius="xl"
 				w="4vw"

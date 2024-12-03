@@ -85,7 +85,7 @@ export const FormulaDisplay: React.FC<FormulaDisplayProps> = () => {
 					</GridItem>
 				)
 			})}
-			<Text color="yellow" mr="1vw" fontSize={"4vh"}>
+			<Text color="drac.yellow" mr="1vw" fontSize={"4vh"}>
 				→
 			</Text>
 

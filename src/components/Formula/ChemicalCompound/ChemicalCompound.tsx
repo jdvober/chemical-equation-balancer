@@ -35,6 +35,7 @@ export const ChemicalCompound: React.FC<ChemicalCompoundProps> = ({
 							chunk={chunk}
 							chunkIndex={chunkIndex}
 							arrows={false}
+							location="FORMULA"
 						/>
 					</HStack>
 				))}

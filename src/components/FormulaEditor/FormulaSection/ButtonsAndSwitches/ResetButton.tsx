@@ -31,7 +31,7 @@ export const ResetButton: React.FC<ResetButtonProps> = () => {
 					)
 				}}
 				bg="comment"
-				color="bground"
+				color="drac.bg"
 			>
 				<RxReset />
 			</Button>

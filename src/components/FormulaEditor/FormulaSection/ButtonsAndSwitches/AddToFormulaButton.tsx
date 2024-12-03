@@ -129,7 +129,7 @@ export const AddToFormulaButton: React.FC<AddToFormulaButtonProps> = () => {
 						: addNewProducts()
 				}}
 				bg="comment"
-				color="bground"
+				color="drac.bg"
 			>
 				<TiChevronRightOutline />
 			</Button>

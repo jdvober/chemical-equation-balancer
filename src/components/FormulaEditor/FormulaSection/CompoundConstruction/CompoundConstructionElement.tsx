@@ -110,15 +110,14 @@ export const CompoundConstructionElement = ({
 
 	return (
 		<Flex
-			padding="3"
 			backgroundColor={"none"}
 			color={
 				selectedConstructionCompoundIDs.includes(eID)
 					? dracOrange
 					: dracPurple
 			}
-			w={`3vw`}
-			h={`3vw`}
+			// w={`3vw`}
+			// h={`3vw`}
 			mb=".25vw"
 			ml=".125vw"
 			align="center"

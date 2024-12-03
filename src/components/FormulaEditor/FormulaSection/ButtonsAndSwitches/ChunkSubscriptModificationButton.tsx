@@ -57,7 +57,7 @@ export const ChunkSubscriptModificationButton: React.FC<
 					)
 				}}
 			>
-				<TiArrowUpOutline color="black" />
+				<TiArrowUpOutline color="drac.black" />
 			</Button>
 		)
 	} else {
@@ -92,7 +92,7 @@ export const ChunkSubscriptModificationButton: React.FC<
 					)
 				}}
 			>
-				<TiArrowDownOutline color="black" />
+				<TiArrowDownOutline color="drac.black" />
 			</Button>
 		)
 	}

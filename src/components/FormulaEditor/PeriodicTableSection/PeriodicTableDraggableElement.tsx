@@ -48,7 +48,7 @@ export const PeriodicTableDraggableElement = ({
 						eID: `${symbol}-${uuid()}`,
 						index: editorConstructionSectionChunks.length,
 						symbol: symbol,
-						subscript: { value: 1, color: "purple" },
+						subscript: { value: 1, color: "drac.purple" },
 					},
 				],
 				chunkID: uuid(),
@@ -67,9 +67,9 @@ export const PeriodicTableDraggableElement = ({
 			backgroundColor={
 				symbol === "BLANK" || parent !== "FormulaEditorElementSection"
 					? ""
-					: "fg"
+					: "drac.fg"
 			}
-			color={"currentLine"}
+			color={"drac.cl"}
 			w={`3vw`}
 			h={`3vw`}
 			mb=".25vw"
@@ -88,7 +88,7 @@ export const PeriodicTableDraggableElement = ({
 			onClick={() => {
 				handleClick()
 			}}
-			_hover={{ bg: "red" }}
+			_hover={{ bg: "drac.red" }}
 		>
 			<VStack>
 				<Flex
@@ -98,7 +98,7 @@ export const PeriodicTableDraggableElement = ({
 				>
 					<Text
 						fontSize={"1.5vw"}
-						color={"bg"}
+						color={"drac.bg"}
 						userSelect={"none"}
 						justifySelf="center"
 					>

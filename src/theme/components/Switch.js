@@ -17,9 +17,9 @@ const neutral = definePartsStyle({
 		bg: "comment",
 	},
 	track: {
-		bg: "currentLine",
+		bg: ""drac.cl"",
 		_checked: {
-			bg: "currentLine",
+			bg: ""drac.cl"",
 		},
 	},
 })

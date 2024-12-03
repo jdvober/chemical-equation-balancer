@@ -61,6 +61,8 @@ type ElementCountListEntry = {
 
 type ElementCountList = ElementCountListEntry[]
 
+type CompoundLocation = "FORMULA" | "CONSTRUCTION" | "PERIODIC_TABLE"
+
 type ChemicalSymbol =
 	"H"
 	| "He"

@@ -6,7 +6,7 @@ import { Box, Flex, HStack, Text } from "@chakra-ui/react"
 // If values, fill in the object below
 //type ChemicalDisplayProps = {}
 import { AtomSVG } from "@/components/ChemicalDisplay/AtomSVG.tsx"
-import { dracCurrentLine } from "@/theme/colors/colors.ts"
+import { dracCurrentLine, dracCyan } from "@/theme/colors/colors.ts"
 import { useMainStore } from "../../stores/MainStore.ts"
 
 // If no values, use this:
@@ -31,11 +31,10 @@ export const ChemicalDisplay: React.FC<ChemicalDisplayProps> = () => {
 	return (
 		<Flex w="95vw" justifyContent="space-evenly">
 			<Box
-				border={`1px solid ${dracCurrentLine}`}
+				border={`1px solid drac.cl`}
 				w="45vw"
 				minW="45vw"
 				maxW="45vw"
-				overflowX="scroll"
 				p="2vh"
 				borderRadius="1vw"
 			>
@@ -48,55 +47,64 @@ export const ChemicalDisplay: React.FC<ChemicalDisplayProps> = () => {
 							</Text>
 							{getCompoundString(reactant).map((compound) => {
 								return (
-									<div key={uuid()}>
+									<Flex dir="row" key={uuid()}>
 										<Text>{compound.symbol}</Text>
 										<Text>
 											{compound.count > 1 ? (
-												<sub>{compound.count}</sub>
+												<Text>
+													<sub>{compound.count}</sub>
+												</Text>
 											) : null}
 										</Text>
-									</div>
+									</Flex>
 								)
 							})}
-							{getCompoundString(reactant).map((compound) => {
-								return (
-									<div key={uuid()}>
-										{/* Atoms */}
-										<HStack ml="1vw">
-											{Array(
-												compound.count *
-													reactant.coefficient
-											)
-												.fill(0)
-												.map(() => {
-													return (
-														<AtomSVG
-															cirFill="black"
-															cirRadiusInVW={2.5}
-															cirStroke="black"
-															symbol={
-																compound.symbol
-															}
-															textFill="red"
-															key={uuid()}
-														/>
-													)
-												})}
-										</HStack>
-									</div>
-								)
-							})}
+							<HStack overflowX={"scroll"} ml="1vw" mb="1vw">
+								{getCompoundString(reactant).map((compound) => {
+									return (
+										<Box key={uuid()}>
+											{/* Atoms */}
+											<HStack ml="1vw">
+												{Array(
+													compound.count *
+														reactant.coefficient
+												)
+													.fill(0)
+													.map(() => {
+														return (
+															<AtomSVG
+																cirFill={
+																	dracCurrentLine
+																}
+																cirRadiusInVW={
+																	2.5
+																}
+																cirStroke="drac.black"
+																symbol={
+																	compound.symbol
+																}
+																textFill={
+																	dracCyan
+																}
+																key={uuid()}
+															/>
+														)
+													})}
+											</HStack>
+										</Box>
+									)
+								})}
+							</HStack>
 						</Flex>
 					)
 				})}
 			</Box>
 			{/* Products */}
 			<Box
-				border={`1px solid ${dracCurrentLine}`}
+				border={`1px solid drac.cl`}
 				w="45vw"
 				minW="45vw"
 				maxW="45vw"
-				overflowX="scroll"
 				p="2vh"
 				borderRadius="1vw"
 			>
@@ -109,44 +117,54 @@ export const ChemicalDisplay: React.FC<ChemicalDisplayProps> = () => {
 							</Text>
 							{getCompoundString(product).map((compound) => {
 								return (
-									<div key={uuid()}>
+									<Flex dir="row" key={uuid()}>
 										<Text>{compound.symbol}</Text>
 										<Text>
 											{compound.count > 1 ? (
-												<sub>{compound.count}</sub>
+												<Text>
+													<sub>{compound.count}</sub>
+												</Text>
 											) : null}
 										</Text>
-									</div>
+									</Flex>
 								)
 							})}
-							{getCompoundString(product).map((compound) => {
-								return (
-									<div key={uuid()}>
-										{/* Atoms */}
-										<HStack ml="1vw">
-											{Array(
-												compound.count *
-													product.coefficient
-											)
-												.fill(0)
-												.map(() => {
-													return (
-														<AtomSVG
-															cirFill="black"
-															cirRadiusInVW={2.5}
-															cirStroke="black"
-															symbol={
-																compound.symbol
-															}
-															textFill="red"
-															key={uuid()}
-														/>
-													)
-												})}
-										</HStack>
-									</div>
-								)
-							})}
+							<HStack overflowX={"scroll"} ml="1vw" mb="1vw">
+								{getCompoundString(product).map((compound) => {
+									return (
+										<div key={uuid()}>
+											{/* Atoms */}
+											<HStack ml="1vw">
+												{Array(
+													compound.count *
+														product.coefficient
+												)
+													.fill(0)
+													.map(() => {
+														return (
+															<AtomSVG
+																cirFill={
+																	dracCurrentLine
+																}
+																cirRadiusInVW={
+																	2.5
+																}
+																cirStroke="drac.black"
+																symbol={
+																	compound.symbol
+																}
+																textFill={
+																	dracCyan
+																}
+																key={uuid()}
+															/>
+														)
+													})}
+											</HStack>
+										</div>
+									)
+								})}
+							</HStack>
 						</Flex>
 					)
 				})}
@@ -156,10 +174,10 @@ export const ChemicalDisplay: React.FC<ChemicalDisplayProps> = () => {
 }
 
 // <AtomSVG
-// 	cirFill="black"
+// 	cirFill="drac.black"
 // 	cirRadiusInVW={ 2.5 }
-// 	cirStroke="black"
+// 	cirStroke="drac.black"
 // 	symbol={ compound.symbol }
-// 	textFill="red"
+// 	textFill="drac.red"
 // 	key={ uuid() }
 // />

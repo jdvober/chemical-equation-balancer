@@ -1,8 +1,10 @@
 import React from "react"
 import { v4 as uuid } from "uuid"
 
+import { FormulaElement } from "@/components/Formula/CompoundChunk/FormulaElement"
 import { ChemicalElementSubscriptModificationButton } from "@/components/FormulaEditor/FormulaSection/ButtonsAndSwitches/ChemicalElementSubscriptModificationButton"
 import { CompoundConstructionElement } from "@/components/FormulaEditor/FormulaSection/CompoundConstruction/CompoundConstructionElement"
+import { PeriodicTableDraggableElement } from "@/components/FormulaEditor/PeriodicTableSection/PeriodicTableDraggableElement"
 import { Box, Flex } from "@chakra-ui/react"
 
 // If no values, use this:
@@ -12,12 +14,14 @@ type SubcompoundProps = {
 	chunk: CompoundChunk
 	chunkIndex: number
 	arrows: boolean
+	location: CompoundLocation
 }
 
 export const Subcompound: React.FC<SubcompoundProps> = ({
 	chunk,
 	chunkIndex,
 	arrows,
+	location,
 }) => {
 	return (
 		<Flex
@@ -37,14 +41,35 @@ export const Subcompound: React.FC<SubcompoundProps> = ({
 								elementIndex={elementIndex}
 							/>
 						) : null}
-						<CompoundConstructionElement
-							key={uuid()}
-							id={`${element.symbol}-${uuid()}`}
-							symbol={element.symbol}
-							eID={element.eID}
-							chunkID={chunk.chunkID}
-							subscript={element.subscript}
-						/>
+						{location === "FORMULA" ? (
+							<FormulaElement
+								key={uuid()}
+								id={`${element.symbol}-${uuid()}`}
+								symbol={element.symbol}
+								eID={element.eID}
+								chunkID={chunk.chunkID}
+								subscript={element.subscript}
+							/>
+						) : null}
+						{location === "CONSTRUCTION" ? (
+							<CompoundConstructionElement
+								key={uuid()}
+								id={`${element.symbol}-${uuid()}`}
+								symbol={element.symbol}
+								eID={element.eID}
+								chunkID={chunk.chunkID}
+								subscript={element.subscript}
+							/>
+						) : null}
+						{location === "PERIODIC_TABLE" ? (
+							<PeriodicTableDraggableElement
+								key={uuid()}
+								id={`${element.symbol}-${uuid()}`}
+								symbol={element.symbol}
+								eID={element.eID}
+								parent="FormulaEditorElementSection"
+							/>
+						) : null}
 						{arrows === true ? (
 							<ChemicalElementSubscriptModificationButton
 								isUpArrow={false}

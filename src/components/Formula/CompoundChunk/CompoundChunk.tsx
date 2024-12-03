@@ -10,33 +10,50 @@ type CompoundChunkProps = {
 	chunk: CompoundChunk
 	chunkIndex: number
 	arrows: boolean
+	location: CompoundLocation
 }
 
 export const CompoundChunk: React.FC<CompoundChunkProps> = ({
 	chunk,
 	chunkIndex,
 	arrows,
+	location,
 }) => {
 	return (
 		<Flex
 			className="CompoundChunk"
 			direction="row"
 			justifyContent={"center"} /*justify ==> along main axis*/
-			alignItems={"center"} /*align ==> along cross axis*/
+			alignContent="center"
 		>
 			{chunk.parenthesesSubscript >= 1 ? (
-				<Text fontSize="2vw">(</Text>
+				<Text fontSize="3.25vw" color="drac.orange">
+					(
+				</Text>
 			) : null}
 			<Subcompound
 				chunk={chunk}
 				chunkIndex={chunkIndex}
 				arrows={arrows}
+				location={location}
 			/>
 			{chunk.parenthesesSubscript >= 1 ? (
-				<Text fontSize="2vw">)</Text>
+				<Flex dir="column">
+					<Text
+						fontSize="3.25vw"
+						color="drac.orange"
+						alignSelf="center"
+					>
+						)
+					</Text>
+				</Flex>
 			) : null}
 			{chunk.parenthesesSubscript > 1 ? (
-				<Text fontSize="2vw">
+				<Text
+					fontSize="2.25vw"
+					color="drac.orange"
+					alignSelf="flex-end"
+				>
 					<sub>{chunk.parenthesesSubscript}</sub>
 				</Text>
 			) : null}

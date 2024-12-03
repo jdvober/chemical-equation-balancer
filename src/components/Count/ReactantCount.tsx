@@ -59,10 +59,10 @@ export const ReactantCount: React.FC<ReactantCountProps> = () => {
 							<Text
 								color={
 									numSamePairs() === countList.length
-										? "green"
+										? "drac.green"
 										: determineElementSame() === true
-										? "yellow"
-										: "red"
+										? "drac.yellow"
+										: "drac.red"
 								}
 								opacity={
 									numSamePairs() === countList.length

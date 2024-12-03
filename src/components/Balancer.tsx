@@ -15,7 +15,7 @@ type BalancerProps = Record<string, never>
 export const Balancer: React.FC<BalancerProps> = () => {
 	return (
 		<Box className="Balancer">
-			<Center fontSize="5xl" bg="bg">
+			<Center fontSize="5xl" bg="drac.bg">
 				<VStack>
 					<HStack>
 						<Formula />

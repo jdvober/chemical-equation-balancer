@@ -14,7 +14,7 @@ export const EditorPeriodicTableSection: React.FC<
 	const elements = useMainStore((state) => state.elements)
 	return (
 		<Box>
-			<VStack color="fg">
+			<VStack color="drac.fg">
 				<Flex w="86vw" wrap="wrap" justify={"center"}>
 					{elements.map((period) => {
 						return (

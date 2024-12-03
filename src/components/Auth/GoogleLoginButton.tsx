@@ -67,7 +67,7 @@ export const GoogleLoginButton: React.FC<GoogleLoginButtonProps> = () => {
 							src={profile.picture}
 							size="sm"
 						/>
-						<Text color="black">Logout</Text>
+						<Text color="drac.black">Logout</Text>
 					</HStack>
 				</Button>
 			) : (

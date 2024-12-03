@@ -4,7 +4,7 @@ export const Styles = {
 	global: (props) => ({
 		body: {
 			height: 2 * window.innerHeight,
-			bg: "bg",
+			bg: "drac.bg",
 		},
 	}),
 }

@@ -40,6 +40,7 @@ export const CompoundConstruction: React.FC<CompoundConstructionProps> = () => {
 								chunkIndex={chunkIndex}
 								arrows={true}
 								key={uuid()}
+								location="CONSTRUCTION"
 							/>
 							{chunk.parenthesesSubscript >= 1 ? (
 								<ChunkSubscriptModificationButton

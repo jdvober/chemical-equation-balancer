@@ -41,7 +41,7 @@ export const FormulaEditor: React.FC<FormulaEditorProps> = () => {
 	)
 
 	return (
-		<Box className="FormulaEditor" color="fg" h="90%">
+		<Box className="FormulaEditor" color="drac.fg" h="90%">
 			<DndContext
 				sensors={sensors}
 				collisionDetection={rectIntersection}

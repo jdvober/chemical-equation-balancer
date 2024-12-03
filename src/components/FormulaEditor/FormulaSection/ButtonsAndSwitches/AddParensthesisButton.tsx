@@ -86,7 +86,7 @@ export const AddParensthesisButton: React.FC<
 				setParens()
 			}}
 			bg="comment"
-			color="bground"
+			color="drac.bg"
 		>
 			<Text>
 				{"( )"}
