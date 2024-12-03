@@ -28,6 +28,8 @@ export const ReactantProductSwitch: React.FC<
 							: "REACTANTS"
 					)
 				}}
+				ml=".5vw"
+				mr=".5vw"
 			/>
 			<Text>Products</Text>
 		</Flex>
