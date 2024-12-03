@@ -28,7 +28,7 @@ export const FormulaSection: React.FC<FormulaSectionProps> = () => {
 				flex="1"
 				padding="1vh"
 				w="95vw"
-				h="20vh"
+				h="25vh"
 				align={"center"}
 				pl="2vw"
 				pr="2vw"

@@ -1,8 +1,8 @@
 import React from "react"
 import { v4 as uuid } from "uuid"
 
-import { CompoundConstructionElement } from "@/components/FormulaEditor/CompoundConstructionElement"
 import { ChemicalElementSubscriptModificationButton } from "@/components/FormulaEditor/FormulaSection/ButtonsAndSwitches/ChemicalElementSubscriptModificationButton"
+import { CompoundConstructionElement } from "@/components/FormulaEditor/FormulaSection/CompoundConstruction/CompoundConstructionElement"
 import { Box, Flex } from "@chakra-ui/react"
 
 // If no values, use this:
@@ -39,7 +39,7 @@ export const Subcompound: React.FC<SubcompoundProps> = ({
 						) : null}
 						<CompoundConstructionElement
 							key={uuid()}
-							id={uuid()}
+							id={`${element.symbol}-${uuid()}`}
 							symbol={element.symbol}
 							eID={element.eID}
 							chunkID={chunk.chunkID}

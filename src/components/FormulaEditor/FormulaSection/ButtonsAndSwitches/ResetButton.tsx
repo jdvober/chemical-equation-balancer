@@ -11,11 +11,11 @@ type ResetButtonProps = Record<string, never>
 
 export const ResetButton: React.FC<ResetButtonProps> = () => {
 	const setEditorChemicalSectionItems = useMainStore(
-		(state) => state.setEditorChemicalSectionChunks
+		(state) => state.setEditorConstructionSectionChunks
 	)
 
 	const editorChemicalSectionItems = useMainStore(
-		(state) => state.editorChemicalSectionChunks
+		(state) => state.editorConstructionSectionChunks
 	)
 
 	return (
@@ -30,6 +30,8 @@ export const ResetButton: React.FC<ResetButtonProps> = () => {
 						editorChemicalSectionItems.slice(0, -1)
 					)
 				}}
+				bg="comment"
+				color="bground"
 			>
 				<RxReset />
 			</Button>

@@ -3,7 +3,7 @@ import { useDraggable } from "@dnd-kit/core"
 import { CSS } from "@dnd-kit/utilities"
 
 import { dracOrange, dracPurple } from "@/theme/colors/colors"
-import { useMainStore } from "../../stores/MainStore"
+import { useMainStore } from "../../../../stores/MainStore"
 
 // If no values, use this:
 // type CompoundConstructionElementProps = Record<string, never>
@@ -41,25 +41,25 @@ export const CompoundConstructionElement = ({
 		(state) => state.setSelectedConstructionCompoundIDs
 	)
 
-	const formulaEditorChemicalSectionChunks = useMainStore(
-		(state) => state.editorChemicalSectionChunks
+	const editorConstructionSectionChunks = useMainStore(
+		(state) => state.editorConstructionSectionChunks
 	)
 
-	const setFormulaEditorChemicalSectionChunks = useMainStore(
-		(state) => state.setEditorChemicalSectionChunks
+	const setEditorConstructionSectionChunks = useMainStore(
+		(state) => state.setEditorConstructionSectionChunks
 	)
 
 	const removeElement = () => {
-		console.log(eID)
+		console.log(chunkID, eID)
 
-		console.log(formulaEditorChemicalSectionChunks)
+		console.log(editorConstructionSectionChunks)
 		console.log("Remove element?")
 
 		//Determine Index of the element
 
 		let indexes = { chunk: -1, element: -1 }
 
-		formulaEditorChemicalSectionChunks.forEach((chunk, i) => {
+		editorConstructionSectionChunks.forEach((chunk, i) => {
 			chunk.elements.forEach((element, j) => {
 				element.eID === eID
 					? (indexes = { chunk: i, element: j })
@@ -70,7 +70,7 @@ export const CompoundConstructionElement = ({
 		if (indexes.chunk >= 0 && indexes.element >= 0) {
 			let newChunks: CompoundChunk[] = []
 
-			formulaEditorChemicalSectionChunks.forEach((chunk) => {
+			editorConstructionSectionChunks.forEach((chunk) => {
 				let newElements: ChemicalElement[] = []
 				chunk.elements.forEach((element) => {
 					if (element.eID != eID) {
@@ -84,13 +84,7 @@ export const CompoundConstructionElement = ({
 				})
 			})
 
-			setFormulaEditorChemicalSectionChunks(newChunks)
-
-			// setFormulaEditorChemicalSectionChunks(
-			// 	[...formulaEditorChemicalSectionChunks].filter((chunk) => {
-			// 		chunk.elements[indexes.element].eID != eID
-			// 	})
-			// )
+			setEditorConstructionSectionChunks(newChunks)
 		} else {
 			console.log(
 				"eID was either not found or never set to a number besides -1"
@@ -127,34 +121,12 @@ export const CompoundConstructionElement = ({
 			h={`3vw`}
 			mb=".25vw"
 			ml=".125vw"
-			// mr={
-			// 	formulaEditorChemicalSectionChunks[
-			// 		formulaEditorChemicalSectionChunks.indexOf({
-			// 			eID: eID,
-			// 			index: index,
-			// 			symbol: symbol as ChemicalSymbol,
-			// 			subscript: subscript,
-			// 			subscriptColor: dracPurple,
-			// 		}) == -1
-			// 			? 0
-			// 			: formulaEditorChemicalSectionChunks.indexOf({
-			// 					eID: eID,
-			// 					index: index,
-			// 					symbol: symbol as ChemicalSymbol,
-			// 					subscript: subscript,
-			// 					subscriptColor: dracPurple,
-			// 			  })
-			// 	].subscript <= 1
-			// 		? "-1vw"
-			// 		: ".125vw"
-			// }
 			align="center"
 			justify={"center"}
 			transform={style.transform}
 			{...listeners}
 			{...attributes}
 			ref={setNodeRef}
-			userSelect={"none"}
 			onContextMenu={(e) => {
 				handleContextMenu(e)
 			}}
@@ -176,7 +148,6 @@ export const CompoundConstructionElement = ({
 								? dracOrange
 								: dracPurple
 						}
-						userSelect={"none"}
 						justifySelf="center"
 					>
 						{symbol}
@@ -188,8 +159,6 @@ export const CompoundConstructionElement = ({
 								? dracOrange
 								: dracPurple
 						}
-						// opacity={subscript === 1 ? "0%" : "100%"}
-						userSelect={"none"}
 					>
 						<sub
 							color={

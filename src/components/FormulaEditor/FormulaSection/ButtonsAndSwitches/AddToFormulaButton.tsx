@@ -12,11 +12,11 @@ type AddToFormulaButtonProps = Record<string, never>
 export const AddToFormulaButton: React.FC<AddToFormulaButtonProps> = () => {
 	const editFormulaSection = useMainStore((state) => state.editFormulaSection)
 	const setReactants = useMainStore((state) => state.setReactants)
-	const setEditorChemicalSectionItems = useMainStore(
-		(state) => state.setEditorChemicalSectionChunks
+	const setEditorConstructionSectionChunks = useMainStore(
+		(state) => state.setEditorConstructionSectionChunks
 	)
-	const editorChemicalSectionItems = useMainStore(
-		(state) => state.editorChemicalSectionChunks
+	const editorConstructionSectionChunks = useMainStore(
+		(state) => state.editorConstructionSectionChunks
 	)
 
 	const setProducts = useMainStore((state) => state.setProducts)
@@ -26,13 +26,6 @@ export const AddToFormulaButton: React.FC<AddToFormulaButtonProps> = () => {
 	const setCountList = useMainStore((state) => state.setCountList)
 	const addNewReactants = () => {
 		let newReactants = formula.reactants
-		const elements = editorChemicalSectionItems.map((item) => {
-			return {
-				index: item.index,
-				subscript: item.subscript,
-				symbol: item.symbol,
-			}
-		})
 		newReactants = [
 			...newReactants,
 			{
@@ -40,21 +33,17 @@ export const AddToFormulaButton: React.FC<AddToFormulaButtonProps> = () => {
 
 				formulaSection: "REACTANTS",
 				isHovered: false,
-				chunks: [
-					{
-						parenthesesSubscript: 3,
-						elements: elements as ChemicalElement[],
-					},
-				],
+				chunks: editorConstructionSectionChunks,
 			},
 		]
 
 		setReactants(newReactants)
-		let newElements = elements.map((element) => {
-			return {
-				symbol: element.symbol,
-				count: element.subscript,
-			}
+		let newElements: ChemicalElement[] = []
+
+		editorConstructionSectionChunks.forEach((chunk) => {
+			chunk.elements.forEach((element) => {
+				newElements.push(element)
+			})
 		})
 
 		// Update the counts
@@ -66,7 +55,7 @@ export const AddToFormulaButton: React.FC<AddToFormulaButtonProps> = () => {
 					tempCountReactants = {
 						symbol: newElement.symbol as ChemicalSymbol,
 						reactantCount: (element.reactantCount +
-							newElement.count) as number,
+							newElement.subscript.value) as number,
 						productCount: element.productCount,
 					}
 				}
@@ -79,41 +68,29 @@ export const AddToFormulaButton: React.FC<AddToFormulaButtonProps> = () => {
 		})
 
 		setCountList(newCountList)
-		setEditorChemicalSectionItems([])
+		setEditorConstructionSectionChunks([])
 	}
 
 	const addNewProducts = () => {
 		let newProducts = formula.products
-		const elements = editorChemicalSectionItems.map((item) => {
-			return {
-				eID: item.eID,
-				index: item.index,
-				symbol: item.symbol,
-				subscript: item.subscript,
-			} as ChemicalElement
-		})
 		newProducts = [
 			...newProducts,
 			{
 				coefficient: 1,
+
 				formulaSection: "PRODUCTS",
 				isHovered: false,
-				chunks: [
-					{
-						parenthesesSubscript: 2,
-						elements: elements as ChemicalElement[],
-					},
-				],
+				chunks: editorConstructionSectionChunks,
 			},
 		]
 
 		setProducts(newProducts)
+		let newElements: ChemicalElement[] = []
 
-		let newElements = elements.map((element) => {
-			return {
-				symbol: element.symbol,
-				count: element.subscript,
-			}
+		editorConstructionSectionChunks.forEach((chunk) => {
+			chunk.elements.forEach((element) => {
+				newElements.push(element)
+			})
 		})
 
 		// Update the counts
@@ -124,9 +101,9 @@ export const AddToFormulaButton: React.FC<AddToFormulaButtonProps> = () => {
 				if (newElement.symbol === element.symbol) {
 					tempCountProducts = {
 						symbol: newElement.symbol as ChemicalSymbol,
-						reactantCount: element.productCount,
+						reactantCount: element.reactantCount,
 						productCount: (element.productCount +
-							newElement.count) as number,
+							newElement.subscript.value) as number,
 					}
 				}
 			})
@@ -138,7 +115,7 @@ export const AddToFormulaButton: React.FC<AddToFormulaButtonProps> = () => {
 		})
 
 		setCountList(newCountList)
-		setEditorChemicalSectionItems([])
+		setEditorConstructionSectionChunks([])
 	}
 	return (
 		<Box className="AddToFormulaButton">
@@ -151,6 +128,8 @@ export const AddToFormulaButton: React.FC<AddToFormulaButtonProps> = () => {
 						? addNewReactants()
 						: addNewProducts()
 				}}
+				bg="comment"
+				color="bground"
 			>
 				<TiChevronRightOutline />
 			</Button>

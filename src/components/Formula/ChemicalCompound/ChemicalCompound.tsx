@@ -28,7 +28,6 @@ export const ChemicalCompound: React.FC<ChemicalCompoundProps> = ({
 				mb={"auto"}
 				key={uuid()}
 				alignSelf="center"
-				userSelect={"none"}
 			>
 				{compound.chunks.map((chunk, chunkIndex) => (
 					<HStack key={uuid()}>
@@ -41,12 +40,12 @@ export const ChemicalCompound: React.FC<ChemicalCompoundProps> = ({
 				))}
 				{formulaSection === "REACTANTS" ? (
 					index < formula.reactants.length - 1 ? (
-						<Text color="dracula.dracComment" mr="1vw">
+						<Text color="comment" mr="1vw">
 							{includeSymbols ? "+" : ""}
 						</Text>
 					) : null
 				) : index < formula.products.length - 1 ? (
-					<Text color="dracula.dracComment" mr="1vw">
+					<Text color="comment" mr="1vw">
 						{includeSymbols ? "+" : ""}
 					</Text>
 				) : null}

@@ -14,18 +14,19 @@ export const EditorPeriodicTableSection: React.FC<
 	const elements = useMainStore((state) => state.elements)
 	return (
 		<Box>
-			<VStack color="dracula.dracFG">
+			<VStack color="fg">
 				<Flex w="86vw" wrap="wrap" justify={"center"}>
 					{elements.map((period) => {
 						return (
 							<HStack key={uuid()}>
 								{period.map((symbol) => {
 									if (symbol != "BLANK") {
+										const uniqueID = `${symbol}-${uuid()}`
 										return (
 											<PeriodicTableDraggableElement
 												symbol={symbol}
-												id={uuid()}
-												eID={uuid()}
+												id={uniqueID}
+												eID={uniqueID}
 												parent={
 													"FormulaEditorElementSection"
 												}

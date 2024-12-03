@@ -14,12 +14,12 @@ const neutral = definePartsStyle({
 		// ...
 	},
 	thumb: {
-		bg: "dracula.dracComment",
+		bg: "comment",
 	},
 	track: {
-		bg: "dracula.dracCurrentLine",
+		bg: "currentLine",
 		_checked: {
-			bg: "dracula.dracCurrentLine",
+			bg: "currentLine",
 		},
 	},
 })

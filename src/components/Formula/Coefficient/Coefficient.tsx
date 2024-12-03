@@ -71,14 +71,12 @@ export const Coefficient: React.FC<CoefficientProps> = ({
 				onClick={() => {
 					increment()
 				}}
+				bg="currentLine"
+				color="green"
 			>
 				+
 			</Button>
-			<Text
-				color="dracula.dracPurple"
-				fontSize={"8vh"}
-				alignSelf="center"
-			>
+			<Text color={"pink"} fontSize={"8vh"} alignSelf="center">
 				{formulaSection == "REACTANTS"
 					? formula.reactants[index].coefficient
 					: formula.products[index].coefficient}
@@ -90,6 +88,8 @@ export const Coefficient: React.FC<CoefficientProps> = ({
 				onClick={() => {
 					decrement()
 				}}
+				bg="currentLine"
+				color="red"
 			>
 				-
 			</Button>

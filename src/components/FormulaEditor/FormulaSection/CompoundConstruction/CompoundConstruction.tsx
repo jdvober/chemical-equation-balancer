@@ -2,6 +2,7 @@ import React from "react"
 import { v4 as uuid } from "uuid"
 
 import { CompoundChunk } from "@/components/Formula/CompoundChunk/CompoundChunk"
+import { ChunkSubscriptModificationButton } from "@/components/FormulaEditor/FormulaSection/ButtonsAndSwitches/ChunkSubscriptModificationButton"
 import { ChemicalDropZone } from "@/components/FormulaEditor/FormulaSection/ChemicalDropZone"
 import { useMainStore } from "@/stores/MainStore"
 import { Flex, VStack } from "@chakra-ui/react"
@@ -12,33 +13,45 @@ type CompoundConstructionProps = Record<string, never>
 //type CompoundConstructionProps = {}
 
 export const CompoundConstruction: React.FC<CompoundConstructionProps> = () => {
-	const editorChemicalSectionChunks = useMainStore(
-		(state) => state.editorChemicalSectionChunks
+	const editorConstructionSectionChunks = useMainStore(
+		(state) => state.editorConstructionSectionChunks
 	)
 
 	return (
 		<Flex dir="row" w="auto" className="CompoundConstruction">
-			{editorChemicalSectionChunks.length === 0 ? (
+			{editorConstructionSectionChunks.length === 0 ? (
 				<ChemicalDropZone
 					title={"FormulaEditorChemicalSection"}
 					items={[]}
 					key={uuid()}
 				/>
 			) : (
-				editorChemicalSectionChunks.map((chunk, chunkIndex) => {
+				editorConstructionSectionChunks.map((chunk, chunkIndex) => {
 					return (
 						<VStack key={uuid()} h="100%" alignSelf="center">
+							{chunk.parenthesesSubscript >= 1 ? (
+								<ChunkSubscriptModificationButton
+									chunkID={chunk.chunkID}
+									isUpArrow={true}
+								/>
+							) : null}
 							<CompoundChunk
 								chunk={chunk}
 								chunkIndex={chunkIndex}
 								arrows={true}
 								key={uuid()}
 							/>
+							{chunk.parenthesesSubscript >= 1 ? (
+								<ChunkSubscriptModificationButton
+									chunkID={chunk.chunkID}
+									isUpArrow={false}
+								/>
+							) : null}
 						</VStack>
 					)
 				})
 			)}
-			{editorChemicalSectionChunks.length >= 1 ? (
+			{editorConstructionSectionChunks.length >= 1 ? (
 				<ChemicalDropZone
 					title={"FormulaEditorChemicalSection"}
 					items={[]}

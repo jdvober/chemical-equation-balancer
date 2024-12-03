@@ -55,12 +55,7 @@ export const Formula: React.FC<FormulaProps> = () => {
 					</HStack>
 				</Box>
 			))}
-			<Text
-				color="dracula.dracYellow"
-				ml="1vw"
-				mr="1vw"
-				alignSelf="center"
-			>
+			<Text color="yellow" ml="1vw" mr="1vw" alignSelf="center">
 				→
 			</Text>
 

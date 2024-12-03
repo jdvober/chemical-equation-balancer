@@ -24,10 +24,10 @@ type FormulaEditorProps = Record<string, never>
 
 export const FormulaEditor: React.FC<FormulaEditorProps> = () => {
 	const formulaEditorChemicalSectionChunks = useMainStore(
-		(state) => state.editorChemicalSectionChunks
+		(state) => state.editorConstructionSectionChunks
 	)
 	const setFormulaEditorChemicalSectionChunks = useMainStore(
-		(state) => state.setEditorChemicalSectionChunks
+		(state) => state.setEditorConstructionSectionChunks
 	)
 	const selectedConstructionCompoundIDs = useMainStore(
 		(state) => state.selectedConstructionCompoundIDs
@@ -41,7 +41,7 @@ export const FormulaEditor: React.FC<FormulaEditorProps> = () => {
 	)
 
 	return (
-		<Box className="FormulaEditor" color="dracula.dracFG" h="90%">
+		<Box className="FormulaEditor" color="fg" h="90%">
 			<DndContext
 				sensors={sensors}
 				collisionDetection={rectIntersection}

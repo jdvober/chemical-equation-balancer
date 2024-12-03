@@ -16,11 +16,7 @@ export const ChemicalElement: React.FC<ChemicalElementProps> = ({
 }) => {
 	return (
 		<Box className="ChemicalElement" border="1px solid purple">
-			<HStack
-				color={
-					isHovered === true ? "dracula.dracRed" : "dracula.dracFG"
-				}
-			>
+			<HStack color={isHovered === true ? "red" : "fg"}>
 				<Text fontSize={`${fontSizeInVH}vh`}>{symbol}</Text>
 				{subscript && !(subscript <= 1) ? (
 					<Text fontSize={`${fontSizeInVH}vh`}>

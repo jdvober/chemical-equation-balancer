@@ -21,7 +21,7 @@ type State = {
 	formulaEditorActive: boolean,
 	elements: ( ChemicalSymbol )[][]
 	subscriptColor: string
-	editorChemicalSectionChunks: CompoundChunk[]
+	editorConstructionSectionChunks: CompoundChunk[]
 	reactantAndProductElementListsMatch: boolean,
 	selectedConstructionCompoundIDs: string[]
 }
@@ -34,10 +34,10 @@ type Action = {
 	setCountList: ( newCountList: ElementCountList ) => void,
 	setEditFormulaSection: ( newFormulaSection: FormulaSection ) => void
 	setFormulaEditorActive: ( isActive: boolean ) => void,
-	setChemicalSelectionItemSubscriptColor: ( newSubscriptColor: string, chunkIndex: number, elementIndex: number
+	setConstructionSelectionItemSubscriptColor: ( newSubscriptColor: string, chunkIndex: number, elementIndex: number
 	) => void
-	setEditorChemicalSectionChunks: ( newFormulaEditorChemicalSectionItems: CompoundChunk[] ) => void
-	setEditorChemicalSectionItemSubscriptValue: ( newSubscriptValue: number, chunkIndex: number, elementIndex: number ) => void
+	setEditorConstructionSectionChunks: ( newFormulaEditorConstructionSectionChunks: CompoundChunk[] ) => void
+	setEditorConstructionSectionItemSubscriptValue: ( newSubscriptValue: number, chunkIndex: number, elementIndex: number ) => void
 	setHoverStatus: ( formulaSection: FormulaSection, index: number, newHoverStatus: boolean ) => void
 	setReactantAndProductElementListsMatch: ( newBoolean: boolean ) => void
 	setSelectedConstructionCompoundIDs: ( selectedCompounds: string[] ) => void
@@ -76,7 +76,7 @@ export const useMainStore = create<State & Action>()(
 				chunks: [
 					{
 						chunkID: uuid(),
-						parenthesesSubscript: 2,
+						parenthesesSubscript: 0,
 						elements: [
 							{
 								index: 0,
@@ -123,7 +123,7 @@ export const useMainStore = create<State & Action>()(
 		formulaEditorActive: false,
 		elements: Elements,
 		subscriptColor: dracPurple,
-		editorChemicalSectionChunks: [],
+		editorConstructionSectionChunks: [],
 		reactantAndProductElementListsMatch: false,
 		selectedConstructionCompoundIDs: [],
 
@@ -168,16 +168,16 @@ export const useMainStore = create<State & Action>()(
 			set( ( state ) => {
 				state.formulaEditorActive = isActive
 			} ),
-		setChemicalSelectionItemSubscriptColor: ( newSubscriptColor, chunkIndex, elementIndex ) => set( ( state ) => {
-			let oldValue = state.editorChemicalSectionChunks[ chunkIndex ].elements[ elementIndex ].subscript.value
-			state.editorChemicalSectionChunks[ chunkIndex ].elements[ elementIndex ].subscript = { color: newSubscriptColor, value: oldValue }
+		setConstructionSelectionItemSubscriptColor: ( newSubscriptColor, chunkIndex, elementIndex ) => set( ( state ) => {
+			let oldValue = state.editorConstructionSectionChunks[ chunkIndex ].elements[ elementIndex ].subscript.value
+			state.editorConstructionSectionChunks[ chunkIndex ].elements[ elementIndex ].subscript = { color: newSubscriptColor, value: oldValue }
 		} ),
-		setEditorChemicalSectionChunks: ( newFormulaEditorChemicalSectionItems ) => set( ( state ) => {
-			state.editorChemicalSectionChunks = newFormulaEditorChemicalSectionItems
+		setEditorConstructionSectionChunks: ( newFormulaEditorChemicalSectionItems ) => set( ( state ) => {
+			state.editorConstructionSectionChunks = newFormulaEditorChemicalSectionItems
 		} ),
-		setEditorChemicalSectionItemSubscriptValue: ( newSubscriptValue, chunkIndex, elementIndex ) => set( ( state ) => {
-			let oldColor = state.editorChemicalSectionChunks[ chunkIndex ].elements[ elementIndex ].subscript.color
-			state.editorChemicalSectionChunks[ chunkIndex ].elements[ elementIndex ].subscript = { color: oldColor, value: newSubscriptValue }
+		setEditorConstructionSectionItemSubscriptValue: ( newSubscriptValue, chunkIndex, elementIndex ) => set( ( state ) => {
+			let oldColor = state.editorConstructionSectionChunks[ chunkIndex ].elements[ elementIndex ].subscript.color
+			state.editorConstructionSectionChunks[ chunkIndex ].elements[ elementIndex ].subscript = { color: oldColor, value: newSubscriptValue }
 		} ),
 		setHoverStatus: ( formulaSection, index, newFormulaStatus ) =>
 			set( ( state ) => {

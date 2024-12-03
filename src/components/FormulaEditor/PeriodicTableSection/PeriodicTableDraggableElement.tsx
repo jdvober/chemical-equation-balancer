@@ -4,7 +4,6 @@ import { Flex, Text, VStack } from "@chakra-ui/react"
 import { useDraggable } from "@dnd-kit/core"
 import { CSS } from "@dnd-kit/utilities"
 
-import { dracFG, dracRed } from "@/theme/colors/colors"
 import { useMainStore } from "../../../stores/MainStore"
 
 export const PeriodicTableDraggableElement = ({
@@ -30,32 +29,32 @@ export const PeriodicTableDraggableElement = ({
 		transform: CSS.Translate.toString(transform),
 	}
 
-	const editorChemicalSectionChunks = useMainStore(
-		(state) => state.editorChemicalSectionChunks
+	const editorConstructionSectionChunks = useMainStore(
+		(state) => state.editorConstructionSectionChunks
 	)
 
-	const setEditorChemicalSectionChunks = useMainStore(
-		(state) => state.setEditorChemicalSectionChunks
+	const setEditorConstructinSectionChunks = useMainStore(
+		(state) => state.setEditorConstructionSectionChunks
 	)
 
 	const addElement = () => {
 		console.log(eID)
-		setEditorChemicalSectionChunks([
-			...editorChemicalSectionChunks,
+		setEditorConstructinSectionChunks([
+			...editorConstructionSectionChunks,
 			{
 				parenthesesSubscript: 0,
 				elements: [
 					{
-						eID: uuid(),
-						index: editorChemicalSectionChunks.length,
+						eID: `${symbol}-${uuid()}`,
+						index: editorConstructionSectionChunks.length,
 						symbol: symbol,
-						subscript: { value: 1, color: "dracula.dracPurple" },
+						subscript: { value: 1, color: "purple" },
 					},
 				],
 				chunkID: uuid(),
 			},
 		] as CompoundChunk[])
-		console.log(editorChemicalSectionChunks)
+		console.log(editorConstructionSectionChunks)
 	}
 
 	const handleClick = () => {
@@ -68,9 +67,9 @@ export const PeriodicTableDraggableElement = ({
 			backgroundColor={
 				symbol === "BLANK" || parent !== "FormulaEditorElementSection"
 					? ""
-					: dracFG
+					: "fg"
 			}
-			color={"dracula.dracCurrentLine"}
+			color={"currentLine"}
 			w={`3vw`}
 			h={`3vw`}
 			mb=".25vw"
@@ -89,7 +88,7 @@ export const PeriodicTableDraggableElement = ({
 			onClick={() => {
 				handleClick()
 			}}
-			_hover={{ bg: dracRed }}
+			_hover={{ bg: "red" }}
 		>
 			<VStack>
 				<Flex
@@ -99,7 +98,7 @@ export const PeriodicTableDraggableElement = ({
 				>
 					<Text
 						fontSize={"1.5vw"}
-						color={"dracula.dracBG"}
+						color={"bg"}
 						userSelect={"none"}
 						justifySelf="center"
 					>

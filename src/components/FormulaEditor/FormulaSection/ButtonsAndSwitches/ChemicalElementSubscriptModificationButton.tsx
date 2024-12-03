@@ -3,7 +3,6 @@ import { TiArrowDownOutline, TiArrowUpOutline } from "react-icons/ti"
 
 import { Button } from "@chakra-ui/react"
 
-import { dracGreen, dracRed } from "@/theme/colors/colors"
 import { useMainStore } from "../../../../stores/MainStore"
 
 // If no values, use this:
@@ -20,17 +19,18 @@ export const ChemicalElementSubscriptModificationButton: React.FC<
 > = ({ isUpArrow, chunkIndex, elementIndex }) => {
 	const [opacity, setOpacity] = useState(25)
 	const formulaEditorChemicalSectionChunks = useMainStore(
-		(state) => state.editorChemicalSectionChunks
+		(state) => state.editorConstructionSectionChunks
 	)
 	const setFormulaEditorChemicalSectionItemSubscriptValue = useMainStore(
-		(state) => state.setEditorChemicalSectionItemSubscriptValue
+		(state) => state.setEditorConstructionSectionItemSubscriptValue
 	)
 
 	if (isUpArrow === true) {
 		return (
 			<Button
-				border={`1px solid ${dracGreen}`}
+				border={`1px solid green`}
 				h="3vh"
+				w="1vw"
 				opacity={`${opacity}%`}
 				onMouseEnter={() => {
 					setOpacity(100)
@@ -51,14 +51,15 @@ export const ChemicalElementSubscriptModificationButton: React.FC<
 					)
 				}}
 			>
-				<TiArrowUpOutline />
+				<TiArrowUpOutline color="black" />
 			</Button>
 		)
 	} else {
 		return (
 			<Button
-				border={`1px solid ${dracRed}`}
+				border={`1px solid red`}
 				h="3vh"
+				w="1vw"
 				opacity={`${opacity}%`}
 				onMouseEnter={() => {
 					setOpacity(100)
@@ -73,13 +74,13 @@ export const ChemicalElementSubscriptModificationButton: React.FC<
 						].subscript.value >= 2
 							? formulaEditorChemicalSectionChunks[chunkIndex]
 									.elements[elementIndex].subscript.value - 1
-							: 99,
+							: 1,
 						chunkIndex,
 						elementIndex
 					)
 				}}
 			>
-				<TiArrowDownOutline />
+				<TiArrowDownOutline color="black" />
 			</Button>
 		)
 	}
