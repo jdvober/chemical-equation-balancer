@@ -2,6 +2,7 @@ import React from "react"
 
 import { AddParensthesisButton } from "@/components/FormulaEditor/FormulaSection/ButtonsAndSwitches/AddParensthesisButton"
 import { AddToFormulaButton } from "@/components/FormulaEditor/FormulaSection/ButtonsAndSwitches/AddToFormulaButton"
+import { ReactantProductSwitch } from "@/components/FormulaEditor/FormulaSection/ButtonsAndSwitches/ReactantProductSwitch"
 import { ResetButton } from "@/components/FormulaEditor/FormulaSection/ButtonsAndSwitches/ResetButton"
 import { VStack } from "@chakra-ui/react"
 
@@ -22,6 +23,7 @@ export const EditorControls: React.FC<EditorControlsProps> = () => {
 			<AddToFormulaButton />
 			<AddParensthesisButton />
 			<ResetButton />
+			<ReactantProductSwitch />
 		</VStack>
 	)
 }

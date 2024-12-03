@@ -16,12 +16,22 @@ export const ChemicalDisplay: React.FC<ChemicalDisplayProps> = () => {
 	const formula = useMainStore((state) => state.formula)
 
 	const getCompoundString = (compound: ChemicalCompound) => {
-		let symbolList = [] as { symbol: ChemicalSymbol; count: number }[]
+		let symbolList = [] as {
+			symbol: ChemicalSymbol
+			count: number
+			parenthesesSubscript: number
+			isFirstElementInChunk: boolean
+			isLastElementInChunk: boolean
+		}[]
 		compound.chunks.forEach((chunk) => {
-			chunk.elements.forEach((element) => {
+			chunk.elements.forEach((element, i) => {
 				symbolList.push({
 					symbol: element.symbol,
 					count: element.subscript.value,
+					parenthesesSubscript: chunk.parenthesesSubscript,
+					isFirstElementInChunk: i === 0 ? true : false,
+					isLastElementInChunk:
+						i === chunk.elements.length - 1 ? true : false,
 				})
 			})
 		})
@@ -48,6 +58,11 @@ export const ChemicalDisplay: React.FC<ChemicalDisplayProps> = () => {
 							{getCompoundString(reactant).map((compound) => {
 								return (
 									<Flex dir="row" key={uuid()}>
+										{compound.parenthesesSubscript >= 2 &&
+										compound.isFirstElementInChunk ===
+											true ? (
+											<Text>(</Text>
+										) : null}
 										<Text>{compound.symbol}</Text>
 										<Text>
 											{compound.count > 1 ? (
@@ -56,6 +71,20 @@ export const ChemicalDisplay: React.FC<ChemicalDisplayProps> = () => {
 												</Text>
 											) : null}
 										</Text>
+										{compound.parenthesesSubscript >= 2 &&
+										compound.isLastElementInChunk ===
+											true ? (
+											<Flex dir="row">
+												<Text>)</Text>
+												<Text>
+													<sub>
+														{
+															compound.parenthesesSubscript
+														}
+													</sub>
+												</Text>
+											</Flex>
+										) : null}
 									</Flex>
 								)
 							})}
@@ -67,7 +96,11 @@ export const ChemicalDisplay: React.FC<ChemicalDisplayProps> = () => {
 											<HStack ml="1vw">
 												{Array(
 													compound.count *
-														reactant.coefficient
+														reactant.coefficient *
+														(compound.parenthesesSubscript <=
+														0
+															? 1
+															: compound.parenthesesSubscript)
 												)
 													.fill(0)
 													.map(() => {
@@ -118,6 +151,11 @@ export const ChemicalDisplay: React.FC<ChemicalDisplayProps> = () => {
 							{getCompoundString(product).map((compound) => {
 								return (
 									<Flex dir="row" key={uuid()}>
+										{compound.parenthesesSubscript >= 2 &&
+										compound.isFirstElementInChunk ===
+											true ? (
+											<Text>(</Text>
+										) : null}
 										<Text>{compound.symbol}</Text>
 										<Text>
 											{compound.count > 1 ? (
@@ -126,6 +164,20 @@ export const ChemicalDisplay: React.FC<ChemicalDisplayProps> = () => {
 												</Text>
 											) : null}
 										</Text>
+										{compound.parenthesesSubscript >= 2 &&
+										compound.isLastElementInChunk ===
+											true ? (
+											<Flex dir="row">
+												<Text>)</Text>
+												<Text>
+													<sub>
+														{
+															compound.parenthesesSubscript
+														}
+													</sub>
+												</Text>
+											</Flex>
+										) : null}
 									</Flex>
 								)
 							})}
@@ -137,7 +189,11 @@ export const ChemicalDisplay: React.FC<ChemicalDisplayProps> = () => {
 											<HStack ml="1vw">
 												{Array(
 													compound.count *
-														product.coefficient
+														product.coefficient *
+														(compound.parenthesesSubscript <=
+														0
+															? 1
+															: compound.parenthesesSubscript)
 												)
 													.fill(0)
 													.map(() => {
