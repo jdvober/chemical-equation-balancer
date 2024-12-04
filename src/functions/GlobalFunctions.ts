@@ -142,7 +142,7 @@ export const CalculateCountList = ( formula: ChemicalFormula ) => {
 
 				chunk.elements.forEach( ( reactantElement ) => {
 					if ( reactantElement.symbol === countListElement.symbol ) {
-						numOfElementPresentReactants += reactantElement.subscript * reactant.coefficient
+						numOfElementPresentReactants += reactantElement.subscript.value * reactant.coefficient
 					}
 				} )
 			} )
@@ -152,7 +152,7 @@ export const CalculateCountList = ( formula: ChemicalFormula ) => {
 			product.chunks.forEach( ( chunk ) => {
 				chunk.elements.forEach( ( productElement ) => {
 					if ( productElement.symbol === countListElement.symbol ) {
-						numOfElementPresentProducts += productElement.subscript * product.coefficient
+						numOfElementPresentProducts += productElement.subscript.value * product.coefficient
 					}
 				} )
 			} )

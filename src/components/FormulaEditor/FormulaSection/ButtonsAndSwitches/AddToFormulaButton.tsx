@@ -2,6 +2,7 @@ import React from "react"
 import { TiChevronRightOutline } from "react-icons/ti"
 
 import { useMainStore } from "@/stores/MainStore"
+import { dracPurple } from "@/theme/colors/colors"
 import { Box, Button } from "@chakra-ui/react"
 
 // If no values, use this:
@@ -128,8 +129,13 @@ export const AddToFormulaButton: React.FC<AddToFormulaButtonProps> = () => {
 						? addNewReactants()
 						: addNewProducts()
 				}}
-				bg="comment"
-				color="drac.bg"
+				bg="drac.cl"
+				color="drac.fg"
+				css={{ transition: "all 0.1s ease-in-out" }}
+				_hover={{
+					color: "drac.red",
+					boxShadow: `0 5px 15px ${dracPurple}`,
+				}}
 			>
 				<TiChevronRightOutline />
 			</Button>

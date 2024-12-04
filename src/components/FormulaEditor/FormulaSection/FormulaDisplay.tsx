@@ -79,6 +79,7 @@ export const FormulaDisplay: React.FC<FormulaDisplayProps> = () => {
 									formulaSection="REACTANTS"
 									index={reactantIndex}
 									includeSymbols={true}
+									location="EDITOR_FORMULA"
 								/>
 							</Box>
 						</HStack>
@@ -113,6 +114,10 @@ export const FormulaDisplay: React.FC<FormulaDisplayProps> = () => {
 									)
 								}
 								key={uuid()}
+								_hover={{
+									transform: "scale()",
+									color: "drac.red",
+								}}
 							>
 								<ChemicalCompound
 									compound={product}
@@ -120,6 +125,7 @@ export const FormulaDisplay: React.FC<FormulaDisplayProps> = () => {
 									index={productIndex}
 									includeSymbols={true}
 									key={uuid()}
+									location="EDITOR_FORMULA"
 								/>
 							</Box>
 						</HStack>

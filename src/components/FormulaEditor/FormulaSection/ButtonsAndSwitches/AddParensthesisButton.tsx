@@ -2,6 +2,7 @@ import React from "react"
 import { v4 as uuid } from "uuid"
 
 import { useMainStore } from "@/stores/MainStore"
+import { dracPurple } from "@/theme/colors/colors"
 import { Button, Text } from "@chakra-ui/react"
 
 // If no values, use this:
@@ -85,8 +86,13 @@ export const AddParensthesisButton: React.FC<
 			onClick={() => {
 				setParens()
 			}}
-			bg="comment"
-			color="drac.bg"
+			bg="drac.cl"
+			color="drac.fg"
+			css={{ transition: "all 0.1s ease-in-out" }}
+			_hover={{
+				color: "drac.red",
+				boxShadow: `0 5px 15px ${dracPurple}`,
+			}}
 		>
 			<Text>
 				{"( )"}

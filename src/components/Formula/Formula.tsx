@@ -50,6 +50,7 @@ export const Formula: React.FC<FormulaProps> = () => {
 								formulaSection="REACTANTS"
 								index={reactantIndex}
 								includeSymbols={true}
+								location="FORMULA"
 							/>
 						</Box>
 					</HStack>
@@ -80,6 +81,7 @@ export const Formula: React.FC<FormulaProps> = () => {
 								formulaSection="PRODUCTS"
 								index={productIndex}
 								includeSymbols={true}
+								location="FORMULA"
 							/>
 						</Box>
 					</HStack>

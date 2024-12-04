@@ -2,6 +2,7 @@ import React from "react"
 import { RxReset } from "react-icons/rx"
 
 import { useMainStore } from "@/stores/MainStore"
+import { dracPurple } from "@/theme/colors/colors"
 import { Box, Button } from "@chakra-ui/react"
 
 // If no values, use this:
@@ -30,8 +31,13 @@ export const ResetButton: React.FC<ResetButtonProps> = () => {
 						editorChemicalSectionItems.slice(0, -1)
 					)
 				}}
-				bg="comment"
-				color="drac.bg"
+				bg="drac.cl"
+				color="drac.fg"
+				css={{ transition: "all 0.1s ease-in-out" }}
+				_hover={{
+					color: "drac.red",
+					boxShadow: `0 5px 15px ${dracPurple}`,
+				}}
 			>
 				<RxReset />
 			</Button>

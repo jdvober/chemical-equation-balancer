@@ -1,11 +1,11 @@
 import React from "react"
-import "../App.css"
+import "../../App.css"
 
+import { EditFormulaButton } from "@/components/Balancer/EditFormulaButton"
 import { ChemicalDisplay } from "@/components/ChemicalDisplay/ChemicalDisplay"
 import { Count } from "@/components/Count/Count"
 import { Formula } from "@/components/Formula/Formula"
 import { Box, Center, HStack, VStack } from "@chakra-ui/react"
-import { Link } from "react-router-dom"
 
 // If no values, use this:
 type BalancerProps = Record<string, never>
@@ -19,7 +19,7 @@ export const Balancer: React.FC<BalancerProps> = () => {
 				<VStack>
 					<HStack>
 						<Formula />
-						<Link to={`/editor`}>Edit</Link>
+						<EditFormulaButton />
 					</HStack>
 					<Count />
 					<ChemicalDisplay />

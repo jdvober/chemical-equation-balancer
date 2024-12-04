@@ -4,6 +4,7 @@ import { Flex, Text, VStack } from "@chakra-ui/react"
 import { useDraggable } from "@dnd-kit/core"
 import { CSS } from "@dnd-kit/utilities"
 
+import { dracPurple } from "@/theme/colors/colors"
 import { useMainStore } from "../../../stores/MainStore"
 
 export const PeriodicTableDraggableElement = ({
@@ -67,9 +68,9 @@ export const PeriodicTableDraggableElement = ({
 			backgroundColor={
 				symbol === "BLANK" || parent !== "FormulaEditorElementSection"
 					? ""
-					: "drac.fg"
+					: "drac.comment"
 			}
-			color={"drac.cl"}
+			color={"drac.bg"}
 			w={`3vw`}
 			h={`3vw`}
 			mb=".25vw"
@@ -88,7 +89,13 @@ export const PeriodicTableDraggableElement = ({
 			onClick={() => {
 				handleClick()
 			}}
-			_hover={{ bg: "drac.red" }}
+			css={{ transition: "all 0.1s ease-in-out" }}
+			_hover={{
+				color: "drac.red",
+				boxShadow: `0 5px 15px ${dracPurple}`,
+				transform: "scale(1.35)",
+				backgroundColor: "drac.cl",
+			}}
 		>
 			<VStack>
 				<Flex
@@ -98,7 +105,6 @@ export const PeriodicTableDraggableElement = ({
 				>
 					<Text
 						fontSize={"1.5vw"}
-						color={"drac.bg"}
 						userSelect={"none"}
 						justifySelf="center"
 					>

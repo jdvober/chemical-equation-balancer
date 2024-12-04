@@ -25,6 +25,10 @@ export const CompoundChunk: React.FC<CompoundChunkProps> = ({
 			direction="row"
 			justifyContent={"center"} /*justify ==> along main axis*/
 			alignContent="center"
+			_hover={{
+				transform: "scale(1.2)",
+				color: "drac.red",
+			}}
 		>
 			{chunk.parenthesesSubscript >= 1 ? (
 				<Text fontSize="3.25vw" color="drac.orange">

@@ -14,7 +14,7 @@ const neutral = definePartsStyle({
 		// ...
 	},
 	thumb: {
-		bg: "comment",
+		bg: "drac.comment",
 	},
 	track: {
 		bg: ""drac.cl"",

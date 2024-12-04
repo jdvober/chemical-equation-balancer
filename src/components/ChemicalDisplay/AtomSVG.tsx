@@ -23,6 +23,8 @@ export const AtomSVG: React.FC<AtomSVGProps> = ({
 		<Box
 			ml="1vw"
 			p="0"
+			pb="10px"
+			pt="10px"
 			m="0"
 			border={showBorders === true ? "1px solid blue" : ""}
 		>

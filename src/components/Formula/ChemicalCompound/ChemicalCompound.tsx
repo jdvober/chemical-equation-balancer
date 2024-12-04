@@ -11,12 +11,14 @@ type ChemicalCompoundProps = {
 	formulaSection: FormulaSection
 	index: number
 	includeSymbols: boolean
+	location: CompoundLocation
 }
 export const ChemicalCompound: React.FC<ChemicalCompoundProps> = ({
 	compound,
 	formulaSection,
 	index,
 	includeSymbols,
+	location,
 }) => {
 	const formula = useMainStore((state) => state.formula)
 	return (
@@ -30,23 +32,29 @@ export const ChemicalCompound: React.FC<ChemicalCompoundProps> = ({
 				alignSelf="center"
 			>
 				{compound.chunks.map((chunk, chunkIndex) => (
-					<HStack key={uuid()}>
+					<HStack
+						key={uuid()}
+						_hover={{
+							transform: "scale()",
+							color: "drac.red",
+						}}
+					>
 						<CompoundChunk
 							chunk={chunk}
 							chunkIndex={chunkIndex}
 							arrows={false}
-							location="FORMULA"
+							location={location}
 						/>
 					</HStack>
 				))}
 				{formulaSection === "REACTANTS" ? (
 					index < formula.reactants.length - 1 ? (
-						<Text color="comment" mr="1vw">
+						<Text color="drac.comment" mr="1vw">
 							{includeSymbols ? "+" : ""}
 						</Text>
 					) : null
 				) : index < formula.products.length - 1 ? (
-					<Text color="comment" mr="1vw">
+					<Text color="drac.comment" mr="1vw">
 						{includeSymbols ? "+" : ""}
 					</Text>
 				) : null}

@@ -24,7 +24,11 @@ export const Coefficient: React.FC<CoefficientProps> = ({
 			formulaSection,
 			index,
 			formulaSection == "REACTANTS"
-				? formula.reactants[index].coefficient + 1
+				? formula.reactants[index].coefficient >= 99
+					? 99
+					: formula.reactants[index].coefficient + 1
+				: formula.products[index].coefficient >= 99
+				? 99
 				: formula.products[index].coefficient + 1
 		)
 

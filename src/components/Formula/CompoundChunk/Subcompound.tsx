@@ -1,6 +1,7 @@
 import React from "react"
 import { v4 as uuid } from "uuid"
 
+import { EditorFormulaElement } from "@/components/Formula/CompoundChunk/EditorFormulaElement"
 import { FormulaElement } from "@/components/Formula/CompoundChunk/FormulaElement"
 import { ChemicalElementSubscriptModificationButton } from "@/components/FormulaEditor/FormulaSection/ButtonsAndSwitches/ChemicalElementSubscriptModificationButton"
 import { CompoundConstructionElement } from "@/components/FormulaEditor/FormulaSection/CompoundConstruction/CompoundConstructionElement"
@@ -53,6 +54,16 @@ export const Subcompound: React.FC<SubcompoundProps> = ({
 						) : null}
 						{location === "CONSTRUCTION" ? (
 							<CompoundConstructionElement
+								key={uuid()}
+								id={`${element.symbol}-${uuid()}`}
+								symbol={element.symbol}
+								eID={element.eID}
+								chunkID={chunk.chunkID}
+								subscript={element.subscript}
+							/>
+						) : null}
+						{location === "EDITOR_FORMULA" ? (
+							<EditorFormulaElement
 								key={uuid()}
 								id={`${element.symbol}-${uuid()}`}
 								symbol={element.symbol}
