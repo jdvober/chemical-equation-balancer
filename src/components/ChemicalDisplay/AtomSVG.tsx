@@ -4,46 +4,37 @@ import { Box } from "@chakra-ui/react"
 
 type AtomSVGProps = {
 	symbol: ChemicalSymbol
-	cirRadiusInVW: number
+	cirRadiusInEm: number
 	cirFill: string
 	cirStroke: string
 	textFill: string
 }
 export const AtomSVG: React.FC<AtomSVGProps> = ({
 	symbol,
-	cirRadiusInVW,
+	cirRadiusInEm: r,
 	cirFill,
 	cirStroke,
 	textFill,
 }) => {
-	const showBorders = false as boolean
-	const fontHeight = cirRadiusInVW * 1.25
-	const textYPos = cirRadiusInVW + fontHeight / 3
+	const toEm = (num: number) => {
+		return `${num}em`
+	}
+
 	return (
-		<Box
-			ml="1vw"
-			p="0"
-			pb="10px"
-			pt="10px"
-			m="0"
-			border={showBorders === true ? "1px solid blue" : ""}
-		>
-			<svg
-				width={`${cirRadiusInVW * 2}vw`}
-				height={`${cirRadiusInVW * 2}vw`}
-			>
+		<Box ml=".1vw">
+			<svg width={toEm(r * 2)} height={toEm(r * 2)}>
 				<circle
 					cx={"50%"}
 					cy={"50%"}
-					r={`${cirRadiusInVW}vw`}
+					r={toEm(r)}
 					stroke={cirStroke}
 					strokeWidth="3"
 					fill={cirFill}
 				/>
 				<text
-					x="50%"
-					y={`${textYPos}vw`}
-					fontSize={`${fontHeight}vw`}
+					x={toEm(r)}
+					y={"65%"}
+					fontSize={toEm(r * 2)}
 					textAnchor="middle"
 					stroke="drac.black"
 					strokeWidth="1px"

@@ -5,7 +5,7 @@ import { EditFormulaButton } from "@/components/Balancer/EditFormulaButton"
 import { ChemicalDisplay } from "@/components/ChemicalDisplay/ChemicalDisplay"
 import { Count } from "@/components/Count/Count"
 import { Formula } from "@/components/Formula/Formula"
-import { Box, Center, HStack, VStack } from "@chakra-ui/react"
+import { Box, Flex, VStack } from "@chakra-ui/react"
 
 // If no values, use this:
 type BalancerProps = Record<string, never>
@@ -15,16 +15,20 @@ type BalancerProps = Record<string, never>
 export const Balancer: React.FC<BalancerProps> = () => {
 	return (
 		<Box className="Balancer">
-			<Center fontSize="5xl" bg="drac.bg">
-				<VStack>
-					<HStack>
+			<VStack w="100vw">
+				<Flex
+					dir="row"
+					justifyContent="space-between"
+					alignItems={"center"}
+				>
+					<Box marginEnd="auto">
 						<Formula />
-						<EditFormulaButton />
-					</HStack>
-					<Count />
-					<ChemicalDisplay />
-				</VStack>
-			</Center>
+					</Box>
+					<EditFormulaButton />
+				</Flex>
+				<Count />
+				<ChemicalDisplay />
+			</VStack>
 		</Box>
 	)
 }

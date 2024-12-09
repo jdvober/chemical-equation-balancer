@@ -1,7 +1,6 @@
-import { create } from "zustand"
-// import { persist } from "zustand/middleware"
 import { dracPurple } from "@/theme/colors/colors"
 import { v4 as uuid } from "uuid"
+import { create } from "zustand"
 import { immer } from "zustand/middleware/immer"
 import { CountList } from "./countList"
 import { Elements } from "./elements"
@@ -44,14 +43,13 @@ type Action = {
 }
 
 export const useMainStore = create<State & Action>()(
-	// persist(
 	immer( ( set ) => ( {
 		///////////
 		// State //
 		///////////
 		formula: {
 			reactants: [ {
-				coefficient: 1,
+				coefficient: 4,
 				formulaSection: "REACTANTS",
 				isHovered: false,
 				chunks: [
@@ -70,7 +68,7 @@ export const useMainStore = create<State & Action>()(
 				]
 			},
 			{
-				coefficient: 1,
+				coefficient: 2,
 				formulaSection: "REACTANTS",
 				isHovered: false,
 				chunks: [
@@ -90,13 +88,13 @@ export const useMainStore = create<State & Action>()(
 			} ],
 			products: [
 				{
-					coefficient: 1,
+					coefficient: 4,
 					formulaSection: "PRODUCTS",
 					isHovered: false,
 					chunks: [
 						{
 							chunkID: uuid(),
-							parenthesesSubscript: 0,
+							parenthesesSubscript: 3,
 							elements: [
 								{
 									index: 0,
@@ -195,12 +193,7 @@ export const useMainStore = create<State & Action>()(
 			} )
 		},
 	}
-	) ),
-	// {
-	// 	// Use Local Storage
-	// 	name: "main-storage",
-	// 	getStorage: () => sessionStorage,
-	// } )
+	) )
 
 )
 

@@ -14,13 +14,14 @@ export const EditFormulaButton: EditFormulaButtonProps = () => {
 			to={"/editor"}
 			bg={dracCurrentLine}
 			color={dracFG}
-			width="6vw"
-			height="2em"
+			width="7vw"
+			height="5em"
 			css={{ transition: "all 0.1s ease-in-out" }}
 			_hover={{
 				color: "drac.red",
 				boxShadow: `0 5px 15px ${dracPurple}`,
 			}}
+			borderRadius=".5em"
 		>
 			<Flex dir="column" wrap="wrap" justify="center">
 				<Text fontSize=".75em">Edit</Text>

@@ -1,6 +1,6 @@
 import { AtomSVG } from "@/components/ChemicalDisplay/AtomSVG"
 import { dracCurrentLine, dracCyan } from "@/theme/colors/colors"
-import { Box, HStack } from "@chakra-ui/react"
+import { Box, Flex } from "@chakra-ui/react"
 import React from "react"
 import { v4 as uuid } from "uuid"
 
@@ -34,37 +34,35 @@ export const ChemicalDisplayAtom: ChemicalDisplayAtomProps = ({ item }) => {
 	}
 
 	return (
-		<Box className="ChemicalDisplayFormulas">
-			<HStack overflowX={"scroll"} ml="1vw" mb="1vw" maxW="24vw">
-				{getCompoundString(item).map((compound) => {
-					return (
-						<div key={uuid()}>
-							<HStack ml="1vw">
-								{Array(
-									compound.count *
-										item.coefficient *
-										(compound.parenthesesSubscript <= 0
-											? 1
-											: compound.parenthesesSubscript)
-								)
-									.fill(0)
-									.map(() => {
-										return (
-											<AtomSVG
-												cirFill={dracCurrentLine}
-												cirRadiusInVW={2.5}
-												cirStroke="drac.black"
-												symbol={compound.symbol}
-												textFill={dracCyan}
-												key={uuid()}
-											/>
-										)
-									})}
-							</HStack>
-						</div>
-					)
-				})}
-			</HStack>
-		</Box>
+		<Flex
+			className="ChemicalDisplayFormulas"
+			direction="row"
+			overflowX="scroll"
+		>
+			{getCompoundString(item).map((compound) => {
+				return Array(
+					compound.count *
+						item.coefficient *
+						(compound.parenthesesSubscript <= 0
+							? 1
+							: compound.parenthesesSubscript)
+				)
+					.fill(0)
+					.map(() => {
+						return (
+							<Box ml=".5vw" mr=".5vw" mb="1vh" mt="1vh" h="2em">
+								<AtomSVG
+									cirFill={dracCurrentLine}
+									cirRadiusInEm={0.85}
+									cirStroke="drac.black"
+									symbol={compound.symbol}
+									textFill={dracCyan}
+									key={uuid()}
+								/>
+							</Box>
+						)
+					})
+			})}
+		</Flex>
 	)
 }

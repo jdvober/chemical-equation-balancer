@@ -18,13 +18,15 @@ export const Formula: React.FC<FormulaProps> = () => {
 
 	return (
 		<Flex
-			w="90vw"
 			border={`1px solid #44475a`}
 			borderRadius={"1vw"}
 			h={"25vh"}
 			overflowX={"scroll"}
+			overflowY={"hidden"}
 			m="1vh"
 			alignItems="center"
+			pl={"2vw"}
+			pr={"2vw"}
 		>
 			<Spacer />
 			<Spacer />
@@ -56,7 +58,13 @@ export const Formula: React.FC<FormulaProps> = () => {
 					</HStack>
 				</Box>
 			))}
-			<Text color="drac.yellow" ml="1vw" mr="1vw" alignSelf="center">
+			<Text
+				color="drac.yellow"
+				ml="1vw"
+				mr="1vw"
+				alignSelf="center"
+				fontSize="4em"
+			>
 				→
 			</Text>
 

@@ -35,7 +35,6 @@ export const ProductCount: React.FC<ProductCountProps> = () => {
 			className="ReactantCount"
 			border={`1px solid #44475a`}
 			borderRadius={"1vw"}
-			w="33vw"
 			h="auto"
 			mt="2vh"
 		>

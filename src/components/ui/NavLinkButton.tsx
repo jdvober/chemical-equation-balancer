@@ -1,4 +1,3 @@
-import { toPx } from "@/functions/toPx"
 import { Box, Center } from "@chakra-ui/react"
 import React from "react"
 import { NavLink } from "react-router-dom"
@@ -20,7 +19,10 @@ export const NavLinkButton: NavLinkButtonProps = ({
 }) => {
 	return (
 		<NavLink className="NavButton" to={to}>
-			<Box borderRadius={toPx(rest.width, "width") / 6} {...rest}>
+			<Box
+				borderRadius={(rest.width * window.innerWidth) / 100 / 6}
+				{...rest}
+			>
 				<Center w="100%" h="100%" fontSize="3xl">
 					{children}
 				</Center>

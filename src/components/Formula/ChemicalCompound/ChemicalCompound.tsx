@@ -49,12 +49,12 @@ export const ChemicalCompound: React.FC<ChemicalCompoundProps> = ({
 				))}
 				{formulaSection === "REACTANTS" ? (
 					index < formula.reactants.length - 1 ? (
-						<Text color="drac.comment" mr="1vw">
+						<Text color="drac.comment" mr="1vw" fontSize="3em">
 							{includeSymbols ? "+" : ""}
 						</Text>
 					) : null
 				) : index < formula.products.length - 1 ? (
-					<Text color="drac.comment" mr="1vw">
+					<Text color="drac.comment" mr="1vw" fontSize="3em">
 						{includeSymbols ? "+" : ""}
 					</Text>
 				) : null}

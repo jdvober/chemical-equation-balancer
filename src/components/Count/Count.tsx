@@ -1,6 +1,6 @@
 import React from "react"
 
-import { Box, HStack } from "@chakra-ui/react"
+import { Box, GridItem, SimpleGrid } from "@chakra-ui/react"
 
 import { useMainStore } from "../../stores/MainStore"
 import { ProductCount } from "./ProductCount"
@@ -16,29 +16,33 @@ export const Count: React.FC<CountProps> = () => {
 		(state) => state.formulaEditorActive
 	)
 
-	const showBorders = false as boolean
 	if (editFormulaDrawerActive === true) {
 		return (
 			<Box
 				className="Count-container"
-				border={`1px solid #44475a`}
 				borderRadius={"1vw"}
 				w="33vw"
 				h="auto"
-				mt="2vh"
 			></Box>
 		)
 	} else {
 		return (
-			<HStack
+			<SimpleGrid
 				className="Count-container"
-				border={showBorders === true ? "1px solid #44475a" : ""}
-				w="33vw"
+				columns={2}
+				minW="33vw"
+				maxW="100vw"
+				gapX="2vw"
 				h="auto"
+				fontSize="2em"
 			>
-				<ReactantCount />
-				<ProductCount />
-			</HStack>
+				<GridItem colSpan={1}>
+					<ReactantCount />
+				</GridItem>
+				<GridItem colSpan={1}>
+					<ProductCount />
+				</GridItem>
+			</SimpleGrid>
 		)
 	}
 }
