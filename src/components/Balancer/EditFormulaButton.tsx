@@ -1,6 +1,6 @@
 import { NavLinkButton } from "@/components/ui/NavLinkButton"
 import { dracCurrentLine, dracFG, dracPurple } from "@/theme/colors/colors"
-import { Flex, Text } from "@chakra-ui/react"
+import { Center, GridItem, SimpleGrid, Text } from "@chakra-ui/react"
 import React from "react"
 
 type Props = {}
@@ -14,19 +14,28 @@ export const EditFormulaButton: EditFormulaButtonProps = () => {
 			to={"/editor"}
 			bg={dracCurrentLine}
 			color={dracFG}
-			width="7vw"
-			height="5em"
+			width="6rem"
+			height="5rem"
 			css={{ transition: "all 0.1s ease-in-out" }}
 			_hover={{
 				color: "drac.red",
 				boxShadow: `0 5px 15px ${dracPurple}`,
 			}}
-			borderRadius=".5em"
+			borderRadius=".5rem"
+			ml="1rem"
 		>
-			<Flex dir="column" wrap="wrap" justify="center">
-				<Text fontSize=".75em">Edit</Text>
-				<Text fontSize=".75em">Formula</Text>
-			</Flex>
+			<SimpleGrid>
+				<GridItem>
+					<Center>
+						<Text fontSize="1.25rem">Edit</Text>
+					</Center>
+				</GridItem>
+				<GridItem>
+					<Center>
+						<Text fontSize="1.25rem">Formula</Text>
+					</Center>
+				</GridItem>
+			</SimpleGrid>
 		</NavLinkButton>
 	)
 }

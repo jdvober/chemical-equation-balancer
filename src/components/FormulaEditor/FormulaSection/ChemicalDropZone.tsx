@@ -18,22 +18,20 @@ export const ChemicalDropZone: React.FC<ChemicalDropZone> = ({ title }) => {
 		<Flex
 			className="ChemicalDropZoneBox"
 			ref={setNodeRef}
-			borderRadius="2xl"
+			borderRadius="1rem"
 			flex="1"
-			padding="1vh"
 			flexDirection="row"
 			w="auto"
 			h="auto"
 			align={"center"}
 			justify="space-between"
-			ml="2vw"
-			mr="2vw"
+			ml="1rem"
 		>
 			<Box
 				// border={"1px solid " + dracCyan}
 				backgroundColor={isOver ? "drac.yellow" : ""}
 				boxShadow={"0 0 0 10px rgba(241, 250, 140, 80)"}
-				borderRadius="xl"
+				borderRadius=".5rem"
 				w="4vw"
 				h="4vw"
 			/>

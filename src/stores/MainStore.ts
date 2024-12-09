@@ -10,7 +10,7 @@ type State = {
 		reactants: ChemicalReactant[],
 		products: ChemicalProduct[]
 	},
-	formulaHeightVH: number,
+	formulaHeightEM: number,
 	countList: {
 		symbol: ChemicalSymbol
 		reactantCount: number
@@ -114,7 +114,7 @@ export const useMainStore = create<State & Action>()(
 				}
 			]
 		},
-		formulaHeightVH: 20,
+		formulaHeightEM: 5,
 		countList: CountList,
 
 		editFormulaSection: "REACTANTS",

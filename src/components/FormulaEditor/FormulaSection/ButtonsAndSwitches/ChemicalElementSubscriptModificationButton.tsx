@@ -30,8 +30,8 @@ export const ChemicalElementSubscriptModificationButton: React.FC<
 		return (
 			<Button
 				border={`1px solid ${dracGreen}`}
-				h="3vh"
-				w="1vw"
+				h="1.25rem"
+				w="1rem"
 				opacity={`${opacity}%`}
 				onMouseEnter={() => {
 					setOpacity(100)
@@ -59,8 +59,8 @@ export const ChemicalElementSubscriptModificationButton: React.FC<
 		return (
 			<Button
 				border={`1px solid ${dracRed}`}
-				h="3vh"
-				w="1vw"
+				h="1.25rem"
+				w="1rem"
 				opacity={`${opacity}%`}
 				onMouseEnter={() => {
 					setOpacity(100)

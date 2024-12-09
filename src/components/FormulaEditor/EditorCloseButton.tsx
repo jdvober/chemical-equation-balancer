@@ -17,13 +17,16 @@ export const EditorCloseButton: React.FC<EditorCloseButtonProps> = () => {
 			to={"/balancer"}
 			bg={dracCurrentLine}
 			color={dracFG}
-			width="4vw"
-			height="4vw"
+			width="2rem"
+			height="2rem"
 			css={{ transition: "all 0.1s ease-in-out" }}
 			_hover={{
 				color: "drac.red",
 				boxShadow: `0 5px 15px ${dracPurple}`,
 			}}
+			borderRadius=".5rem"
+			justifySelf="flex-end"
+			ml="1rem"
 		>
 			<Flex dir="column" wrap="wrap" justify="center">
 				<TiTimesOutline />

@@ -1,0 +1,55 @@
+import { ChemicalCompound } from "@/components/Balancer/Formula/ChemicalCompound/ChemicalCompound"
+import { Coefficient } from "@/components/Balancer/Formula/Coefficient/Coefficient"
+import { useMainStore } from "@/stores/MainStore"
+import { Box, HStack } from "@chakra-ui/react"
+import { v4 as uuid } from "uuid"
+
+interface CoefficientAndCompoundProps {
+	item: ChemicalReactant
+	itemIndex: number
+}
+
+export const CoefficientAndCompound: React.FC<CoefficientAndCompoundProps> = ({
+	item,
+	itemIndex,
+}) => {
+	const setHoverStatus = useMainStore((state) => state.setHoverStatus)
+	const handleMouseEnter = () => {
+		setHoverStatus(item.formulaSection, itemIndex, true)
+	}
+	const handleMouseLeave = () => {
+		setHoverStatus(item.formulaSection, itemIndex, false)
+	}
+	return (
+		<Box
+			key={uuid()}
+			w="auto"
+			alignSelf="center"
+			alignContent="center"
+			onMouseEnter={() => {
+				handleMouseEnter()
+			}}
+			onMouseLeave={() => {
+				handleMouseLeave()
+			}}
+		>
+			<HStack alignItems={"center"}>
+				<Box className={`coefficient-${item}-${itemIndex}-container`}>
+					<Coefficient
+						index={itemIndex}
+						formulaSection={item.formulaSection}
+					/>
+				</Box>
+				<Box alignItems="center" alignSelf="center">
+					<ChemicalCompound
+						compound={item}
+						formulaSection={item.formulaSection}
+						index={itemIndex}
+						includeSymbols={true}
+						location="FORMULA"
+					/>
+				</Box>
+			</HStack>
+		</Box>
+	)
+}

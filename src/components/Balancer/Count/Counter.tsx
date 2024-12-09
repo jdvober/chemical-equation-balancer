@@ -1,17 +1,15 @@
+import { CalculateCountList } from "@/functions/GlobalFunctions"
+import { useMainStore } from "@/stores/MainStore"
+import { Box, Center, Text } from "@chakra-ui/react"
 import React from "react"
 import { v4 as uuid } from "uuid"
 
-import { Box, Center, Text } from "@chakra-ui/react"
+type Props = { formulaSection: FormulaSection }
+type CounterProps = Props extends Record<string, never>
+	? React.FC<Record<string, never>>
+	: React.FC<Props>
 
-import { CalculateCountList } from "../../functions/GlobalFunctions.ts"
-import { useMainStore } from "../../stores/MainStore.ts"
-
-// If no values, use this:
-type ReactantCountProps = Record<string, never>
-// If values, fill in the object below
-//type ReactantCountProps = {}
-
-export const ReactantCount: React.FC<ReactantCountProps> = () => {
+export const Counter: CounterProps = ({ formulaSection }) => {
 	const formula = useMainStore((state) => state.formula)
 	const countList = CalculateCountList(formula)
 
@@ -33,7 +31,11 @@ export const ReactantCount: React.FC<ReactantCountProps> = () => {
 
 	return (
 		<Box
-			className="ReactantCount"
+			className={
+				formulaSection === "REACTANTS"
+					? "ReactantCount"
+					: "ProductCount"
+			}
 			border={`1px solid #44475a`}
 			borderRadius={"1vw"}
 			h="auto"
@@ -41,7 +43,9 @@ export const ReactantCount: React.FC<ReactantCountProps> = () => {
 		>
 			{countList
 				.filter((element) => {
-					return element.reactantCount >= 1
+					return formulaSection === "REACTANTS"
+						? element.reactantCount >= 1
+						: element.productCount >= 1
 				})
 				.sort((a: ElementCountListEntry, b: ElementCountListEntry) => {
 					if (a.symbol < b.symbol) {
@@ -71,7 +75,7 @@ export const ReactantCount: React.FC<ReactantCountProps> = () => {
 										: "100%"
 								}
 							>
-								{element.symbol}:{element.reactantCount}
+								{element.symbol}:{element.productCount}
 							</Text>
 						</Center>
 					)

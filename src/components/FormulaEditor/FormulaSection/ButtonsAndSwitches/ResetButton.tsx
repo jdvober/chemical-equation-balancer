@@ -22,9 +22,9 @@ export const ResetButton: React.FC<ResetButtonProps> = () => {
 	return (
 		<Box className="ResetButton">
 			<Button
-				w="5vw"
-				h="5vh"
-				fontSize={"2rem"}
+				w="2rem"
+				h="1.5rem"
+				fontSize={"1rem"}
 				alignSelf={"center"}
 				onClick={() => {
 					setEditorChemicalSectionItems(

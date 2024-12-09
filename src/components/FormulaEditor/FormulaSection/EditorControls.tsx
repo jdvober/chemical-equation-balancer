@@ -16,9 +16,9 @@ export const EditorControls: React.FC<EditorControlsProps> = () => {
 		<VStack
 			className="EditorControls"
 			h="100%"
-			pl="2vw"
 			justifyContent={"center"} /*justify ==> along main axis*/
 			alignItems={"center"} /*align ==> along cross axis*/
+			mr="2rem"
 		>
 			<AddToFormulaButton />
 			<AddParensthesisButton />

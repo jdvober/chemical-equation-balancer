@@ -5,21 +5,19 @@ import { Box, HStack, Text } from "@chakra-ui/react"
 type ChemicalElementProps = {
 	symbol: ChemicalSymbol
 	subscript?: number
-	fontSizeInVH: number
 	isHovered?: boolean
 }
 export const ChemicalElement: React.FC<ChemicalElementProps> = ({
 	symbol,
 	subscript,
-	fontSizeInVH,
 	isHovered,
 }) => {
 	return (
 		<Box className="ChemicalElement">
 			<HStack color={isHovered === true ? "drac.red" : "drac.fg"}>
-				<Text fontSize={`${fontSizeInVH}vh`}>{symbol}</Text>
+				<Text fontSize={"2rem"}>{symbol}</Text>
 				{subscript && !(subscript <= 1) ? (
-					<Text fontSize={`${fontSizeInVH}vh`}>
+					<Text fontSize={"2rem"}>
 						<sub>{subscript}</sub>
 					</Text>
 				) : null}

@@ -1,4 +1,4 @@
-import { AtomSVG } from "@/components/ChemicalDisplay/AtomSVG"
+import { AtomSVG } from "@/components/Balancer/ChemicalDisplay/AtomSVG"
 import { dracCurrentLine, dracCyan } from "@/theme/colors/colors"
 import { Box, Flex } from "@chakra-ui/react"
 import React from "react"
@@ -34,11 +34,7 @@ export const ChemicalDisplayAtom: ChemicalDisplayAtomProps = ({ item }) => {
 	}
 
 	return (
-		<Flex
-			className="ChemicalDisplayFormulas"
-			direction="row"
-			overflowX="scroll"
-		>
+		<Flex className="ChemicalDisplayFormulas" direction="row">
 			{getCompoundString(item).map((compound) => {
 				return Array(
 					compound.count *
@@ -50,7 +46,7 @@ export const ChemicalDisplayAtom: ChemicalDisplayAtomProps = ({ item }) => {
 					.fill(0)
 					.map(() => {
 						return (
-							<Box ml=".5vw" mr=".5vw" mb="1vh" mt="1vh" h="2em">
+							<Box ml=".5vw" mr=".5vw" mb="1vh" mt="1vh" h="2rem">
 								<AtomSVG
 									cirFill={dracCurrentLine}
 									cirRadiusInEm={0.85}

@@ -4,8 +4,8 @@ import { Button, Text, VStack } from "@chakra-ui/react"
 
 import { dracFG } from "@/theme/colors/colors.ts"
 import { TiArrowDownOutline, TiArrowUpOutline } from "react-icons/ti"
-import { CalculateCountList } from "../../../functions/GlobalFunctions.ts"
-import { useMainStore } from "../../../stores/MainStore.ts"
+import { CalculateCountList } from "../../../../functions/GlobalFunctions.ts"
+import { useMainStore } from "../../../../stores/MainStore.ts"
 
 type CoefficientProps = {
 	formulaSection: FormulaSection
@@ -75,8 +75,8 @@ export const Coefficient: React.FC<CoefficientProps> = ({
 	return (
 		<VStack justify="start" w={"100%"}>
 			<Button
-				w="1vw"
-				h="3vh"
+				w="1rem"
+				h="1.5rem"
 				onClick={() => {
 					increment()
 				}}
@@ -94,7 +94,7 @@ export const Coefficient: React.FC<CoefficientProps> = ({
 			>
 				<TiArrowUpOutline color={dracFG} />
 			</Button>
-			<Text color={"drac.pink"} fontSize={"8vh"} alignSelf="center">
+			<Text color={"drac.pink"} fontSize={"3rem"} alignSelf="center">
 				{formulaSection == "REACTANTS"
 					? formula.reactants[index].coefficient
 					: formula.products[index].coefficient}
@@ -103,8 +103,8 @@ export const Coefficient: React.FC<CoefficientProps> = ({
 			<Button
 				border="1px solid"
 				borderColor="drac.red"
-				w="1vw"
-				h="3vh"
+				w="1rem"
+				h="1.5rem"
 				onClick={() => {
 					decrement()
 				}}

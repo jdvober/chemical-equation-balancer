@@ -116,10 +116,6 @@ export const CompoundConstructionElement = ({
 					? dracOrange
 					: dracPurple
 			}
-			// w={`3vw`}
-			// h={`3vw`}
-			mb=".25vw"
-			ml=".125vw"
 			align="center"
 			justify={"center"}
 			transform={style.transform}
@@ -141,7 +137,7 @@ export const CompoundConstructionElement = ({
 					alignItems={"center"} /*align ==> along cross axis*/
 				>
 					<Text
-						fontSize={"3.75vh"}
+						fontSize={"2rem"}
 						color={
 							selectedConstructionCompoundIDs.includes(eID)
 								? dracOrange
@@ -152,7 +148,7 @@ export const CompoundConstructionElement = ({
 						{symbol}
 					</Text>
 					<Text
-						fontSize={"3.25vh"}
+						fontSize={"2rem"}
 						color={
 							selectedConstructionCompoundIDs.includes(eID)
 								? dracOrange

@@ -3,7 +3,7 @@ import { v4 as uuid } from "uuid"
 
 import { HStack, Text, VStack } from "@chakra-ui/react"
 
-import { CompoundChunk } from "@/components/Formula/CompoundChunk/CompoundChunk.tsx"
+import { CompoundChunk } from "@/components/Balancer/Formula/CompoundChunk/CompoundChunk"
 import { useMainStore } from "@/stores/MainStore.ts"
 
 type ChemicalCompoundProps = {
@@ -22,10 +22,9 @@ export const ChemicalCompound: React.FC<ChemicalCompoundProps> = ({
 }) => {
 	const formula = useMainStore((state) => state.formula)
 	return (
-		<VStack h="20vh">
+		<VStack>
 			<HStack
 				className="compound"
-				p="0px"
 				mt={"auto"}
 				mb={"auto"}
 				key={uuid()}
@@ -49,12 +48,22 @@ export const ChemicalCompound: React.FC<ChemicalCompoundProps> = ({
 				))}
 				{formulaSection === "REACTANTS" ? (
 					index < formula.reactants.length - 1 ? (
-						<Text color="drac.comment" mr="1vw" fontSize="3em">
+						<Text
+							color="drac.comment"
+							ml="1rem"
+							mr="1rem"
+							fontSize="3rem"
+						>
 							{includeSymbols ? "+" : ""}
 						</Text>
 					) : null
 				) : index < formula.products.length - 1 ? (
-					<Text color="drac.comment" mr="1vw" fontSize="3em">
+					<Text
+						color="drac.comment"
+						ml="1rem"
+						mr="1rem"
+						fontSize="3rem"
+					>
 						{includeSymbols ? "+" : ""}
 					</Text>
 				) : null}

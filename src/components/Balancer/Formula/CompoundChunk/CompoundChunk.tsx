@@ -1,6 +1,6 @@
 import React from "react"
 
-import { Subcompound } from "@/components/Formula/CompoundChunk/Subcompound"
+import { Subcompound } from "@/components/Balancer/Formula/CompoundChunk/Subcompound"
 import { Flex, Text } from "@chakra-ui/react"
 
 // If no values, use this:
@@ -24,40 +24,26 @@ export const CompoundChunk: React.FC<CompoundChunkProps> = ({
 			className="CompoundChunk"
 			direction="row"
 			justifyContent={"center"} /*justify ==> along main axis*/
-			alignContent="center"
+			alignItems="center"
 			_hover={{
 				transform: "scale(1.2)",
 				color: "drac.red",
 			}}
 		>
-			{chunk.parenthesesSubscript >= 1 ? (
-				<Text fontSize="3.25vw" color="drac.orange">
-					(
-				</Text>
-			) : null}
+			<Text fontSize="3rem" color="drac.orange">
+				{chunk.parenthesesSubscript >= 1 ? "(" : null}
+			</Text>
 			<Subcompound
 				chunk={chunk}
 				chunkIndex={chunkIndex}
 				arrows={arrows}
 				location={location}
 			/>
-			{chunk.parenthesesSubscript >= 1 ? (
-				<Flex dir="column">
-					<Text
-						fontSize="3.25vw"
-						color="drac.orange"
-						alignSelf="center"
-					>
-						)
-					</Text>
-				</Flex>
-			) : null}
+			<Text fontSize="3rem" color="drac.orange">
+				{chunk.parenthesesSubscript >= 1 ? ")" : null}
+			</Text>
 			{chunk.parenthesesSubscript > 1 ? (
-				<Text
-					fontSize="2.25vw"
-					color="drac.orange"
-					alignSelf="flex-end"
-				>
+				<Text fontSize="2rem" color="drac.orange" alignSelf="flex-end">
 					<sub>{chunk.parenthesesSubscript}</sub>
 				</Text>
 			) : null}

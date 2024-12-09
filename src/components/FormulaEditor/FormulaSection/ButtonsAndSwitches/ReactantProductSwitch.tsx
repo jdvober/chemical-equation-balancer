@@ -18,7 +18,7 @@ export const ReactantProductSwitch: React.FC<
 	const editFormulaSection = useMainStore((state) => state.editFormulaSection)
 	return (
 		<Flex direction={"row"} className="ReactantProductSwitch">
-			<Text>Reactants</Text>
+			<Text fontSize=".75rem">Reactants</Text>
 			<Switch
 				checked={editFormulaSection === "REACTANTS" ? false : true}
 				onCheckedChange={() => {
@@ -28,10 +28,11 @@ export const ReactantProductSwitch: React.FC<
 							: "REACTANTS"
 					)
 				}}
-				ml=".5vw"
-				mr=".5vw"
+				ml=".5rem"
+				mr=".5rem"
+				size={"sm"}
 			/>
-			<Text>Products</Text>
+			<Text fontSize=".75rem">Products</Text>
 		</Flex>
 	)
 }

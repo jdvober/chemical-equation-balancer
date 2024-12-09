@@ -1,10 +1,10 @@
 import React from "react"
 import "../../App.css"
 
+import { ChemicalDisplay } from "@/components/Balancer/ChemicalDisplay/ChemicalDisplay"
+import { Count } from "@/components/Balancer/Count/Count"
 import { EditFormulaButton } from "@/components/Balancer/EditFormulaButton"
-import { ChemicalDisplay } from "@/components/ChemicalDisplay/ChemicalDisplay"
-import { Count } from "@/components/Count/Count"
-import { Formula } from "@/components/Formula/Formula"
+import { Formula } from "@/components/Balancer/Formula/Formula"
 import { Box, Flex, VStack } from "@chakra-ui/react"
 
 // If no values, use this:

@@ -5,7 +5,7 @@ import { Box, GridItem, HStack, Text } from "@chakra-ui/react"
 
 import { CalculateCountList } from "../../../functions/GlobalFunctions"
 import { useMainStore } from "../../../stores/MainStore"
-import { ChemicalCompound } from "../../Formula/ChemicalCompound/ChemicalCompound"
+import { ChemicalCompound } from "../../Balancer/Formula/ChemicalCompound/ChemicalCompound"
 
 // If no values, use this:
 type FormulaDisplayProps = Record<string, never>
@@ -47,7 +47,7 @@ export const FormulaDisplay: React.FC<FormulaDisplayProps> = () => {
 	}
 
 	return (
-		<HStack pt="1vh" pb="1vh" alignSelf={"center"} ml="2vw">
+		<HStack alignSelf={"center"} mr="1rem">
 			{formula.reactants.map((reactant, reactantIndex) => {
 				return (
 					<GridItem key={uuid()}>
@@ -86,7 +86,7 @@ export const FormulaDisplay: React.FC<FormulaDisplayProps> = () => {
 					</GridItem>
 				)
 			})}
-			<Text color="drac.yellow" mr="1vw" fontSize={"4vh"}>
+			<Text color="drac.yellow" ml="1rem" mr="1rem" fontSize={"3em"}>
 				→
 			</Text>
 

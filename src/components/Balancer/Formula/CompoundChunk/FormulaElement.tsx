@@ -59,7 +59,7 @@ export const FormulaElement = ({
 					alignItems={"center"} /*align ==> along cross axis*/
 				>
 					<Text
-						fontSize={"4.75vh"}
+						fontSize={"2rem"}
 						color={
 							selectedConstructionCompoundIDs.includes(eID)
 								? dracOrange
@@ -70,7 +70,7 @@ export const FormulaElement = ({
 						{symbol}
 					</Text>
 					<Text
-						fontSize={"4.25vh"}
+						fontSize={"2rem"}
 						color={
 							selectedConstructionCompoundIDs.includes(eID)
 								? dracOrange

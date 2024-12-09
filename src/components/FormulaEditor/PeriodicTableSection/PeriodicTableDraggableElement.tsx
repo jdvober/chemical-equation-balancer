@@ -78,7 +78,7 @@ export const PeriodicTableDraggableElement = ({
 			mr={".125vw"}
 			align="center"
 			justify={"center"}
-			borderRadius="lg"
+			borderRadius=".25rem"
 			border={symbol === "BLANK" ? "" : "2px solid gray.500"}
 			boxShadow={symbol === "BLANK" ? "" : "0px 0px 5px 2px #2121213b"}
 			transform={style.transform}
@@ -104,7 +104,7 @@ export const PeriodicTableDraggableElement = ({
 					alignItems={"center"} /*align ==> along cross axis*/
 				>
 					<Text
-						fontSize={"1.5vw"}
+						fontSize={".8rem"}
 						userSelect={"none"}
 						justifySelf="center"
 					>

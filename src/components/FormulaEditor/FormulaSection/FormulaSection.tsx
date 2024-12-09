@@ -17,7 +17,7 @@ export const FormulaSection: React.FC<FormulaSectionProps> = () => {
 		(state) => state.reactantAndProductElementListsMatch
 	)
 	return (
-		<Box w="95vw" className="FormulaSection">
+		<Box flexGrow={1} className="FormulaSection">
 			<Flex
 				borderRadius="8px"
 				border={`1px solid ${
@@ -26,16 +26,11 @@ export const FormulaSection: React.FC<FormulaSectionProps> = () => {
 						: dracRed
 				}`}
 				flex="1"
-				padding="1vh"
-				w="95vw"
-				h="25vh"
+				h="10rem"
 				align={"center"}
-				pl="2vw"
-				pr="2vw"
 				justifyContent={"flex-start"}
 				overflowX={"auto"}
 				overflowY={"clip"}
-				mt="2vh"
 			>
 				<CompoundConstruction />
 				<EditorControls />

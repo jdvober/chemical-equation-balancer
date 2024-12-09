@@ -1,7 +1,7 @@
 import React from "react"
 import { v4 as uuid } from "uuid"
 
-import { Box, HStack, VStack } from "@chakra-ui/react"
+import { Box, Flex, VStack } from "@chakra-ui/react"
 //@ts-ignore
 
 import { FormulaSection } from "@/components/FormulaEditor/FormulaSection/FormulaSection.tsx"
@@ -84,10 +84,17 @@ export const FormulaEditor: React.FC<FormulaEditorProps> = () => {
 				}}
 			>
 				<VStack>
-					<HStack>
+					<Flex
+						dir="row"
+						m="1rem"
+						p="1rem"
+						alignItems="center"
+						justifyContent={"space-between"}
+						w="100vw"
+					>
 						<FormulaSection />
 						<EditorCloseButton />
-					</HStack>
+					</Flex>
 					<EditorPeriodicTableSection />
 					{selectedConstructionCompoundIDs.map((compound) => {
 						return <div key={uuid()}>{compound}</div>

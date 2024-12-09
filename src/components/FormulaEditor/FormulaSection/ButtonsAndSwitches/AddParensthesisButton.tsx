@@ -79,9 +79,9 @@ export const AddParensthesisButton: React.FC<
 	return (
 		<Button
 			className="AddParensthesisButton"
-			w="5vw"
-			h="5vh"
-			fontSize={"1.5rem"}
+			w="2rem"
+			h="1.5rem"
+			fontSize={"1rem"}
 			alignSelf={"center"}
 			onClick={() => {
 				setParens()
@@ -93,8 +93,10 @@ export const AddParensthesisButton: React.FC<
 				color: "drac.red",
 				boxShadow: `0 5px 15px ${dracPurple}`,
 			}}
+			pt=".25rem"
+			pb=".5rem"
 		>
-			<Text>
+			<Text alignSelf={"center"}>
 				{"( )"}
 				<sub>x</sub>
 			</Text>

@@ -1,8 +1,8 @@
 import React from "react"
 import { v4 as uuid } from "uuid"
 
-import { EditorFormulaElement } from "@/components/Formula/CompoundChunk/EditorFormulaElement"
-import { FormulaElement } from "@/components/Formula/CompoundChunk/FormulaElement"
+import { EditorFormulaElement } from "@/components/Balancer/Formula/CompoundChunk/EditorFormulaElement"
+import { FormulaElement } from "@/components/Balancer/Formula/CompoundChunk/FormulaElement"
 import { ChemicalElementSubscriptModificationButton } from "@/components/FormulaEditor/FormulaSection/ButtonsAndSwitches/ChemicalElementSubscriptModificationButton"
 import { CompoundConstructionElement } from "@/components/FormulaEditor/FormulaSection/CompoundConstruction/CompoundConstructionElement"
 import { PeriodicTableDraggableElement } from "@/components/FormulaEditor/PeriodicTableSection/PeriodicTableDraggableElement"

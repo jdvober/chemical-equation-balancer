@@ -2,9 +2,8 @@ import React from "react"
 
 import { Box, GridItem, SimpleGrid } from "@chakra-ui/react"
 
-import { useMainStore } from "../../stores/MainStore"
-import { ProductCount } from "./ProductCount"
-import { ReactantCount } from "./ReactantCount"
+import { Counter } from "@/components/Balancer/Count/Counter"
+import { useMainStore } from "@/stores/MainStore"
 
 // If no values, use this:
 type CountProps = Record<string, never>
@@ -34,13 +33,13 @@ export const Count: React.FC<CountProps> = () => {
 				maxW="100vw"
 				gapX="2vw"
 				h="auto"
-				fontSize="2em"
+				fontSize="2rem"
 			>
 				<GridItem colSpan={1}>
-					<ReactantCount />
+					<Counter formulaSection={"REACTANTS"} />
 				</GridItem>
 				<GridItem colSpan={1}>
-					<ProductCount />
+					<Counter formulaSection="PRODUCTS" />
 				</GridItem>
 			</SimpleGrid>
 		)

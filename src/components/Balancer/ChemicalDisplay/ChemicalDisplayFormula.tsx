@@ -36,17 +36,17 @@ export const ChemicalDisplayFormula: ChemicalDisplayFormulaProps = ({
 
 	return (
 		<Box className="ChemicalDisplayFormulas">
-			<Flex dir="row" key={uuid()} height="4em">
+			<Flex dir="row" key={uuid()} height="4rem">
 				{/*             */}
 				{/* Coefficient */}
 				{/*             */}
-				<Text color="drac.pink" fontSize="2em">
+				<Text color="drac.pink" fontSize="2rem">
 					{item.coefficient}
 				</Text>
 				{/*    */}
 				{/* Of */}
 				{/*    */}
-				<Text ml=".25em" mr=".25em" fontSize="2em">
+				<Text ml=".25rem" mr=".25rem" fontSize="2rem">
 					of
 				</Text>
 				{/*         */}
@@ -57,15 +57,15 @@ export const ChemicalDisplayFormula: ChemicalDisplayFormulaProps = ({
 						<Flex dir="row" key={uuid()}>
 							{compound.parenthesesSubscript >= 2 &&
 							compound.isFirstElementInChunk === true ? (
-								<Text color="drac.orange" fontSize="2em">
+								<Text color="drac.orange" fontSize="2rem">
 									(
 								</Text>
 							) : null}
-							<Text color="drac.purple" fontSize="2em">
+							<Text color="drac.purple" fontSize="2rem">
 								{compound.symbol}
 							</Text>
 
-							<Text color="drac.purple" fontSize="2em">
+							<Text color="drac.purple" fontSize="2rem">
 								{compound.count > 1 ? (
 									<sub>{compound.count}</sub>
 								) : null}
@@ -74,10 +74,10 @@ export const ChemicalDisplayFormula: ChemicalDisplayFormulaProps = ({
 							{compound.parenthesesSubscript >= 2 &&
 							compound.isLastElementInChunk === true ? (
 								<Flex dir="row">
-									<Text color="drac.orange" fontSize="2em">
+									<Text color="drac.orange" fontSize="2rem">
 										)
 									</Text>
-									<Text color="drac.orange" fontSize="2em">
+									<Text color="drac.orange" fontSize="2rem">
 										<sub>
 											{compound.parenthesesSubscript}
 										</sub>

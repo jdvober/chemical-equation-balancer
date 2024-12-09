@@ -1,7 +1,7 @@
 import React from "react"
 import { v4 as uuid } from "uuid"
 
-import { CompoundChunk } from "@/components/Formula/CompoundChunk/CompoundChunk"
+import { CompoundChunk } from "@/components/Balancer/Formula/CompoundChunk/CompoundChunk"
 import { ChunkSubscriptModificationButton } from "@/components/FormulaEditor/FormulaSection/ButtonsAndSwitches/ChunkSubscriptModificationButton"
 import { ChemicalDropZone } from "@/components/FormulaEditor/FormulaSection/ChemicalDropZone"
 import { useMainStore } from "@/stores/MainStore"
@@ -18,7 +18,7 @@ export const CompoundConstruction: React.FC<CompoundConstructionProps> = () => {
 	)
 
 	return (
-		<Flex dir="row" w="auto" className="CompoundConstruction">
+		<Flex dir="row" w="auto" className="CompoundConstruction" ml="1rem">
 			{editorConstructionSectionChunks.length === 0 ? (
 				<ChemicalDropZone
 					title={"FormulaEditorChemicalSection"}
