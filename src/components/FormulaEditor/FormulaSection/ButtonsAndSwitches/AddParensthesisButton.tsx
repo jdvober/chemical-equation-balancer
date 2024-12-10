@@ -79,8 +79,8 @@ export const AddParensthesisButton: React.FC<
 	return (
 		<Button
 			className="AddParensthesisButton"
-			w="2rem"
-			h="1.5rem"
+			w="100%"
+			h="auto"
 			fontSize={"1rem"}
 			alignSelf={"center"}
 			onClick={() => {

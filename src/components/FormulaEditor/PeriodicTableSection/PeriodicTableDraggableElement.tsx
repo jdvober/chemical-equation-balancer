@@ -1,10 +1,10 @@
 import { v4 as uuid } from "uuid"
 
-import { Flex, Text, VStack } from "@chakra-ui/react"
+import { Box, GridItem, Square, Text } from "@chakra-ui/react"
 import { useDraggable } from "@dnd-kit/core"
 import { CSS } from "@dnd-kit/utilities"
 
-import { dracPurple } from "@/theme/colors/colors"
+import { dracBG200, dracBG700 } from "@/theme/colors/colors"
 import { useMainStore } from "../../../stores/MainStore"
 
 export const PeriodicTableDraggableElement = ({
@@ -63,55 +63,32 @@ export const PeriodicTableDraggableElement = ({
 	}
 
 	return (
-		<Flex
-			padding="3"
-			backgroundColor={
-				symbol === "BLANK" || parent !== "FormulaEditorElementSection"
-					? ""
-					: "drac.comment"
-			}
-			color={"drac.bg"}
-			w={`3vw`}
-			h={`3vw`}
-			mb=".25vw"
-			ml=".125vw"
-			mr={".125vw"}
-			align="center"
-			justify={"center"}
-			borderRadius=".25rem"
-			border={symbol === "BLANK" ? "" : "2px solid gray.500"}
-			boxShadow={symbol === "BLANK" ? "" : "0px 0px 5px 2px #2121213b"}
-			transform={style.transform}
-			{...listeners}
-			{...attributes}
-			ref={setNodeRef}
-			userSelect={"none"}
-			onClick={() => {
-				handleClick()
-			}}
-			css={{ transition: "all 0.1s ease-in-out" }}
-			_hover={{
-				color: "drac.red",
-				boxShadow: `0 5px 15px ${dracPurple}`,
-				transform: "scale(1.35)",
-				backgroundColor: "drac.cl",
-			}}
-		>
-			<VStack>
-				<Flex
-					direction={"row"}
-					justifyContent={"center"} /*justify ==> along main axis*/
-					alignItems={"center"} /*align ==> along cross axis*/
-				>
-					<Text
-						fontSize={".8rem"}
-						userSelect={"none"}
-						justifySelf="center"
-					>
-						{symbol}
-					</Text>
-				</Flex>
-			</VStack>
-		</Flex>
+		<GridItem>
+			<Square
+				size="2.5em"
+				// Styling
+				backgroundColor={
+					symbol === "BLANK" ||
+					parent !== "FormulaEditorElementSection"
+						? ""
+						: "drac.comment"
+				}
+				color={"drac.bg"}
+				border={symbol === "BLANK" ? "" : `2px solid ${dracBG700}`}
+				boxShadow={
+					symbol === "BLANK" ? "" : `0px 0px 5px 2px ${dracBG200}`
+				}
+				borderRadius={"10%"}
+				// Draggable Stuff
+				transform={style.transform}
+				{...listeners}
+				{...attributes}
+				ref={setNodeRef}
+				// Actions
+				onClick={handleClick}
+			>
+				<Box>{symbol != "BLANK" ? <Text>{symbol}</Text> : null}</Box>
+			</Square>
+		</GridItem>
 	)
 }

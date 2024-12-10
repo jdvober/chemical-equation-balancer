@@ -1,10 +1,12 @@
 import React from "react"
 import { v4 as uuid } from "uuid"
 
-import { Box, Flex, VStack } from "@chakra-ui/react"
+import { Box, Flex, Spacer } from "@chakra-ui/react"
 //@ts-ignore
 
-import { FormulaSection } from "@/components/FormulaEditor/FormulaSection/FormulaSection.tsx"
+import { EditorCloseButton } from "@/components/FormulaEditor/EditorCloseButton"
+import { FormulaSection } from "@/components/FormulaEditor/FormulaSection/FormulaSection"
+import { EditorPeriodicTableSection } from "@/components/FormulaEditor/PeriodicTableSection/EditorPeriodicTableSection"
 import { useMainStore } from "@/stores/MainStore.ts"
 import { dracPurple } from "@/theme/colors/colors.ts"
 import {
@@ -14,8 +16,6 @@ import {
 	useSensor,
 	useSensors,
 } from "@dnd-kit/core"
-import { EditorCloseButton } from "./EditorCloseButton"
-import { EditorPeriodicTableSection } from "./PeriodicTableSection/EditorPeriodicTableSection.tsx"
 
 // If no values, use this:
 type FormulaEditorProps = Record<string, never>
@@ -29,9 +29,6 @@ export const FormulaEditor: React.FC<FormulaEditorProps> = () => {
 	const setFormulaEditorChemicalSectionChunks = useMainStore(
 		(state) => state.setEditorConstructionSectionChunks
 	)
-	const selectedConstructionCompoundIDs = useMainStore(
-		(state) => state.selectedConstructionCompoundIDs
-	)
 	const sensors = useSensors(
 		useSensor(MouseSensor, {
 			activationConstraint: {
@@ -41,7 +38,7 @@ export const FormulaEditor: React.FC<FormulaEditorProps> = () => {
 	)
 
 	return (
-		<Box className="FormulaEditor" color="drac.fg" h="90%">
+		<Box className="FormulaEditor" color="drac.fg" h="100svh">
 			<DndContext
 				sensors={sensors}
 				collisionDetection={rectIntersection}
@@ -83,23 +80,19 @@ export const FormulaEditor: React.FC<FormulaEditorProps> = () => {
 					}
 				}}
 			>
-				<VStack>
+				<Flex direction="column" h="100%" gap="1em">
 					<Flex
-						dir="row"
-						m="1rem"
-						p="1rem"
-						alignItems="center"
-						justifyContent={"space-between"}
-						w="100vw"
+						direction="row"
+						align="center"
+						justifyContent="space-evenly"
+						overflowY="none"
 					>
 						<FormulaSection />
+						<Spacer />
 						<EditorCloseButton />
 					</Flex>
 					<EditorPeriodicTableSection />
-					{selectedConstructionCompoundIDs.map((compound) => {
-						return <div key={uuid()}>{compound}</div>
-					})}
-				</VStack>
+				</Flex>
 			</DndContext>
 		</Box>
 	)

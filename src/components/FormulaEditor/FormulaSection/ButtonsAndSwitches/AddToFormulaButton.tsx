@@ -121,9 +121,7 @@ export const AddToFormulaButton: React.FC<AddToFormulaButtonProps> = () => {
 	return (
 		<Box className="AddToFormulaButton">
 			<Button
-				fontSize={"2rem"}
-				w="2rem"
-				h="1.5rem"
+				h="2.5rem"
 				onClick={() => {
 					editFormulaSection === "REACTANTS"
 						? addNewReactants()

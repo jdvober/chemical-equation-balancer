@@ -27,6 +27,7 @@ export const EditorCloseButton: React.FC<EditorCloseButtonProps> = () => {
 			borderRadius=".5rem"
 			justifySelf="flex-end"
 			ml="1rem"
+			mr="1rem"
 		>
 			<Flex dir="column" wrap="wrap" justify="center">
 				<TiTimesOutline />

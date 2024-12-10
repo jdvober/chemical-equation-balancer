@@ -18,7 +18,7 @@ export const CompoundConstruction: React.FC<CompoundConstructionProps> = () => {
 	)
 
 	return (
-		<Flex dir="row" w="auto" className="CompoundConstruction" ml="1rem">
+		<Flex dir="row" w="auto" className="CompoundConstruction" gap=".5em">
 			{editorConstructionSectionChunks.length === 0 ? (
 				<ChemicalDropZone
 					title={"FormulaEditorChemicalSection"}

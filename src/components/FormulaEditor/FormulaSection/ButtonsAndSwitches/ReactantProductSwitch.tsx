@@ -1,8 +1,9 @@
-import React from "react"
+import React, { useState } from "react"
 
-import { Switch } from "@/components/ui/switch"
 import { useMainStore } from "@/stores/MainStore"
 import { Flex, Text } from "@chakra-ui/react"
+import { motion } from "motion/react"
+import "../../../../customCSS/ReactantProductSwitch.css"
 
 // If no values, use this:
 type ReactantProductSwitchProps = Record<string, never>
@@ -15,23 +16,36 @@ export const ReactantProductSwitch: React.FC<
 	const setEditFormulaSection = useMainStore(
 		(state) => state.setEditFormulaSection
 	)
+
 	const editFormulaSection = useMainStore((state) => state.editFormulaSection)
+
+	const spring = {
+		type: "spring",
+		stiffness: 700,
+		damping: 30,
+	}
+
+	const [isOn, setIsOn] = useState(false)
+
+	const toggleSwitch = () => {
+		setIsOn(!isOn)
+		setEditFormulaSection(
+			editFormulaSection === "REACTANTS" ? "PRODUCTS" : "REACTANTS"
+		)
+	}
+
 	return (
-		<Flex direction={"row"} className="ReactantProductSwitch">
+		<Flex
+			direction={"row"}
+			className="ReactantProductSwitch"
+			alignItems="center"
+			justifyContent={"space-between"}
+			h="20%"
+		>
 			<Text fontSize=".75rem">Reactants</Text>
-			<Switch
-				checked={editFormulaSection === "REACTANTS" ? false : true}
-				onCheckedChange={() => {
-					setEditFormulaSection(
-						editFormulaSection === "REACTANTS"
-							? "PRODUCTS"
-							: "REACTANTS"
-					)
-				}}
-				ml=".5rem"
-				mr=".5rem"
-				size={"sm"}
-			/>
+			<div className="switch" data-isOn={isOn} onClick={toggleSwitch}>
+				<motion.div className="handle" layout transition={spring} />
+			</div>
 			<Text fontSize=".75rem">Products</Text>
 		</Flex>
 	)

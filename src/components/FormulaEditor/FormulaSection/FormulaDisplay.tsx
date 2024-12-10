@@ -1,7 +1,7 @@
 import React from "react"
 import { v4 as uuid } from "uuid"
 
-import { Box, GridItem, HStack, Text } from "@chakra-ui/react"
+import { Box, Flex, GridItem, HStack, Text } from "@chakra-ui/react"
 
 import { CalculateCountList } from "../../../functions/GlobalFunctions"
 import { useMainStore } from "../../../stores/MainStore"
@@ -47,11 +47,11 @@ export const FormulaDisplay: React.FC<FormulaDisplayProps> = () => {
 	}
 
 	return (
-		<HStack alignSelf={"center"} mr="1rem">
+		<Flex direction="row" alignSelf={"center"} alignItems="center">
 			{formula.reactants.map((reactant, reactantIndex) => {
 				return (
 					<GridItem key={uuid()}>
-						<HStack alignItems={"center"} key={uuid()}>
+						<Flex alignItems={"center"} key={uuid()}>
 							<Box
 								key={uuid()}
 								className="compound-container"
@@ -82,10 +82,11 @@ export const FormulaDisplay: React.FC<FormulaDisplayProps> = () => {
 									location="EDITOR_FORMULA"
 								/>
 							</Box>
-						</HStack>
+						</Flex>
 					</GridItem>
 				)
 			})}
+
 			<Text color="drac.yellow" ml="1rem" mr="1rem" fontSize={"3em"}>
 				→
 			</Text>
@@ -132,6 +133,6 @@ export const FormulaDisplay: React.FC<FormulaDisplayProps> = () => {
 					</GridItem>
 				)
 			})}
-		</HStack>
+		</Flex>
 	)
 }

@@ -21,6 +21,19 @@ export const ChemicalCompound: React.FC<ChemicalCompoundProps> = ({
 	location,
 }) => {
 	const formula = useMainStore((state) => state.formula)
+	const setHoverStatus = useMainStore((state) => state.setHoverStatus)
+	const item =
+		formulaSection === "REACTANTS"
+			? formula.reactants[index]
+			: formula.products[index]
+
+	const handleMouseEnter = () => {
+		setHoverStatus(item.formulaSection, index, true)
+	}
+	const handleMouseLeave = () => {
+		setHoverStatus(item.formulaSection, index, false)
+	}
+
 	return (
 		<VStack>
 			<HStack
@@ -36,6 +49,12 @@ export const ChemicalCompound: React.FC<ChemicalCompoundProps> = ({
 						_hover={{
 							transform: "scale()",
 							color: "drac.red",
+						}}
+						onMouseEnter={() => {
+							handleMouseEnter()
+						}}
+						onMouseLeave={() => {
+							handleMouseLeave()
 						}}
 					>
 						<CompoundChunk

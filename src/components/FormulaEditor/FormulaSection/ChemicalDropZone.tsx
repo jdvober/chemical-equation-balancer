@@ -25,15 +25,14 @@ export const ChemicalDropZone: React.FC<ChemicalDropZone> = ({ title }) => {
 			h="auto"
 			align={"center"}
 			justify="space-between"
-			ml="1rem"
 		>
 			<Box
 				// border={"1px solid " + dracCyan}
 				backgroundColor={isOver ? "drac.yellow" : ""}
 				boxShadow={"0 0 0 10px rgba(241, 250, 140, 80)"}
 				borderRadius=".5rem"
-				w="4vw"
-				h="4vw"
+				w="3em"
+				h="3em"
 			/>
 		</Flex>
 	)

@@ -1,0 +1,27 @@
+/* 100px=1rem */
+body {
+	--switch-unit: 1.5rem;
+}
+.switch {
+	width: calc(var(--switch-unit) * 1.6);
+	height: var(--switch-unit);
+	background-color: rgba(255, 255, 255, 0.4);
+	display: flex;
+	justify-content: flex-start;
+	border-radius: calc(var(--switch-unit) * 0.5);
+	padding: calc(var(--switch-unit) * 0.1);
+	cursor: pointer;
+	margin-left: calc(var(--switch-unit) * 0.4);
+	margin-right: calc(var(--switch-unit) * 0.4);
+}
+
+.switch[data-isOn="true"] {
+	justify-content: flex-end;
+}
+
+.handle {
+	width: calc(var(--switch-unit) * 0.8);
+	height: calc(var(--switch-unit) * 0.8);
+	background-color: white;
+	border-radius: calc(var(--switch-unit) * 0.8);
+}

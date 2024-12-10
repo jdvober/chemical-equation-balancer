@@ -3,7 +3,7 @@ import { v4 as uuid } from "uuid"
 import { create } from "zustand"
 import { immer } from "zustand/middleware/immer"
 import { CountList } from "./countList"
-import { Elements } from "./elements"
+import { ElementsByPeriod } from "./elements"
 
 type State = {
 	formula: {
@@ -119,7 +119,7 @@ export const useMainStore = create<State & Action>()(
 
 		editFormulaSection: "REACTANTS",
 		formulaEditorActive: false,
-		elements: Elements,
+		elements: ElementsByPeriod,
 		subscriptColor: dracPurple,
 		editorConstructionSectionChunks: [],
 		reactantAndProductElementListsMatch: false,

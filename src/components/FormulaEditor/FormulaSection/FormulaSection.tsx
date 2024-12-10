@@ -1,11 +1,12 @@
 import React from "react"
 
+import { ReactantProductSwitch } from "@/components/FormulaEditor/FormulaSection/ButtonsAndSwitches/ReactantProductSwitch"
 import { CompoundConstruction } from "@/components/FormulaEditor/FormulaSection/CompoundConstruction/CompoundConstruction"
 import { EditorControls } from "@/components/FormulaEditor/FormulaSection/EditorControls"
 import { FormulaDisplay } from "@/components/FormulaEditor/FormulaSection/FormulaDisplay"
 import { useMainStore } from "@/stores/MainStore"
+import { dracGreen, dracRed } from "@/theme/colors/colors"
 import { Box, Flex } from "@chakra-ui/react"
-import { dracOrange, dracRed } from "../../../theme/colors/colors"
 
 // If no values, use this:
 type FormulaSectionProps = Record<string, never>
@@ -17,23 +18,26 @@ export const FormulaSection: React.FC<FormulaSectionProps> = () => {
 		(state) => state.reactantAndProductElementListsMatch
 	)
 	return (
-		<Box flexGrow={1} className="FormulaSection">
+		<Box className="FormulaSection" flexGrow={1} w="100%">
 			<Flex
-				borderRadius="8px"
+				direction="row"
 				border={`1px solid ${
 					reactantAndProductElementListsMatch === true
-						? dracOrange
+						? dracGreen
 						: dracRed
 				}`}
-				flex="1"
-				h="10rem"
-				align={"center"}
+				borderRadius={"1rem"}
+				alignItems={"center"}
 				justifyContent={"flex-start"}
 				overflowX={"auto"}
 				overflowY={"clip"}
+				p=".5rem"
+				m=".5rem"
+				gap=".5em"
 			>
 				<CompoundConstruction />
 				<EditorControls />
+				<ReactantProductSwitch />
 				<FormulaDisplay />
 			</Flex>
 		</Box>
