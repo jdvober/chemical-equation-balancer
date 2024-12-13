@@ -1,22 +1,6 @@
 import React, { useState } from 'react'
 import { Swatches } from '../theme.ts'
-import {
-	Box,
-	Center,
-	ColorSwatch,
-	Flex,
-	Grid,
-	GridItem,
-	Group,
-	HStack,
-	Popover,
-	PopoverArrow,
-	PopoverBody,
-	PopoverContent,
-	PopoverRoot,
-	PopoverTrigger,
-	Text,
-} from '@chakra-ui/react'
+import { Box, Center, ColorSwatch, Flex, Group } from '@chakra-ui/react'
 
 type Props = {}
 type ColorViewerDevProps =
@@ -29,8 +13,8 @@ export const ColorViewerDev: ColorViewerDevProps = () => {
 
 	return (
 		<Center w="100vw" h="100vh">
-			<Flex direction="row" width="100%" p="5%">
-				<Center w="15vw">
+			<Flex direction="column" width="100%" p="5%">
+				<Center w="100%" h="2em">
 					{colorInfo[0]}
 					{colorInfo[0] === '' ? '' : ' '}
 					{colorInfo[0] != colorInfo[1] ? colorInfo[1] : ''}

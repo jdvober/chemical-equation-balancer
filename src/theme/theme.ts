@@ -72,6 +72,13 @@ export const Colors = {
 		dark: { value: '#9E5FF6' },
 		darker: { value: '#7D2AF3' },
 	},
+	tan: {
+		DEFAULT: { value: '#B7A48A' },
+		lighter: { value: '#CCBEAB' },
+		light: { value: '#C2B19B' },
+		dark: { value: '#A68E6E' },
+		darker: { value: '#8E7757' },
+	},
 	white: {
 		DEFAULT: { value: '#F8F8F2' },
 		lighter: { value: '#FAFAF6' },
@@ -92,13 +99,6 @@ export const Colors = {
 		light: { value: '#5A5D77' },
 		dark: { value: '#3F4254' },
 		darker: { value: '#353847' },
-	},
-	tan: {
-		DEFAULT: { value: '#B7A48A' },
-		lighter: { value: '#CCBEAB' },
-		light: { value: '#C2B19B' },
-		dark: { value: '#A68E6E' },
-		darker: { value: '#8E7757' },
 	},
 	bg: {
 		DEFAULT: { value: '#282A36' },
@@ -251,7 +251,17 @@ export const Swatches = [
 		],
 	},
 	{
-		name: 'White',
+		name: 'Tan',
+		colors: [
+			{ name: 'Lighter', value: Colors.tan.lighter.value },
+			{ name: 'Light', value: Colors.tan.light.value },
+			{ name: 'Default', value: Colors.tan.DEFAULT.value },
+			{ name: 'Dark', value: Colors.tan.dark.value },
+			{ name: 'Darker', value: Colors.tan.darker.value },
+		],
+	},
+	{
+		name: 'White a.k.a. Foreground',
 		colors: [
 			{ name: 'Lighter', value: Colors.white.lighter.value },
 			{ name: 'Light', value: Colors.white.light.value },
@@ -261,13 +271,13 @@ export const Swatches = [
 		],
 	},
 	{
-		name: 'Black',
+		name: 'Comment',
 		colors: [
-			{ name: 'Lighter', value: Colors.black.lighter.value },
-			{ name: 'Light', value: Colors.black.light.value },
-			{ name: 'Default', value: Colors.black.DEFAULT.value },
-			{ name: 'Dark', value: Colors.black.dark.value },
-			{ name: 'Darker', value: Colors.black.darker.value },
+			{ name: 'Lighter', value: Colors.comment.lighter.value },
+			{ name: 'Light', value: Colors.comment.light.value },
+			{ name: 'Default', value: Colors.comment.DEFAULT.value },
+			{ name: 'Dark', value: Colors.comment.dark.value },
+			{ name: 'Darker', value: Colors.comment.darker.value },
 		],
 	},
 	{
@@ -281,13 +291,13 @@ export const Swatches = [
 		],
 	},
 	{
-		name: 'Tan',
+		name: 'Current Line',
 		colors: [
-			{ name: 'Lighter', value: Colors.tan.lighter.value },
-			{ name: 'Light', value: Colors.tan.light.value },
-			{ name: 'Default', value: Colors.tan.DEFAULT.value },
-			{ name: 'Dark', value: Colors.tan.dark.value },
-			{ name: 'Darker', value: Colors.tan.darker.value },
+			{ name: 'Lighter', value: Colors.currentLine.lighter.value },
+			{ name: 'Light', value: Colors.currentLine.light.value },
+			{ name: 'Default', value: Colors.currentLine.DEFAULT.value },
+			{ name: 'Dark', value: Colors.currentLine.dark.value },
+			{ name: 'Darker', value: Colors.currentLine.darker.value },
 		],
 	},
 	{
@@ -301,33 +311,13 @@ export const Swatches = [
 		],
 	},
 	{
-		name: 'Current Line',
+		name: 'Black',
 		colors: [
-			{ name: 'Lighter', value: Colors.currentLine.lighter.value },
-			{ name: 'Light', value: Colors.currentLine.light.value },
-			{ name: 'Default', value: Colors.currentLine.DEFAULT.value },
-			{ name: 'Dark', value: Colors.currentLine.dark.value },
-			{ name: 'Darker', value: Colors.currentLine.darker.value },
-		],
-	},
-	{
-		name: 'Foreground',
-		colors: [
-			{ name: 'Lighter', value: Colors.fg.lighter.value },
-			{ name: 'Light', value: Colors.fg.light.value },
-			{ name: 'Default', value: Colors.fg.DEFAULT.value },
-			{ name: 'Dark', value: Colors.fg.dark.value },
-			{ name: 'Darker', value: Colors.fg.darker.value },
-		],
-	},
-	{
-		name: 'Comment',
-		colors: [
-			{ name: 'Lighter', value: Colors.comment.lighter.value },
-			{ name: 'Light', value: Colors.comment.light.value },
-			{ name: 'Default', value: Colors.comment.DEFAULT.value },
-			{ name: 'Dark', value: Colors.comment.dark.value },
-			{ name: 'Darker', value: Colors.comment.darker.value },
+			{ name: 'Lighter', value: Colors.black.lighter.value },
+			{ name: 'Light', value: Colors.black.light.value },
+			{ name: 'Default', value: Colors.black.DEFAULT.value },
+			{ name: 'Dark', value: Colors.black.dark.value },
+			{ name: 'Darker', value: Colors.black.darker.value },
 		],
 	},
 ]
