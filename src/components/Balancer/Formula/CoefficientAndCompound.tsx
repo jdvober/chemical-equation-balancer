@@ -1,7 +1,7 @@
-import { ChemicalCompound } from "@/components/Balancer/Formula/ChemicalCompound/ChemicalCompound"
-import { Coefficient } from "@/components/Balancer/Formula/Coefficient/Coefficient"
-import { Box, HStack } from "@chakra-ui/react"
-import { v4 as uuid } from "uuid"
+import { ChemicalCompound } from '@/components/Balancer/Formula/ChemicalCompound/ChemicalCompound'
+import { Coefficient } from '@/components/Balancer/Formula/Coefficient/Coefficient'
+import { Box, HStack } from '@chakra-ui/react'
+import { v4 as uuid } from 'uuid'
 
 interface CoefficientAndCompoundProps {
 	item: ChemicalReactant
@@ -14,7 +14,7 @@ export const CoefficientAndCompound: React.FC<CoefficientAndCompoundProps> = ({
 }) => {
 	return (
 		<Box key={uuid()} w="auto" alignSelf="center" alignContent="center">
-			<HStack alignItems={"center"}>
+			<HStack alignItems={'center'}>
 				<Box className={`coefficient-${item}-${itemIndex}-container`}>
 					<Coefficient
 						index={itemIndex}

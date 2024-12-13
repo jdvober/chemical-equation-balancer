@@ -1,11 +1,11 @@
-import React from "react"
+import React from 'react'
 
-import { Flex, Spacer } from "@chakra-ui/react"
+import { Flex, Spacer } from '@chakra-ui/react'
 
-import { Arrow } from "@/components/Balancer/Formula/Arrow.tsx"
-import { CoefficientAndCompound } from "@/components/Balancer/Formula/CoefficientAndCompound.tsx"
-import { dracCurrentLine } from "@/theme/colors/colors.ts"
-import { useMainStore } from "../../../stores/MainStore.ts"
+import { Arrow } from '@/components/Balancer/Formula/Arrow.tsx'
+import { CoefficientAndCompound } from '@/components/Balancer/Formula/CoefficientAndCompound.tsx'
+import { dracCurrentLine } from '@/theme/colors/colors.ts'
+import { useMainStore } from '../../../stores/MainStore.ts'
 
 // If no values, use this:
 type FormulaProps = Record<string, never>
@@ -19,10 +19,10 @@ export const Formula: React.FC<FormulaProps> = () => {
 		<Flex
 			direction="row"
 			border={`1px solid ${dracCurrentLine}`}
-			borderRadius={"1rem"}
+			borderRadius={'1rem'}
 			p="1rem"
-			overflowX={"scroll"}
-			overflowY={"hidden"}
+			overflowX={'scroll'}
+			overflowY={'hidden'}
 			alignItems="center"
 			justifyContent="center"
 		>

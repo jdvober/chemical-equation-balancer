@@ -1,10 +1,11 @@
-import axios from "axios"
-import React, { useEffect, useState } from "react"
+import axios from 'axios'
+import React, { useEffect, useState } from 'react'
 
-import { Avatar, Button, HStack, Text } from "@chakra-ui/react"
-import { GoogleLogin, googleLogout, useGoogleLogin } from "@react-oauth/google"
+import { Button, HStack, Text } from '@chakra-ui/react'
+import { GoogleLogin, googleLogout, useGoogleLogin } from '@react-oauth/google'
 
-import { useGoogleAuthStore } from "../../stores/GoogleAuthStore.ts"
+import { Avatar } from '@/components/ui/avatar.tsx'
+import { useGoogleAuthStore } from '../../stores/GoogleAuthStore.ts'
 
 interface GoogleLoginButtonProps {}
 export const GoogleLoginButton: React.FC<GoogleLoginButtonProps> = () => {
@@ -25,7 +26,7 @@ export const GoogleLoginButton: React.FC<GoogleLoginButtonProps> = () => {
 			setUser(codeResponse)
 			setIsLoggedIn(true)
 		},
-		onError: (error) => console.log("Login Failed:", error),
+		onError: (error) => console.log('Login Failed:', error),
 	})
 
 	useEffect(() => {
@@ -36,7 +37,7 @@ export const GoogleLoginButton: React.FC<GoogleLoginButtonProps> = () => {
 					{
 						headers: {
 							Authorization: `Bearer ${user.access_token}`,
-							Accept: "application/json",
+							Accept: 'application/json',
 						},
 					}
 				)
@@ -77,7 +78,7 @@ export const GoogleLoginButton: React.FC<GoogleLoginButtonProps> = () => {
 						login()
 					}}
 					onError={() => {
-						console.log("Login Failed")
+						console.log('Login Failed')
 					}}
 				/>
 			)}
