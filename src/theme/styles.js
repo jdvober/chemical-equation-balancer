@@ -1,10 +1,10 @@
 export const Styles = {
-	initialColorMode: "dark",
+	initialColorMode: 'dark',
 	useSystemColorMode: true,
 	global: (props) => ({
 		body: {
 			height: 2 * window.innerHeight,
-			bg: "drac.bg",
+			bg: 'bg',
 		},
 	}),
 }

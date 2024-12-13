@@ -4,7 +4,6 @@ import { Flex, Spacer } from '@chakra-ui/react'
 
 import { Arrow } from '@/components/Balancer/Formula/Arrow.tsx'
 import { CoefficientAndCompound } from '@/components/Balancer/Formula/CoefficientAndCompound.tsx'
-import { dracCurrentLine } from '@/theme/colors/colors.ts'
 import { useMainStore } from '../../../stores/MainStore.ts'
 
 // If no values, use this:
@@ -18,7 +17,7 @@ export const Formula: React.FC<FormulaProps> = () => {
 	return (
 		<Flex
 			direction="row"
-			border={`1px solid ${dracCurrentLine}`}
+			border={`1px solid currentLine`}
 			borderRadius={'1rem'}
 			p="1rem"
 			overflowX={'scroll'}

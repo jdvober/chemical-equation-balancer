@@ -1,10 +1,9 @@
-import React, { useState } from "react"
-import { TiArrowDownOutline, TiArrowUpOutline } from "react-icons/ti"
+import React, { useState } from 'react'
+import { TiArrowDownOutline, TiArrowUpOutline } from 'react-icons/ti'
 
-import { Button } from "@chakra-ui/react"
+import { Button } from '@chakra-ui/react'
 
-import { dracGreen, dracRed } from "@/theme/colors/colors"
-import { useMainStore } from "../../../../stores/MainStore"
+import { useMainStore } from '../../../../stores/MainStore'
 
 // If no values, use this:
 // type ChemicalElementEditorButtonProps = Record<string, never>
@@ -29,7 +28,7 @@ export const ChemicalElementSubscriptModificationButton: React.FC<
 	if (isUpArrow === true) {
 		return (
 			<Button
-				border={`1px solid ${dracGreen}`}
+				border={`1px solid green`}
 				h="1.25rem"
 				w="1rem"
 				opacity={`${opacity}%`}
@@ -52,13 +51,13 @@ export const ChemicalElementSubscriptModificationButton: React.FC<
 					)
 				}}
 			>
-				<TiArrowUpOutline color="drac.black" />
+				<TiArrowUpOutline color="black" />
 			</Button>
 		)
 	} else {
 		return (
 			<Button
-				border={`1px solid ${dracRed}`}
+				border={`1px solid red`}
 				h="1.25rem"
 				w="1rem"
 				opacity={`${opacity}%`}
@@ -81,7 +80,7 @@ export const ChemicalElementSubscriptModificationButton: React.FC<
 					)
 				}}
 			>
-				<TiArrowDownOutline color="drac.black" />
+				<TiArrowDownOutline color="black" />
 			</Button>
 		)
 	}

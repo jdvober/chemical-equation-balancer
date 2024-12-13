@@ -1,21 +1,21 @@
-import React from "react"
-import { v4 as uuid } from "uuid"
+import React from 'react'
+import { v4 as uuid } from 'uuid'
 
-import { Box, Flex, Spacer } from "@chakra-ui/react"
+import { Box, Flex, Spacer } from '@chakra-ui/react'
 //@ts-ignore
 
-import { EditorCloseButton } from "@/components/FormulaEditor/EditorCloseButton"
-import { FormulaSection } from "@/components/FormulaEditor/FormulaSection/FormulaSection"
-import { EditorPeriodicTableSection } from "@/components/FormulaEditor/PeriodicTableSection/EditorPeriodicTableSection"
-import { useMainStore } from "@/stores/MainStore.ts"
-import { dracPurple } from "@/theme/colors/colors.ts"
+import { EditorCloseButton } from '@/components/FormulaEditor/EditorCloseButton'
+import { FormulaSection } from '@/components/FormulaEditor/FormulaSection/FormulaSection'
+import { EditorPeriodicTableSection } from '@/components/FormulaEditor/PeriodicTableSection/EditorPeriodicTableSection'
+import { useMainStore } from '@/stores/MainStore.ts'
+import { dracPurple } from '@/theme/colors/colors.ts'
 import {
 	DndContext,
 	MouseSensor,
 	rectIntersection,
 	useSensor,
 	useSensors,
-} from "@dnd-kit/core"
+} from '@dnd-kit/core'
 
 // If no values, use this:
 type FormulaEditorProps = Record<string, never>
@@ -38,16 +38,16 @@ export const FormulaEditor: React.FC<FormulaEditorProps> = () => {
 	)
 
 	return (
-		<Box className="FormulaEditor" color="drac.fg" h="100svh">
+		<Box className="FormulaEditor" color="fg" h="100svh">
 			<DndContext
 				sensors={sensors}
 				collisionDetection={rectIntersection}
 				onDragEnd={(e) => {
 					const container = e.over?.id
-					const symbol = e.active.data.current?.symbol ?? ""
+					const symbol = e.active.data.current?.symbol ?? ''
 					const index = formulaEditorChemicalSectionChunks.length ?? 0
-					const parent = e.active.data.current?.parent ?? "ToDo"
-					if (container === "FormulaEditorChemicalSection") {
+					const parent = e.active.data.current?.parent ?? 'ToDo'
+					if (container === 'FormulaEditorChemicalSection') {
 						setFormulaEditorChemicalSectionChunks([
 							...formulaEditorChemicalSectionChunks,
 							{
@@ -67,7 +67,7 @@ export const FormulaEditor: React.FC<FormulaEditorProps> = () => {
 							},
 						])
 					}
-					if (parent === "FormulaEditorChemicalSection") {
+					if (parent === 'FormulaEditorChemicalSection') {
 						setFormulaEditorChemicalSectionChunks([
 							...formulaEditorChemicalSectionChunks.slice(
 								0,

@@ -1,6 +1,6 @@
-import React from "react"
+import React from 'react'
 
-import { Box, HStack, Text } from "@chakra-ui/react"
+import { Box, HStack, Text } from '@chakra-ui/react'
 
 type ChemicalElementProps = {
 	symbol: ChemicalSymbol
@@ -14,10 +14,10 @@ export const ChemicalElement: React.FC<ChemicalElementProps> = ({
 }) => {
 	return (
 		<Box className="ChemicalElement">
-			<HStack color={isHovered === true ? "drac.red" : "drac.fg"}>
-				<Text fontSize={"2rem"}>{symbol}</Text>
+			<HStack color={isHovered === true ? 'red' : 'fg'}>
+				<Text fontSize={'2rem'}>{symbol}</Text>
 				{subscript && !(subscript <= 1) ? (
-					<Text fontSize={"2rem"}>
+					<Text fontSize={'2rem'}>
 						<sub>{subscript}</sub>
 					</Text>
 				) : null}

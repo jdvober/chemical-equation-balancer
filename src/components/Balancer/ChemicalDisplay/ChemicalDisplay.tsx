@@ -1,21 +1,21 @@
-import React from "react"
+import React from 'react'
 
-import { GridItem, SimpleGrid } from "@chakra-ui/react"
+import { GridItem, SimpleGrid } from '@chakra-ui/react'
 
 // If values, fill in the object below
 //type ChemicalDisplayProps = {}
-import { ChemicalDisplayCombo } from "@/components/Balancer/ChemicalDisplay/ChemicalDisplayCombo"
+import { ChemicalDisplayCombo } from '@/components/Balancer/ChemicalDisplay/ChemicalDisplayCombo'
 
 // If no values, use this:
 type ChemicalDisplayProps = Record<string, never>
 
 export const ChemicalDisplay: React.FC<ChemicalDisplayProps> = () => {
 	return (
-		<SimpleGrid w="96vw" columns={2} gap={"2vw"}>
+		<SimpleGrid w="96vw" columns={2} gap={'2vw'}>
 			<GridItem
 				colSpan={1}
 				border={`1px solid`}
-				borderColor="drac.cyan"
+				borderColor="cyan"
 				p="2vh"
 				borderRadius="1vw"
 			>
@@ -24,7 +24,7 @@ export const ChemicalDisplay: React.FC<ChemicalDisplayProps> = () => {
 			<GridItem
 				colSpan={1}
 				border={`1px solid`}
-				borderColor="drac.cyan"
+				borderColor="cyan"
 				p="2vh"
 				borderRadius="1vw"
 			>

@@ -1,13 +1,14 @@
-import { AtomSVG } from "@/components/Balancer/ChemicalDisplay/AtomSVG"
-import { dracCurrentLine, dracCyan } from "@/theme/colors/colors"
-import { Box, Flex } from "@chakra-ui/react"
-import React from "react"
-import { v4 as uuid } from "uuid"
+import { AtomSVG } from '@/components/Balancer/ChemicalDisplay/AtomSVG'
+import { dracCurrentLine, dracCyan } from '@/theme/colors/colors'
+import { Box, Flex } from '@chakra-ui/react'
+import React from 'react'
+import { v4 as uuid } from 'uuid'
 
 type Props = { item: ChemicalCompound }
-type ChemicalDisplayAtomProps = Props extends Record<string, never>
-	? React.FC<Record<string, never>>
-	: React.FC<Props>
+type ChemicalDisplayAtomProps =
+	Props extends Record<string, never>
+		? React.FC<Record<string, never>>
+		: React.FC<Props>
 
 export const ChemicalDisplayAtom: ChemicalDisplayAtomProps = ({ item }) => {
 	const getCompoundString = (compound: ChemicalCompound) => {
@@ -50,7 +51,7 @@ export const ChemicalDisplayAtom: ChemicalDisplayAtomProps = ({ item }) => {
 								<AtomSVG
 									cirFill={dracCurrentLine}
 									cirRadiusInEm={0.85}
-									cirStroke="drac.black"
+									cirStroke="black"
 									symbol={compound.symbol}
 									textFill={dracCyan}
 									key={uuid()}

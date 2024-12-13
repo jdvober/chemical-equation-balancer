@@ -13,8 +13,8 @@ export const ColorViewerDev: ColorViewerDevProps = () => {
 
 	return (
 		<Center w="100vw" h="100vh">
-			<Flex direction="row" width="100%" p="5%">
-				<Center w="15vw">
+			<Flex direction="column" width="100%" p="5%">
+				<Center w="100%" h="2em">
 					{colorInfo[0]}
 					{colorInfo[0] === '' ? '' : ' '}
 					{colorInfo[0] != colorInfo[1] ? colorInfo[1] : ''}

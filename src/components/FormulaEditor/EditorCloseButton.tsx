@@ -1,10 +1,10 @@
-import React from "react"
+import React from 'react'
 
 //@ts-ignore
-import { NavLinkButton } from "@/components/ui/NavLinkButton"
-import { dracCurrentLine, dracFG, dracPurple } from "@/theme/colors/colors"
-import { Flex } from "@chakra-ui/react"
-import { TiTimesOutline } from "react-icons/ti"
+import { NavLinkButton } from '@/components/ui/NavLinkButton'
+import { dracCurrentLine, dracFG } from '@/theme/colors/colors'
+import { Flex } from '@chakra-ui/react'
+import { TiTimesOutline } from 'react-icons/ti'
 
 // If no values, use this:
 type EditorCloseButtonProps = Record<string, never>
@@ -14,15 +14,15 @@ type EditorCloseButtonProps = Record<string, never>
 export const EditorCloseButton: React.FC<EditorCloseButtonProps> = () => {
 	return (
 		<NavLinkButton
-			to={"/balancer"}
+			to={'/balancer'}
 			bg={dracCurrentLine}
 			color={dracFG}
 			width="2rem"
 			height="2rem"
-			css={{ transition: "all 0.1s ease-in-out" }}
+			css={{ transition: 'all 0.1s ease-in-out' }}
 			_hover={{
-				color: "drac.red",
-				boxShadow: `0 5px 15px ${dracPurple}`,
+				color: 'red',
+				boxShadow: `0 5px 15px purple`,
 			}}
 			borderRadius=".5rem"
 			justifySelf="flex-end"

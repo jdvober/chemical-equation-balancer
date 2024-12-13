@@ -1,9 +1,8 @@
-import React from "react"
-import { TiChevronRightOutline } from "react-icons/ti"
+import React from 'react'
+import { TiChevronRightOutline } from 'react-icons/ti'
 
-import { useMainStore } from "@/stores/MainStore"
-import { dracPurple } from "@/theme/colors/colors"
-import { Box, Button } from "@chakra-ui/react"
+import { useMainStore } from '@/stores/MainStore'
+import { Box, Button } from '@chakra-ui/react'
 
 // If no values, use this:
 type AddToFormulaButtonProps = Record<string, never>
@@ -32,7 +31,7 @@ export const AddToFormulaButton: React.FC<AddToFormulaButtonProps> = () => {
 			{
 				coefficient: 1,
 
-				formulaSection: "REACTANTS",
+				formulaSection: 'REACTANTS',
 				isHovered: false,
 				chunks: editorConstructionSectionChunks,
 			},
@@ -79,7 +78,7 @@ export const AddToFormulaButton: React.FC<AddToFormulaButtonProps> = () => {
 			{
 				coefficient: 1,
 
-				formulaSection: "PRODUCTS",
+				formulaSection: 'PRODUCTS',
 				isHovered: false,
 				chunks: editorConstructionSectionChunks,
 			},
@@ -123,16 +122,16 @@ export const AddToFormulaButton: React.FC<AddToFormulaButtonProps> = () => {
 			<Button
 				h="2.5rem"
 				onClick={() => {
-					editFormulaSection === "REACTANTS"
+					editFormulaSection === 'REACTANTS'
 						? addNewReactants()
 						: addNewProducts()
 				}}
-				bg="drac.cl"
-				color="drac.fg"
-				css={{ transition: "all 0.1s ease-in-out" }}
+				bg="currentLine"
+				color="fg"
+				css={{ transition: 'all 0.1s ease-in-out' }}
 				_hover={{
-					color: "drac.red",
-					boxShadow: `0 5px 15px ${dracPurple}`,
+					color: 'red',
+					boxShadow: `0 5px 15px purple`,
 				}}
 			>
 				<TiChevronRightOutline />

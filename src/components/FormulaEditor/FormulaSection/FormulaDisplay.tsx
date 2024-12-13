@@ -1,11 +1,11 @@
-import React from "react"
-import { v4 as uuid } from "uuid"
+import React from 'react'
+import { v4 as uuid } from 'uuid'
 
-import { Box, Flex, GridItem, HStack, Text } from "@chakra-ui/react"
+import { Box, Flex, GridItem, HStack, Text } from '@chakra-ui/react'
 
-import { CalculateCountList } from "../../../functions/GlobalFunctions"
-import { useMainStore } from "../../../stores/MainStore"
-import { ChemicalCompound } from "../../Balancer/Formula/ChemicalCompound/ChemicalCompound"
+import { CalculateCountList } from '../../../functions/GlobalFunctions'
+import { useMainStore } from '../../../stores/MainStore'
+import { ChemicalCompound } from '../../Balancer/Formula/ChemicalCompound/ChemicalCompound'
 
 // If no values, use this:
 type FormulaDisplayProps = Record<string, never>
@@ -47,11 +47,11 @@ export const FormulaDisplay: React.FC<FormulaDisplayProps> = () => {
 	}
 
 	return (
-		<Flex direction="row" alignSelf={"center"} alignItems="center">
+		<Flex direction="row" alignSelf={'center'} alignItems="center">
 			{formula.reactants.map((reactant, reactantIndex) => {
 				return (
 					<GridItem key={uuid()}>
-						<Flex alignItems={"center"} key={uuid()}>
+						<Flex alignItems={'center'} key={uuid()}>
 							<Box
 								key={uuid()}
 								className="compound-container"
@@ -60,14 +60,14 @@ export const FormulaDisplay: React.FC<FormulaDisplayProps> = () => {
 								}}
 								onMouseEnter={() =>
 									setHoverStatus(
-										"REACTANTS",
+										'REACTANTS',
 										reactantIndex,
 										true
 									)
 								}
 								onMouseLeave={() =>
 									setHoverStatus(
-										"REACTANTS",
+										'REACTANTS',
 										reactantIndex,
 										false
 									)
@@ -87,14 +87,14 @@ export const FormulaDisplay: React.FC<FormulaDisplayProps> = () => {
 				)
 			})}
 
-			<Text color="drac.yellow" ml="1rem" mr="1rem" fontSize={"3em"}>
+			<Text color="yellow" ml="1rem" mr="1rem" fontSize={'3em'}>
 				→
 			</Text>
 
 			{formula.products.map((product, productIndex) => {
 				return (
 					<GridItem key={uuid()}>
-						<HStack alignItems={"center"} key={uuid()}>
+						<HStack alignItems={'center'} key={uuid()}>
 							<Box
 								className="compound-container"
 								onClick={() => {
@@ -102,22 +102,22 @@ export const FormulaDisplay: React.FC<FormulaDisplayProps> = () => {
 								}}
 								onMouseEnter={() =>
 									setHoverStatus(
-										"PRODUCTS",
+										'PRODUCTS',
 										productIndex,
 										true
 									)
 								}
 								onMouseLeave={() =>
 									setHoverStatus(
-										"PRODUCTS",
+										'PRODUCTS',
 										productIndex,
 										false
 									)
 								}
 								key={uuid()}
 								_hover={{
-									transform: "scale()",
-									color: "drac.red",
+									transform: 'scale()',
+									color: 'red',
 								}}
 							>
 								<ChemicalCompound

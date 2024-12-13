@@ -107,14 +107,35 @@ export const Colors = {
 		dark: { value: '#21232D' },
 		darker: { value: '#1C1D26' },
 	},
-	currentLine: {
+	background: {
 		DEFAULT: { value: '#282A36' },
+		lighter: { value: '#4D5168' },
+		light: { value: '#404457' },
+		dark: { value: '#21232D' },
+		darker: { value: '#1C1D26' },
+	},
+	currentLine: {
+		DEFAULT: { value: '#44475A' },
+		lighter: { value: '#5A5F79' },
+		light: { value: '#45A5D77' },
+		dark: { value: '#3A3D4D' },
+		darker: { value: '#313340' },
+	},
+	cl: {
+		DEFAULT: { value: '#44475A' },
 		lighter: { value: '#5A5F79' },
 		light: { value: '#45A5D77' },
 		dark: { value: '#3A3D4D' },
 		darker: { value: '#313340' },
 	},
 	fg: {
+		DEFAULT: { value: '#F8F8F2' },
+		lighter: { value: '#FAFAF6' },
+		light: { value: '#F9F9F4' },
+		dark: { value: '#ECECDB' },
+		darker: { value: '#DFDFC4' },
+	},
+	foreground: {
 		DEFAULT: { value: '#F8F8F2' },
 		lighter: { value: '#FAFAF6' },
 		light: { value: '#F9F9F4' },

@@ -1,11 +1,11 @@
-import React, { useState } from "react"
+import React, { useState } from 'react'
 
-import { Button, Text, VStack } from "@chakra-ui/react"
+import { Button, Text, VStack } from '@chakra-ui/react'
 
-import { dracFG } from "@/theme/colors/colors.ts"
-import { TiArrowDownOutline, TiArrowUpOutline } from "react-icons/ti"
-import { CalculateCountList } from "../../../../functions/GlobalFunctions.ts"
-import { useMainStore } from "../../../../stores/MainStore.ts"
+import { dracFG } from '@/theme/colors/colors.ts'
+import { TiArrowDownOutline, TiArrowUpOutline } from 'react-icons/ti'
+import { CalculateCountList } from '../../../../functions/GlobalFunctions.ts'
+import { useMainStore } from '../../../../stores/MainStore.ts'
 
 type CoefficientProps = {
 	formulaSection: FormulaSection
@@ -23,19 +23,19 @@ export const Coefficient: React.FC<CoefficientProps> = ({
 		setCoefficient(
 			formulaSection,
 			index,
-			formulaSection == "REACTANTS"
+			formulaSection == 'REACTANTS'
 				? formula.reactants[index].coefficient >= 99
 					? 99
 					: formula.reactants[index].coefficient + 1
 				: formula.products[index].coefficient >= 99
-				? 99
-				: formula.products[index].coefficient + 1
+					? 99
+					: formula.products[index].coefficient + 1
 		)
 
 		// structuredClone creates a deep copy of formula that has the "read-only" attribute of properties removed (this was enacted by strict mode)
 		let updatedFormula = structuredClone(formula)
 
-		formulaSection === "REACTANTS"
+		formulaSection === 'REACTANTS'
 			? updatedFormula.reactants[index].coefficient++
 			: updatedFormula.products[index].coefficient++
 
@@ -47,19 +47,19 @@ export const Coefficient: React.FC<CoefficientProps> = ({
 		setCoefficient(
 			formulaSection,
 			index,
-			formulaSection == "REACTANTS"
+			formulaSection == 'REACTANTS'
 				? formula.reactants[index].coefficient <= 1
 					? 1
 					: formula.reactants[index].coefficient - 1
 				: formula.products[index].coefficient <= 1
-				? 1
-				: formula.products[index].coefficient - 1
+					? 1
+					: formula.products[index].coefficient - 1
 		)
 
 		// structuredClone creates a deep copy of formula that has the "read-only" attribute of properties removed (this was enacted by strict mode)
 		let updatedFormula = structuredClone(formula)
 
-		formulaSection === "REACTANTS"
+		formulaSection === 'REACTANTS'
 			? updatedFormula.reactants[index].coefficient++
 			: updatedFormula.products[index].coefficient++
 
@@ -73,17 +73,17 @@ export const Coefficient: React.FC<CoefficientProps> = ({
 	const [opacityDown, setOpacityDown] = useState(50)
 
 	return (
-		<VStack justify="start" w={"100%"}>
+		<VStack justify="start" w={'100%'}>
 			<Button
 				w="1rem"
 				h="1.5rem"
 				onClick={() => {
 					increment()
 				}}
-				bg="drac.cl"
-				color="drac.fg"
+				bg="comment"
+				color="fg"
 				border="1px solid"
-				borderColor="drac.green"
+				borderColor="green"
 				opacity={`${opacityUp}%`}
 				onMouseEnter={() => {
 					setOpacityUp(100)
@@ -94,15 +94,15 @@ export const Coefficient: React.FC<CoefficientProps> = ({
 			>
 				<TiArrowUpOutline color={dracFG} />
 			</Button>
-			<Text color={"drac.pink"} fontSize={"3rem"} alignSelf="center">
-				{formulaSection == "REACTANTS"
+			<Text color={'pink'} fontSize={'3rem'} alignSelf="center">
+				{formulaSection == 'REACTANTS'
 					? formula.reactants[index].coefficient
 					: formula.products[index].coefficient}
 			</Text>
 
 			<Button
 				border="1px solid"
-				borderColor="drac.red"
+				borderColor="red"
 				w="1rem"
 				h="1.5rem"
 				onClick={() => {
@@ -115,8 +115,8 @@ export const Coefficient: React.FC<CoefficientProps> = ({
 				onMouseLeave={() => {
 					setOpacityDown(50)
 				}}
-				bg="drac.cl"
-				color="drac.red"
+				bg="comment"
+				color="red"
 			>
 				<TiArrowDownOutline color={dracFG} />
 			</Button>

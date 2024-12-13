@@ -1,9 +1,9 @@
-import "../../../customCSS/ChemicalDropZone.css"
+import '../../../customCSS/ChemicalDropZone.css'
 
-import React from "react"
+import React from 'react'
 
-import { Box, Flex } from "@chakra-ui/react"
-import { useDroppable } from "@dnd-kit/core"
+import { Box, Flex } from '@chakra-ui/react'
+import { useDroppable } from '@dnd-kit/core'
 
 // If no values, use this:
 // type ChemicalDropZoneProps = Record<string, never>
@@ -23,13 +23,13 @@ export const ChemicalDropZone: React.FC<ChemicalDropZone> = ({ title }) => {
 			flexDirection="row"
 			w="auto"
 			h="auto"
-			align={"center"}
+			align={'center'}
 			justify="space-between"
 		>
 			<Box
 				// border={"1px solid " + dracCyan}
-				backgroundColor={isOver ? "drac.yellow" : ""}
-				boxShadow={"0 0 0 10px rgba(241, 250, 140, 80)"}
+				backgroundColor={isOver ? 'yellow' : ''}
+				boxShadow={'0 0 0 10px rgba(241, 250, 140, 80)'}
 				borderRadius=".5rem"
 				w="3em"
 				h="3em"

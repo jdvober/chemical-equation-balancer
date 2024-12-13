@@ -1,13 +1,14 @@
-import { CalculateCountList } from "@/functions/GlobalFunctions"
-import { useMainStore } from "@/stores/MainStore"
-import { Box, Center, Text } from "@chakra-ui/react"
-import React from "react"
-import { v4 as uuid } from "uuid"
+import { CalculateCountList } from '@/functions/GlobalFunctions'
+import { useMainStore } from '@/stores/MainStore'
+import { Box, Center, Text } from '@chakra-ui/react'
+import React from 'react'
+import { v4 as uuid } from 'uuid'
 
 type Props = { formulaSection: FormulaSection }
-type CounterProps = Props extends Record<string, never>
-	? React.FC<Record<string, never>>
-	: React.FC<Props>
+type CounterProps =
+	Props extends Record<string, never>
+		? React.FC<Record<string, never>>
+		: React.FC<Props>
 
 export const Counter: CounterProps = ({ formulaSection }) => {
 	const formula = useMainStore((state) => state.formula)
@@ -32,18 +33,18 @@ export const Counter: CounterProps = ({ formulaSection }) => {
 	return (
 		<Box
 			className={
-				formulaSection === "REACTANTS"
-					? "ReactantCount"
-					: "ProductCount"
+				formulaSection === 'REACTANTS'
+					? 'ReactantCount'
+					: 'ProductCount'
 			}
 			border={`1px solid #44475a`}
-			borderRadius={"1vw"}
+			borderRadius={'1vw'}
 			h="auto"
 			mt="2vh"
 		>
 			{countList
 				.filter((element) => {
-					return formulaSection === "REACTANTS"
+					return formulaSection === 'REACTANTS'
 						? element.reactantCount >= 1
 						: element.productCount >= 1
 				})
@@ -62,17 +63,17 @@ export const Counter: CounterProps = ({ formulaSection }) => {
 							<Text
 								color={
 									numSamePairs() === countList.length
-										? "drac.green"
+										? 'green'
 										: determineElementSame() === true
-										? "drac.yellow"
-										: "drac.red"
+											? 'yellow'
+											: 'red'
 								}
 								opacity={
 									numSamePairs() === countList.length
-										? "100%"
+										? '100%'
 										: determineElementSame() === true
-										? "50%"
-										: "100%"
+											? '50%'
+											: '100%'
 								}
 							>
 								{element.symbol}:{element.productCount}

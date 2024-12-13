@@ -1,12 +1,13 @@
-import React from "react"
-import { v4 as uuid } from "uuid"
+import React from 'react'
+import { v4 as uuid } from 'uuid'
 
-import { Box, Flex, Text } from "@chakra-ui/react"
+import { Box, Flex, Text } from '@chakra-ui/react'
 
 type Props = { item: ChemicalCompound }
-type ChemicalDisplayFormulaProps = Props extends Record<string, never>
-	? React.FC<Record<string, never>>
-	: React.FC<Props>
+type ChemicalDisplayFormulaProps =
+	Props extends Record<string, never>
+		? React.FC<Record<string, never>>
+		: React.FC<Props>
 
 export const ChemicalDisplayFormula: ChemicalDisplayFormulaProps = ({
 	item,
@@ -40,7 +41,7 @@ export const ChemicalDisplayFormula: ChemicalDisplayFormulaProps = ({
 				{/*             */}
 				{/* Coefficient */}
 				{/*             */}
-				<Text color="drac.pink" fontSize="2rem">
+				<Text color="pink" fontSize="2rem">
 					{item.coefficient}
 				</Text>
 				{/*    */}
@@ -57,15 +58,15 @@ export const ChemicalDisplayFormula: ChemicalDisplayFormulaProps = ({
 						<Flex dir="row" key={uuid()}>
 							{compound.parenthesesSubscript >= 2 &&
 							compound.isFirstElementInChunk === true ? (
-								<Text color="drac.orange" fontSize="2rem">
+								<Text color="orange" fontSize="2rem">
 									(
 								</Text>
 							) : null}
-							<Text color="drac.purple" fontSize="2rem">
+							<Text color="purple" fontSize="2rem">
 								{compound.symbol}
 							</Text>
 
-							<Text color="drac.purple" fontSize="2rem">
+							<Text color="purple" fontSize="2rem">
 								{compound.count > 1 ? (
 									<sub>{compound.count}</sub>
 								) : null}
@@ -74,10 +75,10 @@ export const ChemicalDisplayFormula: ChemicalDisplayFormulaProps = ({
 							{compound.parenthesesSubscript >= 2 &&
 							compound.isLastElementInChunk === true ? (
 								<Flex dir="row">
-									<Text color="drac.orange" fontSize="2rem">
+									<Text color="orange" fontSize="2rem">
 										)
 									</Text>
-									<Text color="drac.orange" fontSize="2rem">
+									<Text color="orange" fontSize="2rem">
 										<sub>
 											{compound.parenthesesSubscript}
 										</sub>

@@ -1,25 +1,26 @@
-import { NavLinkButton } from "@/components/ui/NavLinkButton"
-import { dracCurrentLine, dracFG, dracPurple } from "@/theme/colors/colors"
-import { Center, GridItem, SimpleGrid, Text } from "@chakra-ui/react"
-import React from "react"
+import { NavLinkButton } from '@/components/ui/NavLinkButton'
+import { dracCurrentLine, dracFG } from '@/theme/colors/colors'
+import { Center, GridItem, SimpleGrid, Text } from '@chakra-ui/react'
+import React from 'react'
 
 type Props = {}
-type EditFormulaButtonProps = Props extends Record<string, never>
-	? React.FC<Record<string, never>>
-	: React.FC<Props>
+type EditFormulaButtonProps =
+	Props extends Record<string, never>
+		? React.FC<Record<string, never>>
+		: React.FC<Props>
 
 export const EditFormulaButton: EditFormulaButtonProps = () => {
 	return (
 		<NavLinkButton
-			to={"/editor"}
+			to={'/editor'}
 			bg={dracCurrentLine}
 			color={dracFG}
 			width="6rem"
 			height="5rem"
-			css={{ transition: "all 0.1s ease-in-out" }}
+			css={{ transition: 'all 0.1s ease-in-out' }}
 			_hover={{
-				color: "drac.red",
-				boxShadow: `0 5px 15px ${dracPurple}`,
+				color: 'red',
+				boxShadow: `0 5px 15px purple`,
 			}}
 			borderRadius=".5rem"
 			ml="1rem"

@@ -1,9 +1,8 @@
-import React from "react"
-import { v4 as uuid } from "uuid"
+import React from 'react'
+import { v4 as uuid } from 'uuid'
 
-import { useMainStore } from "@/stores/MainStore"
-import { dracPurple } from "@/theme/colors/colors"
-import { Button, Text } from "@chakra-ui/react"
+import { useMainStore } from '@/stores/MainStore'
+import { Button, Text } from '@chakra-ui/react'
 
 // If no values, use this:
 type AddParensthesisButtonProps = Record<string, never>
@@ -81,23 +80,23 @@ export const AddParensthesisButton: React.FC<
 			className="AddParensthesisButton"
 			w="100%"
 			h="auto"
-			fontSize={"1rem"}
-			alignSelf={"center"}
+			fontSize={'1rem'}
+			alignSelf={'center'}
 			onClick={() => {
 				setParens()
 			}}
-			bg="drac.cl"
-			color="drac.fg"
-			css={{ transition: "all 0.1s ease-in-out" }}
+			bg="currentLine"
+			color="fg"
+			css={{ transition: 'all 0.1s ease-in-out' }}
 			_hover={{
-				color: "drac.red",
-				boxShadow: `0 5px 15px ${dracPurple}`,
+				color: 'red',
+				boxShadow: `0 5px 15px purple`,
 			}}
 			pt=".25rem"
 			pb=".5rem"
 		>
-			<Text alignSelf={"center"}>
-				{"( )"}
+			<Text alignSelf={'center'}>
+				{'( )'}
 				<sub>x</sub>
 			</Text>
 		</Button>

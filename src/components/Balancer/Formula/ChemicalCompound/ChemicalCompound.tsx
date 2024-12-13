@@ -1,10 +1,10 @@
-import React from "react"
-import { v4 as uuid } from "uuid"
+import React from 'react'
+import { v4 as uuid } from 'uuid'
 
-import { HStack, Text, VStack } from "@chakra-ui/react"
+import { HStack, Text, VStack } from '@chakra-ui/react'
 
-import { CompoundChunk } from "@/components/Balancer/Formula/CompoundChunk/CompoundChunk"
-import { useMainStore } from "@/stores/MainStore.ts"
+import { CompoundChunk } from '@/components/Balancer/Formula/CompoundChunk/CompoundChunk'
+import { useMainStore } from '@/stores/MainStore.ts'
 
 type ChemicalCompoundProps = {
 	compound: ChemicalCompound
@@ -23,7 +23,7 @@ export const ChemicalCompound: React.FC<ChemicalCompoundProps> = ({
 	const formula = useMainStore((state) => state.formula)
 	const setHoverStatus = useMainStore((state) => state.setHoverStatus)
 	const item =
-		formulaSection === "REACTANTS"
+		formulaSection === 'REACTANTS'
 			? formula.reactants[index]
 			: formula.products[index]
 
@@ -38,8 +38,8 @@ export const ChemicalCompound: React.FC<ChemicalCompoundProps> = ({
 		<VStack>
 			<HStack
 				className="compound"
-				mt={"auto"}
-				mb={"auto"}
+				mt={'auto'}
+				mb={'auto'}
 				key={uuid()}
 				alignSelf="center"
 			>
@@ -47,8 +47,8 @@ export const ChemicalCompound: React.FC<ChemicalCompoundProps> = ({
 					<HStack
 						key={uuid()}
 						_hover={{
-							transform: "scale()",
-							color: "drac.red",
+							transform: 'scale()',
+							color: 'red',
 						}}
 						onMouseEnter={() => {
 							handleMouseEnter()
@@ -65,25 +65,20 @@ export const ChemicalCompound: React.FC<ChemicalCompoundProps> = ({
 						/>
 					</HStack>
 				))}
-				{formulaSection === "REACTANTS" ? (
+				{formulaSection === 'REACTANTS' ? (
 					index < formula.reactants.length - 1 ? (
 						<Text
-							color="drac.comment"
+							color="comment"
 							ml="1rem"
 							mr="1rem"
 							fontSize="3rem"
 						>
-							{includeSymbols ? "+" : ""}
+							{includeSymbols ? '+' : ''}
 						</Text>
 					) : null
 				) : index < formula.products.length - 1 ? (
-					<Text
-						color="drac.comment"
-						ml="1rem"
-						mr="1rem"
-						fontSize="3rem"
-					>
-						{includeSymbols ? "+" : ""}
+					<Text color="comment" ml="1rem" mr="1rem" fontSize="3rem">
+						{includeSymbols ? '+' : ''}
 					</Text>
 				) : null}
 			</HStack>

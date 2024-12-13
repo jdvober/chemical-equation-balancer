@@ -1,9 +1,8 @@
-import React from "react"
-import { RxReset } from "react-icons/rx"
+import React from 'react'
+import { RxReset } from 'react-icons/rx'
 
-import { useMainStore } from "@/stores/MainStore"
-import { dracPurple } from "@/theme/colors/colors"
-import { Box, Button } from "@chakra-ui/react"
+import { useMainStore } from '@/stores/MainStore'
+import { Box, Button } from '@chakra-ui/react'
 
 // If no values, use this:
 type ResetButtonProps = Record<string, never>
@@ -24,19 +23,19 @@ export const ResetButton: React.FC<ResetButtonProps> = () => {
 			<Button
 				h="2.5rem"
 				w="auto"
-				fontSize={"1rem"}
-				alignSelf={"center"}
+				fontSize={'1rem'}
+				alignSelf={'center'}
 				onClick={() => {
 					setEditorChemicalSectionItems(
 						editorChemicalSectionItems.slice(0, -1)
 					)
 				}}
-				bg="drac.cl"
-				color="drac.fg"
-				css={{ transition: "all 0.1s ease-in-out" }}
+				bg="currentLine"
+				color="fg"
+				css={{ transition: 'all 0.1s ease-in-out' }}
 				_hover={{
-					color: "drac.red",
-					boxShadow: `0 5px 15px ${dracPurple}`,
+					color: 'red',
+					boxShadow: `0 5px 15px purple`,
 				}}
 			>
 				<RxReset />

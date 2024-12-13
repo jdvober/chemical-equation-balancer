@@ -1,6 +1,6 @@
-import React from "react"
+import React from 'react'
 
-import { Box } from "@chakra-ui/react"
+import { Box } from '@chakra-ui/react'
 
 type AtomSVGProps = {
 	symbol: ChemicalSymbol
@@ -24,8 +24,8 @@ export const AtomSVG: React.FC<AtomSVGProps> = ({
 		<Box ml=".1vw">
 			<svg width={toEm(r * 2)} height={toEm(r * 2)}>
 				<circle
-					cx={"50%"}
-					cy={"50%"}
+					cx={'50%'}
+					cy={'50%'}
 					r={toEm(r)}
 					stroke={cirStroke}
 					strokeWidth="3"
@@ -33,10 +33,10 @@ export const AtomSVG: React.FC<AtomSVGProps> = ({
 				/>
 				<text
 					x={toEm(r)}
-					y={"65%"}
+					y={'65%'}
 					fontSize={toEm(r * 2)}
 					textAnchor="middle"
-					stroke="drac.black"
+					stroke="black"
 					strokeWidth="1px"
 					alignmentBaseline="middle"
 					fill={textFill}
