@@ -1,6 +1,6 @@
 import { AtomSVG } from '@/components/Balancer/ChemicalDisplay/AtomSVG'
 import { dracCurrentLine, dracCyan } from '@/theme/colors/colors'
-import { Box, Flex } from '@chakra-ui/react'
+import { Flex } from '@chakra-ui/react'
 import React from 'react'
 import { v4 as uuid } from 'uuid'
 
@@ -47,16 +47,14 @@ export const ChemicalDisplayAtom: ChemicalDisplayAtomProps = ({ item }) => {
 					.fill(0)
 					.map(() => {
 						return (
-							<Box ml=".5vw" mr=".5vw" mb="1vh" mt="1vh" h="2rem">
-								<AtomSVG
-									cirFill={dracCurrentLine}
-									cirRadiusInEm={0.85}
-									cirStroke="black"
-									symbol={compound.symbol}
-									textFill={dracCyan}
-									key={uuid()}
-								/>
-							</Box>
+							<AtomSVG
+								cirFill={dracCurrentLine}
+								cirRadiusInEm={0.85}
+								cirStroke="black"
+								symbol={compound.symbol}
+								textFill={dracCyan}
+								key={uuid()}
+							/>
 						)
 					})
 			})}
