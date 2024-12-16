@@ -1,9 +1,11 @@
 import { v4 as uuid } from 'uuid'
 
-import { Box, GridItem, Square, Text } from '@chakra-ui/react'
+import { Box, GridItem, Square } from '@chakra-ui/react'
 import { useDraggable } from '@dnd-kit/core'
 import { CSS } from '@dnd-kit/utilities'
+import { AnimatePresence, motion } from 'motion/react'
 
+import { useState } from 'react'
 import { useMainStore } from '../../../stores/MainStore'
 
 export const PeriodicTableDraggableElement = ({
@@ -61,33 +63,56 @@ export const PeriodicTableDraggableElement = ({
 		addElement()
 	}
 
+	const [c, setC] = useState('bg')
+
 	return (
 		<GridItem>
-			<Square
-				size="2.5em"
-				// Styling
-				backgroundColor={
-					symbol === 'BLANK' ||
-					parent !== 'FormulaEditorElementSection'
-						? ''
-						: 'comment'
-				}
-				color={'bg'}
-				border={symbol === 'BLANK' ? '' : `2px solid bg.light`}
-				boxShadow={
-					symbol === 'BLANK' ? '' : `0px 0px 5px 2px bg.darker`
-				}
-				borderRadius={'10%'}
-				// Draggable Stuff
-				transform={style.transform}
-				{...listeners}
-				{...attributes}
-				ref={setNodeRef}
-				// Actions
-				onClick={handleClick}
-			>
-				<Box>{symbol != 'BLANK' ? <Text>{symbol}</Text> : null}</Box>
-			</Square>
+			<AnimatePresence>
+				{/* Quick grow on render */}
+				<motion.div
+					whileHover={{
+						color: c,
+						boxShadow: `0 5px 15px purple`,
+						scale: 1.4,
+					}}
+				>
+					<Square
+						size="2.5em"
+						// Styling
+						backgroundColor={
+							symbol === 'BLANK' ||
+							parent !== 'FormulaEditorElementSection'
+								? ''
+								: 'comment'
+						}
+						color={c}
+						border={symbol === 'BLANK' ? '' : `2px solid bg.light`}
+						boxShadow={
+							symbol === 'BLANK'
+								? ''
+								: `0px 0px 5px 2px bg.darker`
+						}
+						borderRadius={'10%'}
+						// Draggable Stuff
+						transform={style.transform}
+						{...listeners}
+						{...attributes}
+						ref={setNodeRef}
+						// Actions
+						onClick={handleClick}
+						onMouseEnter={() => {
+							if (symbol != 'BLANK') {
+								setC('red')
+							}
+						}}
+						onMouseLeave={() => {
+							setC('bg')
+						}}
+					>
+						<Box>{symbol != 'BLANK' ? symbol : null}</Box>
+					</Square>
+				</motion.div>
+			</AnimatePresence>
 		</GridItem>
 	)
 }
