@@ -1,10 +1,10 @@
 import { v4 as uuid } from 'uuid'
 
-import { Box, GridItem, Square } from '@chakra-ui/react'
+import { Box, GridItem, Square, Text } from '@chakra-ui/react'
 import { useDraggable } from '@dnd-kit/core'
 import { CSS } from '@dnd-kit/utilities'
-import { AnimatePresence, motion } from 'motion/react'
 
+import { motion } from 'motion/react'
 import { useState } from 'react'
 import { useMainStore } from '../../../stores/MainStore'
 
@@ -19,13 +19,16 @@ export const PeriodicTableDraggableElement = ({
 	symbol: ChemicalSymbol
 	parent: string
 }) => {
-	const { attributes, listeners, setNodeRef, transform } = useDraggable({
-		id: id,
-		data: {
-			symbol: symbol,
-			parent: parent,
-		},
-	})
+	const { attributes, listeners, setNodeRef, transform, isDragging } =
+		useDraggable({
+			id: id,
+			data: {
+				symbol: symbol,
+				parent: parent,
+			},
+		})
+
+	const [hovered, setHovered] = useState(false)
 
 	const style = {
 		transform: CSS.Translate.toString(transform),
@@ -63,35 +66,28 @@ export const PeriodicTableDraggableElement = ({
 		addElement()
 	}
 
-	const [c, setC] = useState('bg')
-
-	return (
-		<GridItem>
-			<AnimatePresence>
-				{/* Quick grow on render */}
-				<motion.div
-					whileHover={{
-						color: c,
-						boxShadow: `0 5px 15px purple`,
-						scale: 1.4,
-					}}
-				>
+	if (symbol != 'BLANK' && !isDragging) {
+		return (
+			<motion.div
+				whileHover={{
+					scale: 1.2,
+					boxShadow: '0px 0px 5px 2px purple',
+				}}
+				onHoverStart={() => setHovered(true)}
+				onHoverEnd={() => setHovered(false)}
+			>
+				<GridItem>
 					<Square
 						size="2.5em"
 						// Styling
 						backgroundColor={
-							symbol === 'BLANK' ||
 							parent !== 'FormulaEditorElementSection'
 								? ''
 								: 'comment'
 						}
-						color={c}
-						border={symbol === 'BLANK' ? '' : `2px solid bg.light`}
-						boxShadow={
-							symbol === 'BLANK'
-								? ''
-								: `0px 0px 5px 2px bg.darker`
-						}
+						color={hovered === true ? 'red' : 'bg'}
+						border={`2px solid bg.light`}
+						boxShadow={`0px 0px 5px 2px bg.darker`}
 						borderRadius={'10%'}
 						// Draggable Stuff
 						transform={style.transform}
@@ -100,19 +96,52 @@ export const PeriodicTableDraggableElement = ({
 						ref={setNodeRef}
 						// Actions
 						onClick={handleClick}
-						onMouseEnter={() => {
-							if (symbol != 'BLANK') {
-								setC('red')
-							}
-						}}
-						onMouseLeave={() => {
-							setC('bg')
-						}}
 					>
-						<Box>{symbol != 'BLANK' ? symbol : null}</Box>
+						<Box>
+							<Text>{symbol}</Text>
+						</Box>
 					</Square>
-				</motion.div>
-			</AnimatePresence>
+				</GridItem>
+			</motion.div>
+		)
+	}
+	// Element Being Dragged
+	else if (symbol != 'BLANK' && isDragging) {
+		return (
+			<GridItem>
+				<Square
+					size="2.5em"
+					// Styling
+					backgroundColor={
+						parent !== 'FormulaEditorElementSection'
+							? ''
+							: 'comment'
+					}
+					color="red"
+					border={`2px solid bg.light`}
+					boxShadow={`0px 0px 5px 2px purple`}
+					borderRadius={'10%'}
+					// Draggable Stuff
+					transform={style.transform}
+					{...listeners}
+					{...attributes}
+					ref={setNodeRef}
+				>
+					<Box>
+						<Text>{symbol}</Text>
+					</Box>
+				</Square>
+			</GridItem>
+		)
+	}
+	// Blank Elements As Placeholders
+	return (
+		<GridItem>
+			<Square
+				size="2.5em"
+				// Styling
+				opacity={'0'}
+			></Square>
 		</GridItem>
 	)
 }

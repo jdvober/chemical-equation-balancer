@@ -1,9 +1,9 @@
-import React, { useState } from "react"
+import React, { useState } from 'react'
 
-import { useMainStore } from "@/stores/MainStore"
-import { Flex, Text } from "@chakra-ui/react"
-import { motion } from "motion/react"
-import "../../../../customCSS/ReactantProductSwitch.css"
+import { useMainStore } from '@/stores/MainStore'
+import { Center, Flex, Text } from '@chakra-ui/react'
+import { motion } from 'motion/react'
+import '../../../../customCSS/ReactantProductSwitch.css'
 
 // If no values, use this:
 type ReactantProductSwitchProps = Record<string, never>
@@ -20,7 +20,7 @@ export const ReactantProductSwitch: React.FC<
 	const editFormulaSection = useMainStore((state) => state.editFormulaSection)
 
 	const spring = {
-		type: "spring",
+		type: 'spring',
 		stiffness: 700,
 		damping: 30,
 	}
@@ -30,23 +30,28 @@ export const ReactantProductSwitch: React.FC<
 	const toggleSwitch = () => {
 		setIsOn(!isOn)
 		setEditFormulaSection(
-			editFormulaSection === "REACTANTS" ? "PRODUCTS" : "REACTANTS"
+			editFormulaSection === 'REACTANTS' ? 'PRODUCTS' : 'REACTANTS'
 		)
 	}
 
 	return (
-		<Flex
-			direction={"row"}
-			className="ReactantProductSwitch"
-			alignItems="center"
-			justifyContent={"space-between"}
-			h="20%"
-		>
-			<Text fontSize=".75rem">Reactants</Text>
-			<div className="switch" data-isOn={isOn} onClick={toggleSwitch}>
-				<motion.div className="handle" layout transition={spring} />
-			</div>
-			<Text fontSize=".75rem">Products</Text>
+		<Flex direction="column">
+			<Center mb=".1em">
+				<Text>Add To</Text>
+			</Center>
+			<Flex
+				direction={'row'}
+				className="ReactantProductSwitch"
+				alignItems="center"
+				justifyContent={'space-between'}
+				h="20%"
+			>
+				<Text fontSize=".75rem">Reactants</Text>
+				<div className="switch" data-isOn={isOn} onClick={toggleSwitch}>
+					<motion.div className="handle" layout transition={spring} />
+				</div>
+				<Text fontSize=".75rem">Products</Text>
+			</Flex>
 		</Flex>
 	)
 }
