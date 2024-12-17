@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { RxReset } from 'react-icons/rx'
 
 import { useMainStore } from '@/stores/MainStore'
 import { Box, Button } from '@chakra-ui/react'
+import { motion } from 'motion/react'
 
 // If no values, use this:
 type ResetButtonProps = Record<string, never>
@@ -18,28 +19,32 @@ export const ResetButton: React.FC<ResetButtonProps> = () => {
 		(state) => state.editorConstructionSectionChunks
 	)
 
+	const [hovered, setHovered] = useState(false)
+
 	return (
-		<Box className="ResetButton">
-			<Button
-				h="2.5rem"
-				w="auto"
-				fontSize={'1rem'}
-				alignSelf={'center'}
-				onClick={() => {
-					setEditorChemicalSectionItems(
-						editorChemicalSectionItems.slice(0, -1)
-					)
-				}}
-				bg="currentLine"
-				color="fg"
-				css={{ transition: 'all 0.1s ease-in-out' }}
-				_hover={{
-					color: 'red',
-					boxShadow: `0 5px 15px purple`,
-				}}
-			>
-				<RxReset />
-			</Button>
-		</Box>
+		<motion.div
+			onHoverStart={() => setHovered(true)}
+			onHoverEnd={() => setHovered(false)}
+			whileHover={{ scale: 1.2 }}
+		>
+			<Box className="ResetButton">
+				<Button
+					h="2.5rem"
+					w="auto"
+					fontSize={'1rem'}
+					alignSelf={'center'}
+					onClick={() => {
+						setEditorChemicalSectionItems(
+							editorChemicalSectionItems.slice(0, -1)
+						)
+					}}
+					bg="currentLine"
+					color={hovered ? 'red' : 'fg'}
+					boxShadow={hovered ? `0 5px 15px purple` : ''}
+				>
+					<RxReset />
+				</Button>
+			</Box>
+		</motion.div>
 	)
 }

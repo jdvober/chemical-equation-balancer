@@ -25,6 +25,7 @@ export const ChemicalDropZone: React.FC<ChemicalDropZone> = ({ title }) => {
 			h="auto"
 			align={'center'}
 			justify="space-between"
+			ml=".5em"
 		>
 			<Box
 				// border={"1px solid " + dracCyan}

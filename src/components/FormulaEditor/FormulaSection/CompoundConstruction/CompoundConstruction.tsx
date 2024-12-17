@@ -1,11 +1,11 @@
-import React from "react"
-import { v4 as uuid } from "uuid"
+import React from 'react'
+import { v4 as uuid } from 'uuid'
 
-import { CompoundChunk } from "@/components/Balancer/Formula/CompoundChunk/CompoundChunk"
-import { ChunkSubscriptModificationButton } from "@/components/FormulaEditor/FormulaSection/ButtonsAndSwitches/ChunkSubscriptModificationButton"
-import { ChemicalDropZone } from "@/components/FormulaEditor/FormulaSection/ChemicalDropZone"
-import { useMainStore } from "@/stores/MainStore"
-import { Flex, VStack } from "@chakra-ui/react"
+import { ChemicalDropZone } from '@/components/FormulaEditor/FormulaSection/ChemicalDropZone'
+import { CompoundStack } from '@/components/FormulaEditor/FormulaSection/CompoundConstruction/CompoundStack'
+import { useMainStore } from '@/stores/MainStore'
+import { Flex, For } from '@chakra-ui/react'
+import { AnimatePresence, motion } from 'motion/react'
 
 // If no values, use this:
 type CompoundConstructionProps = Record<string, never>
@@ -17,47 +17,63 @@ export const CompoundConstruction: React.FC<CompoundConstructionProps> = () => {
 		(state) => state.editorConstructionSectionChunks
 	)
 
+	const animatedCompoundConstructionChunkIDs = useMainStore(
+		(state) => state.animatedCompoundConstructionChunkIDs
+	)
+
 	return (
 		<Flex dir="row" w="auto" className="CompoundConstruction" gap=".5em">
-			{editorConstructionSectionChunks.length === 0 ? (
-				<ChemicalDropZone
-					title={"FormulaEditorChemicalSection"}
-					items={[]}
-					key={uuid()}
-				/>
-			) : (
-				editorConstructionSectionChunks.map((chunk, chunkIndex) => {
-					return (
-						<VStack key={uuid()} h="100%" alignSelf="center">
-							{chunk.parenthesesSubscript >= 1 ? (
-								<ChunkSubscriptModificationButton
-									chunkID={chunk.chunkID}
-									isUpArrow={true}
-								/>
-							) : null}
-							<CompoundChunk
+			<AnimatePresence>
+				<For
+					each={editorConstructionSectionChunks}
+					fallback={
+						<ChemicalDropZone
+							title={'FormulaEditorChemicalSection'}
+							items={[]}
+						/>
+					}
+				>
+					{(chunk, chunkIndex) => (
+						<motion.div
+							key={uuid()}
+							initial={
+								animatedCompoundConstructionChunkIDs.latest ===
+								chunk.chunkID
+									? { scale: 0.25 }
+									: { scale: 1 }
+							}
+							animate={
+								animatedCompoundConstructionChunkIDs.latest ===
+								chunk.chunkID
+									? { scale: 1 }
+									: { scale: 1 }
+							}
+							exit={
+								animatedCompoundConstructionChunkIDs.latest ===
+								chunk.chunkID
+									? { scale: 0.1 }
+									: { scale: 0.5 }
+							}
+							onClick={() => {
+								console.log(
+									`Found ${chunk.chunkID} in history? ${animatedCompoundConstructionChunkIDs.history.includes(
+										chunk.chunkID
+									)}`
+								)
+								console.log(
+									animatedCompoundConstructionChunkIDs.history
+								)
+							}}
+						>
+							<CompoundStack
+								key={uuid()}
 								chunk={chunk}
 								chunkIndex={chunkIndex}
-								arrows={true}
-								key={uuid()}
-								location="CONSTRUCTION"
 							/>
-							{chunk.parenthesesSubscript >= 1 ? (
-								<ChunkSubscriptModificationButton
-									chunkID={chunk.chunkID}
-									isUpArrow={false}
-								/>
-							) : null}
-						</VStack>
-					)
-				})
-			)}
-			{editorConstructionSectionChunks.length >= 1 ? (
-				<ChemicalDropZone
-					title={"FormulaEditorChemicalSection"}
-					items={[]}
-				/>
-			) : null}
+						</motion.div>
+					)}
+				</For>
+			</AnimatePresence>
 		</Flex>
 	)
 }

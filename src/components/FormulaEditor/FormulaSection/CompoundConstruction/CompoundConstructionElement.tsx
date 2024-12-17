@@ -1,9 +1,9 @@
-import { Flex, Text, VStack } from "@chakra-ui/react"
-import { useDraggable } from "@dnd-kit/core"
-import { CSS } from "@dnd-kit/utilities"
+import { Flex, Text, VStack } from '@chakra-ui/react'
+import { useDraggable } from '@dnd-kit/core'
+import { CSS } from '@dnd-kit/utilities'
 
-import { dracOrange, dracPurple } from "@/theme/colors/colors"
-import { useMainStore } from "../../../../stores/MainStore"
+import { dracOrange, dracPurple } from '@/theme/colors/colors'
+import { useMainStore } from '../../../../stores/MainStore'
 
 // If no values, use this:
 // type CompoundConstructionElementProps = Record<string, never>
@@ -53,7 +53,7 @@ export const CompoundConstructionElement = ({
 		console.log(chunkID, eID)
 
 		console.log(editorConstructionSectionChunks)
-		console.log("Remove element?")
+		console.log('Remove element?')
 
 		//Determine Index of the element
 
@@ -87,57 +87,57 @@ export const CompoundConstructionElement = ({
 			setEditorConstructionSectionChunks(newChunks)
 		} else {
 			console.log(
-				"eID was either not found or never set to a number besides -1"
+				'eID was either not found or never set to a number besides -1'
 			)
 		}
 	}
 
-	const handleContextMenu = (
-		e: React.MouseEvent<HTMLDivElement, MouseEvent>
-	) => {
-		e.preventDefault()
-		removeElement()
-	}
-	const handleClick = () => {
-		setSelectedConstructionCompoundIDs(
-			selectedConstructionCompoundIDs.includes(eID)
-				? [...selectedConstructionCompoundIDs].filter((id) => {
-						return id != eID
-				  })
-				: [...selectedConstructionCompoundIDs, eID]
-		)
+	const handleClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+		if (e.nativeEvent.button === 0) {
+			// Handling Left Click
+			setSelectedConstructionCompoundIDs(
+				selectedConstructionCompoundIDs.includes(eID)
+					? [...selectedConstructionCompoundIDs].filter((id) => {
+							return id != eID
+						})
+					: [...selectedConstructionCompoundIDs, eID]
+			)
+		} else if (e.nativeEvent.button === 2) {
+			// Handling Right Click
+			e.preventDefault()
+			removeElement()
+		}
 	}
 
 	return (
 		<Flex
-			backgroundColor={"none"}
+			backgroundColor={'none'}
 			color={
 				selectedConstructionCompoundIDs.includes(eID)
 					? dracOrange
 					: dracPurple
 			}
 			align="center"
-			justify={"center"}
+			justify={'center'}
 			transform={style.transform}
 			{...listeners}
 			{...attributes}
 			ref={setNodeRef}
 			onContextMenu={(e) => {
-				handleContextMenu(e)
+				handleClick(e)
 			}}
-			onClick={() => {
-				handleClick()
+			onClick={(e) => {
+				handleClick(e)
 			}}
-			_hover={{ transform: "scale(1.2)" }}
 		>
 			<VStack>
 				<Flex
-					direction={"row"}
-					justifyContent={"center"} /*justify ==> along main axis*/
-					alignItems={"center"} /*align ==> along cross axis*/
+					direction={'row'}
+					justifyContent={'center'} /*justify ==> along main axis*/
+					alignItems={'center'} /*align ==> along cross axis*/
 				>
 					<Text
-						fontSize={"2rem"}
+						fontSize={'2rem'}
 						color={
 							selectedConstructionCompoundIDs.includes(eID)
 								? dracOrange
@@ -148,7 +148,7 @@ export const CompoundConstructionElement = ({
 						{symbol}
 					</Text>
 					<Text
-						fontSize={"2rem"}
+						fontSize={'2rem'}
 						color={
 							selectedConstructionCompoundIDs.includes(eID)
 								? dracOrange

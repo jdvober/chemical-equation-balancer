@@ -10,12 +10,10 @@ import { useMainStore } from '../../../stores/MainStore'
 
 export const PeriodicTableDraggableElement = ({
 	id,
-	eID,
 	symbol,
 	parent,
 }: {
 	id: string
-	eID: string
 	symbol: ChemicalSymbol
 	parent: string
 }) => {
@@ -42,8 +40,15 @@ export const PeriodicTableDraggableElement = ({
 		(state) => state.setEditorConstructionSectionChunks
 	)
 
+	const animatedCompoundConstructionChunkIDs = useMainStore(
+		(state) => state.animatedCompoundConstructionChunkIDs
+	)
+	const setAnimatedChunkIDs = useMainStore(
+		(state) => state.setAnimatedChunkIDs
+	)
+
+	const chunkID = uuid()
 	const addElement = () => {
-		console.log(eID)
 		setEditorConstructinSectionChunks([
 			...editorConstructionSectionChunks,
 			{
@@ -56,14 +61,27 @@ export const PeriodicTableDraggableElement = ({
 						subscript: { value: 1, color: 'purple' },
 					},
 				],
-				chunkID: uuid(),
+				chunkID: chunkID,
 			},
 		] as CompoundChunk[])
-		console.log(editorConstructionSectionChunks)
 	}
 
 	const handleClick = () => {
+		console.clear()
 		addElement()
+		// Set which item to animate
+		console.log(
+			`Adding ${chunkID} to latest and appending ${animatedCompoundConstructionChunkIDs.latest} to history.`
+		)
+		const newLists = {
+			latest: chunkID,
+			history: [
+				...animatedCompoundConstructionChunkIDs.history,
+				animatedCompoundConstructionChunkIDs.latest,
+			],
+		}
+		console.log(newLists)
+		setAnimatedChunkIDs(newLists)
 	}
 
 	if (symbol != 'BLANK' && !isDragging) {

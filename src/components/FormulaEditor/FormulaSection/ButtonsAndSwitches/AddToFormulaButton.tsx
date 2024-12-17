@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { TiChevronRightOutline } from 'react-icons/ti'
 
 import { useMainStore } from '@/stores/MainStore'
 import { Box, Button } from '@chakra-ui/react'
+import { motion } from 'motion/react'
 
 // If no values, use this:
 type AddToFormulaButtonProps = Record<string, never>
@@ -117,25 +118,34 @@ export const AddToFormulaButton: React.FC<AddToFormulaButtonProps> = () => {
 		setCountList(newCountList)
 		setEditorConstructionSectionChunks([])
 	}
+
+	const [hovered, setHovered] = useState(false)
+
 	return (
-		<Box className="AddToFormulaButton">
-			<Button
-				h="2.5rem"
-				onClick={() => {
-					editFormulaSection === 'REACTANTS'
-						? addNewReactants()
-						: addNewProducts()
-				}}
-				bg="currentLine"
-				color="fg"
-				css={{ transition: 'all 0.1s ease-in-out' }}
-				_hover={{
-					color: 'red',
-					boxShadow: `0 5px 15px purple`,
-				}}
-			>
-				<TiChevronRightOutline />
-			</Button>
-		</Box>
+		<motion.div
+			onHoverStart={() => {
+				setHovered(true)
+			}}
+			onHoverEnd={() => {
+				setHovered(false)
+			}}
+			whileHover={{ scale: 1.2 }}
+		>
+			<Box className="AddToFormulaButton">
+				<Button
+					h="2.5rem"
+					onClick={() => {
+						editFormulaSection === 'REACTANTS'
+							? addNewReactants()
+							: addNewProducts()
+					}}
+					bg="currentLine"
+					color={hovered ? 'red' : 'fg'}
+					boxShadow={hovered ? `0 5px 15px purple` : ''}
+				>
+					<TiChevronRightOutline />
+				</Button>
+			</Box>
+		</motion.div>
 	)
 }

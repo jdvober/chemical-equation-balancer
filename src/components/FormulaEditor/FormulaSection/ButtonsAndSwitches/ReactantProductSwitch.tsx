@@ -35,7 +35,7 @@ export const ReactantProductSwitch: React.FC<
 	}
 
 	return (
-		<Flex direction="column">
+		<Flex direction="column" ml="1em" mr="1em">
 			<Center mb=".1em">
 				<Text>Add To</Text>
 			</Center>
@@ -47,7 +47,7 @@ export const ReactantProductSwitch: React.FC<
 				h="20%"
 			>
 				<Text fontSize=".75rem">Reactants</Text>
-				<div className="switch" data-isOn={isOn} onClick={toggleSwitch}>
+				<div className="switch" data-ison={isOn} onClick={toggleSwitch}>
 					<motion.div className="handle" layout transition={spring} />
 				</div>
 				<Text fontSize=".75rem">Products</Text>
