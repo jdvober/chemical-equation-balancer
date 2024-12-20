@@ -1,15 +1,16 @@
-import React from "react"
-import { v4 as uuid } from "uuid"
+import React from 'react'
+import { v4 as uuid } from 'uuid'
 
-import { Grid } from "@chakra-ui/react"
+import { Grid } from '@chakra-ui/react'
 
-import { PeriodicTableDraggableElement } from "@/components/FormulaEditor/PeriodicTableSection/PeriodicTableDraggableElement"
-import { Elements } from "../../../stores/elements.ts"
+import { PeriodicTableDraggableElement } from '@/components/FormulaEditor/PeriodicTableSection/PeriodicTableDraggableElement'
+import { Elements } from '../../../stores/elements.ts'
 
 type Props = {}
-type EditorPeriodicTableSectionProps = Props extends Record<string, never>
-	? React.FC<Record<string, never>>
-	: React.FC<Props>
+type EditorPeriodicTableSectionProps =
+	Props extends Record<string, never>
+		? React.FC<Record<string, never>>
+		: React.FC<Props>
 
 export const EditorPeriodicTableSection: EditorPeriodicTableSectionProps =
 	() => {
@@ -29,8 +30,7 @@ export const EditorPeriodicTableSection: EditorPeriodicTableSectionProps =
 						<PeriodicTableDraggableElement
 							symbol={element}
 							id={uniqueID}
-							eID={uniqueID}
-							parent={"FormulaEditorElementSection"}
+							parent={'FormulaEditorElementSection'}
 							key={uuid()}
 						/>
 					)

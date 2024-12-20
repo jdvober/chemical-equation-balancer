@@ -16,7 +16,6 @@ type State = {
 		reactantCount: number
 		productCount: number
 	}[]
-	editFormulaSection: FormulaSection
 	formulaEditorActive: boolean
 	elements: ChemicalSymbol[][]
 	subscriptColor: string
@@ -37,7 +36,6 @@ type Action = {
 		newCoefficient: number
 	) => void
 	setCountList: (newCountList: ElementCountList) => void
-	setEditFormulaSection: (newFormulaSection: FormulaSection) => void
 	setFormulaEditorActive: (isActive: boolean) => void
 	setConstructionSelectionItemSubscriptColor: (
 		newSubscriptColor: string,
@@ -142,7 +140,6 @@ export const useMainStore = create<State & Action>()(
 		formulaHeightEM: 5,
 		countList: CountList,
 
-		editFormulaSection: 'REACTANTS',
 		formulaEditorActive: false,
 		elements: ElementsByPeriod,
 		subscriptColor: dracPurple,
@@ -190,10 +187,6 @@ export const useMainStore = create<State & Action>()(
 				} else if (formulaSection === 'PRODUCTS') {
 					state.formula.products[index].coefficient = newCoefficient
 				}
-			}),
-		setEditFormulaSection: (newFormulaSection) =>
-			set((state) => {
-				state.editFormulaSection = newFormulaSection
 			}),
 		setFormulaEditorActive: (isActive) =>
 			set((state) => {

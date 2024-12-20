@@ -47,7 +47,12 @@ export const FormulaDisplay: React.FC<FormulaDisplayProps> = () => {
 	}
 
 	return (
-		<Flex direction="row" alignSelf={'center'} alignItems="center">
+		<Flex
+			direction="row"
+			alignSelf={'center'}
+			alignItems="center"
+			margin={'auto'}
+		>
 			{formula.reactants.map((reactant, reactantIndex) => {
 				return (
 					<GridItem key={uuid()}>

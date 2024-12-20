@@ -1,6 +1,5 @@
 import React from 'react'
 
-import { ReactantProductSwitch } from '@/components/FormulaEditor/FormulaSection/ButtonsAndSwitches/ReactantProductSwitch'
 import { CompoundConstruction } from '@/components/FormulaEditor/FormulaSection/CompoundConstruction/CompoundConstruction'
 import { EditorControls } from '@/components/FormulaEditor/FormulaSection/EditorControls'
 import { FormulaDisplay } from '@/components/FormulaEditor/FormulaSection/FormulaDisplay'
@@ -38,7 +37,6 @@ export const FormulaSection: React.FC<FormulaSectionProps> = () => {
 			>
 				<CompoundConstruction />
 				<EditorControls />
-				<ReactantProductSwitch />
 				<FormulaDisplay />
 			</Flex>
 		</Box>

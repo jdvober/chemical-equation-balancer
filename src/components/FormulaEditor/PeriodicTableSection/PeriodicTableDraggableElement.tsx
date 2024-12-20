@@ -1,9 +1,12 @@
 import { v4 as uuid } from 'uuid'
 
+import './ElementSquare.css'
+
 import { Box, GridItem, Square, Text } from '@chakra-ui/react'
 import { useDraggable } from '@dnd-kit/core'
 import { CSS } from '@dnd-kit/utilities'
 
+import { Colors, dracBG, dracPurple } from '@/theme/colors/colors'
 import { motion } from 'motion/react'
 import { useState } from 'react'
 import { useMainStore } from '../../../stores/MainStore'
@@ -83,29 +86,34 @@ export const PeriodicTableDraggableElement = ({
 		console.log(newLists)
 		setAnimatedChunkIDs(newLists)
 	}
-
+	/*  */
 	if (symbol != 'BLANK' && !isDragging) {
 		return (
 			<motion.div
 				whileHover={{
 					scale: 1.2,
-					boxShadow: '0px 0px 5px 2px purple',
 				}}
 				onHoverStart={() => setHovered(true)}
 				onHoverEnd={() => setHovered(false)}
 			>
 				<GridItem>
 					<Square
-						size="2.5em"
-						// Styling
-						backgroundColor={
-							parent !== 'FormulaEditorElementSection'
-								? ''
-								: 'comment'
+						className='ElementSquare'
+						size='6vmin'
+						boxShadow={
+							hovered === true
+								? `0 0 0.4vmin 0.4vmin ${dracPurple}`
+								: ''
 						}
+						filter={
+							hovered === true
+								? `drop-shadow(${Colors.purple.DEFAULT.value} 0 0 0.3vmin)`
+								: `drop-shadow(${Colors.comment.darker.value} 0 0 0.8vmin)`
+						}
+						// Styling
+						backgroundColor='comment'
 						color={hovered === true ? 'red' : 'bg'}
 						border={`2px solid bg.light`}
-						boxShadow={`0px 0px 5px 2px bg.darker`}
 						borderRadius={'10%'}
 						// Draggable Stuff
 						transform={style.transform}
@@ -128,16 +136,12 @@ export const PeriodicTableDraggableElement = ({
 		return (
 			<GridItem>
 				<Square
-					size="2.5em"
+					size='2.5em'
 					// Styling
-					backgroundColor={
-						parent !== 'FormulaEditorElementSection'
-							? ''
-							: 'comment'
-					}
-					color="red"
-					border={`2px solid bg.light`}
-					boxShadow={`0px 0px 5px 2px purple`}
+					backgroundColor='comment'
+					color='red'
+					border='2px solid bg.light'
+					boxShadow={`0px 0px 5px 2px ${dracBG}`}
 					borderRadius={'10%'}
 					// Draggable Stuff
 					transform={style.transform}
@@ -156,7 +160,7 @@ export const PeriodicTableDraggableElement = ({
 	return (
 		<GridItem>
 			<Square
-				size="2.5em"
+				size='2.5em'
 				// Styling
 				opacity={'0'}
 			></Square>

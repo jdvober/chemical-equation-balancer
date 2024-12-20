@@ -45,7 +45,13 @@ export const CompoundConstruction: React.FC<CompoundConstructionProps> = () => {
 							animate={
 								animatedCompoundConstructionChunkIDs.latest ===
 								chunk.chunkID
-									? { scale: 1 }
+									? {
+											scale: 1,
+											transition: {
+												ease: 'circIn',
+												duration: 0.1,
+											},
+										}
 									: { scale: 1 }
 							}
 							exit={
@@ -54,16 +60,6 @@ export const CompoundConstruction: React.FC<CompoundConstructionProps> = () => {
 									? { scale: 0.1 }
 									: { scale: 0.5 }
 							}
-							onClick={() => {
-								console.log(
-									`Found ${chunk.chunkID} in history? ${animatedCompoundConstructionChunkIDs.history.includes(
-										chunk.chunkID
-									)}`
-								)
-								console.log(
-									animatedCompoundConstructionChunkIDs.history
-								)
-							}}
 						>
 							<CompoundStack
 								key={uuid()}

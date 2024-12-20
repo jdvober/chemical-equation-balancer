@@ -40,15 +40,12 @@ export const CompoundConstructionElement = ({
 	const setSelectedConstructionCompoundIDs = useMainStore(
 		(state) => state.setSelectedConstructionCompoundIDs
 	)
-
 	const editorConstructionSectionChunks = useMainStore(
 		(state) => state.editorConstructionSectionChunks
 	)
-
 	const setEditorConstructionSectionChunks = useMainStore(
 		(state) => state.setEditorConstructionSectionChunks
 	)
-
 	const removeElement = () => {
 		console.log(chunkID, eID)
 
@@ -109,6 +106,45 @@ export const CompoundConstructionElement = ({
 		}
 	}
 
+	const Sym = () => {
+		return (
+			<Text
+				fontSize={'2rem'}
+				color={
+					selectedConstructionCompoundIDs.includes(eID)
+						? dracOrange
+						: dracPurple
+				}
+				justifySelf="center"
+			>
+				{symbol}
+			</Text>
+		)
+	}
+
+	const Sub = () => {
+		return (
+			<Text
+				fontSize={'2rem'}
+				color={
+					selectedConstructionCompoundIDs.includes(eID)
+						? dracOrange
+						: dracPurple
+				}
+			>
+				<sub
+					color={
+						selectedConstructionCompoundIDs.includes(eID)
+							? dracOrange
+							: dracPurple
+					}
+				>
+					{subscript.value > 1 ? subscript.value : null}
+				</sub>
+			</Text>
+		)
+	}
+
 	return (
 		<Flex
 			backgroundColor={'none'}
@@ -136,35 +172,8 @@ export const CompoundConstructionElement = ({
 					justifyContent={'center'} /*justify ==> along main axis*/
 					alignItems={'center'} /*align ==> along cross axis*/
 				>
-					<Text
-						fontSize={'2rem'}
-						color={
-							selectedConstructionCompoundIDs.includes(eID)
-								? dracOrange
-								: dracPurple
-						}
-						justifySelf="center"
-					>
-						{symbol}
-					</Text>
-					<Text
-						fontSize={'2rem'}
-						color={
-							selectedConstructionCompoundIDs.includes(eID)
-								? dracOrange
-								: dracPurple
-						}
-					>
-						<sub
-							color={
-								selectedConstructionCompoundIDs.includes(eID)
-									? dracOrange
-									: dracPurple
-							}
-						>
-							{subscript.value > 1 ? subscript.value : null}
-						</sub>
-					</Text>
+					<Sym />
+					<Sub />
 				</Flex>
 			</VStack>
 		</Flex>

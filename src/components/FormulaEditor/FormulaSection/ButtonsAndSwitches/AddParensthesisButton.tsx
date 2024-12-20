@@ -33,6 +33,13 @@ export const AddParensthesisButton: React.FC<
 		console.log(
 			`Editor ConstructionSectionChunks: ${editorConstructionSectionChunks}`
 		)
+
+		if (selectedConstructionCompoundIDs.length < 2) {
+			console.log(
+				`Not enough elements selected. (${selectedConstructionCompoundIDs.length})`
+			)
+			return
+		}
 		const newElements: ChemicalElement[] = []
 
 		// Create a list of elements that will be added to the new chunk, based on what was selected by the user

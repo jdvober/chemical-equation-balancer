@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { TiChevronRightOutline } from 'react-icons/ti'
 
 import { useMainStore } from '@/stores/MainStore'
-import { Box, Button } from '@chakra-ui/react'
+import { Box, Button, Dialog, Group, Spacer } from '@chakra-ui/react'
 import { motion } from 'motion/react'
 
 // If no values, use this:
@@ -11,7 +11,6 @@ type AddToFormulaButtonProps = Record<string, never>
 //type AddToFormulaButtonProps = {}
 
 export const AddToFormulaButton: React.FC<AddToFormulaButtonProps> = () => {
-	const editFormulaSection = useMainStore((state) => state.editFormulaSection)
 	const setReactants = useMainStore((state) => state.setReactants)
 	const setEditorConstructionSectionChunks = useMainStore(
 		(state) => state.setEditorConstructionSectionChunks
@@ -27,6 +26,9 @@ export const AddToFormulaButton: React.FC<AddToFormulaButtonProps> = () => {
 	const setCountList = useMainStore((state) => state.setCountList)
 	const addNewReactants = () => {
 		let newReactants = formula.reactants
+		if (newReactants.length < 1) {
+			return
+		}
 		newReactants = [
 			...newReactants,
 			{
@@ -74,6 +76,9 @@ export const AddToFormulaButton: React.FC<AddToFormulaButtonProps> = () => {
 
 	const addNewProducts = () => {
 		let newProducts = formula.products
+		if (newProducts.length < 1) {
+			return
+		}
 		newProducts = [
 			...newProducts,
 			{
@@ -119,32 +124,78 @@ export const AddToFormulaButton: React.FC<AddToFormulaButtonProps> = () => {
 		setEditorConstructionSectionChunks([])
 	}
 
-	const [hovered, setHovered] = useState(false)
+	const [open, setOpen] = useState(false)
 
-	return (
-		<motion.div
-			onHoverStart={() => {
-				setHovered(true)
-			}}
-			onHoverEnd={() => {
-				setHovered(false)
-			}}
-			whileHover={{ scale: 1.2 }}
-		>
-			<Box className="AddToFormulaButton">
+	const AddButton = () => {
+		return (
+			<Dialog.Trigger asChild>
 				<Button
 					h="2.5rem"
-					onClick={() => {
-						editFormulaSection === 'REACTANTS'
-							? addNewReactants()
-							: addNewProducts()
-					}}
 					bg="currentLine"
-					color={hovered ? 'red' : 'fg'}
-					boxShadow={hovered ? `0 5px 15px purple` : ''}
+					color={open ? 'red' : 'fg'}
+					boxShadow={open ? `0 5px 15px purple` : ''}
+					_hover={{ color: 'red', boxShadow: `0 5px 15px purple` }}
 				>
 					<TiChevronRightOutline />
 				</Button>
+			</Dialog.Trigger>
+		)
+	}
+
+	const PopContent = () => {
+		return (
+			<Dialog.Content>
+				<Dialog.Body bg="bg.light" borderRadius=".5em">
+					<Group>
+						<Button
+							size="sm"
+							onClick={() => {
+								addNewReactants()
+							}}
+							bg="currentLine"
+							color="fg"
+							boxShadow={`0 5px 15px pink`}
+							_hover={{
+								color: 'red',
+								boxShadow: '0 5px 15px purple',
+							}}
+						>
+							Add To Reactants
+						</Button>
+						<Spacer />
+						<Button
+							onClick={() => {
+								addNewProducts()
+							}}
+							bg="currentLine"
+							color="fg"
+							boxShadow={`0 5px 15px pink`}
+							_hover={{
+								color: 'red',
+								boxShadow: '0 5px 15px purple',
+							}}
+						>
+							Add To Products
+						</Button>
+					</Group>
+				</Dialog.Body>
+			</Dialog.Content>
+		)
+	}
+
+	return (
+		<motion.div whileHover={{ scale: open != true ? 1.2 : 1 }}>
+			<Box className="AddToFormulaButton">
+				<Dialog.Root
+					size="md"
+					motionPreset="slide-in-left"
+					placement="center"
+					open={open}
+					onOpenChange={(e: any) => setOpen(e.open)}
+				>
+					<AddButton />
+					<PopContent />
+				</Dialog.Root>
 			</Box>
 		</motion.div>
 	)
