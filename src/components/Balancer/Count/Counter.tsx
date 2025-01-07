@@ -76,7 +76,7 @@ export const Counter: CounterProps = ({ formulaSection }) => {
 											: '100%'
 								}
 							>
-								{element.symbol}:{element.productCount}
+								{element.symbol}:{formulaSection === "REACTANTS" ? element.reactantCount : element.productCount}
 							</Text>
 						</Center>
 					)
