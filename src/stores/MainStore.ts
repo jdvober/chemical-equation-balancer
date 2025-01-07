@@ -71,7 +71,7 @@ export const useMainStore = create<State & Action>()(
 		formula: {
 			reactants: [
 				{
-					coefficient: 4,
+					coefficient: 1,
 					formulaSection: 'REACTANTS',
 					isHovered: false,
 					chunks: [
@@ -90,7 +90,7 @@ export const useMainStore = create<State & Action>()(
 					],
 				},
 				{
-					coefficient: 2,
+					coefficient: 1,
 					formulaSection: 'REACTANTS',
 					isHovered: false,
 					chunks: [
@@ -111,13 +111,13 @@ export const useMainStore = create<State & Action>()(
 			],
 			products: [
 				{
-					coefficient: 4,
+					coefficient: 1,
 					formulaSection: 'PRODUCTS',
 					isHovered: false,
 					chunks: [
 						{
 							chunkID: uuid(),
-							parenthesesSubscript: 3,
+							parenthesesSubscript: 0,
 							elements: [
 								{
 									index: 0,

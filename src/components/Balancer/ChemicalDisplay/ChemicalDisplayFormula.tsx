@@ -47,7 +47,7 @@ export const ChemicalDisplayFormula: ChemicalDisplayFormulaProps = ({
 				{/*    */}
 				{/* Of */}
 				{/*    */}
-				<Text ml=".25rem" mr=".25rem" fontSize="2rem">
+				<Text ml=".25rem" mr=".25rem" fontSize="2rem" color={'comment'}>
 					of
 				</Text>
 				{/*         */}
