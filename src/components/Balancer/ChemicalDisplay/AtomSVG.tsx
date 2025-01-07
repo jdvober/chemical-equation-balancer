@@ -22,7 +22,8 @@ export const AtomSVG: React.FC<AtomSVGProps> = ({
 
 	return (
 		<Box ml=".1vw">
-			<svg width={toEm(r * 2.5)} height={toEm(r * 2.5)}>
+			<svg width={toEm(r * 2.5)} height={toEm(r * 2.5)} viewBox={`0 0 ${toEm(r * 2.5)} ${toEm(r * 2.5)}`}>
+			<g transform={`translate(${toEm(r*1.25)}, ${toEm(r*1.25)}`} >
 				<circle
 					cx={'50%'}
 					cy={'50%'}
@@ -32,16 +33,18 @@ export const AtomSVG: React.FC<AtomSVGProps> = ({
 					fill={cirFill}
 				/>
 				<text
-					x={toEm(r * 1.25)}
-					y={'65%'}
+					x='50%'
+					y='55%'
 					fontSize={toEm(r * 2)}
 					textAnchor="middle"
 					strokeWidth=".5px"
 					alignmentBaseline="middle"
+					dominantBaseline='middle'
 					fill={textFill}
 				>
 					{symbol}
 				</text>
+				</g>
 			</svg>
 		</Box>
 	)
