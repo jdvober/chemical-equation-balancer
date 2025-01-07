@@ -63,6 +63,7 @@ export const AddParensthesisButton: React.FC<
 					) {
 						return element
 					}
+					return
 				}),
 			}
 			return newChunk
