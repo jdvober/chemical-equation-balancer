@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { v4 as uuid } from 'uuid'
 
 import { useMainStore } from '@/stores/MainStore'
+import { dracPurple } from '@/theme/colors/colors'
 import { Button, Text } from '@chakra-ui/react'
 import { motion } from 'motion/react'
 
@@ -97,19 +98,19 @@ export const AddParensthesisButton: React.FC<
 			whileHover={{ scale: 1.2 }}
 		>
 			<Button
-				className="AddParensthesisButton"
-				w="100%"
-				h="auto"
+				className='AddParensthesisButton'
+				w='100%'
+				h='auto'
 				fontSize={'1rem'}
 				alignSelf={'center'}
 				onClick={() => {
 					setParens()
 				}}
-				bg="currentLine"
-				color={hovered ? 'red' : 'fg'}
-				boxShadow={hovered ? '0 5px 15px purple' : ''}
-				pt=".25rem"
-				pb=".5rem"
+				bg='currentLine'
+				color={hovered ? 'dracRed' : 'foreground'}
+				boxShadow={hovered ? `0 5px 15px ${dracPurple}` : ''}
+				pt='.25rem'
+				pb='.5rem'
 			>
 				<Text alignSelf={'center'}>
 					{'( )'}
