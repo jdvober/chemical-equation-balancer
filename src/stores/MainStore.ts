@@ -1,5 +1,5 @@
+import { PresetFormulas } from '@/stores/PresetFormulas'
 import { dracPurple } from '@/theme/colors/colors'
-import { v4 as uuid } from 'uuid'
 import { create } from 'zustand'
 import { immer } from 'zustand/middleware/immer'
 import { CountList } from './countList'
@@ -7,6 +7,7 @@ import { ElementsByPeriod } from './elements'
 
 type State = {
 	formula: {
+		formulaID: string
 		reactants: ChemicalReactant[]
 		products: ChemicalProduct[]
 	}
@@ -68,75 +69,7 @@ export const useMainStore = create<State & Action>()(
 		///////////
 		// State //
 		///////////
-		formula: {
-			reactants: [
-				{
-					coefficient: 1,
-					formulaSection: 'REACTANTS',
-					isHovered: false,
-					chunks: [
-						{
-							chunkID: uuid(),
-							parenthesesSubscript: 0,
-							elements: [
-								{
-									eID: uuid(),
-									index: 0,
-									symbol: 'H',
-									subscript: { value: 2, color: dracPurple },
-								},
-							],
-						},
-					],
-				},
-				{
-					coefficient: 1,
-					formulaSection: 'REACTANTS',
-					isHovered: false,
-					chunks: [
-						{
-							chunkID: uuid(),
-							parenthesesSubscript: 0,
-							elements: [
-								{
-									index: 0,
-									eID: uuid(),
-									symbol: 'O',
-									subscript: { value: 2, color: dracPurple },
-								},
-							],
-						},
-					],
-				},
-			],
-			products: [
-				{
-					coefficient: 1,
-					formulaSection: 'PRODUCTS',
-					isHovered: false,
-					chunks: [
-						{
-							chunkID: uuid(),
-							parenthesesSubscript: 0,
-							elements: [
-								{
-									index: 0,
-									eID: uuid(),
-									symbol: 'H',
-									subscript: { value: 2, color: dracPurple },
-								},
-								{
-									index: 1,
-									eID: uuid(),
-									symbol: 'O',
-									subscript: { value: 1, color: dracPurple },
-								},
-							],
-						},
-					],
-				},
-			],
-		},
+		formula: PresetFormulas[0],
 		formulaHeightEM: 5,
 		countList: CountList,
 

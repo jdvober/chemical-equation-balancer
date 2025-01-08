@@ -12,14 +12,14 @@ type EditorControlsProps = Record<string, never>
 export const EditorControls: React.FC<EditorControlsProps> = () => {
 	return (
 		<Flex
-			direction="column"
-			className="EditorControls"
-			h="100%"
-			w="auto"
+			direction='column'
+			className='EditorControls'
+			h='100%'
+			w='auto'
 			justifyContent={'center'} /*justify ==> along main axis*/
-			alignItems={'center'} /*align ==> along cross axis*/
-			ml="1em"
-			gap=".5em"
+			alignItems={'flex-start'} /*align ==> along cross axis*/
+			ml='1em'
+			gap='.5em'
 		>
 			<AddToFormulaButton />
 			<AddParensthesisButton />

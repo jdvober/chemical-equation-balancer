@@ -12,8 +12,8 @@ type CompoundStackProps =
 
 export const CompoundStack: CompoundStackProps = ({ chunk, chunkIndex }) => {
 	return (
-		<Box className="CompoundStack" key={chunk.chunkID}>
-			<VStack key={uuid()} h="100%" alignSelf="center">
+		<Box className='CompoundStack' key={chunk.chunkID}>
+			<VStack key={uuid()} h='100%' alignSelf='center'>
 				{chunk.parenthesesSubscript >= 1 ? (
 					<ChunkSubscriptModificationButton
 						chunkID={chunk.chunkID}
@@ -26,7 +26,7 @@ export const CompoundStack: CompoundStackProps = ({ chunk, chunkIndex }) => {
 					chunkIndex={chunkIndex}
 					arrows={true}
 					key={uuid()}
-					location="CONSTRUCTION"
+					location='CONSTRUCTION'
 				/>
 				{chunk.parenthesesSubscript >= 1 ? (
 					<ChunkSubscriptModificationButton

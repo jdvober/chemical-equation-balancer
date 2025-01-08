@@ -2,7 +2,8 @@ import React, { useState } from 'react'
 import { TiChevronRightOutline } from 'react-icons/ti'
 
 import { useMainStore } from '@/stores/MainStore'
-import { Box, Button, Dialog, Group, Spacer } from '@chakra-ui/react'
+import { Colors, dracPink, dracPurple } from '@/theme/colors/colors'
+import { Box, Button, Dialog, Flex, Group, Spacer } from '@chakra-ui/react'
 import { motion } from 'motion/react'
 
 // If no values, use this:
@@ -130,11 +131,14 @@ export const AddToFormulaButton: React.FC<AddToFormulaButtonProps> = () => {
 		return (
 			<Dialog.Trigger asChild>
 				<Button
-					h="2.5rem"
-					bg="currentLine"
-					color={open ? 'red' : 'fg'}
-					boxShadow={open ? `0 5px 15px purple` : ''}
-					_hover={{ color: 'red', boxShadow: `0 5px 15px purple` }}
+					h='2.5rem'
+					bg='currentLine'
+					color={open ? 'red' : 'foreground'}
+					boxShadow={open ? `0 5px 15px ${dracPurple}` : ''}
+					_hover={{
+						color: 'red',
+						boxShadow: `0 5px 15px ${dracPurple}`,
+					}}
 				>
 					<TiChevronRightOutline />
 				</Button>
@@ -145,20 +149,21 @@ export const AddToFormulaButton: React.FC<AddToFormulaButtonProps> = () => {
 	const PopContent = () => {
 		return (
 			<Dialog.Content>
-				<Dialog.Body bg="bg.light" borderRadius=".5em">
-					<Group>
+				<Dialog.Body bg='background.dark' borderRadius={'0.5em'}>
+					<Group mt='5%' mb='auto'>
 						<Button
-							size="sm"
 							onClick={() => {
 								addNewReactants()
 							}}
-							bg="currentLine"
-							color="fg"
-							boxShadow={`0 5px 15px pink`}
+							bg='currentLine'
+							color={Colors.fg.DEFAULT.value}
+							boxShadow={`0 5px 15px ${dracPink}`}
+							dropShadow={`${Colors.purple.DEFAULT.value} 0 0 0.3vmin)`}
 							_hover={{
 								color: 'red',
-								boxShadow: '0 5px 15px purple',
+								boxShadow: `0 5px 15px ${dracPurple}`,
 							}}
+							alignSelf='flex-end'
 						>
 							Add To Reactants
 						</Button>
@@ -167,13 +172,14 @@ export const AddToFormulaButton: React.FC<AddToFormulaButtonProps> = () => {
 							onClick={() => {
 								addNewProducts()
 							}}
-							bg="currentLine"
-							color="fg"
-							boxShadow={`0 5px 15px pink`}
+							bg='currentLine'
+							color='foreground'
+							boxShadow={`0 5px 15px ${dracPink}`}
 							_hover={{
 								color: 'red',
-								boxShadow: '0 5px 15px purple',
+								boxShadow: `0 5px 15px ${dracPurple}`,
 							}}
+							alignSelf='flex-end'
 						>
 							Add To Products
 						</Button>
@@ -184,17 +190,22 @@ export const AddToFormulaButton: React.FC<AddToFormulaButtonProps> = () => {
 	}
 
 	return (
-		<motion.div whileHover={{ scale: open != true ? 1.2 : 1 }}>
-			<Box className="AddToFormulaButton">
+		<motion.div>
+			<Box className='AddToFormulaButton'>
 				<Dialog.Root
-					size="md"
-					motionPreset="slide-in-left"
-					placement="center"
+					motionPreset='slide-in-left'
+					placement='center'
 					open={open}
 					onOpenChange={(e: any) => setOpen(e.open)}
 				>
-					<AddButton />
-					<PopContent />
+					<Flex
+						direction='row'
+						justifyContent='center'
+						alignItems='center'
+					>
+						<AddButton />
+						<PopContent />
+					</Flex>
 				</Dialog.Root>
 			</Box>
 		</motion.div>

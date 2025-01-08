@@ -16,13 +16,12 @@ export const CompoundConstruction: React.FC<CompoundConstructionProps> = () => {
 	const editorConstructionSectionChunks = useMainStore(
 		(state) => state.editorConstructionSectionChunks
 	)
-
 	const animatedCompoundConstructionChunkIDs = useMainStore(
 		(state) => state.animatedCompoundConstructionChunkIDs
 	)
 
 	return (
-		<Flex dir="row" w="auto" className="CompoundConstruction" gap=".5em">
+		<Flex dir='row' w='auto' className='CompoundConstruction' gap='.5em'>
 			<AnimatePresence>
 				<For
 					each={editorConstructionSectionChunks}
@@ -61,11 +60,13 @@ export const CompoundConstruction: React.FC<CompoundConstructionProps> = () => {
 									: { scale: 0.5 }
 							}
 						>
-							<CompoundStack
-								key={uuid()}
-								chunk={chunk}
-								chunkIndex={chunkIndex}
-							/>
+							<div>
+								<CompoundStack
+									key={uuid()}
+									chunk={chunk}
+									chunkIndex={chunkIndex}
+								/>
+							</div>
 						</motion.div>
 					)}
 				</For>

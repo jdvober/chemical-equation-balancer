@@ -6,6 +6,7 @@ import { Box, Flex, Spacer } from '@chakra-ui/react'
 
 import { EditorCloseButton } from '@/components/FormulaEditor/EditorCloseButton'
 import { FormulaSection } from '@/components/FormulaEditor/FormulaSection/FormulaSection'
+import { PresetSelect } from '@/components/FormulaEditor/FormulaSection/PresetSelect'
 import { EditorPeriodicTableSection } from '@/components/FormulaEditor/PeriodicTableSection/EditorPeriodicTableSection'
 import { useMainStore } from '@/stores/MainStore.ts'
 import { dracPurple } from '@/theme/colors/colors.ts'
@@ -38,7 +39,7 @@ export const FormulaEditor: React.FC<FormulaEditorProps> = () => {
 	)
 
 	return (
-		<Box className="FormulaEditor" color="fg" h="100svh">
+		<Box className='FormulaEditor' color='fg' h='100svh'>
 			<DndContext
 				sensors={sensors}
 				collisionDetection={rectIntersection}
@@ -80,15 +81,16 @@ export const FormulaEditor: React.FC<FormulaEditorProps> = () => {
 					}
 				}}
 			>
-				<Flex direction="column" h="100%" gap="1em">
+				<Flex direction='column' h='100%' gap='1em'>
 					<Flex
-						direction="row"
-						align="center"
-						justifyContent="space-evenly"
-						overflowY="none"
+						direction='row'
+						align='center'
+						justifyContent='space-evenly'
+						overflowY='none'
 					>
 						<FormulaSection />
 						<Spacer />
+						<PresetSelect />
 						<EditorCloseButton />
 					</Flex>
 					<EditorPeriodicTableSection />
