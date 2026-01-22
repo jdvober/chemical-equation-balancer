@@ -114,10 +114,7 @@ export const AddParensthesisButton: React.FC<
 			>
 				<Text alignSelf={'center'}>
 					{'( )'}
-					<math>
-						<mi></mi>
-						<msub>x</msub>
-					</math>
+					<sub>x</sub>
 				</Text>
 			</Button>
 		</motion.div>
