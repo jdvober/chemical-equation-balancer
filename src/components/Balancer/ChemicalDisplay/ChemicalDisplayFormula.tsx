@@ -36,18 +36,18 @@ export const ChemicalDisplayFormula: ChemicalDisplayFormulaProps = ({
 	}
 
 	return (
-		<Box className="ChemicalDisplayFormulas">
-			<Flex dir="row" key={uuid()} height="4rem">
+		<Box className='ChemicalDisplayFormulas'>
+			<Flex dir='row' key={uuid()} height='4rem'>
 				{/*             */}
 				{/* Coefficient */}
 				{/*             */}
-				<Text color="pink" fontSize="2rem">
+				<Text color='pink' fontSize='2rem'>
 					{item.coefficient}
 				</Text>
 				{/*    */}
 				{/* Of */}
 				{/*    */}
-				<Text ml=".25rem" mr=".5rem" fontSize="2rem" color={'comment'}>
+				<Text ml='.25rem' mr='.5rem' fontSize='2rem' color={'comment'}>
 					copy of
 				</Text>
 				{/*         */}
@@ -55,30 +55,35 @@ export const ChemicalDisplayFormula: ChemicalDisplayFormulaProps = ({
 				{/*         */}
 				{getCompoundString(item).map((compound) => {
 					return (
-						<Flex dir="row" key={uuid()}>
+						<Flex dir='row' key={uuid()}>
 							{compound.parenthesesSubscript >= 2 &&
 							compound.isFirstElementInChunk === true ? (
-								<Text color="orange" fontSize="2rem">
+								<Text color='orange' fontSize='2rem'>
 									(
 								</Text>
 							) : null}
-							<Text color="purple" fontSize="2rem">
+							<Text color='purple' fontSize='2rem'>
 								{compound.symbol}
 							</Text>
 
-							<Text color="purple" fontSize="2rem">
+							<Text color='purple' fontSize='2rem'>
 								{compound.count > 1 ? (
-									<sub>{compound.count}</sub>
+									<math>
+										<msub>
+											<mi></mi>
+											<mn>{compound.count}</mn>
+										</msub>
+									</math>
 								) : null}
 							</Text>
 
 							{compound.parenthesesSubscript >= 2 &&
 							compound.isLastElementInChunk === true ? (
-								<Flex dir="row">
-									<Text color="orange" fontSize="2rem">
+								<Flex dir='row'>
+									<Text color='orange' fontSize='2rem'>
 										)
 									</Text>
-									<Text color="orange" fontSize="2rem">
+									<Text color='orange' fontSize='2rem'>
 										<sub>
 											{compound.parenthesesSubscript}
 										</sub>

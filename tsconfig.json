@@ -24,7 +24,7 @@
 		"noUnusedLocals": true,
 		"noUnusedParameters": true,
 		"noFallthroughCasesInSwitch": true,
-		"exactOptionalPropertyTypes": true,
+		"exactOptionalPropertyTypes": false,
 		"noImplicitAny": true,
 		"noImplicitReturns": true,
 		"noImplicitThis": true,
@@ -32,6 +32,6 @@
 		"strictNullChecks": true,
 		"strictPropertyInitialization": true
 	},
-	"include": ["src", "**/.d.ts"],
+	"include": ["src", "**/.d.ts", "custom-elements.d.ts"],
 	"references": [{ "path": "./tsconfig.node.json" }]
 }
