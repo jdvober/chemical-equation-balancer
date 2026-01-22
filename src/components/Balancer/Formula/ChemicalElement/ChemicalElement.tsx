@@ -13,12 +13,15 @@ export const ChemicalElement: React.FC<ChemicalElementProps> = ({
 	isHovered,
 }) => {
 	return (
-		<Box className="ChemicalElement">
+		<Box className='ChemicalElement'>
 			<HStack color={isHovered === true ? 'red' : 'fg'}>
 				<Text fontSize={'2rem'}>{symbol}</Text>
 				{subscript && !(subscript <= 1) ? (
 					<Text fontSize={'2rem'}>
-						<sub>{subscript}</sub>
+						<math>
+							<mi></mi>
+							<msub>{subscript}</msub>
+						</math>
 					</Text>
 				) : null}
 			</HStack>

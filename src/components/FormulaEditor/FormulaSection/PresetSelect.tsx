@@ -65,7 +65,12 @@ export const PresetSelect: PresetSelectProps = () => {
 									{form.label.split('').map((char) => {
 										if (char >= '0' && char <= '9') {
 											// Is a number
-											return <sub>{char}</sub>
+											return (
+												<math>
+													<mi></mi>
+													<msub>{char}</msub>
+												</math>
+											)
 										}
 										return <Text>{char}</Text>
 									})}

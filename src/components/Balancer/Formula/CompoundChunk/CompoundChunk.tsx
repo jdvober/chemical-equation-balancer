@@ -21,12 +21,12 @@ export const CompoundChunk: React.FC<CompoundChunkProps> = ({
 }) => {
 	return (
 		<Flex
-			className="CompoundChunk"
-			direction="row"
+			className='CompoundChunk'
+			direction='row'
 			justifyContent={'center'} /*justify ==> along main axis*/
-			alignItems="center"
+			alignItems='center'
 		>
-			<Text fontSize="3rem" color="orange">
+			<Text fontSize='3rem' color='orange'>
 				{chunk.parenthesesSubscript >= 1 ? '(' : null}
 			</Text>
 			<Subcompound
@@ -35,12 +35,17 @@ export const CompoundChunk: React.FC<CompoundChunkProps> = ({
 				arrows={arrows}
 				location={location}
 			/>
-			<Text fontSize="3rem" color="orange">
+			<Text fontSize='3rem' color='orange'>
 				{chunk.parenthesesSubscript >= 1 ? ')' : null}
 			</Text>
 			{chunk.parenthesesSubscript > 1 ? (
-				<Text fontSize="2rem" color="orange" alignSelf="flex-end">
-					<sub>{chunk.parenthesesSubscript}</sub>
+				<Text fontSize='1.5rem' color='orange' alignSelf='flex-end'>
+					<math>
+						<msub>
+							<mi></mi>
+							<mn>{chunk.parenthesesSubscript}</mn>
+						</msub>
+					</math>
 				</Text>
 			) : null}
 		</Flex>

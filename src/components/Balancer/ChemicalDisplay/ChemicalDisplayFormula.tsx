@@ -84,9 +84,12 @@ export const ChemicalDisplayFormula: ChemicalDisplayFormulaProps = ({
 										)
 									</Text>
 									<Text color='orange' fontSize='2rem'>
-										<sub>
-											{compound.parenthesesSubscript}
-										</sub>
+										<math>
+											<msub>
+												<mi></mi>
+												{compound.parenthesesSubscript}
+											</msub>
+										</math>
 									</Text>
 								</Flex>
 							) : null}
